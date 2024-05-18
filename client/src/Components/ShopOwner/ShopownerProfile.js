@@ -7,7 +7,7 @@ function ShopownerProfile({url}) {
   return (
     <div className=''>
     <ShopOwnerNav/>,
-    <ShopownerProfilepage url={{url}}/>,
+    <ShopownerProfilepage url={{url}}/>
     <Footer/>
     </div>
   )

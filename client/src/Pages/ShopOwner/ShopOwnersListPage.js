@@ -50,11 +50,11 @@ function ShopOwnersListPage({url}) {
               >
                 <thead style={{ height: "50px" }}>
                   <tr>
-                    <th>shopname</th>
-                    <th>shopownername</th>
-                    <th>shoplisence</th>
-                    <th>shopregistrationnumber</th>
-                    <th>shopownercontact</th>
+                    <th>Shopname</th>
+                    <th>Shopowner Name</th>
+                    <th>Shoplisence</th>
+                    <th>Shop Registration Number</th>
+                    <th>Shopowner Contact</th>
                   </tr>
                 </thead>
                 <tbody>

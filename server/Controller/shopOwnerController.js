@@ -63,7 +63,7 @@ const ShopeOwnerLogin = async (req, res) => {
         );
         return res
           .status(200)
-          .json({ message: "Login successful", token, id: shopowner._id });
+          .json({ message: "Login successful", token, id: shopowner._id ,status:shopowner.status});
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }

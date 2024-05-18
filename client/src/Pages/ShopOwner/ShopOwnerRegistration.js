@@ -317,7 +317,7 @@ function ShopOwnerRegistration() {
 
             <div className="text m-3">
               <h6 className="text-light">
-                Already have an account? <Link to="/login">Login now</Link>
+                Already have an account? <Link to="/shopownerlogin">Login now</Link>
               </h6>
             </div>
 

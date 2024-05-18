@@ -46,26 +46,26 @@ function LandingPage() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Login
+                  Register
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <Link class="dropdown-item" to="customerregistration">
+                    <Link class="dropdown-item" to="/customerregistration">
                       Customer
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" to="shopownerregistration">
+                    <Link class="dropdown-item" to="/shopownerregistration">
                       Shop Owner
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" to="deliveryagentregistration">
+                    <Link class="dropdown-item" to="/deliveryagentregistration">
                       Delivery Agent
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" to="wholesaledealerregistration">
+                    <Link class="dropdown-item" to="/wholesaledealerregistration">
                       Wholesale Dealer
                     </Link>
                   </li>
@@ -78,26 +78,26 @@ function LandingPage() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Register
+                  Login
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <Link class="dropdown-item" to="customerlogin">
+                    <Link class="dropdown-item" to="/customerlogin">
                       Customer
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" to="shopownerlogin">
+                    <Link class="dropdown-item" to="/shopownerlogin">
                       Shop Owner
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" to="deliveryagentlogin">
+                    <Link class="dropdown-item" to="/deliveryagentlogin">
                       Delivery Agent
                     </Link>
                   </li>
                   <li>
-                    <Link class="dropdown-item" to="wholesaledealerlogin">
+                    <Link class="dropdown-item" to="/wholesaledealerlogin">
                       Wholesale Dealer
                     </Link>
                   </li>

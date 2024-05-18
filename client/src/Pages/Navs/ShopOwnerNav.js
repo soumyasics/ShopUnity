@@ -18,7 +18,7 @@ function ShopOwnerNav() {
 
   return (
     <Navbar collapseOnSelect expand="lg" className="" id="navfixed">
-      <div className="col-5">
+      <div className="col-4">
         <Navbar.Brand href="/" className="toggleimg">
           <img src={logo} className="w-50" alt="img"></img>
         </Navbar.Brand>
@@ -37,7 +37,7 @@ function ShopOwnerNav() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse d-flex" id="">
+          <div className="collapse navbar-collapse d-flex ms-5" id="">
             <ul className="navbar-nav a1 gap-4 d-flex ms-5 ">
               <li style={{ cursor: "pointer" }} className="nav-item">
                 <Link

@@ -57,10 +57,18 @@ function ShopOwnerLogin() {
       axiosInstance
         .post("/shopowner_login", data)
         .then((result) => {
-          alert(result.data.message);
-          localStorage.setItem("shopowner", result.data.id);
-          localStorage.setItem("shopownertoken", result.data.token);
-          Navigate("/shopownerhome");
+          const { status, message, id, token } = result.data;
+
+          if (status === "pending") {
+            alert("Waiting for admin approval");
+          } else if (status === "accepted") {
+            alert("Login successful");
+            localStorage.setItem("shopowner", id);
+            localStorage.setItem("shopownertoken", token);
+            Navigate("/shopownerhome");
+          } else {
+            alert(message);
+          }
         })
         .catch((err) => {
           alert(err.response.data.message);
@@ -82,7 +90,7 @@ function ShopOwnerLogin() {
                 borderRadius: "16px",
               }}
             >
-              <form onSubmit={handleSubmit} className="p-3" st>
+              <form onSubmit={handleSubmit} className="p-3">
                 <div className="mb-3">
                   <label className="text-light" htmlFor="form-controler-email">
                     Email

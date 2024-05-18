@@ -1,6 +1,7 @@
 .footer{
 padding-top: 5%;
-background-color: rgb(196, 218, 236);
+background-color: rgb(0, 0, 0);
+color: aliceblue;
 }
 #navfixed{
     z-index:1;
