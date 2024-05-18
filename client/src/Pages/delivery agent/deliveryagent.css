@@ -1,0 +1,31 @@
+.delivery_login_main {
+  padding: 10% 2%;
+  margin: 5%;
+  
+}
+.delivery_login_form {
+  padding: 2%;
+  margin: 0 8%;
+}
+
+.delivery_login {
+  padding-top: 5%;
+  background-image: url("../../images/deliveryagent1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.delivery_agent_register {
+  background-image: url("../../images/deliveryagent2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding-top: 5%;
+}
+.delivery_agent_register_main {
+  padding: 5%;
+  margin: 5%;
+}
+.delivery_agent_register_form {
+  padding: 2%;
+  margin: 0 8%;
+}

@@ -1,0 +1,42 @@
+.wholesale_dealer_register_main {
+  padding: 2%;
+ 
+  
+}
+.wholesale_dealer_register_form {
+  padding: 2%;
+  margin: 0 8%;
+}
+
+.Wholesale_dealer_register {
+  padding-top: 2%;
+  background-image: url("../../images/wholesale\ dealer.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wholesale_dealer_login {
+  background-image:url("../../images/wholesale\ dealer2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  padding-top: 5%;
+}
+.wholesale_dealer_login_main {
+  
+  padding:  2%;
+  margin: 5%;
+}
+.wholesale_dealer_login_form {
+  padding: 8%;
+  margin: 0 8%;
+}
+
+.borderstyle {
+  border: none;
+  outline: none;
+}
+.forgotpassword {
+  text-decoration: none;
+  color: black;
+  margin: 2% 0px;
+}

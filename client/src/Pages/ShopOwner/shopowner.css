@@ -1,0 +1,109 @@
+.shop_register_main{
+    padding: 2%;
+    margin: 5%;
+  }
+  .shop_register_form{
+      padding: 2%;
+      margin: 0 8%;
+  }
+  .shop_register_main img{
+    margin-top: 30%;
+  }
+  .shop_register{
+    background-image:url("../../images/shopowner2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+    padding-top: 5%;
+  }
+  .shop_login{
+    padding-top: 5%;
+    background-image:url("../../images/shopowner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  .shop_login_main{
+    padding:2% 2%;
+    margin: 5%;
+  }
+  .shop_login_form{
+    padding: 2%;
+    margin: 0 8%;
+  }
+  
+.shopownerhome{
+  background-image: url("https://img.freepik.com/premium-photo/small-business-owner-entrance_1033130-1135.jpg?w=740");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  min-height: 100vh;
+}
+.shopownerhomemain{
+  background-color: rgba(0, 0, 0, 0.652);
+  padding: 5%;
+  min-height: 100vh;
+}
+.shopownerhome3{
+  background-image: url("../../images/couple-barista-standing-counter-coffee-shop-coffee-business-concept.jpg");
+  background-size: cover;
+
+}
+.shopownerhome4{
+  background-color: rgba(0, 0, 0, 0.638);
+  min-height: 90vh;
+
+}
+.shopownerprofile{
+  background: linear-gradient(to right, #333232, #b4aeac);
+
+  /* background-color: rgb(150, 150, 150); */
+  color:white;
+  padding:5% 15%
+}
+/* .shopownerprofilinput{
+  background-color: rgba(255, 228, 196, 0);
+  border: none;
+} */
+ 
+.shopownerprofilepage {
+  width: 100%;
+border-radius: 8px;
+  border:1px solid rgb(156, 155, 155);
+
+}
+
+.user-card-full {
+  overflow: hidden;
+}
+
+.shopownerprofilepagediv {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+  border: none;
+  margin-bottom: 30px;
+}
+
+
+.user-card-full .user-profile {
+  border-radius: 5px 0 0 5px;
+}
+
+.bg-c-lite-green {
+  /* background: linear-gradient(to right, #3f3e3e, #c06636); */
+  height: fit;
+}
+
+
+
+
+
+.user-card-full .social-link li {
+  display: inline-block;
+}
+
+
+
+ 
+.shop-owner-pending-list-page{
+  overflow-x: hidden;
+}

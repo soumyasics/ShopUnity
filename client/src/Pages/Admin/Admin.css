@@ -1,0 +1,74 @@
+.Admin_login {
+  padding-top: 5%;
+}
+.Admin_login_main {
+  border: 1px solid rgb(168, 173, 179);
+  border-radius: 8px;
+  padding: 2%;
+  margin: 5%;
+  background-image: url("https://img.freepik.com/free-photo/brunette-businesswoman-posing_23-2148142724.jpg?w=740&t=st=1707465492~exp=1707466092~hmac=a637c1729cc4411abc1625d76f833943168285dad57ac97f80981326bf357c34");
+  background-repeat: no-repeat;
+  background-size: cover;
+ 
+}
+.Admin_login_form {
+  padding: 6%;
+  margin: 0 8%;
+}
+
+.adminbody{
+  background-image: url("https://img.freepik.com/premium-photo/businessman-using-mobile-smartphone-global-network-connection-investor-customer_34200-485.jpg?w=826");
+background-repeat: no-repeat;
+background-size: cover;
+height: 100vh;
+}
+
+.revenue__box, .order__box, .products__box, .user__box{
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.revenue__box{
+  background: #fce6d9;
+}
+
+.order__box{
+  background: #ceebe9;
+}
+
+.products__box{
+  background: #e2f2b2;
+}
+
+.user__box{
+  background: #f9e196;
+}
+
+.revenue__box h5, .order__box h5, .products__box h5, .user__box h5{
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #252525;
+  margin-bottom: 20px;
+}
+
+.revenue__box span, .order__box span, .products__box span, .user__box span{
+  color: #252525;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.area_des{
+  display: inline-block;
+  background: #0d6dfd65;
+  padding: 5px 15px;
+  border-radius: 20px;
+  
+}
+
+.admin_dashboard_main{
+  padding: 0 50px;
+}
+
+.admin_dashboard_main a{
+  text-decoration: none;
+}
