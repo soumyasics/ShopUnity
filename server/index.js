@@ -1,6 +1,6 @@
 const express =require("express")
 const app=express()
-const port=8002
+const port=4028
 const bodyparser=require("body-parser")
 const cors=require("cors")
 const db=require("./DBConnection")

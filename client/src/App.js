@@ -28,9 +28,9 @@ import AdminMainNav from './Pages/Navs/AdminMainNav';
 
 
 function App() {
-  const url="http://localhost:8002/"
+  const url="http://localhost:4028/"
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/shopunity">
     <Routes>
     <Route path='/' element={[<LandingPage/>,<Footer/>]}/>
 
