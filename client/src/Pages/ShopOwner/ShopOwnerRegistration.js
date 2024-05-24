@@ -14,8 +14,12 @@ function ShopOwnerRegistration() {
     shopowneremail: "",
     shopowneraddress: "",
     shopregistrationnumber: " ",
-    shoplisence: "",
     shopownerpassword: "",
+    shopownerconfirmpassword: "",
+    shopownerdistrict: "",
+    shopownercity: "",
+    shopownerpincode: "",
+    shoplisence: ""
   });
 
   const [errors, setErrors] = useState({
@@ -25,8 +29,12 @@ function ShopOwnerRegistration() {
     shopowneremail: "",
     shopowneraddress: "",
     shopregistrationnumber: " ",
-    shoplisence: "",
     shopownerpassword: "",
+    shopownerconfirmpassword: "",
+    shopownerdistrict: "",
+    shopownercity: "",
+    shopownerpincode: "",
+    shoplisence: ""
   });
 
   const handleInputChange = (e) => {
@@ -108,6 +116,10 @@ function ShopOwnerRegistration() {
       data.shopowneraddress &&
       data.shopregistrationnumber &&
       data.shopownerpassword &&
+      data.shopownerconfirmpassword &&
+      data.shopownerdistrict &&
+      data.shopownercity &&
+      data.shopownerpincode &&
       data.shoplisence
     ) {
       formValid = true;
@@ -297,7 +309,48 @@ function ShopOwnerRegistration() {
                 </div>
               )}
             </div>
-
+            <div className="input-box">
+              <div className="label">
+                {" "}  
+                <label className="text-light">Confirm Password</label>{" "}
+              </div>
+              <input
+                type="password"
+                className="form-control m-2"
+                placeholder="shopownerpassword"
+                value={data.shopownerpassword}
+                name="shopownerpassword"
+                onChange={handleInputChange}
+              />
+              </div>
+              <div className="input-box">
+              <div className="label">
+                {" "}  
+                <label className="text-light">City</label>{" "}
+              </div>
+              <input
+                type="password"
+                className="form-control m-2"
+                placeholder="shopownerCity"
+                value={data.shopownerpassword}
+                name="shopownerpassword"
+                onChange={handleInputChange}
+              />
+              </div>
+              <div className="input-box">
+              <div className="label">
+                {" "}  
+                <label className="text-light">Pincode</label>{" "}
+              </div>
+              <input
+                type="password"
+                className="form-control m-2"
+                placeholder="shopownerpassword"
+                value={data.shopownerpassword}
+                name="shopownerpassword"
+                onChange={handleInputChange}
+              />
+              </div>
             <div className="mt-3">
               {" "}
               <label className="text-light">Shop Lisence</label>{" "}

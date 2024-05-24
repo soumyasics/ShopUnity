@@ -7,7 +7,7 @@ import "./landing.css";
 import Form from "react-bootstrap/Form";
 import { Row, Col, Container } from "react-bootstrap";
 import logoimg from "../../images/LOGO SHOP UNITY-1.png";
-
+import landingimg from "../../images/landingvdo.mp4";
 function LandingPage() {
   const navigate = useNavigate();
 
@@ -108,9 +108,15 @@ function LandingPage() {
         </div>
       </Navbar>
       <div className="navshadow">
-        <div id="home" className="shopunitytittle_main">
-          <h5 className="shopunitytittle">ShopUnity</h5>
+        <div>
+          <Row>
+            <Col></Col>
+            <Col>
+              
+            </Col>
+          </Row>
         </div>
+        
       </div>
       <div id="about" className="container mt-5 pt-5">
         <Row>

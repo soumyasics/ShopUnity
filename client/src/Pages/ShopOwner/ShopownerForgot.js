@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import "./shopowner.css";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
-
+import forgot from '../../images/shopownerforgetpswd.png';
 function ShopownerForgot() {
   const [data, setData] = useState({
     email: "",
@@ -77,32 +78,32 @@ function ShopownerForgot() {
     
   return (
     <div className=" pt-5">
-      <h5 className="text-center pt-5 text-light">Shop owner Login</h5>
-      <Container>
+      
+       
+        <div className="container-fluid">
         <Row className="shop_login_main">
-          <div className="container">
-            <div
-              className=""
-              style={{
-                margin: "1% 30%",
-                boxShadow: " rgba(0, 0, 0, 0.84) 0px 3px 8px",
-                borderRadius: "16px",
-              }}
-            >
+          <Col classname='col-7'>
+            <img className="forgot" src={forgot} alt=''></img>
+          </Col>
+          <Col className="col-5">
+          <div>
+            <div classname='forgetpswd' >
+            <h1 className="text-center reset">Reset Password</h1>
               <form onSubmit={handleSubmit} className="p-3" st>
                 <div className="mb-3">
-                  <label className="" htmlFor="form-controler-email">
+                  <label className="forgotlabel" htmlFor="form-controler-email">
                     Email
-                  </label>
+                  </label>{' '}
                   <input
                     type="email"
                     className="form-control form-input"
                     id="form-controler-email"
-                    placeholder=""
+                    placeholder="Email"
                     required=""
                     onChange={handleInputChange}
                     name="email"
                     value={data.email}
+                    
                   />
                   {errors.email && (
                     <div className="text-danger">{errors.email}</div>
@@ -110,14 +111,14 @@ function ShopownerForgot() {
                   <span className="glyphicon form-control-feedback" />
                 </div>
                 <div className="form-group has-feedback" id="form-group">
-                  <label className="" htmlFor="form-controler-password">
-                    Password
+                  <label className="forgotlabel" htmlFor="form-controler-password">
+                   New Password
                   </label>
                   <input
                     type="password"
-                    className="form-control form-input"
-                    id="form-controler-password m-3"
-                    placeholder=""
+                    className="form-control "
+                    id="form-controler-email"
+                    placeholder="New Password"
                     required=""
                     name="password"
                     onChange={handleInputChange}
@@ -130,14 +131,14 @@ function ShopownerForgot() {
                 </div>
 
                 <div className="form-group has-feedback" id="form-group">
-                  <label className=" mt-3" htmlFor="form-controler-password">
+                  <label className="forgotlabel mt-3" htmlFor="form-controler-password">
                     Confirm Password
                   </label>
                   <input
                     type="password"
-                    className="form-control form-input"
-                    id="form-controler-password m-3"
-                    placeholder=""
+                    className="form-control"
+                    id="form-controler-email"
+                    placeholder="Confirm Password"
                     required=""
                     name="confirmpassword"
                     onChange={handleInputChange}
@@ -149,16 +150,17 @@ function ShopownerForgot() {
                   <span className="glyphicon form-control-feedback" />
                 </div>
 
-                <div className="text-center">
-                  <button type="submit" className="btn btn-primary m-4">
-                    Confirm Password
+                <div >
+                  <button type="submit" className="btn btn-primary mt-5" id='submitbtn'>
+                    Submit
                   </button>
                 </div>
               </form>
             </div>
           </div>
+          </Col>
         </Row>
-      </Container>
+        </div>
     </div>
   );
 }

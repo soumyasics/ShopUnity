@@ -107,3 +107,38 @@ border-radius: 8px;
 .shop-owner-pending-list-page{
   overflow-x: hidden;
 }
+
+.forgot{
+  height: 600px;
+  width: 700px;
+}
+.text-center{
+  margin-top: 100px;
+  color:rgba(19, 152, 204, 0.664)violet ;
+}
+
+.forgotpswd{
+  background-color: rgba(128, 128, 128, 0.507);
+}
+.form-control form-input{
+  height: 25px;
+}
+#submitbtn{
+  height: 50px;
+  width: 620px;
+  font-size: 20px;
+}
+#form-controler-email{
+  height: 50px;
+}
+.forgotlabel{
+  color: rgba(0, 162, 255, 0.863);
+  font-size: 20px;
+  font-weight: bold;
+}
+.col-5{
+  background-color: rgba(246,246,255,255);
+}
+.reset{
+ color:#8ab8bb
+}
