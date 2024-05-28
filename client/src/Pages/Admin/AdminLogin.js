@@ -6,7 +6,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import "./Admin.css"
-
+import adminlog from '../../images/adminlog.png'
 function AdminLogin() {
   const [data, setData] = useState({
     email: "",
@@ -74,66 +74,62 @@ function AdminLogin() {
   };
 
   return (
-    <div className="pt-5 adminbody">
-    <div className="container pt-5 m-5">
-      <div className="row">
-      <div 
-        className="col-6 p-2 border ms-5"
-        style={{
-          boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
-          borderRadius: "16px",
-          width:"30%"
-        }}
-      >
+    <div>
+      <Row>
+        <Col className="col-7">
+          <img className='adminlog mt-5' src={adminlog} alt="img"></img>
+        </Col>
+        <Col className="col-5">
+          <div className="container">
         <form onSubmit={handleSubmit} className="p-3">
-          <div className="mb-3">
-            <h4 className="text-center mt-5 text-light">Sign in</h4>
-            <label className="text-light" htmlFor="form-controler-email">
-              Email
-            </label>
-            <input
+          <div className="mb-3 container">
+             <h1 className=" mt-5 container" id="signin">Admin Login</h1>
+             <label className="font" htmlFor="form-controler-email">
+               Email
+             </label>
+             <input
               type="email"
               className="form-control form-input"
-              id="form-controler-email"
-              placeholder=""
+              id="textbox"
+              placeholder="Email"
               required=""
               onChange={handleInputChange}
               name="email"
               value={data.email}
             />
-            {errors.email && <div className="text-danger">{errors.email}</div>}
-            <span className="glyphicon form-control-feedback" />
-          </div>
-          <div className="form-group has-feedback" id="form-group">
-            <label className="text-light" htmlFor="form-controler-password">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control form-input"
-              id="form-controler-password m-3"
-              placeholder=""
-              required=""
-              name="password"
-              onChange={handleInputChange}
-              value={data.password}
-            />
-            {errors.password && (
-              <div className="text-danger">{errors.password}</div>
-            )}
-            <span className="glyphicon form-control-feedback" />
-          </div>
-          <div className="text-center">
-            <button type="submit" className="btn btn-secondary m-4">
-              Login
-            </button>
-          </div>
+             {errors.email && <div className="text-danger">{errors.email}</div>}
+             <span className="glyphicon form-control-feedback" />
+           </div>
+           <div className="form-group has-feedback container" id="form-group">
+             <label className="font" htmlFor="form-controler-password">
+               Password
+             </label>
+             <input
+               type="password"
+               className="form-control form-input"
+               id="textbox"
+               placeholder="Password"
+               required=""
+               name="password"
+               onChange={handleInputChange}
+               value={data.password}
+             />
+             {errors.password && (
+               <div className="text-danger">{errors.password}</div>
+             )}
+             <span className="glyphicon form-control-feedback" />
+           </div>
+           <div className="text-center container mt-5">
+             <button type="submit" className="btn"id="colors">
+               Login
+             </button>
+           </div>
          
-        </form>
-      </div>
-      <div className="col-6"></div>
-      </div>
-    </div></div>
+         </form>
+         </div>
+        </Col>
+      </Row>
+    </div>
   );
 }
 

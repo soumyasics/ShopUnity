@@ -72,3 +72,31 @@ height: 100vh;
 .admin_dashboard_main a{
   text-decoration: none;
 }
+.adminlog{
+  height: 700px;
+  width: 800px;
+}
+#signin{
+  padding-top: 150px;
+  color:  #11B1C7;
+  padding-left: 70px;
+}
+#textbox{
+  height: 50px;
+  font-size:13px ;
+  color: #929292;
+  border-color: #89CCC5;
+  background-color: #89CCC5;
+  width: 400px;
+}
+.font{
+  color:  #11B1C7;
+  font-weight: bold;
+}
+#colors{
+  background-color: #459197;
+  width: 400px;
+  height: 50px;
+  margin-right: 150px;
+  color: white;
+ }

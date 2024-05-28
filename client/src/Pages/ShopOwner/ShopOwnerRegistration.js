@@ -4,334 +4,319 @@ import Col from "react-bootstrap/Col";
 import "./shopowner.css";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
-
+import shopownerreg from "../../images/shopownerreg.png"
 function ShopOwnerRegistration() {
-  const navigate = useNavigate();
-  const [data, setData] = useState({
-    shopname: "",
-    shopownername: "",
-    shopownercontact: "",
-    shopowneremail: "",
-    shopowneraddress: "",
-    shopregistrationnumber: " ",
-    shoplisence: "",
-    shopownerpassword: "",
-  });
+  const[data,setData]=useState({
+    shopname:"",
+    shopownername:"",
+    shopowneraddress:"",
+    shopownerdistrict:"",
+    shopownercity:"",
+    shopownerpincode:"",
+    shopownercontact:"",
+    shopowneremail:"",
+    shopownerregistration:"",
+    shoplisence:"",
+    shopownerpassword:"",
+    shopownerconfirmpassword:""
+  })
+  const districts=[
+    'Alappuzha','Ernakulam','Idukki','Kannur','Kasaragod',
+    'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
+    'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
+  ];
 
-  const [errors, setErrors] = useState({
-    shopname: "",
-    shopownername: "",
-    shopownercontact: "",
-    shopowneremail: "",
-    shopowneraddress: "",
-    shopregistrationnumber: " ",
-    shoplisence: "",
-    shopownerpassword: "",
-  });
+  const handlePhoneNumberChange = (value) => {
+    let newValue = value.replace(/\D/g, '');
+    if (newValue.length > 10) {
+        newValue = newValue.slice(0, 10);
+    }
+    return newValue;
+};
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData({ ...data, [name]: value });
-  };
+const handlePincodeChange = (value) => {
+  let newValue = value.replace(/\D/g, '');
+  if (newValue.length > 6) {
+      newValue = newValue.slice(0, 6);
+  }
+  return newValue;
+};
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setData({ ...data, [name]: files[0] });
-    console.log(files);
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  let newValue;
+  
+  if (name === "phone") {
+      newValue = handlePhoneNumberChange(value);
+  } else if (name === "name") {
+      newValue = value.replace(/[^a-zA-Z\s]/g, '');
+  } else {
+      newValue = value;
+  }
+  
+  setData({ ...data, [name]: newValue });
+  
+  setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: newValue.trim() === "" ? `${name.charAt(0).toUpperCase() + name.slice(1)} required` : null
+  }));
+};
+  const validateForm=()=>{
+    let formErrors={};
+
+    if(!data.shopname)
+      formErrors.shopname='ShopName Required';
+    if(!data.shopownername)
+      formErrors.shopownername='ShopownerName Required';
+    if(!data.shopowneraddress)
+      formErrors.shopowneraddress='Address Required';
+    if(!data.shopownerdistrict)
+      formErrors.shopownerdistrict='District Required';
+    if(!data.shopownercity)
+      formErrors.shopownercity='City Required';
+    if(!data.shopownerpincode)
+      formErrors.shopownerpincode='Pincode Required';
+    if(!data.shopownercontact)
+      formErrors.shopownercontact='Contact Required';
+    if(!data.shopowneremail)
+      formErrors.shopowneremail='Email Required';
+    if(!data.shopownerregistration)
+      formErrors.shopownerregistration='Registration Required';
+    if(!data.shoplisence)
+      formErrors.shoplisence='Shoplisence Required';
+    if(!data.shopownerpassword)
+      formErrors.shopownerpassword='SPassword Required';
+    if(!data.shopownerconfirmpassword)
+      formErrors.shopownerconfirmpassword='Password Required';
+
+    return formErrors;
+  }
+
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  const formErrors = validateForm();
+  setErrors(formErrors);
+};
 
-    let errors = {};
-
-    let formValid = true;
-
-    if (!data.shopname.trim()) {
-      formValid = false;
-      errors.shopname = "shopname is required";
-    }
-    if (!data.shopownername.trim()) {
-      formValid = false;
-      errors.shopownername = "shopownername is required";
-    }
-
-    if (!data.shopownercontact.trim()) {
-      formValid = false;
-      errors.contact = "Contact number is required";
-    } else if (data.shopownercontact.length < 10) {
-      errors.shopownercontact = "Enter a valid 10-digit contact number";
-    }
-
-    if (!data.shopowneraddress.trim()) {
-      formValid = false;
-      errors.shopowneraddress = "shopowneraddress is required";
-    }
-
-    if (!data.shopowneremail.trim()) {
-      formValid = false;
-      errors.shopowneremail = "Email is required";
-    } else if (!data.shopowneremail.endsWith("@gmail.com")) {
-      formValid = false;
-      errors.shopowneremail = "Email must be a valid Gmail address";
-    }
-
-    if (!data.shopregistrationnumber.trim()) {
-      formValid = false;
-      errors.shopregistrationnumber =
-        "Shop registration number number is required";
-    } else if (data.shopregistrationnumber.length <= 3) {
-      errors.shopregistrationnumber = "Enter a valid Registartion number";
-    }
-
-    if (!data.shopownerpassword.trim()) {
-      formValid = false;
-      errors.shopownerpassword = "Password is required";
-    } else if (
-      !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}/.test(
-        data.shopownerpassword
-      )
-    ) {
-      formValid = false;
-      errors.shopownerpassword =
-        "Password should be at least 6 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character";
-    }
-
-    setErrors(errors);
-
-    // console.log(data.shoplisence);
-    if (
-      data.shopname &&
-      data.shopownername &&
-      data.shopowneremail &&
-      data.shopownercontact &&
-      data.shopowneraddress &&
-      data.shopregistrationnumber &&
-      data.shopownerpassword &&
-      data.shoplisence
-    ) {
-      formValid = true;
-    }
-
-    if (Object.keys(errors).length === 0 && formValid) {
-      const formData = new FormData();
-
-      console.log(data.shoplisence, data.shopname);
-      formData.append("shopname", data.shopname);
-      formData.append("shopownername", data.shopownername);
-      formData.append("shopowneremail", data.shopowneremail);
-      formData.append("shopownercontact", data.shopownercontact);
-      formData.append("shopowneraddress", data.shopowneraddress);
-      formData.append("shopregistrationnumber", data.shopregistrationnumber);
-      formData.append("shopownerpassword", data.shopownerpassword);
-      formData.append("file", data.shoplisence);
-      try {
-        console.log(formData, "formdata");
-        var response;
-        if (formData) {
-          response = await axiosInstance.post("/shopeowner_register", formData);
-        }
-
-        console.log("Response:", response);
-        alert("Waiting for Admin approval..");
-        setTimeout(() => {
-          navigate("/shopownerlogin");
-        }, 1500);
-      } catch (error) {
-        console.error("Error:", error);
-        let msg = error?.response?.data?.message || "Error occurred";
-        alert(msg);
-      }
-    } else {
-      // console.log("Form is not valid", formValid);
-      // console.log("Data entered", data);
-    }
-  };
-  return (
-    <div className="shop_register">
-      <h5 className="text-center mt-5 text-light"> Shop Owner Register</h5>
-      <Row className="shop_register_main">
-        <div className="col">
-          <form
-            onSubmit={handleSubmit}
-            className="p-4"
-            style={{
-              margin: "0% 18%",
-              boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
-              borderRadius: "16px",
-            }}
-          >
-            <div className="input-box">
+return (
+  <div  className="ownerregg container-fluid">
+    <Row className="container-fluid">
+      <Col className="col-6 container">
+      <img className="shopownerimg container" src={shopownerreg} alt=''></img>
+      </Col>
+      <Col className="col-6">
+        <div className="ownerreg">
+        <h1  className="text-center reg" id="ownerreg">Shop Owner Register</h1><br></br>
+        <Row className="container-fluid">
+          <Col className="col-6" id="regcol">
+          <form onSubmit={handleSubmit}>
+          <div className="input-box">
               {" "}
-              <label className="text-light">Shop Name</label>{" "}
-              <input
-                type="text"
-                placeholder="shopname"
-                value={data.shopname}
-                name="shopname"
-                className="form-control m-2"
-                onChange={handleInputChange}
-              />
-              {errors.shopname && (
-                <div className="text-danger errortext">{errors.shopname}</div>
-              )}
-            </div>
-
-            <div className="input-box">
-              <label className="text-light">Shop Owner Name</label>{" "}
-              <input
-                type="text"
-                placeholder="shopownername"
+              <label className="container-fluid font" id="font">Shop Name</label>{" "}
+               <input
+                 type="text"
+                 placeholder="shopname"
+               value={data.shopname}
+                 name="shopname"
+                 id="text1"
+                 className="form-control m-2 textbox "
+                 onChange={handleChange}
+               />
+               {errors.shopname && <span className='span-required'>{errors.shopname}</span>}
+             </div><br></br>
+             <div className="input-box">
+               <label className="container-fluid font" id="font">Shop Owner Name</label>{" "}
+               <input
+                 type="text"
+                 placeholder="shopownername"
                 value={data.shopownername}
-                name="shopownername"
-                className="form-control m-2"
-                onChange={handleInputChange}
+                 name="shopownername"
+                 id="text1"
+                 className="form-control m-2"
+                 onChange={handleChange}
+               />
+               {errors.shopownername && <span className='span-required'>{errors.shopownername}</span>}
+           </div><br></br>
+           <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">Shopowner Address</label>{" "}
+               </div>
+               <input
+                 type="text"
+                 value={data.shopowneraddress}
+                 placeholder="shopowneraddress"
+                 name="shopowneraddress"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
               />
-              {errors.shopownername && (
-                <div className="text-danger errortext">
-                  {errors.shopownername}
-                </div>
-              )}
-            </div>
-            <div className="input-box">
-              <div className="label">
-                {" "}
-                <label className="text-light">Shopowner Contact</label>{" "}
-              </div>
-              <input
-                type="number"
-                placeholder="shopownercontact"
-                name="shopownercontact"
-                className="form-control m-2"
-                value={data.shopownercontact}
-                onChange={handleInputChange}
+              {errors.shopowneraddress && <span className='span-required'>{errors.shopowneraddress}</span>}
+             </div><br></br>
+              
+              <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">District</label>{" "}
+               </div>
+               <select className="form-control controls m-2" 
+                                name="shopownerdistrict" 
+                                id="text1"
+                                value={data.shopownerdistrict} 
+                                onChange={handleChange}>
+                                    <option >Select District</option>
+                                    {districts.map((district, index) => (
+                                        <option key={index} value={district}>{district}</option>
+                                    ))}
+              </select>
+              {errors.shopownerdistrict && <span className='span-required'>{errors.shopownerdistrict}</span>}
+              </div><br></br>
+              <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">City</label>{" "}
+               </div>
+               <input
+                 type="text"
+                 value={data.shopownercity}
+                 placeholder="City"
+                 name="shopownercity"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
               />
-
-              {errors.shopownercontact && (
-                <div className="text-danger errortext">
-                  {errors.shopownercontact}
-                </div>
-              )}
-            </div>
-
-            <div className="input-box">
-              <div className="label">
-                {" "}
-                <label className="text-light">Email</label>{" "}
-              </div>
-              <input
-                type="email"
-                value={data.shopowneremail}
-                placeholder="shopowneremail"
-                name="shopowneremail"
-                className="form-control m-2"
-                onChange={handleInputChange}
+              {errors.shopownercity && <span className='span-required'>{errors.shopownercity}</span>}
+              </div><br></br>
+              <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">Pincode</label>{" "}
+               </div>
+               <input
+                 type="text"
+                 value={data.shopownerpincode}
+                 placeholder="Pincode"
+                 name="shopownerpincode"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handlePincodeChange}
               />
-
-              {errors.shopowneremail && (
-                <div className="text-danger errortext">
-                  {errors.shopowneremail}
-                </div>
-              )}
-            </div>
-
-            <div className="input-box">
-              <div className="label">
-                {" "}
-                <label className="text-light">Shopowner Address</label>{" "}
-              </div>
-              <input
-                type="text"
-                value={data.shopowneraddress}
-                placeholder="shopowneraddress"
-                name="shopowneraddress"
-                className="form-control m-2"
-                onChange={handleInputChange}
-              />
-
-              {errors.shopowneraddress && (
-                <div className="text-danger errortext">
-                  {errors.shopowneraddress}
-                </div>
-              )}
-            </div>
-
-            <div className="input-box">
-              <div className="label">
-                {" "}
-                <label className="text-light">Shop Registration Number</label>
-              </div>
-              <input
-                type="text"
-                placeholder="shopregistrationnumber"
-                name="shopregistrationnumber"
-                className="form-control m-2"
-                value={data.shopregistrationnumber}
-                onChange={handleInputChange}
-              />
-
-              {errors.shopregistrationnumber && (
-                <div className="text-danger errortext">
-                  {errors.shopregistrationnumber}
-                </div>
-              )}
-            </div>
-
-            <div className="input-box">
-              <div className="label">
-                {" "}
-                <label className="text-light">Password</label>{" "}
-              </div>
-              <input
-                type="password"
-                className="form-control m-2"
-                placeholder="shopownerpassword"
-                value={data.shopownerpassword}
-                name="shopownerpassword"
-                onChange={handleInputChange}
-              />
-
-              {errors.shopownerpassword && (
-                <div className="text-danger errortext">
-                  {errors.shopownerpassword}
-                </div>
-              )}
-            </div>
-
-            <div className="mt-3">
-              {" "}
-              <label className="text-light">Shop Lisence</label>{" "}
-              <input
-                className="text-light border border-light w-100 rounded p-2"
-                type="file"
-                name="shoplisence"
-                onChange={handleFileChange}
-                // required
-              />
-              {errors.shoplisence && (
-                <div className="form-control m-2 text-danger errortext">
-                  {errors.shoplisence}
-                </div>
-              )}
-            </div>
-
-            <div className="text m-3">
-              <h6 className="text-light">
-                Already have an account? <Link to="/shopownerlogin">Login now</Link>
-              </h6>
-            </div>
-
-            <div className="inbutton d-flex justify-content-center">
-              <button type="submit" className="btn btn-primary icon text-light">
-                Sign UP
-              </button>
-            </div>
+              {errors.shopownerpincode && <span className='span-required'>{errors.shopownerpincode}</span>}
+              </div><br></br>
           </form>
+          </Col>
+          <Col className="col-6">
+          <form onSubmit={handleSubmit}>
+            <div className="input-box">
+             {" "}
+              <label className="container-fluid font" id="font">Contact Number</label>{" "}
+               <input
+                 type="text"
+                 placeholder="Contact Number"
+               value={data.handlePhoneNumberChange}
+                 name="contactnumber"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
+               />              
+                {errors.shopownercontact && <span className='span-required'>{errors.shopownercontact}</span>}
+             </div><br></br>
+             <div className="input-box">
+               <label className=" container-fluid font" id="font">Email</label>{" "}
+               <input
+                 type="email"
+                 placeholder="Email"
+                value={data.shopowneremail}
+                 name="shopowneremail"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
+               />
+               {errors.shopowneremail && <span className='span-required'>{errors.shopowneremail}</span>}
+           </div><br></br>
+           <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">Registartion Number</label>{" "}
+               </div>
+               <input
+                 type="text"
+                 value={data.shopownerregstration}
+                 placeholder="Registartion Number"
+                 name="shopregistartionnumber"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
+              /> 
+              {errors.shopregistrationnumber && <span className='span-required'>{errors.shopregistrationnumber}</span>}
+              </div><br></br>
+              <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">Shop Lisence</label>{" "}
+               </div>
+               <input
+                 type="file"
+                 value={data.shoplisence}
+                 placeholder="Shop Lisence"
+                 name="shoplisence"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
+              />
+              {errors.shoplisence && <span className='span-required'>{errors.shoplisence}</span>}
+              </div><br></br>
+              <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">Password</label>{" "}
+               </div>
+               <input
+                 type="text"
+                 value={data.shopownerpassword}
+                 placeholder="Password"
+                 name="password"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handleChange}
+              />
+              {errors.shopownerpassword && <span className='span-required'>{errors.shopownerpassword}</span>}
+              </div><br></br>
+              <div className="input-box">
+               <div className="label">
+                 {" "}
+                 <label className="container-fluid font" id="font">Confirm Password</label>{" "}
+               </div>
+               <input
+                 type="text"
+                 value={data.shopownerconfirmpassword}
+                 placeholder="Confirm Password"
+                 name="confirmpassword"
+                 id="text1"
+                 className="form-control m-2"
+                 onChange={handleChange}
+              />
+              {errors.shopownerconfirmpassword && <span className='span-required'>{errors.shopownerconfirmpassword}</span>}
+              </div><br></br>  
+              </form>
+          </Col>
+        </Row>
+        <div className="inbutton d-flex justify-content-center" id="signup">
+               <button type="submit" className="btn text-white" id="colors">
+                 Register
+               </button>
         </div>
-        <Col></Col>
-      </Row>
-    </div>
+        <div className="text">
+               <h6 className="text-center" id="text">
+                 Already have an account? <Link to="/shopownerlogin" className="shopownweracc">Log In</Link>
+               </h6>
+        </div>
+        </div>
+      </Col>
+    </Row>
+  </div>
   );
 }
-
 export default ShopOwnerRegistration;
