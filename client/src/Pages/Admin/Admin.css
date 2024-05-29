@@ -93,10 +93,10 @@ height: 100vh;
   color:  #11B1C7;
   font-weight: bold;
 }
-#colors{
+#text{
   background-color: #459197;
-  width: 400px;
-  height: 50px;
-  margin-right: 150px;
   color: white;
- }
+  border-color: #459197 ;
+  width: 400px;
+  margin-left: 15px;
+}

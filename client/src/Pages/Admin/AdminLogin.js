@@ -119,13 +119,13 @@ function AdminLogin() {
              )}
              <span className="glyphicon form-control-feedback" />
            </div>
-           <div className="text-center container mt-5">
-             <button type="submit" className="btn"id="colors">
+           </form>
+           <div className=" container mt-4">
+             <button type="submit" className="btn" id="text">
                Login
              </button>
            </div>
-         
-         </form>
+           
          </div>
         </Col>
       </Row>
