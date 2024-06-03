@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import { Link, useNavigate } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function ShopOwnerProfileEditPage() {
   const [data, setData] = useState({
     shopname: "",
     shopownername: "",
+    shopowneraddress:"",
+    shopownerdistrict:"",
+    shopownercity:"",
+    shopownerpincode:"",
     shopownercontact: "",
     shopowneremail: "",
-    shopowneraddress: "",
     shopregistrationnumber: "",
+    shoplisence:""
   });
 
   const navigate = useNavigate();
@@ -46,75 +52,169 @@ function ShopOwnerProfileEditPage() {
   };
 
   return (
-    <div className="pt-5">
-      <div className="shopownerprofile pt-5">
-        <div className="pt-5">
-          <div className="container border p-5 rounded">
-            <div className="row">
-              <div className="col">
-                <label className="mt-4">Shop Name: </label>
-                <input
-                  className="shopownerprofilinput form-control text-light bg-transparent border-none"
-                  placeholder="Enter Shop Name"
-                  name="shopname"
-                  value={data.shopname}
-                  onChange={handleInputChange}
-                ></input>
-                <label className="mt-4">Shop Owner Email: </label>
-                <input
-                  className="shopownerprofilinput form-control text-light bg-transparent border-none"
-                  placeholder="Enter Shop Owner Email"
-                  name="shopowneremail"
-                  value={data.shopowneremail}
-                  onChange={handleInputChange}
-                ></input>
-                <label className="mt-4">Shop Registration Number: </label>
-                <input
-                  className="shopownerprofilinput form-control text-light bg-transparent border-none"
-                  placeholder="Enter Shop Registration Number"
-                  name="shopregistrationnumber"
-                  value={data.shopregistrationnumber}
-                  onChange={handleInputChange}
-                ></input>
-              </div>
-              <div className="col">
-                <label className="mt-4">Shop Owner Name: </label>
-                <input
-                  className="shopownerprofilinput form-control bg-transparent border-none"
-                  placeholder="Enter Shop Owner Name"
-                  name="shopownername"
-                  value={data.shopownername}
-                  onChange={handleInputChange}
-                  style={{ color: "white" }}
-                ></input>
-                <label className="mt-4">Shop Owner Contact: </label>
-                <input
-                  className="shopownerprofilinput form-control text-light bg-transparent border-none"
-                  placeholder="Enter Shop Owner Contact"
-                  name="shopownercontact"
-                  value={data.shopownercontact}
-                  onChange={handleInputChange}
-                ></input>
-                <label className="mt-4">Shop Owner Address: </label>
-                <input
-                  className="shopownerprofilinput form-control text-light bg-transparent border-none"
-                  placeholder="Enter Shop Owner Address"
-                  name="shopowneraddress"
-                  value={data.shopowneraddress}
-                  onChange={handleInputChange}
-                ></input>
-              </div>
-              <div className="btn btn-light mt-4" onClick={handleEdit}>
-                Edit
-              </div>
-              <Link to="/shopownerprofile">
-                <div className="btn btn-secondary mt-4">Cancel</div>
-              </Link>
-            </div>
-          </div>
-        </div>
+    // <div className="container">
+     
+    //   <div className="main">
+    //     <Row className="">
+    //       <Col className="container">
+    //         <form>
+    //         <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop Name</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopname"
+    //            value={data.shopname}
+    //              name="shopname"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">ShopOwner Name</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopownername"
+    //            value={data.shopownername}
+    //              name="shopownername"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop Address</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopowneraddress"
+    //            value={data.shopowneraddress}
+    //              name="shopowneraddress"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop District</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopownerdistrict"
+    //            value={data.shopownerdistrict}
+    //              name="shopownerdistrict"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop City</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopownercity"
+    //            value={data.shopownercity}
+    //              name="shopownercity"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+    //         </form>
+    //       </Col>
+    //       <Col className="container">
+    //         <form>
+    //         <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop Pincode</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopownerpincode"
+    //            value={data.shopownerpincode}
+    //              name="shopownerpincode"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop Contact</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="Shopownercontact"
+    //            value={data.shopownercontact}
+    //              name="shopownercontact"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop Address</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopowneraddress"
+    //            value={data.shopowneraddress}
+    //              name="shopowneraddress"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop District</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopownerdistrict"
+    //            value={data.shopownerdistrict}
+    //              name="shopownerdistrict"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+
+    //            <div className="input-box">
+    //           {" "}
+    //           <label className="container-fluid font" id="font">Shop City</label>{" "}
+    //            <input
+    //              type="text"
+    //              placeholder="shopownercity"
+    //            value={data.shopownercity}
+    //              name="shopownercity"
+    //              id="text1"
+    //              className="form-control m-2 textbox "
+    //            />
+    //            </div>
+    //         </form>
+    //       </Col>
+    //     </Row>
+    //   </div>
+    // </div>
+
+    <div className=" container">
+      <div className="">
+      <div
+              className=" shopownerbox"
+              style={{
+                margin: "2% 7%",
+                boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                borderRadius: "16px",
+              }}
+            >
+      <form >
+        <label>shopowner</label>
+        <input type="text" cl></input>
+       </form>
+       </div>
       </div>
+       
     </div>
+  
   );
 }
 

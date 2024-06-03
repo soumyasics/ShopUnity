@@ -122,7 +122,7 @@ height: 25px;
 }
 .ownerreg{
   background-color: #CAFAE2;
-  margin-top: 50px;
+  margin-top: 100px;
   border-radius: 16px;
   box-shadow: #333232;
   
@@ -192,7 +192,7 @@ height: 25px;
   width: 250px;
   height: 50px;
   margin-top: 20px;
-  margin-left: 120px;
+  margin-left: 50px;
  }
 #ownerinput{
   height: 40px;
@@ -203,4 +203,18 @@ height: 25px;
 #text1{
   height: 44px;
   font-size: 13px;
+}
+.text{
+  padding-bottom:10px ;
+  margin-bottom: 20px;
+}
+.main{
+  border-radius: 16px;
+  background-color: #CAFAE2;  
+}
+.row{
+ 
+  background-color: #CAFAE2;
+  padding-top: 100px;
+  border-radius: 16px; 
 }

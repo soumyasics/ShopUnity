@@ -25,79 +25,67 @@ function ShopOwnerRegistration() {
     'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
     'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
   ];
-
-  const handlePhoneNumberChange = (value) => {
-    let newValue = value.replace(/\D/g, '');
-    if (newValue.length > 10) {
-        newValue = newValue.slice(0, 10);
+  const [isvalid, setIsvalid]=useState(false);
+  
+  const handleChange = (e) => {
+    const{name,value} =e.target;
+    switch (name){
+      case 'shopname':
+        setData(value);
+        setIsvalid({...isvalid, shopname:value.length > 0});
+        break;
+        case 'shopownername':
+          setData(value);
+          setIsvalid({...isvalid, shopownername:value.length > 0});
+          break;
+        case 'shopowneraddress':
+          setData(value);
+          setIsvalid({...isvalid, shopowneraddress:value.length > 0});
+          break;
+        case 'shopownerdistrict':
+          setData(value);
+          setIsvalid({...isvalid, shopownerdistrict:value.length > 0});
+          break;
+        case 'shopownercity':
+          setData(value);
+          setIsvalid({...isvalid, shopownercity:value.length > 0});
+          break;   
     }
-    return newValue;
-};
-
-const handlePincodeChange = (value) => {
-  let newValue = value.replace(/\D/g, '');
-  if (newValue.length > 6) {
-      newValue = newValue.slice(0, 6);
   }
-  return newValue;
-};
-
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  let newValue;
-  
-  if (name === "phone") {
-      newValue = handlePhoneNumberChange(value);
-  } else if (name === "name") {
-      newValue = value.replace(/[^a-zA-Z\s]/g, '');
-  } else {
-      newValue = value;
+  const PasswordChange = (e) => {
+    const{name,value}= e.target;
+    
+    if(name == 'shopownerpassword'){
+      setData(value)
+    }
+    else if(name == 'shopownerconfirmpassword'){
+      setData(value);
+    }
   }
-  
-  setData({ ...data, [name]: newValue });
-  
-  setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: newValue.trim() === "" ? `${name.charAt(0).toUpperCase() + name.slice(1)} required` : null
-  }));
-};
-  const validateForm=()=>{
-    let formErrors={};
-
-    if(!data.shopname)
-      formErrors.shopname='ShopName Required';
-    if(!data.shopownername)
-      formErrors.shopownername='ShopownerName Required';
-    if(!data.shopowneraddress)
-      formErrors.shopowneraddress='Address Required';
-    if(!data.shopownerdistrict)
-      formErrors.shopownerdistrict='District Required';
-    if(!data.shopownercity)
-      formErrors.shopownercity='City Required';
-    if(!data.shopownerpincode)
-      formErrors.shopownerpincode='Pincode Required';
-    if(!data.shopownercontact)
-      formErrors.shopownercontact='Contact Required';
-    if(!data.shopowneremail)
-      formErrors.shopowneremail='Email Required';
-    if(!data.shopownerregistration)
-      formErrors.shopownerregistration='Registration Required';
-    if(!data.shoplisence)
-      formErrors.shoplisence='Shoplisence Required';
-    if(!data.shopownerpassword)
-      formErrors.shopownerpassword='SPassword Required';
-    if(!data.shopownerconfirmpassword)
-      formErrors.shopownerconfirmpassword='Password Required';
-
-    return formErrors;
+  const handlePincodeChange = (e) => {
+    const value = e.target.value;
+    const pinRegex = /^\d{6}$/;
+    setIsvalid(pinRegex.test(value));
+    setData(value);
   }
 
-  const [errors, setErrors] = useState({});
+  const handlePhoneNumberChange = (e) => {
+    const value = e.target. value;
+    const phoneRegex = /^[0-9]{10}$/;
+    setIsvalid(phoneRegex.test(value));
+    setData(value);
+  }
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  const formErrors = validateForm();
-  setErrors(formErrors);
+    const handleSubmit =  (e) => {
+    e.preventDefault();
+
+    // if(shopownerpassword == shopownerconfirmpassword){
+    //   setIsvalid(true);
+    // }
+    // else{
+    //   setIsvalid(false)
+    // }
+
 };
 
 return (
@@ -117,27 +105,28 @@ return (
               <label className="container-fluid font" id="font">Shop Name</label>{" "}
                <input
                  type="text"
-                 placeholder="shopname"
-               value={data.shopname}
+                 placeholder="Shopname"
+                 value={data.shopname}
                  name="shopname"
                  id="text1"
                  className="form-control m-2 textbox "
                  onChange={handleChange}
                />
-               {errors.shopname && <span className='span-required'>{errors.shopname}</span>}
+               {!isvalid.shopname && <p>Shopname is required.{isvalid.shopname}</p>}
              </div><br></br>
              <div className="input-box">
                <label className="container-fluid font" id="font">Shop Owner Name</label>{" "}
                <input
                  type="text"
-                 placeholder="shopownername"
+                 placeholder="Shopownername"
                 value={data.shopownername}
                  name="shopownername"
                  id="text1"
                  className="form-control m-2"
                  onChange={handleChange}
                />
-               {errors.shopownername && <span className='span-required'>{errors.shopownername}</span>}
+                {!isvalid.shopname && <p>Shopname is required.</p>}
+
            </div><br></br>
            <div className="input-box">
                <div className="label">
@@ -147,13 +136,13 @@ return (
                <input
                  type="text"
                  value={data.shopowneraddress}
-                 placeholder="shopowneraddress"
+                 placeholder="Shopowneraddress"
                  name="shopowneraddress"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shopowneraddress && <span className='span-required'>{errors.shopowneraddress}</span>}
+               {!isvalid.shopname && <p>Shopname is required.</p>}
              </div><br></br>
               
               <div className="input-box">
@@ -171,8 +160,9 @@ return (
                                         <option key={index} value={district}>{district}</option>
                                     ))}
               </select>
-              {errors.shopownerdistrict && <span className='span-required'>{errors.shopownerdistrict}</span>}
+              {!isvalid.shopname && <p>Shopname is required.</p>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -187,8 +177,9 @@ return (
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shopownercity && <span className='span-required'>{errors.shopownercity}</span>}
+               {!isvalid.shopname && <p>Shopname is required.</p>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -203,7 +194,7 @@ return (
                  id="text1"
                  onChange={handlePincodeChange}
               />
-              {errors.shopownerpincode && <span className='span-required'>{errors.shopownerpincode}</span>}
+               {!isvalid.shopname && <p>Shopname is required.</p>}
               </div><br></br>
           </form>
           </Col>
@@ -219,10 +210,11 @@ return (
                  name="contactnumber"
                  className="form-control m-2"
                  id="text1"
-                 onChange={handleChange}
+                 onChange={handlePhoneNumberChange}
                />              
-                {errors.shopownercontact && <span className='span-required'>{errors.shopownercontact}</span>}
+               {!isvalid.shopname && <p>Shopname is required.</p>}
              </div><br></br>
+
              <div className="input-box">
                <label className=" container-fluid font" id="font">Email</label>{" "}
                <input
@@ -234,8 +226,9 @@ return (
                  id="text1"
                  onChange={handleChange}
                />
-               {errors.shopowneremail && <span className='span-required'>{errors.shopowneremail}</span>}
+               {!isvalid.shopowneremail && <p>Email is required.</p>}
            </div><br></br>
+
            <div className="input-box">
                <div className="label">
                  {" "}
@@ -250,8 +243,9 @@ return (
                  id="text1"
                  onChange={handleChange}
               /> 
-              {errors.shopregistrationnumber && <span className='span-required'>{errors.shopregistrationnumber}</span>}
+               {!isvalid. shopregistartionnumber && <p>Shopregistartionnumber is required.</p>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -266,8 +260,9 @@ return (
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shoplisence && <span className='span-required'>{errors.shoplisence}</span>}
+               {!isvalid.shoplisence && <p>Shoplisence is required.</p>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -280,10 +275,11 @@ return (
                  name="password"
                  className="form-control m-2"
                  id="text1"
-                 onChange={handleChange}
+                 onChange={PasswordChange}
               />
-              {errors.shopownerpassword && <span className='span-required'>{errors.shopownerpassword}</span>}
+               {!isvalid.shopownerpassword && <p>Password is required.</p>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -296,9 +292,9 @@ return (
                  name="confirmpassword"
                  id="text1"
                  className="form-control m-2"
-                 onChange={handleChange}
+                 onChange={PasswordChange}
               />
-              {errors.shopownerconfirmpassword && <span className='span-required'>{errors.shopownerconfirmpassword}</span>}
+               {!isvalid.shopownerconfirmpassword && <p>Password do not match.</p>}
               </div><br></br>  
               </form>
           </Col>
@@ -309,7 +305,7 @@ return (
                </button>
         </div>
         <div className="text">
-               <h6 className="text-center" id="text">
+               <h6 className="text-center" >
                  Already have an account? <Link to="/shopownerlogin" className="shopownweracc">Log In</Link>
                </h6>
         </div>
