@@ -28,7 +28,8 @@ import AdminMainNav from './Pages/Navs/AdminMainNav';
 
 
 function App() {
-  const url="http://localhost:4028/"
+  const url="http://hybrid.srishticampus.in/shopunity_api/"
+
   return (
     <BrowserRouter basename="/shopunity">
     <Routes>

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import "./shopowner.css";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
-
+import shopownerlogin from '../../images/shopownerlogin.png'
 function ShopOwnerLogin() {
   const [data, setData] = useState({
     email: "",
@@ -45,9 +46,20 @@ function ShopOwnerLogin() {
     });
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
+  const validateForm = () =>{
+    let formErrors = {}
+
+    if(!data.email)
+      formErrors.email= "Email Required";
+    if(!data.password)
+      formErrors.password= "Password Required";
+
+    return formErrors;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formErrors=validateForm()
     let errors = {};
     errors.email = formValidating("Email", data.email);
     errors.password = formValidating("Password", data.password);
@@ -77,84 +89,84 @@ function ShopOwnerLogin() {
   };
 
   return (
-    <div className="shop_login">
-      <h5 className="text-center mt-5 pt-5 text-light">Shop owner Login</h5>
-      <Container>
+    <div className="shop_login container">
+      
+     
         <Row className="shop_login_main">
-          <div className="container">
+          <Col>
+            <img className="shopownerlogin" src={shopownerlogin} alt=""></img>
+          </Col>
+          <Col>
+          <div className="container-fluid">
             <div
-              className=""
+              className=" shopownerbox"
               style={{
-                margin: "1% 30%",
-                boxShadow: " rgba(0, 0, 0, 0.84) 0px 3px 8px",
+                margin: "2% 7%",
+                boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
                 borderRadius: "16px",
               }}
             >
+              <h1 className="text-center mt-5 pt-5 " id="ownerreg">Shop Owner Login</h1>
+              <div className="container">
               <form onSubmit={handleSubmit} className="p-3">
-                <div className="mb-3">
-                  <label className="text-light" htmlFor="form-controler-email">
+                <div className="mb-3 container" >
+                  <label className="font" htmlFor="form-controler-email">
                     Email
                   </label>
                   <input
                     type="email"
-                    className="form-control form-input"
-                    id="form-controler-email"
-                    placeholder=""
+                    className="form-control form-input txthei"
+                    id="form-controler-email ownerinput "
+                    placeholder="Email "
                     required=""
                     onChange={handleInputChange}
                     name="email"
                     value={data.email}
                   />
-                  {errors.email && (
-                    <div className="text-danger">{errors.email}</div>
-                  )}
-                  <span className="glyphicon form-control-feedback" />
+                  {errors.email && <span className='span-required'>{errors.email}</span>}
                 </div>
-                <div className="form-group has-feedback" id="form-group">
+                <div className="form-group has-feedback container" id="form-group">
                   <label
-                    className="text-light"
+                    className="font"
                     htmlFor="form-controler-password"
                   >
                     Password
                   </label>
                   <input
                     type="password"
-                    className="form-control form-input"
+                    className="form-control form-input txthei "
                     id="form-controler-password m-3"
-                    placeholder=""
+                    placeholder="Password"
                     required=""
                     name="password"
                     onChange={handleInputChange}
                     value={data.password}
                   />
-                  {errors.password && (
-                    <div className="text-danger">{errors.password}</div>
-                  )}
-                  <span className="glyphicon form-control-feedback" />
-                </div>
-                <label className="text-center text-light ms-5 mt-2">
-                  <Link className="text-light ms-5 ps-5" to={"/shopownerforgotpaswd"}>
-                    forgot password
-                  </Link>
-                </label>
+                 {errors.password && <span className='span-required'>{errors.password}</span>}
+
+                </div><br></br>
+
+                <Link  to={"/shopownerforgotpaswd"} className="shopownerforpass"><a >Forgot Password?</a></Link>
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary m-4">
+                  <button className="btn text-white container shopownerlogbtn" id="color">
                     Login
                   </button>
                 </div>
                 <div className="text">
-                  <h6 className="text-light">
-                    Don't have an account?{" "}
+                  <h6 className="text-dark text-center">
+                    Not a member?{" "}
                     <Link to="/shopownerregistration" className="text-decoration-none">
-                      Register
+                      Sign up now
                     </Link>
                   </h6>
                 </div>
               </form>
+              </div>
             </div>
           </div>
+          </Col>
         </Row>
-      </Container>
+      
     </div>
   );
 }

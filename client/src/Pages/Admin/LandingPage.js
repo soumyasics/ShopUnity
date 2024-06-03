@@ -109,7 +109,7 @@ function LandingPage() {
       </Navbar>
       <div className="navshadow">
         <div id="home" className="shopunitytittle_main">
-          <h5 className="shopunitytittle">ShopUnity</h5>
+          <h5 className="shopunitytittle"></h5>
         </div>
       </div>
       <div id="about" className="container mt-5 pt-5">

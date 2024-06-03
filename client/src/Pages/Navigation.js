@@ -4,15 +4,15 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Nav from "react-bootstrap/Nav";
-
+import logos from './../images/logos.png'
 import "./Footer"
-
+import "./Navigation.css";
 function Navigation() {
   return (
     <Navbar collapseOnSelect expand="md" className="" id="navfixed" >
     <div className="col-9">
       <Navbar.Brand href="/" className="toggleimg">
-        <img src={logo} className="w-25" alt="img"></img>
+        <img src={logos} className="logoimg" alt="img"></img>
       </Navbar.Brand>
     </div>
     <div className="col-2">

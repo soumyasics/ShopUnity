@@ -4,10 +4,9 @@
     border-radius: 12px;
 }
 .navshadow{
-    background-image: url("http://wallpapercave.com/wp/wp1877577.jpg");
+   background-color: rgba(255, 255, 0, 0.629);
     height: 750px;
-background-repeat: no-repeat;
-background-size: cover;
+
 
 }
 .shopunitytittle{
