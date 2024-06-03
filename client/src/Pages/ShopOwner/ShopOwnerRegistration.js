@@ -89,118 +89,17 @@ function ShopOwnerRegistration() {
 };
 
 return (
-  <div  className="ownerregg container-fluid">
-    <Row className="container-fluid">
-      <Col className="col-6 container">
-      <img className="shopownerimg container" src={shopownerreg} alt=''></img>
+ <div>
+  <div>
+    <Row>
+      <Col>
+      
       </Col>
-      <Col className="col-6">
-        <div className="ownerreg">
-        <h1  className="text-center reg" id="ownerreg">Shop Owner Register</h1><br></br>
-        <Row className="container-fluid">
-          <Col className="col-6" id="regcol">
-          <form onSubmit={handleSubmit}>
+      <Col>
+      <Row>
+        <form>
+          <Col>
           <div className="input-box">
-              {" "}
-              <label className="container-fluid font" id="font">Shop Name</label>{" "}
-               <input
-                 type="text"
-                 placeholder="Shopname"
-                 value={data.shopname}
-                 name="shopname"
-                 id="text1"
-                 className="form-control m-2 textbox "
-                 onChange={handleChange}
-               />
-               {!isvalid.shopname && <p>Shopname is required.{isvalid.shopname}</p>}
-             </div><br></br>
-             <div className="input-box">
-               <label className="container-fluid font" id="font">Shop Owner Name</label>{" "}
-               <input
-                 type="text"
-                 placeholder="Shopownername"
-                value={data.shopownername}
-                 name="shopownername"
-                 id="text1"
-                 className="form-control m-2"
-                 onChange={handleChange}
-               />
-                {!isvalid.shopname && <p>Shopname is required.</p>}
-
-           </div><br></br>
-           <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Shopowner Address</label>{" "}
-               </div>
-               <input
-                 type="text"
-                 value={data.shopowneraddress}
-                 placeholder="Shopowneraddress"
-                 name="shopowneraddress"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={handleChange}
-              />
-               {!isvalid.shopname && <p>Shopname is required.</p>}
-             </div><br></br>
-              
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">District</label>{" "}
-               </div>
-               <select className="form-control controls m-2" 
-                                name="shopownerdistrict" 
-                                id="text1"
-                                value={data.shopownerdistrict} 
-                                onChange={handleChange}>
-                                    <option >Select District</option>
-                                    {districts.map((district, index) => (
-                                        <option key={index} value={district}>{district}</option>
-                                    ))}
-              </select>
-              {!isvalid.shopname && <p>Shopname is required.</p>}
-              </div><br></br>
-
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">City</label>{" "}
-               </div>
-               <input
-                 type="text"
-                 value={data.shopownercity}
-                 placeholder="City"
-                 name="shopownercity"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={handleChange}
-              />
-               {!isvalid.shopname && <p>Shopname is required.</p>}
-              </div><br></br>
-
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Pincode</label>{" "}
-               </div>
-               <input
-                 type="text"
-                 value={data.shopownerpincode}
-                 placeholder="Pincode"
-                 name="shopownerpincode"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={handlePincodeChange}
-              />
-               {!isvalid.shopname && <p>Shopname is required.</p>}
-              </div><br></br>
-          </form>
-          </Col>
-          <Col className="col-6">
-          <form onSubmit={handleSubmit}>
-            <div className="input-box">
              {" "}
               <label className="container-fluid font" id="font">Contact Number</label>{" "}
                <input
@@ -214,105 +113,29 @@ return (
                />              
                {!isvalid.shopname && <p>Shopname is required.</p>}
              </div><br></br>
-
-             <div className="input-box">
-               <label className=" container-fluid font" id="font">Email</label>{" "}
-               <input
-                 type="email"
-                 placeholder="Email"
-                value={data.shopowneremail}
-                 name="shopowneremail"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={handleChange}
-               />
-               {!isvalid.shopowneremail && <p>Email is required.</p>}
-           </div><br></br>
-
-           <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Registartion Number</label>{" "}
-               </div>
-               <input
-                 type="text"
-                 value={data.shopownerregstration}
-                 placeholder="Registartion Number"
-                 name="shopregistartionnumber"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={handleChange}
-              /> 
-               {!isvalid. shopregistartionnumber && <p>Shopregistartionnumber is required.</p>}
-              </div><br></br>
-
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Shop Lisence</label>{" "}
-               </div>
-               <input
-                 type="file"
-                 value={data.shoplisence}
-                 placeholder="Shop Lisence"
-                 name="shoplisence"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={handleChange}
-              />
-               {!isvalid.shoplisence && <p>Shoplisence is required.</p>}
-              </div><br></br>
-
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Password</label>{" "}
-               </div>
-               <input
-                 type="text"
-                 value={data.shopownerpassword}
-                 placeholder="Password"
-                 name="password"
-                 className="form-control m-2"
-                 id="text1"
-                 onChange={PasswordChange}
-              />
-               {!isvalid.shopownerpassword && <p>Password is required.</p>}
-              </div><br></br>
-
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Confirm Password</label>{" "}
-               </div>
-               <input
-                 type="text"
-                 value={data.shopownerconfirmpassword}
-                 placeholder="Confirm Password"
-                 name="confirmpassword"
-                 id="text1"
-                 className="form-control m-2"
-                 onChange={PasswordChange}
-              />
-               {!isvalid.shopownerconfirmpassword && <p>Password do not match.</p>}
-              </div><br></br>  
-              </form>
           </Col>
-        </Row>
-        <div className="inbutton d-flex justify-content-center" id="signup">
-               <button type="submit" className="btn text-white" id="colors">
-                 Register
-               </button>
-        </div>
-        <div className="text">
-               <h6 className="text-center" >
-                 Already have an account? <Link to="/shopownerlogin" className="shopownweracc">Log In</Link>
-               </h6>
-        </div>
-        </div>
+          <Col>
+          <div className="input-box">
+             {" "}
+              <label className="container-fluid font" id="font">Contact Number</label>{" "}
+               <input
+                 type="text"
+                 placeholder="Contact Number"
+               value={data.handlePhoneNumberChange}
+                 name="contactnumber"
+                 className="form-control m-2"
+                 id="text1"
+                 onChange={handlePhoneNumberChange}
+               />              
+               {!isvalid.shopname && <p>Shopname is required.</p>}
+             </div><br></br>
+          </Col>
+        </form>
+      </Row>
       </Col>
     </Row>
   </div>
+ </div>
   );
 }
 export default ShopOwnerRegistration;

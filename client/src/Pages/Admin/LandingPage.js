@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./landing.css";
 import Form from "react-bootstrap/Form";
 import { Row, Col, Container } from "react-bootstrap";
-import logoimg from "../../images/LOGO SHOP UNITY-1.png";
+import logoimg from "../../images/logos.png"
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function LandingPage() {
       <Navbar collapseOnSelect expand="lg" className="" id="navfixed">
         <div className="col-7">
           <Navbar.Brand href="/" className="toggleimg">
-            <img src={logoimg} className="w-25 m-2" alt="img"></img>
+            <img src={logoimg} className="logoimg" alt="img"></img>
           </Navbar.Brand>
         </div>
         <div className="col-2">
@@ -110,6 +110,17 @@ function LandingPage() {
       <div className="navshadow">
         <div id="home" className="shopunitytittle_main">
           <h5 className="shopunitytittle"></h5>
+        </div>
+        <div>
+          <Row>
+            <Col>
+            
+            </Col>
+            <Col>
+              <div>
+              </div>
+            </Col>
+          </Row>
         </div>
       </div>
       <div id="about" className="container mt-5 pt-5">
