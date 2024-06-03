@@ -7,6 +7,7 @@ import "./landing.css";
 import Form from "react-bootstrap/Form";
 import { Row, Col, Container } from "react-bootstrap";
 import logoimg from "../../images/LOGO SHOP UNITY-1.png";
+import first from "../../images/first.mp4"
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -109,6 +110,11 @@ function LandingPage() {
       </Navbar>
       <div className="navshadow">
         <div id="home" className="shopunitytittle_main">
+<video width="800px" height="300px"  autoPlay="true" muted>
+  <source src={first} type="video/mp4"></source> 
+   </video> 
+
+
           <h5 className="shopunitytittle"></h5>
         </div>
       </div>
