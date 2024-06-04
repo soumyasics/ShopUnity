@@ -7,7 +7,8 @@ import "./landing.css";
 import Form from "react-bootstrap/Form";
 import { Row, Col, Container } from "react-bootstrap";
 import logoimg from "../../images/logos.png"
-
+import shopunity from "../../images/shopunity.mp4"
+import landing from "../../images/landing.png"
 function LandingPage() {
   const navigate = useNavigate();
 
@@ -114,10 +115,18 @@ function LandingPage() {
         <div>
           <Row>
             <Col>
-            
+              <p className="para">
+                "i think you're<br></br>
+                really stressed out and <br></br>
+                can't really face reality<br></br>
+                you shop"
+              </p>
+              
             </Col>
             <Col>
               <div>
+              {/* <video src={shopunity} alt='video' autoplay="true"></video> */}
+             
               </div>
             </Col>
           </Row>
@@ -133,8 +142,9 @@ function LandingPage() {
             ></img>
           </Col>
           <Col>
-            <h5 className="mt-5 pt-5">About As</h5>
+            <h5 className="us mt-5 pt-5" >About Us</h5>
             <div>
+              <p className="p1">
               Welcome to Shop Unity, your one-stop destination for all your
               wholesale needs! At Shop Unity, we believe in fostering unity
               within the wholesale community by providing a platform where
@@ -143,46 +153,30 @@ function LandingPage() {
               Our mission is to revolutionize the wholesale industry by offering
               a user-friendly, efficient, and transparent platform that connects
               wholesalers with retailers and facilitates smooth transactions.
+              </p>
             </div>
-            <div className="mt-5">
-              <h5>Our Vision:</h5>
-              At Shop Unity, we envision a future where wholesale businesses
-              thrive in a collaborative ecosystem, empowered by cutting-edge
-              technology and a shared commitment to excellence.
-            </div>
-            <div className="mt-2">
-              {" "}
-              Whether you're a wholesale dealer looking to expand your reach, a
-              shop owner seeking top-notch products, a delivery agent ready to
-              join our network, or a customer in search of great deals, we
-              invite you to join the Shop Unity community today!{" "}
-            </div>
+            
           </Col>
         </Row>
       </div>
-      <hr></hr>
-      <div id="contact" className="container mt-5 pt-5 ">
-        <h5 className="text-center mt-5 pt-5 ">contact</h5>
-        <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="email" placeholder="" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Contact number</Form.Label>
-            <Form.Control type="email" placeholder="" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Message</Form.Label>
-            <Form.Control as="textarea" rows={3} />
-          </Form.Group>
-          <button className="btn btn-primary">Get in touch</button>
-        </Form>
+      
+      <div className="row container">
+        <div className="col-7 container">
+        <h4 className="h4">Our Vision:</h4>
+        <p className="p1">
+        At Shop Unity, we envision a future where wholesale businesses
+        thrive in a collaborative ecosystem, empowered by cutting-edge
+        technology and a shared commitment to excellence.
+          
+        Whether you're a wholesale dealer looking to expand your reach, a
+        shop owner seeking top-notch products, a delivery agent ready to
+        join our network, or a customer in search of great deals, we
+        invite you to join the Shop Unity community today!
+        </p>
+        </div>
+        <div className="col-5 container">
+            <img src={landing} className="landing" alt="img"></img>
+        </div>
       </div>
       <hr></hr>
     </div>

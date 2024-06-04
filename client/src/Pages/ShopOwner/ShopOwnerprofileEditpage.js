@@ -196,24 +196,50 @@ function ShopOwnerProfileEditPage() {
     //   </div>
     // </div>
 
-    <div className=" container">
-      <div className="">
-      <div
-              className=" shopownerbox"
-              style={{
-                margin: "2% 7%",
-                boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                borderRadius: "16px",
-              }}
-            >
-      <form >
-        <label>shopowner</label>
-        <input type="text" cl></input>
-       </form>
-       </div>
-      </div>
-       
+   <div className="container">
+    <div className="header">
+      <form>
+        <Row>
+          <Col>
+          <div>
+          <label className="container-fluid font" id="font">ShopName</label>
+            <input type="text"className="form-control m-2" 
+            placeholder="Contact Number"
+            id="text2"/>
+          </div>
+          <div>
+          <label className="container-fluid font" id="font">Owner Name</label>
+            <input type="text"className="form-control m-2" 
+            placeholder="Contact Number"
+            id="text2"/>
+          </div>
+          <div>
+          <label className="container-fluid font" id="font">Address</label>
+            <input type="text"className="form-control m-2" 
+            placeholder="Contact Number"
+            id="text2"/>
+          </div>
+          <div>
+          <label className="container-fluid font" id="font">District</label>
+            <input type="text"className="form-control m-2" 
+            placeholder="Contact Number"
+            id="text2"/>
+          </div>
+          <div>
+          <label className="container-fluid font" id="font">City</label>
+            <input type="text"className="form-control m-2" 
+            placeholder="Contact Number"
+            id="text2"/>
+          </div>
+          
+          </Col>
+          <Col>
+          
+          </Col>
+        </Row>
+      </form>
     </div>
+   </div>
   
   );
 }

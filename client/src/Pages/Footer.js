@@ -7,6 +7,8 @@ import { FaInstagramSquare } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaTwitter } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import logos from './../images/logos.png'
+
 function Footer() {
   
   return (
@@ -33,13 +35,10 @@ function Footer() {
               <div>8765342367</div>
             </Col>
             <Col>
-             For inquiries,
-              partnerships, or general questions, please don't hesitate to
-              contact us. We're here to help you succeed! 
-              <div className="mt-3">
-              Thank you for choosing
-              Shop Unity. Together, let's build a stronger, more connected
-              wholesale industry.</div>
+              <img src={logos} alt="img" className="logo"></img><br></br>
+              We Inivite You To Join<br>
+              </br>
+              The Shop Unity Community today!
             </Col>
           </Row>
         </Container>

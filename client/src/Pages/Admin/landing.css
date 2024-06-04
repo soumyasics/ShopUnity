@@ -4,7 +4,7 @@
     border-radius: 12px;
 }
 .navshadow{
-   background-color: rgba(255, 255, 0, 0.629);
+   background-color: #eedb50;
     height: 750px;
 }
 .shopunitytittle{
@@ -37,4 +37,30 @@
 .logoimg{
     height: 90px;
     width: 120px;
+}
+.para{
+    text-transform: capitalize;
+    font-size: 40px;
+    word-spacing: 10px;
+    letter-spacing: 2px;
+    margin-top: 300px;
+    margin-left: 150px;
+    font-weight: bold;
+    color: #717063;
+}
+.h4{
+    margin-left: 50px;
+}
+.p1{
+    margin-left: 50px;
+    margin-top: 20px;
+    text-align: justify;
+}
+.landing{
+    height: 300px;
+    width: 500px;
+    margin-left: 100px;
+}
+.us{
+    margin-left: 50px;
 }
