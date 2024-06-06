@@ -21,7 +21,7 @@ function Navigation() {
         
 
         <Nav className="navlist">
-          <div class="dropdown ms-5 me-3" >
+          {/* <div class="dropdown ms-5 me-3" >
             <button
               class="btn btn-outline-success dropdown-toggle rounded-4"
               type="button"
@@ -52,7 +52,13 @@ function Navigation() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
+          <div>
+            <button  class="btn btn-outline-success dropdown-toggle rounded-4"
+              type="button"
+              
+              aria-expanded="false">Home</button>
+          </div>{"   "}
           <div class="dropdown" style={{ marginRight: "50px" }}>
             <button
               class="btn btn-outline-success dropdown-toggle rounded-4"

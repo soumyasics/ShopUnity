@@ -121,9 +121,11 @@ function AdminLogin() {
            </div>
            </form>
            <div className=" container mt-4">
-             <button type="submit" className="btn" id="text">
+            <Link to="admin_dashboard">
+            <button type="submit" className="btn" id="text">
                Login
              </button>
+            </Link>
            </div>
            
          </div>

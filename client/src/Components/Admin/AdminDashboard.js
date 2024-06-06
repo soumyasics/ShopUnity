@@ -6,10 +6,10 @@ function AdminDashboard() {
   return (
     <div>
       <div className="row">
-        <div className="col-3">
+        <div className="col-2">
           <Sidebar />
         </div>
-        <div className="col-9">
+        <div className="col-10">
           < AdminHome/>
         </div>
       </div>

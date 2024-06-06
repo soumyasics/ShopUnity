@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import "./shopowner.css";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
-import shopownerimg from '../../images/shopownerimg.png'
+import shopownerimg from '../../images/shopownerreg.png'
 function ShopOwnerRegistration() {
   const[data,setData]=useState({
     shopname:"",
@@ -58,7 +58,6 @@ function ShopOwnerRegistration() {
     if (!value.trim()) {
       return `${fieldName} is required`;
     }
-
     if(fieldName === "Email" && !value.endsWith("@gmail.com")){
       return "Email must be a valid Gmail address."
     }
@@ -74,34 +73,45 @@ function ShopOwnerRegistration() {
     return '';
   }
 
+  function validatePincode(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 6) {
+      return 'Please enter a valid Pincode';
+    }
+    return '';
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    
+console.log("ok ");
+    let errors={};
     let formIsValid=true;
 
     errors.shopname = validateField('Shopname', data.shopname);
-    errors.shopownername = validateField('shopownername', data.shopownername);
-    errors.shopowneraddress = validateField('shopowneraddress', data.shopowneraddress);
-    errors.shopownerdistrict = validateField('shopownerdistrict', data.shopownerdistrict);
-    errors.shopownercity = validateField('shopownercity', data.shopownercity);
-    errors.shopownerpincode = validateField('shopownerpincode', data.shopownerpincode);
-    errors.shopownercontact = validateContact('shopownercontact', data.shopownercontact);
-    errors.shopowneremail = validateField('shopowneremail', data.shopowneremail);
-    errors.shopownerregistration = validateField('shopownerregistration', data.shopownerregistration);
-    errors.shoplicence = validateField('shoplisence', data.shoplicence);
+    errors.shopownername = validateField('Shopownername', data.shopownername);
+    errors.shopowneraddress = validateField('Shopowneraddress', data.shopowneraddress);
+    errors.shopownerdistrict = validateField('Shopownerdistrict', data.shopownerdistrict);
+    errors.shopownercity = validateField('Shopownercity', data.shopownercity);
+    errors.shopownerpincode = validatePincode('Shopownerpincode', data.shopownerpincode);
+    errors.shopownercontact = validateContact('Shopownercontact', data.shopownercontact);
+    errors.shopowneremail = validateField('Shopowneremail', data.shopowneremail);
+    errors.shopownerregistration = validateField('Shopownerregistration', data.shopownerregistration);
+    errors.shoplicence = validateField('Shoplisence', data.shoplicence);
+    errors.shopownerpassword = validateField ('Shopownerpassword',data.shopownerpassword);
+    errors.shopownerconfirmpassword = validateField ('Shopownerconfirmpassword',data.shopownerconfirmpassword);
 
 
     const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
-      if (!data.password.trim()) {
+      if ((!data.password).toString().trim()) {
         formIsValid = false;
         errors.password = "Password is required";
       } else if (!passwordRegex.test(data.password)) { // Pass the password to the test method
         errors.password =
           "Password must contain at least one number, one special character, and one capital letter";
       }
-
-      if (!data.confirmpassword.trim()) {
+      
+      if ((!data.confirmpassword).toString().trim()) {
         formIsValid = false;
         errors.confirmpassword = "Confirm Password is required";
       } else if (data.confirmpassword !== data.password) {
@@ -133,14 +143,14 @@ return (
               <label className="container-fluid font" id="font">Shop Name</label>{" "}
                <input
                  type="text"
-                 placeholder="Contact Number"
+                 placeholder="Shopname"
                  value={data.shopname}
                  name="shopname"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
                />              
-                {errors.shopname && <div className="text-danger ">{errors.shopname}</div>}         
+                {errors.shopname && <div className="container text-danger ">{errors.shopname}</div>}         
 
              </div><br></br>
              <div className="input-box">
@@ -155,7 +165,7 @@ return (
                  id="text1"
                  onChange={handleChange}
                />     
-               {errors.shopownername && <div className="text-danger">{errors.shopownername}</div>}         
+               {errors.shopownername && <div className="container text-danger">{errors.shopownername}</div>}         
              </div><br></br>
              <div className="input-box">
              {" "}
@@ -169,7 +179,7 @@ return (
                  id="text1"
                  onChange={handleChange}
                />    
-               {errors.shopowneraddress && <div className="text-danger">{errors.shopowneraddress}</div>}           
+               {errors.shopowneraddress && <div className=" container text-danger">{errors.shopowneraddress}</div>}           
              </div><br></br>
              <div className="input-box">
              {" "}
@@ -185,7 +195,7 @@ return (
                                         <option key={index} value={district}>{district}</option>
                                     ))}
               </select>       
-              {errors.shopownerdistrict && <div className="text-danger">{errors.shopownerdistrict}</div>}     
+              {errors.shopownerdistrict && <div className="container text-danger">{errors.shopownerdistrict}</div>}     
              </div><br></br>
              <div className="input-box">
              {" "}
@@ -199,7 +209,7 @@ return (
                  id="text1"
                  onChange={handleChange}
                />      
-               {errors.shopownercity && <div className="text-danger">{errors.shopownercity}</div>}        
+               {errors.shopownercity && <div className=" container text-danger">{errors.shopownercity}</div>}        
              </div><br></br>
              <div className="input-box">
              {" "}
@@ -213,7 +223,7 @@ return (
                  id="text1"
                  onChange={handleChange}
                />             
-               {errors.shopownerpincode && <div className="text-danger">{errors.shopownerpincode}</div>}  
+               {errors.shopownerpincode && <div className="container text-danger">{errors.shopownerpincode}</div>}  
              </div><br></br>
             </Col>
             <Col>
@@ -229,7 +239,7 @@ return (
                  id="text1"
                  onChange={handleChange}
                />       
-               {errors.shopownercontact && <div className="text-danger">{errors.shopownercontact}</div>}       
+               {errors.shopownercontact && <div className="container text-danger">{errors.shopownercontact}</div>}       
              </div><br></br>
 
              <div className="input-box">
@@ -243,7 +253,7 @@ return (
                  id="text1"
                  onChange={handleChange}
                />
-               {errors.shopowneremail && <div className="text-danger">{errors.shopowneremail}</div>}
+               {errors.shopowneremail && <div className="container text-danger">{errors.shopowneremail}</div>}
            </div><br></br>
 
            <div className="input-box">
@@ -260,7 +270,7 @@ return (
                  id="text1"
                  onChange={handleChange}
               /> 
-              {errors.shopownerregistration && <div className="text-danger">{errors.shopownerregistration}</div>}
+              {errors.shopownerregistration && <div className=" container text-danger">{errors.shopownerregistration}</div>}
               </div><br></br>
 
               <div className="input-box">
@@ -277,7 +287,7 @@ return (
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shoplisence && <div className="text-danger">{errors.shoplisence}</div>}
+              {errors.shoplicence && <div className="container text-danger">{errors.shoplicence}</div>}
               </div><br></br>
 
               <div className="input-box">
@@ -294,7 +304,7 @@ return (
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shopownerpassword && <div className="text-danger">{errors.shopownerpassword}</div>}
+              {errors.shopownerpassword && <div className="container text-danger">{errors.shopownerpassword}</div>}
               </div><br></br>
 
               <div className="input-box">
@@ -311,16 +321,17 @@ return (
                  className="form-control m-2"
                  onChange={handleChange}
               />
-               {errors.shopownerconfirmpassword && <div className="text-danger">{errors.shopownerconfirmpassword}</div>}
+               {errors.shopownerconfirmpassword && <div className="container text-danger">{errors.shopownerconfirmpassword}</div>}
               </div><br></br>
             </Col>
             </Row>
-          </form>
-          <div className="inbutton d-flex justify-content-center" id="signup">
+            <div className="inbutton d-flex justify-content-center" id="signup">
                <button type="submit" className="btn text-white" id="colors">
                  Register
                </button>
         </div>
+          </form>
+       
         <div className="text">
                <h6 className="text-center" >
                  Already have an account? <Link to="/shopownerlogin" className="shopownweracc">Log In</Link>
