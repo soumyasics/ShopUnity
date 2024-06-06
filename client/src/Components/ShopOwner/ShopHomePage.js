@@ -1,10 +1,19 @@
 import React from 'react'
-import ShopOwnerNav from '../../Pages/Navs/ShopOwnerNav'
 import ShopownerHomepage from '../../Pages/ShopOwner/ShopownerHomepage'
+import ShopOwnerSidebar from '../../Pages/ShopOwner/ShopOwnerSidebar'
 
 function ShopHomePage() {
   return (
-    <div className=''><ShopownerHomepage/></div>
+    <div>
+      <div className="row">
+        <div className="col-2">
+          <ShopOwnerSidebar/>
+        </div>
+        <div className="col-10">
+          <ShopownerHomepage/>
+        </div>
+      </div>
+    </div>
   )
 }
 

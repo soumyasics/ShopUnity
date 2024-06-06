@@ -281,3 +281,60 @@ height: 25px;
   padding-top: 10px;
   margin-left: 10px;
 }
+
+/* Shopowner Dashboard */
+
+.shop-dash-color{
+  background-color: #CAFAE2;
+  padding-bottom: 40px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.shop-dash-link{
+  text-decoration: none;
+}
+.shop-dash-h5-1{
+  color: black;
+  font-weight: bold;
+  background-color:#98FF95;
+  text-align: center;
+  border-radius: 20px;
+  height: 30px;
+}
+.shop-dash-h5-2{
+  color: black;
+  font-weight: bold;
+  background-color:#00E2E2;
+  border-radius: 20px;
+  height: 30px;
+  text-align: center;
+}
+.shop-dash-h5-3{
+  color: black;
+  font-weight: bold;
+  background-color:#BDB7FF ;
+  text-align: center;
+  border-radius: 20px;
+  height: 30px;
+}
+.revenue__box{
+  background: #98FF954F;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.order__box{
+  background: #00E2E24F;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.products__box{
+  background: #BDB7FF4F;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.shop-dash-icon{
+  color: black;
+  height: 30px;
+  width: 30px;
+}
+.shop-dash-para{
+  font-size: 15px;
+}
