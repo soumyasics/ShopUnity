@@ -33,6 +33,22 @@ const shopownerschema = mongoose.Schema({
     type: String,
     required: true,
   },
+  shopownerpincode: {
+    type: String,
+    required: true,
+  },
+  shopownerdistrict: {
+    type: String,
+    required: true,
+  },
+  shopownerconfirmpassword: {
+    type: String,
+    required: true,
+  },
+  shopownercity: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     default: "pending",
