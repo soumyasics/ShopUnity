@@ -23,8 +23,12 @@ const shopeOwnerRegister = (req, res) => {
     shopowneremail: req.body.shopowneremail,
     shopowneraddress: req.body.shopowneraddress,
     shopregistrationnumber: req.body.shopregistrationnumber,
-    shoplisence: req.file.originalname,
+    shoplisence: req.file,
     shopownerpassword: req.body.shopownerpassword,
+    shopownerpincode: req.body.shopownerpincode,
+    shopownerdistrict: req.body.shopownerdistrict,
+    shopownerconfirmpassword: req.body.shopownerconfirmpassword,
+    shopownercity: req.body.shopownercity,
   });
   shopowner
     .save()
