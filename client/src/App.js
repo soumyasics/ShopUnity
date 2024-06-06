@@ -26,6 +26,7 @@ import ShopOwnerPendingList from './Components/Admin/ShopOwnerPendingList';
 import ShopOwnerList from './Components/Admin/ShopOwnerList';
 import AdminMainNav from './Pages/Navs/AdminMainNav';
 import MainNav from './Pages/Navs/MainNav';
+import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
 
     <Route path='/shopownerregistration' element={[<MainNav/>,<ShopOwnerRegistration/>,<Footer/>]} />
     <Route path='/shopownerlogin' element={[<MainNav/>,<ShopOwnerLogin/>,<Footer/>]} />
-    <Route path='/shopownerhome' element={[<ShopOwnerNav/>,<ShopHomePage/>,<Footer/>]} />
+    <Route path='/shopownerhome' element={[<ShopHomePage/>]} />
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
     <Route path='/shopownerprofile' element={<ShopownerProfile url={{url}}/>}/>
     <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEdit/>}/>
