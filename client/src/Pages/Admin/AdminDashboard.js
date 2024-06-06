@@ -6,7 +6,6 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { FaBoxOpen } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import { GrDeliver } from "react-icons/gr";
-
 function AdminHome() {
   const [customers, setCustomers] = useState([]);
   const [shopOwners, setShopOwners] = useState([]);

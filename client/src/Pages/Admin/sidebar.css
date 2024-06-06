@@ -1,4 +1,4 @@
-.nav-pills > li > a {
+/* .nav-pills > li > a {
     border-radius: 0;
  }
  
@@ -56,7 +56,7 @@
  }
  /* Sidebar Styles */
  
- .sidebar-nav {
+ /* .sidebar-nav {
     position: absolute;
     top: 0;
     width: 250px;
@@ -108,7 +108,7 @@
     margin: 0;
  }
  
- /* @media (min-width: 768px) {
+ @media (min-width: 768px) {
     #wrapper {
        padding-left: 250px;
     }
@@ -153,7 +153,7 @@
        transition: all 0.5s ease;
        width: auto;
     }
- } */
+ }
  .page-content-wrapper {
    overflow-x: hidden;
 }
@@ -163,12 +163,7 @@
    padding-top: 10px;
    padding-bottom: 30px;
 }
-/* .sidebar-img{
-   margin-top: 20px;
-   margin-left: 60px;
-   height: 100px;
-   width: 100px;
-} */
+
 .side-bar-para{
    color: white;
    font-size: 20px;
@@ -192,4 +187,88 @@
 .sidebar-shop{
    color: white;
    font-weight: bold;
+} */ 
+
+.sidebar-div1-color{
+   background-color: #115261;
+   width: 100%;
+   height: 20vh;
+}
+.sidebar-para{
+   color: white;
+   font-size: 25px;
+   margin-top: 35px;
+}
+.sidebar-div2-color{
+   background-color: #004757;
+   height: 80vh;
+   width: 100%;
+}
+.sidebar-dashboard{
+   color: black;
+   text-decoration: none;
+}
+.nav-pills > li > a {
+   border-radius: 0;
+}
+
+.sidebar-nav {
+   position: absolute;
+   top: 0;
+   width: 250px;
+   margin: 0;
+   padding: 0;
+   list-style: none;
+   margin-top: 2px;
+}
+
+.sidebar-nav li {
+   text-indent: 15px;
+   line-height: 40px;
+}
+
+.sidebar-dashboard{
+   color: black;
+   display: block;
+   text-decoration: none;
+   background-color: white;
+   width: 70%;
+   border-end-end-radius: 30px;
+   font-weight: bold;
+}
+
+.sidebar-shop{
+   display: block;
+   text-decoration: none;
+   color: white; 
+   font-weight: bold;
+}
+/* .sidebar-nav li a {
+   display: block;
+   text-decoration: none;
+   color: white;
+} */
+
+.sidebar-nav li a:hover {
+   text-decoration: none;
+   border-left: red 2px solid;
+}
+.no-margin {
+   margin: 0;
+}
+.admin-dash-active{
+   margin-top: 150px;
+}
+.sidebar-logout{
+   text-decoration: none;
+   color: white;
+   font-weight: bold;
+}
+.sidebar-logout-btn{
+   margin-top:200px ;
+   margin-left: 50px;
+   background-color: #ad0000;
+   height: 40px;
+   width: 120px;
+   border-radius: 20px;
 }
