@@ -25,6 +25,7 @@ import ShopOwnerProfileEdit from './Components/ShopOwner/ShopOwnerProfileEdit';
 import ShopOwnerPendingList from './Components/Admin/ShopOwnerPendingList';
 import ShopOwnerList from './Components/Admin/ShopOwnerList';
 import AdminMainNav from './Pages/Navs/AdminMainNav';
+import MainNav from './Pages/Navs/MainNav';
 
 
 function App() {
@@ -55,8 +56,8 @@ function App() {
 
 {/* shopowner */}
 
-    <Route path='/shopownerregistration' element={[<Navigation/>,<ShopOwnerRegistration/>,<Footer/>]} />
-    <Route path='/shopownerlogin' element={[<Navigation/>,<ShopOwnerLogin/>,<Footer/>]} />
+    <Route path='/shopownerregistration' element={[<MainNav/>,<ShopOwnerRegistration/>,<Footer/>]} />
+    <Route path='/shopownerlogin' element={[<MainNav/>,<ShopOwnerLogin/>,<Footer/>]} />
     <Route path='/shopownerhome' element={[<ShopOwnerNav/>,<ShopHomePage/>,<Footer/>]} />
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
     <Route path='/shopownerprofile' element={<ShopownerProfile url={{url}}/>}/>
@@ -64,12 +65,13 @@ function App() {
 {/* Admin */}
 
     <Route path='/Admin' element={[<AdminMainNav/>,<AdminLogin/>,<Footer/>]} />
-    <Route path='/admin_dashboard' element={<AdminDashboard/>}/>
+    <Route path='/admin/admin_dashboard' element={<AdminDashboard/>}/>
     <Route path='/shopownerspendinglist' element={<ShopOwnerPendingList url={url} />}></Route>
     <Route path='/shopownerslist' element={<ShopOwnerList url={url} />}></Route>
     </Routes>
      
     </BrowserRouter>
+
   );
 }
 

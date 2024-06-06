@@ -8,7 +8,7 @@ function ShopOwnerProfileEdit() {
     <div>
       <ShopOwnerNav />
       <ShopOwnerprofileEditpage />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

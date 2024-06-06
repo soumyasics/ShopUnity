@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import "./shopowner.css";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
-import shopownerreg from "../../images/shopownerreg.png"
+import shopownerimg from '../../images/shopownerreg.png'
 function ShopOwnerRegistration() {
   const[data,setData]=useState({
     shopname:"",
@@ -16,213 +16,232 @@ function ShopOwnerRegistration() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    shoplisence:"",
+    shoplicence:"",
     shopownerpassword:"",
     shopownerconfirmpassword:""
   })
+
+  const[errors,setErrors]=useState({
+    shopname:"",
+    shopownername:"",
+    shopowneraddress:"",
+    shopownerdistrict:"",
+    shopownercity:"",
+    shopownerpincode:"",
+    shopownercontact:"",
+    shopowneremail:"",
+    shopownerregistration:"",
+    shoplicence:"",
+    shopownerpassword:"",
+    shopownerconfirmpassword:""
+  })
+
   const districts=[
     'Alappuzha','Ernakulam','Idukki','Kannur','Kasaragod',
     'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
     'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
   ];
 
-  const handlePhoneNumberChange = (value) => {
-    let newValue = value.replace(/\D/g, '');
-    if (newValue.length > 10) {
-        newValue = newValue.slice(0, 10);
-    }
-    return newValue;
-};
-
-const handlePincodeChange = (value) => {
-  let newValue = value.replace(/\D/g, '');
-  if (newValue.length > 6) {
-      newValue = newValue.slice(0, 6);
-  }
-  return newValue;
-};
-
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  let newValue;
-  
-  if (name === "phone") {
-      newValue = handlePhoneNumberChange(value);
-  } else if (name === "name") {
-      newValue = value.replace(/[^a-zA-Z\s]/g, '');
-  } else {
-      newValue = value;
-  }
-  
-  setData({ ...data, [name]: newValue });
-  
-  setErrors((prevErrors) => ({
+  const handleChange = (event) => {    
+    const { name, value } = event.target;
+    setData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+    setErrors(prevErrors => ({
       ...prevErrors,
-      [name]: newValue.trim() === "" ? `${name.charAt(0).toUpperCase() + name.slice(1)} required` : null
-  }));
-};
-  const validateForm=()=>{
-    let formErrors={};
+      [name]: ''
+    }));
+  };
 
-    if(!data.shopname)
-      formErrors.shopname='ShopName Required';
-    if(!data.shopownername)
-      formErrors.shopownername='ShopownerName Required';
-    if(!data.shopowneraddress)
-      formErrors.shopowneraddress='Address Required';
-    if(!data.shopownerdistrict)
-      formErrors.shopownerdistrict='District Required';
-    if(!data.shopownercity)
-      formErrors.shopownercity='City Required';
-    if(!data.shopownerpincode)
-      formErrors.shopownerpincode='Pincode Required';
-    if(!data.shopownercontact)
-      formErrors.shopownercontact='Contact Required';
-    if(!data.shopowneremail)
-      formErrors.shopowneremail='Email Required';
-    if(!data.shopownerregistration)
-      formErrors.shopownerregistration='Registration Required';
-    if(!data.shoplisence)
-      formErrors.shoplisence='Shoplisence Required';
-    if(!data.shopownerpassword)
-      formErrors.shopownerpassword='SPassword Required';
-    if(!data.shopownerconfirmpassword)
-      formErrors.shopownerconfirmpassword='Password Required';
-
-    return formErrors;
+  function validateField(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    }
+    if(fieldName === "Email" && !value.endsWith("@gmail.com")){
+      return "Email must be a valid Gmail address."
+    }
+    return '';
   }
 
-  const [errors, setErrors] = useState({});
+  function validateContact(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 10) {
+      return 'Please enter a valid Contact Number';
+    }
+    return '';
+  }
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  const formErrors = validateForm();
-  setErrors(formErrors);
-};
+  function validatePincode(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 6) {
+      return 'Please enter a valid Pincode';
+    }
+    return '';
+  }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+console.log("ok ");
+    let errors={};
+    let formIsValid=true;
+
+    errors.shopname = validateField('Shopname', data.shopname);
+    errors.shopownername = validateField('Shopownername', data.shopownername);
+    errors.shopowneraddress = validateField('Shopowneraddress', data.shopowneraddress);
+    errors.shopownerdistrict = validateField('Shopownerdistrict', data.shopownerdistrict);
+    errors.shopownercity = validateField('Shopownercity', data.shopownercity);
+    errors.shopownerpincode = validatePincode('Shopownerpincode', data.shopownerpincode);
+    errors.shopownercontact = validateContact('Shopownercontact', data.shopownercontact);
+    errors.shopowneremail = validateField('Shopowneremail', data.shopowneremail);
+    errors.shopownerregistration = validateField('Shopownerregistration', data.shopownerregistration);
+    errors.shoplicence = validateField('Shoplisence', data.shoplicence);
+    errors.shopownerpassword = validateField ('Shopownerpassword',data.shopownerpassword);
+    errors.shopownerconfirmpassword = validateField ('Shopownerconfirmpassword',data.shopownerconfirmpassword);
+
+
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
+      if ((!data.password).toString().trim()) {
+        formIsValid = false;
+        errors.password = "Password is required";
+      } else if (!passwordRegex.test(data.password)) { // Pass the password to the test method
+        errors.password =
+          "Password must contain at least one number, one special character, and one capital letter";
+      }
+      
+      if ((!data.confirmpassword).toString().trim()) {
+        formIsValid = false;
+        errors.confirmpassword = "Confirm Password is required";
+      } else if (data.confirmpassword !== data.password) {
+        formIsValid = false;
+        errors.confirmpassword = "Passwords do not match";
+      }
+
+    setErrors(errors);
+    if (formIsValid){
+      console.log("data",data);
+    }
+  }
+  
 return (
-  <div  className="ownerregg container-fluid">
+ <div>
+  <div className="ownerregg container-fluid">
     <Row className="container-fluid">
       <Col className="col-6 container">
-      <img className="shopownerimg container" src={shopownerreg} alt=''></img>
+        <img className="shopownerimg" src={shopownerimg} alt="img"></img>
       </Col>
-      <Col className="col-6">
+      <Col className="col-6 container-fluid ">
         <div className="ownerreg">
         <h1  className="text-center reg" id="ownerreg">Shop Owner Register</h1><br></br>
-        <Row className="container-fluid">
-          <Col className="col-6" id="regcol">
           <form onSubmit={handleSubmit}>
-          <div className="input-box">
-              {" "}
+            <Row>
+            <Col>
+            <div className="input-box">
+             {" "}
               <label className="container-fluid font" id="font">Shop Name</label>{" "}
                <input
                  type="text"
-                 placeholder="shopname"
-               value={data.shopname}
+                 placeholder="Shopname"
+                 value={data.shopname}
                  name="shopname"
+                 className="form-control m-2"
                  id="text1"
-                 className="form-control m-2 textbox "
                  onChange={handleChange}
-               />
-               {errors.shopname && <span className='span-required'>{errors.shopname}</span>}
+               />              
+                {errors.shopname && <div className="container text-danger ">{errors.shopname}</div>}         
+
              </div><br></br>
              <div className="input-box">
-               <label className="container-fluid font" id="font">Shop Owner Name</label>{" "}
+             {" "}
+              <label className="container-fluid font" id="font">Owner Name</label>{" "}
                <input
                  type="text"
-                 placeholder="shopownername"
-                value={data.shopownername}
+                 placeholder="Shopownername"
+                 value={data.shopownername}
                  name="shopownername"
-                 id="text1"
                  className="form-control m-2"
+                 id="text1"
                  onChange={handleChange}
-               />
-               {errors.shopownername && <span className='span-required'>{errors.shopownername}</span>}
-           </div><br></br>
-           <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Shopowner Address</label>{" "}
-               </div>
+               />     
+               {errors.shopownername && <div className="container text-danger">{errors.shopownername}</div>}         
+             </div><br></br>
+             <div className="input-box">
+             {" "}
+              <label className="container-fluid font" id="font">Address</label>{" "}
                <input
                  type="text"
-                 value={data.shopowneraddress}
-                 placeholder="shopowneraddress"
+                 placeholder="Shopowneraddress"
+               value={data.shopowneraddress}
                  name="shopowneraddress"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
-              />
-              {errors.shopowneraddress && <span className='span-required'>{errors.shopowneraddress}</span>}
+               />    
+               {errors.shopowneraddress && <div className=" container text-danger">{errors.shopowneraddress}</div>}           
              </div><br></br>
-              
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">District</label>{" "}
-               </div>
-               <select className="form-control controls m-2" 
+             <div className="input-box">
+             {" "}
+              <label className="container font" id="font">District</label>{" "}
+              <select className="form-control m-2" 
                                 name="shopownerdistrict" 
+                                value={data.shopownerdistrict}
                                 id="text1"
-                                value={data.shopownerdistrict} 
-                                onChange={handleChange}>
+                                onChange={handleChange}
+                                >
                                     <option >Select District</option>
                                     {districts.map((district, index) => (
                                         <option key={index} value={district}>{district}</option>
                                     ))}
-              </select>
-              {errors.shopownerdistrict && <span className='span-required'>{errors.shopownerdistrict}</span>}
-              </div><br></br>
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">City</label>{" "}
-               </div>
+              </select>       
+              {errors.shopownerdistrict && <div className="container text-danger">{errors.shopownerdistrict}</div>}     
+             </div><br></br>
+             <div className="input-box">
+             {" "}
+              <label className="container-fluid font" id="font">City</label>{" "}
                <input
                  type="text"
-                 value={data.shopownercity}
-                 placeholder="City"
+                 placeholder="Shopownercity"
+               value={data.shopownercity}
                  name="shopownercity"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
-              />
-              {errors.shopownercity && <span className='span-required'>{errors.shopownercity}</span>}
-              </div><br></br>
-              <div className="input-box">
-               <div className="label">
-                 {" "}
-                 <label className="container-fluid font" id="font">Pincode</label>{" "}
-               </div>
+               />      
+               {errors.shopownercity && <div className=" container text-danger">{errors.shopownercity}</div>}        
+             </div><br></br>
+             <div className="input-box">
+             {" "}
+              <label className="container-fluid font" id="font">PinCode</label>{" "}
                <input
                  type="text"
-                 value={data.shopownerpincode}
-                 placeholder="Pincode"
+                 placeholder="PinCode"
+               value={data.shopownerpincode}
                  name="shopownerpincode"
                  className="form-control m-2"
                  id="text1"
-                 onChange={handlePincodeChange}
-              />
-              {errors.shopownerpincode && <span className='span-required'>{errors.shopownerpincode}</span>}
-              </div><br></br>
-          </form>
-          </Col>
-          <Col className="col-6">
-          <form onSubmit={handleSubmit}>
+                 onChange={handleChange}
+               />             
+               {errors.shopownerpincode && <div className="container text-danger">{errors.shopownerpincode}</div>}  
+             </div><br></br>
+            </Col>
+            <Col>
             <div className="input-box">
              {" "}
               <label className="container-fluid font" id="font">Contact Number</label>{" "}
                <input
                  type="text"
                  placeholder="Contact Number"
-               value={data.handlePhoneNumberChange}
-                 name="contactnumber"
+                value={data.shopownercontact}
+                 name="shopownercontact"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
-               />              
-                {errors.shopownercontact && <span className='span-required'>{errors.shopownercontact}</span>}
+               />       
+               {errors.shopownercontact && <div className="container text-danger">{errors.shopownercontact}</div>}       
              </div><br></br>
+
              <div className="input-box">
                <label className=" container-fluid font" id="font">Email</label>{" "}
                <input
@@ -234,8 +253,9 @@ return (
                  id="text1"
                  onChange={handleChange}
                />
-               {errors.shopowneremail && <span className='span-required'>{errors.shopowneremail}</span>}
+               {errors.shopowneremail && <div className="container text-danger">{errors.shopowneremail}</div>}
            </div><br></br>
+
            <div className="input-box">
                <div className="label">
                  {" "}
@@ -243,31 +263,33 @@ return (
                </div>
                <input
                  type="text"
-                 value={data.shopownerregstration}
+                 value={data.shopownerregistration}
                  placeholder="Registartion Number"
-                 name="shopregistartionnumber"
+                 name="shopownerregistration"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
               /> 
-              {errors.shopregistrationnumber && <span className='span-required'>{errors.shopregistrationnumber}</span>}
+              {errors.shopownerregistration && <div className=" container text-danger">{errors.shopownerregistration}</div>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
-                 <label className="container-fluid font" id="font">Shop Lisence</label>{" "}
+                 <label className="container-fluid font" id="font">Shop Licence</label>{" "}
                </div>
                <input
                  type="file"
-                 value={data.shoplisence}
+                 value={data.shoplicence}
                  placeholder="Shop Lisence"
-                 name="shoplisence"
+                 name="shoplicence"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shoplisence && <span className='span-required'>{errors.shoplisence}</span>}
+              {errors.shoplicence && <div className="container text-danger">{errors.shoplicence}</div>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -277,13 +299,14 @@ return (
                  type="text"
                  value={data.shopownerpassword}
                  placeholder="Password"
-                 name="password"
+                 name="shopownerpassword"
                  className="form-control m-2"
                  id="text1"
                  onChange={handleChange}
               />
-              {errors.shopownerpassword && <span className='span-required'>{errors.shopownerpassword}</span>}
+              {errors.shopownerpassword && <div className="container text-danger">{errors.shopownerpassword}</div>}
               </div><br></br>
+
               <div className="input-box">
                <div className="label">
                  {" "}
@@ -293,23 +316,24 @@ return (
                  type="text"
                  value={data.shopownerconfirmpassword}
                  placeholder="Confirm Password"
-                 name="confirmpassword"
+                 name="shopownerconfirmpassword"
                  id="text1"
                  className="form-control m-2"
                  onChange={handleChange}
               />
-              {errors.shopownerconfirmpassword && <span className='span-required'>{errors.shopownerconfirmpassword}</span>}
-              </div><br></br>  
-              </form>
-          </Col>
-        </Row>
-        <div className="inbutton d-flex justify-content-center" id="signup">
+               {errors.shopownerconfirmpassword && <div className="container text-danger">{errors.shopownerconfirmpassword}</div>}
+              </div><br></br>
+            </Col>
+            </Row>
+            <div className="inbutton d-flex justify-content-center" id="signup">
                <button type="submit" className="btn text-white" id="colors">
                  Register
                </button>
         </div>
+          </form>
+       
         <div className="text">
-               <h6 className="text-center" id="text">
+               <h6 className="text-center" >
                  Already have an account? <Link to="/shopownerlogin" className="shopownweracc">Log In</Link>
                </h6>
         </div>
@@ -317,6 +341,7 @@ return (
       </Col>
     </Row>
   </div>
+ </div>
   );
 }
 export default ShopOwnerRegistration;

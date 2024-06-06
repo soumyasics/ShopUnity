@@ -3,12 +3,10 @@
     padding: 4%;
     border-radius: 12px;
 }
-.navshadow{
-   background-color: rgba(255, 255, 0, 0.629);
+/* .navshadow{
+   background-color: #eedb50;
     height: 750px;
-
-
-}
+} */
 .shopunitytittle{
     position: absolute;
     right:60%;
@@ -36,3 +34,90 @@
 #contact{
     padding: 3% 20%;
 }
+.logoimg{
+    height: 90px;
+    width: 120px;
+}
+.para{
+    text-transform: capitalize;
+    font-size: 40px;
+    margin-top: 300px;
+    margin-left: 150px;
+    font-weight: bold;
+    color: #717063;
+    text-align: justify;
+}
+.h4{
+    margin-left: 50px;
+}
+.p1{
+    margin-left: 50px;
+    margin-top: 20px;
+    text-align: justify;
+}
+.landing{
+    height: 300px;
+    width: 500px;
+    margin-left: 100px;
+}
+.us{
+    margin-left: 50px;
+}
+.landingvdo{
+    margin-top: 20px;
+    height: 110vh;
+    width: 100%;
+  }
+  .content {
+    position: absolute;
+    top: 300px;
+    left: 300px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+  .landing-home{
+    background-color: #CAFAE2;
+    border-radius: 10px;
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    padding-top: 5px;
+  }
+  .landing-about{
+    background-color: #CAFAE2;
+    border-radius: 10px;
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    padding-top: 5px;
+  }
+  #landing-button{
+    background-color: #CAFAE2;
+    border-radius: 10px;
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    padding-left: 10px;
+    border: none;
+    margin-left: 15px;
+  }
+  .landing-about-icon{
+    color: #FF971C;
+  }
+  #landing-dropdown{
+    background-color: #CAFAE2;
+    height: 200px;
+    width: 250px;
+    border: none;
+    border-radius: 10px;
+  }
+  #landing-drop-link{
+    background-color: white;
+    text-align: center;
+    border-radius: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 230px;
+  }
