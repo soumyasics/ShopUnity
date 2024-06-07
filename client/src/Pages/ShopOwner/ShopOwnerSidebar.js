@@ -19,8 +19,9 @@ function ShopOwnerSidebar() {
     const navigate = useNavigate();
     const handleLogout = (e) => {
       e.preventDefault();
-      localStorage.removeItem("admin");
-      navigate("/admin");
+      localStorage.removeItem("shopowner");
+      localStorage.removeItem("shopownertoken");
+      navigate("/shopownerlogin");
     };
   return (
     <div>

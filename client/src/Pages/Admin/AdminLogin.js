@@ -81,7 +81,7 @@ function AdminLogin() {
         </Col>
         <Col className="col-5">
           <div className="container">
-        <form onSubmit={handleSubmit} className="p-3">
+        <form  className="p-3">
           <div className="mb-3 container">
              <h1 className=" mt-5 container" id="signin">Admin Login</h1>
              <label className="font" htmlFor="form-controler-email">
@@ -121,11 +121,10 @@ function AdminLogin() {
            </div>
            </form>
            <div className=" container mt-4">
-            <Link to="admin_dashboard">
-            <button type="submit" className="btn" id="text">
+            
+            <button type="submit" className="btn" onClick={handleSubmit} id="text">
                Login
              </button>
-            </Link>
            </div>
            
          </div>

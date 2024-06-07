@@ -75,9 +75,10 @@ function Sidebar() {
       <div className="sidebar-div2-color">
       <ul className="sidebar-nav nav-pills nav-stacked" >
               <li className="admin-dash-active ">
-                <Link to="/Admin/admin_dashboard" className="sidebar-dashboard"><MdDashboard/> Dashboard</Link>
+                <Link to="/admin_dashboard" className="sidebar-dashboard"><MdDashboard/> Dashboard</Link>
                 <Link to=""className="sidebar-shop"><FaPeopleGroup/> Customers</Link>
-                <Link to="/wholesaledealerslist" className="sidebar-shop"><FaBoxOpen/> Wholesale Dealers</Link>
+                <Link to="" className="sidebar-shop"><FaBoxOpen/> Wholesale Dealers</Link>
+                <Link to="/shopownerspendinglist" className="sidebar-shop">Shop Owners Pending</Link>
                 <Link to="/shopownerslist" className="sidebar-shop"><BsPeopleFill/> Shop Owners</Link>
                 <Link to="" className="sidebar-shop"><GrDeliver/> Delivery Agents</Link>
                 <Link to="" className="sidebar-shop"><BsBoxSeam/> Customers Orders</Link>

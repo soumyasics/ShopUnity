@@ -100,7 +100,7 @@ function ShopOwnerPendingListPage({ url }) {
                     <img
                       className="parentimage"
                       alt="img" style={{width:"50px",height:"50px"}}
-                      src={`${url}${ShopOwner.shoplisence}`}
+                      src={`${url}${ShopOwner.shoplicence}`}
                     ></img>
                   </td>
                   <td>{ShopOwner.shopregistrationnumber}</td>
