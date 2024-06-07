@@ -30,7 +30,8 @@ import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in/shopunity_api/"
+  // const url="http://hybrid.srishticampus.in/shopunity_api/"
+  const url="http:/localhost:4028/shopunity_api"
 
   return (
     <BrowserRouter basename="/shopunity">
@@ -66,7 +67,7 @@ function App() {
 {/* Admin */}
 
     <Route path='/Admin' element={[<AdminMainNav/>,<AdminLogin/>,<Footer/>]} />
-    <Route path='/admin/admin_dashboard' element={<AdminDashboard/>}/>
+    <Route path='/admin_dashboard' element={<AdminDashboard/>}/>
     <Route path='/shopownerspendinglist' element={<ShopOwnerPendingList url={url} />}></Route>
     <Route path='/shopownerslist' element={<ShopOwnerList url={url} />}></Route>
     </Routes>

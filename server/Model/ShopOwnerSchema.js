@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const shopownerschema = mongoose.Schema({
+const shopOwnerSchema = new mongoose.Schema({
   shopname: {
     type: String,
     required: true,
@@ -23,9 +23,8 @@ const shopownerschema = mongoose.Schema({
   },
   shopregistrationnumber: {
     type: String,
-    required: true,
   },
-  shoplisence: {
+  shoplicence: {
     type: String,
     required: true,
   },
@@ -55,4 +54,4 @@ const shopownerschema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("shopowners", shopownerschema);
+module.exports = mongoose.model("ShopOwner", shopOwnerSchema);

@@ -15,7 +15,7 @@ function ShopOwnerRegistration() {
     shopownerpincode: "",
     shopownercontact: "",
     shopowneremail: "",
-    shopownerregistration: "",
+    shopregistrationnumber: "",
     shoplicence: "",
     shopownerpassword: "",
     shopownerconfirmpassword: "",
@@ -30,7 +30,7 @@ function ShopOwnerRegistration() {
     shopownerpincode: "",
     shopownercontact: "",
     shopowneremail: "",
-    shopownerregistration: "",
+    shopregistrationnumber: "",
     shoplicence: "",
     shopownerpassword: "",
     shopownerconfirmpassword: "",
@@ -129,9 +129,9 @@ function ShopOwnerRegistration() {
       "Shopowneremail",
       data.shopowneremail
     );
-    errors.shopownerregistration = validateField(
-      "Shopownerregistration",
-      data.shopownerregistration
+    errors.shopregistrationnumber = validateField(
+      "shopregistrationnumber",
+      data.shopregistrationnumber
     );
     errors.shoplicence = validateField("Shoplisence", data.shoplicence);
     errors.shopownerpassword = validateField(
@@ -145,19 +145,19 @@ function ShopOwnerRegistration() {
 
     const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
 
-    if (!data.password || !data.password.trim()) {
+    if (!data.shopownerpassword || !data.shopownerpassword.trim()) {
       formIsValid = false;
-      errors.password = "Password is required";
-    } else if (!passwordRegex.test(data.password)) {
+      errors.shopownerpassword = "Password is required";
+    } else if (!passwordRegex.test(data.shopownerpassword)) {
       // Pass the password to the test method
-      errors.password =
+      errors.shopownerpassword =
         "Password must contain at least one number, one special character, and one capital letter";
     }
 
     if (!data.shopownerconfirmpassword || !data.shopownerconfirmpassword.trim()) {
       formIsValid = false;
       errors.shopownerconfirmpassword = "Confirm Password is required";
-    } else if (data.shopownerconfirmpassword !== data.password) {
+    } else if (data.shopownerconfirmpassword !== data.shopownerpassword) {
       formIsValid = false;
       errors.shopownerconfirmpassword = "Passwords do not match";
     }
@@ -173,7 +173,7 @@ function ShopOwnerRegistration() {
       !errors.shopownerpincode &&
       !errors.shopownercontact &&
       !errors.shopowneremail &&
-      !errors.shopownerregistration &&
+      !errors.shopregistrationnumber &&
       !errors.shopownerpassword &&
       !errors.shopownerpassword &&
       !errors.shopownerconfirmpassword
@@ -395,16 +395,16 @@ function ShopOwnerRegistration() {
                       </div>
                       <input
                         type="text"
-                        value={data.shopownerregistration}
+                        value={data.shopregistrationnumber}
                         placeholder="Registartion Number"
-                        name="shopownerregistration"
+                        name="shopregistrationnumber"
                         className="form-control m-2"
                         id="text1"
                         onChange={handleChange}
                       />
-                      {errors.shopownerregistration && (
+                      {errors.shopregistrationnumber && (
                         <div className=" container text-danger">
-                          {errors.shopownerregistration}
+                          {errors.shopregistrationnumber}
                         </div>
                       )}
                     </div>
