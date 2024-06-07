@@ -86,7 +86,7 @@ function Sidebar() {
              <li>
                 <Link  className="sidebar-logout">
                  <div onClick={handleLogout} className="sidebar-logout-btn"><RiLogoutCircleLine/>Logout</div>
-                </Link>
+                </Link> 
              </li>
            </ul>
       </div>

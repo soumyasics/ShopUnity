@@ -21,7 +21,7 @@ function MainNav() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <a href="#home" className="navlink ms-5 me-3 text-dark text-decoration-none">
-                <h6 className="landing-home"><MdHome/>Home</h6>
+                <h6  ><MdHome/>Home</h6>
               </a>
               <a href="#about " className="navlink text-dark text-decoration-none">
                 <h6 className="landing-about"><MdOutlineRoundaboutRight className="landing-about-icon"/>About</h6>
