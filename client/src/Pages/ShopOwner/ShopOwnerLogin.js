@@ -69,7 +69,7 @@ function ShopOwnerLogin() {
       axiosInstance
         .post("/shopowner_login", data)
         .then((result) => {
-          const { status, message, id, token } = result.data;
+          const { status, message, id, token,shopname } = result.data;
 
           if (status === "pending") {
             alert("Waiting for admin approval");
@@ -77,6 +77,7 @@ function ShopOwnerLogin() {
             alert("Login successful");
             localStorage.setItem("shopowner", id);
             localStorage.setItem("shopownertoken", token);
+            localStorage.setItem("shopname", shopname);
             Navigate("/shopownerhome");
           } else {
             alert(message);

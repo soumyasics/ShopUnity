@@ -16,18 +16,18 @@ function MainNav() {
             <img src={logoimg} className="logoimg" alt="img"></img>
           </Navbar.Brand>
         </div>
-        <div className="col-2">
+        <div className="col-2 ms-5 ps-5">
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <a href="#home" className="navlink ms-5 me-3 text-dark text-decoration-none">
+            <Nav className="me-auto ms-5 ps-5">
+              <a href="#home" className="navlink text-dark text-decoration-none">
                 <h6 className="landing-home"><MdHome/>Home</h6>
               </a>
               <a href="#about " className="navlink text-dark text-decoration-none">
                 <h6 className="landing-about"><MdOutlineRoundaboutRight className="landing-about-icon"/>About</h6>
               </a>
               
-              <div class="dropdown" style={{ marginRight: "50px" }}>
+              <div class="dropdown" >
                 <button
                   // class="btn btn-outline-success dropdown-toggle rounded-4"
                   type="button"

@@ -72,6 +72,7 @@ const ShopeOwnerLogin = async (req, res) => {
             message: "Login successful",
             token,
             id: shopowner._id,
+            shopname: shopowner.shopname,
             status: shopowner.status,
           });
       } else {
