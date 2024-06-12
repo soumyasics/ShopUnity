@@ -94,38 +94,38 @@ function ShopOwnerProfileEditPage() {
       console.log("data",data);
     }
   }
-  // const navigate = useNavigate();
-  // const shopownerid = localStorage.getItem("shopowner");
+  const navigate = useNavigate();
+  const shopownerid = localStorage.getItem("shopowner");
 
-  // useEffect(() => {
-  //   axiosInstance
-  //     .get("/get_a_shopowner/" + shopownerid)
-  //     .then((res) => {
-  //       setData(res.data.data);
-  //       console.log(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [shopownerid]);
+  useEffect(() => {
+    axiosInstance
+      .get("/get_a_shopowner/" + shopownerid)
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [shopownerid]);
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setData({ ...data, [name]: value });
-  // };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
 
-  // const handleEdit = (e) => {
-  //   e.preventDefault();
-  //   axiosInstance
-  //     .post("/edit_a_shopowner/" + shopownerid, data)
-  //     .then((res) => {
-  //       console.log(res);
-  //       navigate("/shopownerprofile");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const handleEdit = (e) => {
+    e.preventDefault();
+    axiosInstance
+      .post("/edit_a_shopowner/" + shopownerid, data)
+      .then((res) => {
+        console.log(res);
+        navigate("/shopownerprofile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
    <div className="container">
@@ -253,14 +253,14 @@ function ShopOwnerProfileEditPage() {
             id="shopprofile-editpage-text2"
             name="shoplicense"
             value={data.shoplicense}
-            onChange={handleChange}
+            onChange={handleInputChange}
             />
             
             {errors.shoplicense && <div  className="text-danger color">{errors.shoplicense}</div>}
           </div>
           </Col>
           <div className="shopprofile-editpage-btn">
-            <button type="submit" className="shopprofile-editpage-subbtn">
+            <button type="submit" className="shopprofile-editpage-subbtn" onClick={handleEdit}>
               Update</button>
           </div>
         </Row>

@@ -197,7 +197,7 @@ function ShopownerProfilepage({ url }) {
             </Col>
             <div className="shopprofile-editpage-btn">
             <button type="submit" className="shopprofile-editpage-subbtn">
-              <BsPencil/>Edit Profile</button>
+              <BsPencil/><Link to="/shopownerprofileedit">Edit Profile</Link> </button>
               </div>
           </Row>
         </form>

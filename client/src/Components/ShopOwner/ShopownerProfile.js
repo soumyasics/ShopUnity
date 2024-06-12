@@ -1,16 +1,22 @@
-import React from 'react'
-import ShopOwnerNav from '../../Pages/Navs/ShopOwnerNav'
-import ShopownerProfilepage from '../../Pages/ShopOwner/ShopownerProfilepage'
-import Footer from '../../Pages/Footer'
+import React from "react";
+import ShopOwnerNav from "../../Pages/Navs/ShopOwnerNav";
+import ShopownerProfilepage from "../../Pages/ShopOwner/ShopownerProfilepage";
+import Footer from "../../Pages/Footer";
+import ShopOwnerSidebar from "../../Pages/ShopOwner/ShopOwnerSidebar";
 
-function ShopownerProfile({url}) {
+function ShopownerProfile({ url }) {
   return (
-    <div className=''>
-    <ShopOwnerNav/>,
-    <ShopownerProfilepage url={{url}}/>
-    <Footer/>
+    <div className="row">
+      <div className="col-2">
+        <ShopOwnerSidebar />
+      </div>
+      <div className="col-9 ms-3">
+        {" "}
+        <ShopownerProfilepage url={{ url }} />
+      </div>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default ShopownerProfile
+export default ShopownerProfile;

@@ -126,7 +126,7 @@ function LandingPage() {
       
       <div className="row container">
         <div className="col-7 container">
-        <h4 className="h4">Our Vision:</h4>
+        <h4 className="h4 mt-5 pt-5">Our Vision:</h4>
         <p className="p1">
         At Shop Unity, we envision a future where wholesale businesses
         thrive in a collaborative ecosystem, empowered by cutting-edge
