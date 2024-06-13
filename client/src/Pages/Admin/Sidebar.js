@@ -96,7 +96,7 @@ function Sidebar() {
     <div className="sidebar-div2-color flex-grow-1">
       <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
         <li className="nav-item" style={{marginTop:"55%"}}>
-          <Link to="/shopownerhome" className="shopownersidebar-dashboard rounded-end-5 ">
+          <Link to="/admin_dashboard" className="shopownersidebar-dashboard rounded-end-5 ">
             <MdDashboard /> Dashboard
           </Link>
         </li>

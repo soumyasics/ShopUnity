@@ -110,8 +110,9 @@ function ShopOwnerProfileEditPage() {
   }, [shopownerid]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+    const { name, files } = e.target;
+    setData({ ...data, [name]: files[0] });
+    console.log(files);
   };
 
   const handleEdit = (e) => {
@@ -131,14 +132,14 @@ function ShopOwnerProfileEditPage() {
    <div className="container">
     <div className="shopprofile-editpage-header">
       <form onSubmit={handleSubmit}>
-        <Row className="container shopprofile-editpage">
-          <Row>
+        <Row className="container shopprofile-editpage mt-5 pt-3">
+          {/* <Row>
             <Col><img className="shopprofile-editpage-img" src={editprofile} alt="img"></img>
             <img className="shopprofile-editpage-imgs" src={editprooutline} alt="img"></img>
             </Col>
             <Col></Col> 
           </Row>
-          
+           */}
         <h2 className="shopprofile-editpage-h2">Edit Profile</h2>
           <Col className="container">
           <div >
@@ -240,7 +241,7 @@ function ShopOwnerProfileEditPage() {
             placeholder="Registration"
             id="shopprofile-editpage-text2"
             name="shopownerregistration"
-            value={data.shopownerregistration}
+            value={data.shopregistrationnumber}
             onChange={handleChange}
             />
              {errors.shopownerregistration && <div  className="text-danger color">{errors.shopownerregistration}</div>}
@@ -252,7 +253,7 @@ function ShopOwnerProfileEditPage() {
             placeholder="Shop License"
             id="shopprofile-editpage-text2"
             name="shoplicense"
-            value={data.shoplicense}
+            // value={data.shoplicense}
             onChange={handleInputChange}
             />
             
