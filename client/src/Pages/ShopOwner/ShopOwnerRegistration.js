@@ -429,7 +429,7 @@ function ShopOwnerRegistration() {
                       <input
                         type="file"
                         placeholder="Shop Licence"
-                        name="shoplicence"
+                        name="files"
                         className="form-control m-2"
                         id="text1"
                         onChange={handleFileChange}
