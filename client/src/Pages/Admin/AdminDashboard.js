@@ -60,7 +60,7 @@ function AdminHome() {
                 <h5 className="admin-dash-h5-2"><FaBoxOpen/>Total Wholesale Dealers</h5>          
                 <div className="order__box">
                  <FaBoxOpen className="admin-dash-icon"/><br></br><br></br>
-                  <span>{shopOwners.length}<p className="admin-dash-para">Dealers</p></span>
+                  <span>{Wholesale.length}<p className="admin-dash-para">Dealers</p></span>
                 </div>
               </Link>
             </div>
@@ -70,7 +70,7 @@ function AdminHome() {
               <h5 className="admin-dash-h5-3"><BsPeopleFill/> Total Shop Owners</h5>
                 <div className="products__box">
                   <BsPeopleFill className="admin-dash-icon"/><br></br><br></br>
-                  <span>{Wholesale.length}<p className="admin-dash-para">Shop Owners</p></span>
+                  <span>{shopOwners.length}<p className="admin-dash-para">Shop Owners</p></span>
                 </div>
               </Link>
             </div>

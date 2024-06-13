@@ -12,10 +12,10 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({ storage: storage }).single("files");
 
 const shopeOwnerRegister = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const newShopOwner = new shopownerschema({
     shopname: req.body.shopname,
@@ -105,7 +105,7 @@ const getAllShopOwners = (req, res) => {
 };
 
 const getAshopowner = (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   const shopownerid = req.params.shopownerid;
   shopownerschema
     .findById(shopownerid)
@@ -178,14 +178,14 @@ const DeleteAShopOwner = (req, res) => {
 };
 
 const Shopownerforgot = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const Shopownerforgotpswrd = await shopownerschema.findOneAndUpdate(
       { shopowneremail: req.body.email },
       { shopownerpassword: req.body.password },
       { new: true }
     );
-    console.log(Shopownerforgotpswrd);
+    // console.log(Shopownerforgotpswrd);
     if (Shopownerforgotpswrd) {
       return res.json({
         status: 200,

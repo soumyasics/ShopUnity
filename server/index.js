@@ -10,7 +10,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(`${__dirname}/upload`));
+app.use( express.static(`${__dirname}/upload`));
 
 const route=require('./Routes/route')
 app.use('/shopunity_api',route)

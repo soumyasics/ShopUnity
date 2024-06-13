@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import axiosInstance from '../../APIS/axiosinstatnce';
-import Sidebar from '../Admin/Sidebar';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import axiosInstance from "../../APIS/axiosinstatnce";
+import Sidebar from "../Admin/Sidebar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./shopownerpendinglist.css";
+import { Card, Row, Col } from "react-bootstrap";
 
 function ShopOwnerPendingListPage({ url }) {
   const [data, setData] = useState([]);
@@ -12,7 +14,8 @@ function ShopOwnerPendingListPage({ url }) {
   }, []);
 
   function getData() {
-    axiosInstance.get("/get_all_shopowners")
+    axiosInstance
+      .get("/get_all_shopowners")
       .then((res) => {
         let allShopowners = res?.data?.data || [];
         const filterPendingReqs = allShopowners.filter(
@@ -30,7 +33,8 @@ function ShopOwnerPendingListPage({ url }) {
       .post("/rejectshopowner/" + id)
       .then((res) => {
         if (res.status === 200) {
-          let msg = res?.data?.message || "Shopowner Registration Request Rejected";
+          let msg =
+            res?.data?.message || "Shopowner Registration Request Rejected";
           alert(msg);
           getData();
         } else {
@@ -47,7 +51,8 @@ function ShopOwnerPendingListPage({ url }) {
       .post("/acceptshopowner/" + id)
       .then((res) => {
         if (res.status === 200) {
-          let msg = res?.data?.message || "Shopowner Registration Request Accepted";
+          let msg =
+            res?.data?.message || "Shopowner Registration Request Accepted";
           alert(msg);
           getData();
         } else {
@@ -60,81 +65,191 @@ function ShopOwnerPendingListPage({ url }) {
   }
 
   return (
-    <div className="shop-owner-pending-list-page">
-<div className="row">
-  <div className="col-2">
-    <Sidebar />
-  </div>
-  <div style={{ maxWidth: "77%" }} className="container">
-    {data.length === 0 && (
-      <h1 className="mt-5"> No ShopOwner Found</h1>
-    )}
-    {data.length > 0 && (
-      <div>
-        <h3 className="mt-5 ms-3">All ShopOwner List</h3>
-        <Table
-          striped
-          bordered
-          hover
-          className="mt-5 ms-3"
-          style={{ width: "100%" }}
-        >
-          <thead style={{ height: "50px" }}>
-            <tr>
-              <th>Shopname</th>
-              <th>Shopowner Name</th>
-              <th>Shoplisence</th>
-              <th>Shop Registration Number</th>
-              <th>Shopowner Contact</th>
-              <th>Accept</th>
-              <th>Reject</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((ShopOwner, index) => {
-              return (
-                <tr key={index} className="mt-4">
-                  <td>{ShopOwner.shopname}</td>
-                  <td>{ShopOwner.shopownername}</td>
-                  <td>
-                    <img
-                      className="parentimage"
-                      alt="img" style={{width:"50px",height:"50px"}}
-                      src={`${url}${ShopOwner.shoplicence}`}
-                    ></img>
-                  </td>
-                  <td>{ShopOwner.shopregistrationnumber}</td>
-                  <td>{ShopOwner.shopownercontact}</td>
-                  <td>
-                          <button
-                            className="btn btn-success"
-                            onClick={() => handleAccept(ShopOwner._id)}
-                          >
-                            Accept
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => handleReject(ShopOwner._id)}
-                          >
-                            Reject
-                          </button>
-                        </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+    //     <div className="shop-owner-pending-list-page">
+    // <div className="row">
+    //   <div className="col-2">
+    //     <Sidebar />
+    //   </div>
+    //   <div style={{ maxWidth: "77%" }} className="container">
+    //     {data.length === 0 && (
+    //       <h1 className="mt-5"> No ShopOwner Found</h1>
+    //     )}
+    //     {data.length > 0 && (
+    //       <div>
+    //         <h3 className="mt-5 ms-3">All ShopOwner List</h3>
+    //         <Table
+    //           striped
+    //           bordered
+    //           hover
+    //           className="mt-5 ms-3"
+    //           style={{ width: "100%" }}
+    //         >
+    //           <thead style={{ height: "50px" }}>
+    //             <tr>
+    //               <th>Shopname</th>
+    //               <th>Shopowner Name</th>
+    //               <th>Shoplisence</th>
+    //               <th>Shop Registration Number</th>
+    //               <th>Shopowner Contact</th>
+    //               <th>Accept</th>
+    //               <th>Reject</th>
+    //             </tr>
+    //           </thead>
+    //           <tbody>
+    //             {data.map((ShopOwner, index) => {
+    //               return (
+    //                 <tr key={index} className="mt-4">
+    //                   <td>{ShopOwner.shopname}</td>
+    //                   <td>{ShopOwner.shopownername}</td>
+    //                   <td>
+    //                     <img
+    //                       className="parentimage"
+    //                       alt="img" style={{width:"50px",height:"50px"}}
+    //                       src={`${url}${ShopOwner.shoplicence}`}
+    //                     ></img>
+    //                   </td>
+    //                   <td>{ShopOwner.shopregistrationnumber}</td>
+    //                   <td>{ShopOwner.shopownercontact}</td>
+    //                   <td>
+    //                           <button
+    //                             className="btn btn-success"
+    //                             onClick={() => handleAccept(ShopOwner._id)}
+    //                           >
+    //                             Accept
+    //                           </button>
+    //                         </td>
+    //                         <td>
+    //                           <button
+    //                             className="btn btn-danger"
+    //                             onClick={() => handleReject(ShopOwner._id)}
+    //                           >
+    //                             Reject
+    //                           </button>
+    //                         </td>
+    //                 </tr>
+    //               );
+    //             })}
+    //           </tbody>
+    //         </Table>
+    //       </div>
+    //     )}
+    //   </div>
+    // </div>
+    // </div>
+    <div>
+      <div className="container">
+        <div className="mt-5">
+          <button>Arrow</button>
+        </div>
+        <div className="">
+          <div className="shopownerpendingrequestdiv">
+            <div style={{ maxWidth: "100%" }} className="p-4">
+              {data.length === 0 && (
+                <h1 className="mt-5"> No ShopOwner Found</h1>
+              )}
+              {data.length > 0 && (
+                <Row>
+                  {data.map((item, index) => (
+                    <Col key={index} sm={12} md={6} lg={4} className="mb-4">
+                      <Card style={{ width: "25rem", borderRadius: "25px" }}>
+                        <table>
+                          <div className="p-4">
+                            <tr>
+                              <td>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                  shop name
+                                </Card.Subtitle>
+                              </td>
+                              <td className="ps-3">
+                                <Card.Subtitle className="mb-2 text-muted">
+                                  {item.shopname}
+                                </Card.Subtitle>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                  owner name
+                                </Card.Subtitle>
+                              </td>
+                              <td className="ps-3">
+                                <Card.Subtitle className="mb-2 text-muted">
+                                {item.shopownername}
+                                </Card.Subtitle>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                  address
+                                </Card.Subtitle>
+                              </td>
+                              <td className="ps-3">
+                                <Card.Subtitle className="mb-2 text-muted">
+                                {item.shopowneraddress}
+                                </Card.Subtitle>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                  contact number
+                                </Card.Subtitle>
+                              </td>
+                              <td className="ps-3">
+                                <Card.Subtitle className="mb-2 text-muted">
+                                {item.shopownercontact}
+                                </Card.Subtitle>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                  email id
+                                </Card.Subtitle>
+                              </td>
+                              <td className="ps-3">
+                                <Card.Subtitle className="mb-2 text-muted">
+                                {item.shopowneremail}
+                                </Card.Subtitle>
+                                <div className="text-end">
+                                  {" "}
+                                  <button className="btn btn-secondary rounded-circle ">
+                                    View
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </div>
+                        </table>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-    )}
-  </div>
-</div>
-</div>
-
+    </div>
   );
 }
 
 export default ShopOwnerPendingListPage;
 
-
+{
+  /* <button
+                                className="btn btn-success"
+                                onClick={() => handleAccept(ShopOwner._id)}
+                              >
+                                Accept
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                className="btn btn-danger"
+                                onClick={() => handleReject(ShopOwner._id)}
+                              >
+                                Reject
+                              </button> */
+}

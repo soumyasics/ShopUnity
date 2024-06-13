@@ -25,7 +25,7 @@ const shopOwnerSchema = new mongoose.Schema({
     type: String,
   },
   shoplicence: {
-    type: String,
+    type: Object,
     required: true,
   },
   shopownerpassword: {

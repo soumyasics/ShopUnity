@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import { BsPencil } from "react-icons/bs";
 
 function ShopownerProfilepage({ url }) {
-  console.log(url.url.url);
+  
 
   const [data, setData] = useState({});
 
@@ -22,13 +22,15 @@ function ShopownerProfilepage({ url }) {
       .catch((err) => {
         console.log(err);
       });
-  }, [data]);
+  }, []);
 
-  const Navigate=useNavigate()
-  const gotoEdit=(e)=>{
-    e.preventDefault()
-    Navigate("/shopownerprofileedit")
-  }
+  const Navigate = useNavigate();
+
+  const gotoEdit = (e) => {
+    e.preventDefault();
+    Navigate("/shopownerprofileedit");
+  };
+  console.log(`${url.url.url}${data.shoplicence}`);
   return (
     // <div className="shopownerprofile pt-5 mt-5">
     //   <div>
@@ -41,20 +43,11 @@ function ShopownerProfilepage({ url }) {
     //                 <div className="col-sm-4 bg-c-lite-green user-profile">
     //                   <div className="card-block text-center text-white">
     //                     <div className="">
-    //                       <img
-    //                         className="mt-3 mb-3"
-    //                         src={`${url.url.url}${data.shoplisence}`}
-    //                         style={{
-    //                           width: "80%",
-    //                           height: "250px",
-    //                           borderRadius: "5%",
-    //                           boxShadow:"rgba(0, 0, 0, 0.65) 0px 5px 15px"
-    //                         }}
-    //                       ></img>
+
     //                     </div>
     //                     <div>
     //                       <button className="btn btn-dark px-5 " onClick={gotoEdit}> Edit </button>
-                          
+
     //                     </div>
     //                     <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" />
     //                   </div>
@@ -121,84 +114,132 @@ function ShopownerProfilepage({ url }) {
         <form>
           <Row className="container shopprofile-edit">
             <h2 className="shopprofile-edit-h2">My Profile</h2>
+           
             <Col>
-            <div >
-          <label className="container-fluid font" id="font">ShopName</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">ShopOwnerName</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">Shop Address</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font"> District</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">City</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
+            <div>
+              <img
+                className="mt-3 mb-3"
+                src={`${url.url.url}${data.shoplisence}`}
+                style={{
+                  borderRadius: "5%",
+                  boxShadow: "rgba(0, 0, 0, 0.65) 0px 5px 15px",
+                }}
+              ></img>
+            </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  ShopName
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopname}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  ShopOwnerName
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopownername}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  Shop Address
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopowneraddress}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  {" "}
+                  District
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopownerdistrict}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+             
             </Col>
             <Col>
-            <div >
-          <label className="container-fluid font" id="font">Pincode</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">Contact Number</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">Email Id</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">Registration Number</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
-          <div >
-          <label className="container-fluid font" id="font">Shop License</label>
-            <input type="text"className="form-control m-2" 
-            placeholder=""
-            id="shopprofile-editpage-text2"
-            />
-          </div>
+            <div>
+                <label className="container-fluid font" id="font">
+                  City
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopownercity}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  Pincode
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopownerpincode}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  Contact Number
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopownercontact}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  Email Id
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopowneremail}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
+              <div>
+                <label className="container-fluid font" id="font">
+                  Registration Number
+                </label>
+                <input
+                  type="text"
+                  className="form-control m-2"
+                  placeholder={data.shopregistrationnumber}
+                  id="shopprofile-editpage-text2"
+                />
+              </div>
             </Col>
             <div className="shopprofile-editpage-btn">
-            <button type="submit" className="shopprofile-editpage-subbtn">
-              <BsPencil/><Link to="/shopownerprofileedit">Edit Profile</Link> </button>
-              </div>
+              <button
+                type="submit"
+                className="shopprofile-editpage-subbtn"
+                onClick={gotoEdit}
+              >
+                <BsPencil />
+                Edit Profile{" "}
+              </button>
+            </div>
           </Row>
         </form>
       </div>
