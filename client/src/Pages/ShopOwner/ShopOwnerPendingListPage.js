@@ -6,9 +6,29 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./shopownerpendinglist.css";
 import { Card, Row, Col } from "react-bootstrap";
 
+import { FaArrowLeftLong } from "react-icons/fa6";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
+
 function ShopOwnerPendingListPage({ url }) {
   const [data, setData] = useState([]);
+  const [Ashopownerdata, setAshopownerdata] = useState({});
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (shopownerid) => {
+    setShow(true);
+    axiosInstance
+      .get("/get_a_shopowner/" + shopownerid)
+      .then((res) => {
+        setAshopownerdata(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
   useEffect(() => {
     getData();
   }, []);
@@ -65,83 +85,12 @@ function ShopOwnerPendingListPage({ url }) {
   }
 
   return (
-    //     <div className="shop-owner-pending-list-page">
-    // <div className="row">
-    //   <div className="col-2">
-    //     <Sidebar />
-    //   </div>
-    //   <div style={{ maxWidth: "77%" }} className="container">
-    //     {data.length === 0 && (
-    //       <h1 className="mt-5"> No ShopOwner Found</h1>
-    //     )}
-    //     {data.length > 0 && (
-    //       <div>
-    //         <h3 className="mt-5 ms-3">All ShopOwner List</h3>
-    //         <Table
-    //           striped
-    //           bordered
-    //           hover
-    //           className="mt-5 ms-3"
-    //           style={{ width: "100%" }}
-    //         >
-    //           <thead style={{ height: "50px" }}>
-    //             <tr>
-    //               <th>Shopname</th>
-    //               <th>Shopowner Name</th>
-    //               <th>Shoplisence</th>
-    //               <th>Shop Registration Number</th>
-    //               <th>Shopowner Contact</th>
-    //               <th>Accept</th>
-    //               <th>Reject</th>
-    //             </tr>
-    //           </thead>
-    //           <tbody>
-    //             {data.map((ShopOwner, index) => {
-    //               return (
-    //                 <tr key={index} className="mt-4">
-    //                   <td>{ShopOwner.shopname}</td>
-    //                   <td>{ShopOwner.shopownername}</td>
-    //                   <td>
-    //                     <img
-    //                       className="parentimage"
-    //                       alt="img" style={{width:"50px",height:"50px"}}
-    //                       src={`${url}${ShopOwner.shoplicence}`}
-    //                     ></img>
-    //                   </td>
-    //                   <td>{ShopOwner.shopregistrationnumber}</td>
-    //                   <td>{ShopOwner.shopownercontact}</td>
-    //                   <td>
-    //                           <button
-    //                             className="btn btn-success"
-    //                             onClick={() => handleAccept(ShopOwner._id)}
-    //                           >
-    //                             Accept
-    //                           </button>
-    //                         </td>
-    //                         <td>
-    //                           <button
-    //                             className="btn btn-danger"
-    //                             onClick={() => handleReject(ShopOwner._id)}
-    //                           >
-    //                             Reject
-    //                           </button>
-    //                         </td>
-    //                 </tr>
-    //               );
-    //             })}
-    //           </tbody>
-    //         </Table>
-    //       </div>
-    //     )}
-    //   </div>
-    // </div>
-    // </div>
     <div>
-      <div className="container">
-        <div className="mt-5">
-          <button>Arrow</button>
+      <div className="m-4">
+        <div className="mt-2">
+          <Link className="text-dark w-100" to="/admin_dashboard"><FaArrowLeftLong/></Link>
         </div>
-        <div className="">
+        <div className="mt-4">
           <div className="shopownerpendingrequestdiv">
             <div style={{ maxWidth: "100%" }} className="p-4">
               {data.length === 0 && (
@@ -174,7 +123,7 @@ function ShopOwnerPendingListPage({ url }) {
                               </td>
                               <td className="ps-3">
                                 <Card.Subtitle className="mb-2 text-muted">
-                                {item.shopownername}
+                                  {item.shopownername}
                                 </Card.Subtitle>
                               </td>
                             </tr>
@@ -186,7 +135,7 @@ function ShopOwnerPendingListPage({ url }) {
                               </td>
                               <td className="ps-3">
                                 <Card.Subtitle className="mb-2 text-muted">
-                                {item.shopowneraddress}
+                                  {item.shopowneraddress}
                                 </Card.Subtitle>
                               </td>
                             </tr>
@@ -198,7 +147,7 @@ function ShopOwnerPendingListPage({ url }) {
                               </td>
                               <td className="ps-3">
                                 <Card.Subtitle className="mb-2 text-muted">
-                                {item.shopownercontact}
+                                  {item.shopownercontact}
                                 </Card.Subtitle>
                               </td>
                             </tr>
@@ -210,11 +159,14 @@ function ShopOwnerPendingListPage({ url }) {
                               </td>
                               <td className="ps-3">
                                 <Card.Subtitle className="mb-2 text-muted">
-                                {item.shopowneremail}
+                                  {item.shopowneremail}
                                 </Card.Subtitle>
                                 <div className="text-end">
                                   {" "}
-                                  <button className="btn btn-secondary rounded-circle ">
+                                  <button
+                                    className="btn btn-outline-secondary rounded-pill px-5 mt-2"
+                                    onClick={() => handleShow(item._id)}
+                                  >
                                     View
                                   </button>
                                 </div>
@@ -231,25 +183,152 @@ function ShopOwnerPendingListPage({ url }) {
           </div>
         </div>
       </div>
+
+      <>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <div>
+            <div>
+              {" "}
+              <img
+                className="parentimage"
+                alt="img"
+                style={{ width: "100%", height: "380px" }}
+                src={`${url}${Ashopownerdata.shoplicence}`}
+              ></img>
+              <div>
+                <table>
+                  <div className="p-4">
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          shop name
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopname}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          owner name
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopownername}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          address
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopowneraddress}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          contact number
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopownercontact}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          email id
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopowneremail}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                        Shopowner City
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopownercity}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                        Shopowner District
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopownerdistrict}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Card.Subtitle className="mb-2 text-muted">
+                        Shopowner Pincode
+                        </Card.Subtitle>
+                      </td>
+                      <td className="ps-3">
+                        <Card.Subtitle className="mb-2 text-muted">
+                          {Ashopownerdata.shopownerpincode}
+                        </Card.Subtitle>
+                      </td>
+                    </tr>
+                    <tr className="mt-3">
+                      {" "}
+                      <td>
+                        <button
+                          className="btn btn-outline-success rounded-pill"
+                          onClick={() => handleAccept(Ashopownerdata._id)}
+                        >
+                          Accept
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-outline-danger rounded-pill"
+                          onClick={() => handleReject(Ashopownerdata._id)}
+                        >
+                          Reject
+                        </button>
+                      </td>
+                    </tr>
+                  </div>
+                </table>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </>
     </div>
   );
 }
 
 export default ShopOwnerPendingListPage;
-
-{
-  /* <button
-                                className="btn btn-success"
-                                onClick={() => handleAccept(ShopOwner._id)}
-                              >
-                                Accept
-                              </button>
-                            </td>
-                            <td>
-                              <button
-                                className="btn btn-danger"
-                                onClick={() => handleReject(ShopOwner._id)}
-                              >
-                                Reject
-                              </button> */
-}

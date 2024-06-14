@@ -25,7 +25,7 @@ const shopOwnerSchema = new mongoose.Schema({
     type: String,
   },
   shoplicence: {
-    type: Object,
+    type: String,
     required: true,
   },
   shopownerpassword: {
@@ -51,6 +51,10 @@ const shopOwnerSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "pending",
+  },
+  ActiveStatus: {
+    type: String,
+    default: "inactive",
   },
 });
 

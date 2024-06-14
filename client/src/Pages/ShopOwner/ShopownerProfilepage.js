@@ -30,7 +30,7 @@ function ShopownerProfilepage({ url }) {
     e.preventDefault();
     Navigate("/shopownerprofileedit");
   };
-  console.log(`${url.url.url}${data.shoplicence}`);
+  console.log(`${url.url.url}${data.shoplicence}`,"kk");
   return (
     // <div className="shopownerprofile pt-5 mt-5">
     //   <div>
@@ -119,15 +119,17 @@ function ShopownerProfilepage({ url }) {
             <div>
               <img
                 className="mt-3 mb-3"
-                src={`${url.url.url}${data.shoplisence}`}
+                src={`${url.url.url}${data.shoplicence}`}
                 style={{
+                  width:"50%",
+                  height:"200px",
                   borderRadius: "5%",
                   boxShadow: "rgba(0, 0, 0, 0.65) 0px 5px 15px",
                 }}
               ></img>
             </div>
               <div>
-                <label className="container-fluid font" id="font">
+                <label className="container-fluid font mt-4" id="font">
                   ShopName
                 </label>
                 <input
@@ -159,7 +161,11 @@ function ShopownerProfilepage({ url }) {
                   id="shopprofile-editpage-text2"
                 />
               </div>
-              <div>
+             
+             
+            </Col>
+            <Col>
+            <div>
                 <label className="container-fluid font" id="font">
                   {" "}
                   District
@@ -171,9 +177,6 @@ function ShopownerProfilepage({ url }) {
                   id="shopprofile-editpage-text2"
                 />
               </div>
-             
-            </Col>
-            <Col>
             <div>
                 <label className="container-fluid font" id="font">
                   City
