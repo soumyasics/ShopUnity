@@ -44,7 +44,7 @@ Route.post('/delete_a_shopowner/:shopownerid',ShopeOwnerController.DeleteAShopOw
 Route.post('/shopowner_forgot',ShopeOwnerController.Shopownerforgot)
 Route.post("/acceptshopowner/:id",ShopeOwnerController.acceptShopOwner)
 Route.post("/rejectshopowner/:id",ShopeOwnerController.rejectshopowner)
-
+Route.post("/innactivateshopowner/:id",ShopeOwnerController.InactivateShopOwner)
 
 
 module.exports=Route

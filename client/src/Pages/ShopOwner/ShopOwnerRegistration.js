@@ -17,7 +17,7 @@ function ShopOwnerRegistration() {
     shopownercontact: "",
     shopowneremail: "",
     shopregistrationnumber: "",
-    shoplicence: null,
+    files: "",
     shopownerpassword: "",
     shopownerconfirmpassword: "",
   });
@@ -101,6 +101,7 @@ function ShopOwnerRegistration() {
   }
 
   const handleSubmit = (event) => {
+    console.log(data);
     event.preventDefault();
     let errors = {};
     let formIsValid = true;
@@ -191,6 +192,7 @@ function ShopOwnerRegistration() {
           },
         })
         .then((result) => {
+          console.log(result);
           console.log("Response:", result);
           alert("Waiting for Admin approval..");
           setTimeout(() => {
@@ -198,7 +200,11 @@ function ShopOwnerRegistration() {
           }, 1500);
         })
         .catch((err) => {
-          alert(err);
+          if (err.response && err.response.data && err.response.data.message) {
+            alert(err.response.data.message);
+          } else {
+            alert("An error occurred. Please try again.");
+          }
         });
     }
   };

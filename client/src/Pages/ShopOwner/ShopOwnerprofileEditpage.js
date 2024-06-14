@@ -17,7 +17,7 @@ function ShopOwnerProfileEditPage() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    shoplicense:""
+    files:""
   })
 
   const[errors,setErrors]=useState({
@@ -30,7 +30,7 @@ function ShopOwnerProfileEditPage() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    shoplicense:""
+    shoplicence:""
   })
 
   const districts=[
@@ -39,12 +39,14 @@ function ShopOwnerProfileEditPage() {
     'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
   ];
 
-  const handleChange = (event) => {    
-    const { name, value } = event.target;
+  const handleChange = (e) => {    
+    const { name, value, files} = e.target;
+
     setData(prevData => ({
       ...prevData,
-      [name]: value
+      [name]: name == 'files' ? files[0] : value
     }));
+
     setErrors(prevErrors => ({
       ...prevErrors,
       [name]: ''
@@ -86,12 +88,11 @@ function ShopOwnerProfileEditPage() {
     errors.shopownercontact=validateField('Shopownercontact',data.shopownercontact);
     errors.shopowneremail=validateField('Shopowneremail',data.shopowneremail);
     errors.shopownerregistration=validateField('Shopownerregistration',data.shopownerregistration);
-    errors.shoplicense=validateField('Shoplicense',data.shoplicense);
+    errors.shoplicence=validateField('shoplicence',data.shoplicence);
 
 
     setErrors(errors);
     if (formIsValid){
-      console.log("data",data);
     }
   }
   const navigate = useNavigate();
@@ -102,29 +103,31 @@ function ShopOwnerProfileEditPage() {
       .get("/get_a_shopowner/" + shopownerid)
       .then((res) => {
         setData(res.data.data);
-        console.log(res.data.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {      });
   }, [shopownerid]);
 
-  const handleInputChange = (e) => {
-    const { name, files } = e.target;
-    setData({ ...data, [name]: files[0] });
-    console.log(files);
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, files } = e.target;
+  //   setData({ ...data, [name]: files[0] });
+  //   console.log(files);
+  // };
 
   const handleEdit = (e) => {
+    const formData=new FormData();
+
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
+    console.log(data,"j")
     e.preventDefault();
     axiosInstance
-      .post("/edit_a_shopowner/" + shopownerid, data)
+      .post("/edit_a_shopowner/" + shopownerid, formData)
       .then((res) => {
-        console.log(res);
         navigate("/shopownerprofile");
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -252,12 +255,12 @@ function ShopOwnerProfileEditPage() {
             
             placeholder="Shop License"
             id="shopprofile-editpage-text2"
-            name="shoplicense"
-            // value={data.shoplicense}
-            onChange={handleInputChange}
+            name="files"
+                     
+            onChange={handleChange}
             />
             
-            {errors.shoplicense && <div  className="text-danger color">{errors.shoplicense}</div>}
+            {errors.shoplicence && <div  className="text-danger color">{errors.shoplicence}</div>}
           </div>
           </Col>
           <div className="shopprofile-editpage-btn">
