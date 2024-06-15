@@ -152,7 +152,7 @@ console.log(req.files,"j");
     shopownerpincode: req.body.shopownerpincode,
     shopownerdistrict: req.body.shopownerdistrict,
     shopownercity: req.body.shopownercity,
-    shoplicence:  req.body.shoplicence
+    shoplicence:  req.file.originalname
   };
 
   shopownerschema
