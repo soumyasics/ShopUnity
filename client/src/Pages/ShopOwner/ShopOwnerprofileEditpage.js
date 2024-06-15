@@ -64,6 +64,10 @@ function ShopOwnerProfileEditPage() {
     return '';
   }
 
+
+  const handlecancel=()=>{
+    navigate("/shopownerprofile")
+  }
   function validateContact(fieldName, value) {
     if (!(value).trim()) {
       return `${fieldName} is required`;
@@ -263,9 +267,11 @@ function ShopOwnerProfileEditPage() {
             {errors.shoplicence && <div  className="text-danger color">{errors.shoplicence}</div>}
           </div>
           </Col>
-          <div className="shopprofile-editpage-btn">
-            <button type="submit" className="shopprofile-editpage-subbtn" onClick={handleEdit}>
+          <div className="shopprofile-editpage-btn ms-5">
+            <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handleEdit}>
               Update</button>
+              <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handlecancel}>
+              Cancel</button>
           </div>
         </Row>
       </form>
