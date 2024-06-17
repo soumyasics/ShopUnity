@@ -19,8 +19,9 @@ function ShopOwnerSidebar() {
     const navigate = useNavigate();
     const handleLogout = (e) => {
       e.preventDefault();
-      localStorage.removeItem("admin");
-      navigate("/admin");
+      localStorage.removeItem("shopowner");
+      localStorage.removeItem("shopownertoken");
+      navigate("/shopownerlogin");
     };
   return (
     <div>
@@ -30,7 +31,7 @@ function ShopOwnerSidebar() {
           <img className="sidebar-img" src={sidebarimg} alt="img"></img>
           </Col>
           <Col>
-            <p className="sidebar-para">Admin</p>
+            <p className="sidebar-para">Lisa Thomas</p>
           </Col>
         </Row>
       </div>

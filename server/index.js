@@ -1,13 +1,14 @@
 const express =require("express")
 const app=express()
 const port=4028
-const bodyparser=require("body-parser")
+const bodyParser=require("body-parser")
 const cors=require("cors")
 const db=require("./DBConnection")
 const jwt=require("jsonwebtoken")
 
 app.use(cors())
-app.use(bodyparser.json())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`${__dirname}/upload`));
 

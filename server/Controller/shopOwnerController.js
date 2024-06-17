@@ -2,12 +2,13 @@ const shopownerschema = require("../Model/ShopOwnerSchema");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 
+// Multer setup for file upload (optional)
 const storage = multer.diskStorage({
-  destination: function (req, res, cb) {
+  destination: function (req, file, cb) {
     cb(null, "./upload");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, file)
   },
 });
 
@@ -15,29 +16,33 @@ const upload = multer({ storage: storage }).single("file");
 
 const shopeOwnerRegister = (req, res) => {
   console.log(req.body);
-  console.log(req.file);
-  const shopowner = new shopownerschema({
+
+  const newShopOwner = new shopownerschema({
     shopname: req.body.shopname,
     shopownername: req.body.shopownername,
     shopownercontact: req.body.shopownercontact,
     shopowneremail: req.body.shopowneremail,
     shopowneraddress: req.body.shopowneraddress,
     shopregistrationnumber: req.body.shopregistrationnumber,
-    shoplisence: req.file.originalname,
+    shoplicence: req.body.shoplicence,
     shopownerpassword: req.body.shopownerpassword,
-  });
-  shopowner
+    shopownerpincode: req.body.shopownerpincode,
+    shopownerdistrict: req.body.shopownerdistrict,
+    shopownerconfirmpassword: req.body.shopownerconfirmpassword,
+    shopownercity: req.body.shopownercity,
+  })
+  newShopOwner
     .save()
     .then((result) => {
       res.status(200).json({
-        message: "Register Successfully",
+        message: "Registered Successfully",
         data: result,
       });
     })
     .catch((err) => {
       res.status(500).json({
         message: "Please type valid data",
-        data: err,
+        error: err,
       });
     });
 };
@@ -63,7 +68,12 @@ const ShopeOwnerLogin = async (req, res) => {
         );
         return res
           .status(200)
-          .json({ message: "Login successful", token, id: shopowner._id ,status:shopowner.status});
+          .json({
+            message: "Login successful",
+            token,
+            id: shopowner._id,
+            status: shopowner.status,
+          });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }

@@ -12,30 +12,30 @@ function AdminHome() {
   const [Wholesale, setWholesale] = useState([]);
   const [Deliveryagent, setDeliveryagent] = useState([]);
 
-  // useEffect(() => {
-  //   axiosInstance.get("/get_all_customers").then((responce) => {
-  //     setCustomers(responce.data.data);
-  //   });
-  //   axiosInstance.get("/get_all_shopowners").then((responce) => {
-  //     setShopOwners(responce.data.data);
-  //   });
-  //   axiosInstance.get("/get_all_wholesaledealer").then((responce) => {
-  //     console.log(responce.data.data);
-  //     setWholesale(responce.data.data);
-  //   });
-  //   axiosInstance.get("/get_all_deliveryagents").then((responce) => {
-  //     setDeliveryagent(responce.data.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axiosInstance.get("/get_all_customers").then((responce) => {
+      setCustomers(responce.data.data);
+    });
+    axiosInstance.get("/get_all_shopowners").then((responce) => {
+      setShopOwners(responce.data.data);
+    });
+    axiosInstance.get("/get_all_wholesaledealer").then((responce) => {
+      console.log(responce.data.data);
+      setWholesale(responce.data.data);
+    });
+    axiosInstance.get("/get_all_deliveryagents").then((responce) => {
+      setDeliveryagent(responce.data.data);
+    });
+  }, []);
 
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (localStorage.getItem("admin") !== null) {
-  //     navigate("/admin_dashboard");
-  //   } else {
-  //     navigate("/admin");
-  //   }
-  // }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("admin") !== null) {
+      navigate("/admin_dashboard");
+    } else {
+      navigate("/admin");
+    }
+  }, []);
 
   return (
     <div>

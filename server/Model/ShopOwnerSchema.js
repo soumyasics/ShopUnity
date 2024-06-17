@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const shopownerschema = mongoose.Schema({
+const shopOwnerSchema = new mongoose.Schema({
   shopname: {
     type: String,
     required: true,
@@ -23,13 +23,28 @@ const shopownerschema = mongoose.Schema({
   },
   shopregistrationnumber: {
     type: String,
-    required: true,
   },
-  shoplisence: {
+  shoplicence: {
     type: String,
     required: true,
   },
   shopownerpassword: {
+    type: String,
+    required: true,
+  },
+  shopownerpincode: {
+    type: String,
+    required: true,
+  },
+  shopownerdistrict: {
+    type: String,
+    required: true,
+  },
+  shopownerconfirmpassword: {
+    type: String,
+    required: true,
+  },
+  shopownercity: {
     type: String,
     required: true,
   },
@@ -39,4 +54,4 @@ const shopownerschema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("shopowners", shopownerschema);
+module.exports = mongoose.model("ShopOwner", shopOwnerSchema);
