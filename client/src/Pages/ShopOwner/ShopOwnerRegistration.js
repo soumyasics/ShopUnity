@@ -5,6 +5,7 @@ import "./shopowner.css";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import shopownerimg from "../../images/shopownerreg.png";
+
 function ShopOwnerRegistration() {
   const [data, setData] = useState({
     shopname: "",
@@ -16,7 +17,7 @@ function ShopOwnerRegistration() {
     shopownercontact: "",
     shopowneremail: "",
     shopregistrationnumber: "",
-    shoplicence: "",
+    files: "",
     shopownerpassword: "",
     shopownerconfirmpassword: "",
   });
@@ -35,6 +36,7 @@ function ShopOwnerRegistration() {
     shopownerpassword: "",
     shopownerconfirmpassword: "",
   });
+
   const navigate = useNavigate();
   const districts = [
     "Alappuzha",
@@ -67,25 +69,21 @@ function ShopOwnerRegistration() {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    // Assuming you want to store the file name
-    const fileName = files[0].name;
-    setData({ ...data, [name]: fileName });
-    console.log(fileName);
+    setData({ ...data, [name]: files[0] });
   };
-  
 
   function validateField(fieldName, value) {
-    if (!value.trim()) {
+    if (typeof value === 'string' && !value.trim()) {
       return `${fieldName} is required`;
     }
-    if (fieldName === "Email" && !value.endsWith("@gmail.com")) {
+    if (fieldName === "Email" && typeof value === 'string' && !value.endsWith("@gmail.com")) {
       return "Email must be a valid Gmail address.";
     }
     return "";
   }
 
   function validateContact(fieldName, value) {
-    if (!value.trim()) {
+    if (typeof value === 'string' && !value.trim()) {
       return `${fieldName} is required`;
     } else if (value.length !== 10) {
       return "Please enter a valid Contact Number";
@@ -94,7 +92,7 @@ function ShopOwnerRegistration() {
   }
 
   function validatePincode(fieldName, value) {
-    if (!value.trim()) {
+    if (typeof value === 'string' && !value.trim()) {
       return `${fieldName} is required`;
     } else if (value.length !== 6) {
       return "Please enter a valid Pincode";
@@ -103,9 +101,11 @@ function ShopOwnerRegistration() {
   }
 
   const handleSubmit = (event) => {
+    console.log(data);
     event.preventDefault();
     let errors = {};
     let formIsValid = true;
+
     errors.shopname = validateField("Shopname", data.shopname);
     errors.shopownername = validateField("Shopownername", data.shopownername);
     errors.shopowneraddress = validateField(
@@ -133,7 +133,7 @@ function ShopOwnerRegistration() {
       "shopregistrationnumber",
       data.shopregistrationnumber
     );
-    errors.shoplicence = validateField("Shoplisence", data.shoplicence);
+    errors.shoplicence = validateField("Shoplicence", data.shoplicence);
     errors.shopownerpassword = validateField(
       "Shopownerpassword",
       data.shopownerpassword
@@ -149,12 +149,14 @@ function ShopOwnerRegistration() {
       formIsValid = false;
       errors.shopownerpassword = "Password is required";
     } else if (!passwordRegex.test(data.shopownerpassword)) {
-      // Pass the password to the test method
       errors.shopownerpassword =
         "Password must contain at least one number, one special character, and one capital letter";
     }
 
-    if (!data.shopownerconfirmpassword || !data.shopownerconfirmpassword.trim()) {
+    if (
+      !data.shopownerconfirmpassword ||
+      !data.shopownerconfirmpassword.trim()
+    ) {
       formIsValid = false;
       errors.shopownerconfirmpassword = "Confirm Password is required";
     } else if (data.shopownerconfirmpassword !== data.shopownerpassword) {
@@ -174,22 +176,35 @@ function ShopOwnerRegistration() {
       !errors.shopownercontact &&
       !errors.shopowneremail &&
       !errors.shopregistrationnumber &&
-      !errors.shopownerpassword &&
+      !errors.shoplicence &&
       !errors.shopownerpassword &&
       !errors.shopownerconfirmpassword
     ) {
-      axiosInstance
-        .post("/shopeowner_register", data)
-        .then((result) => {
-          console.log("Response:", result);
-        alert("Waiting for Admin approval..");
-        setTimeout(() => {
-          navigate("/shopownerlogin");
-        }, 1500) 
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+      });
 
+      axiosInstance
+        .post("/shopeowner_register", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((result) => {
+          console.log(result);
+          console.log("Response:", result);
+          alert("Waiting for Admin approval..");
+          setTimeout(() => {
+            navigate("/shopownerlogin");
+          }, 1500);
         })
         .catch((err) => {
-          alert(err);
+          if (err.response && err.response.data && err.response.data.message) {
+            alert(err.response.data.message);
+          } else {
+            alert("An error occurred. Please try again.");
+          }
         });
     }
   };
@@ -419,9 +434,8 @@ function ShopOwnerRegistration() {
                       </div>
                       <input
                         type="file"
-                        
-                        placeholder="Shop Lisence"
-                        name="shoplicence"
+                        placeholder="Shop Licence"
+                        name="files"
                         className="form-control m-2"
                         id="text1"
                         onChange={handleFileChange}
@@ -508,4 +522,5 @@ function ShopOwnerRegistration() {
     </div>
   );
 }
+
 export default ShopOwnerRegistration;

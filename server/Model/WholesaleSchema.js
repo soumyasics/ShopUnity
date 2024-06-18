@@ -6,7 +6,7 @@ const wholesaledealerschema = mongoose.Schema({
     required: true,
   },
   dealerlisence: {
-    type: String,
+    type: Object,
     required: true,
   },
   contact: {

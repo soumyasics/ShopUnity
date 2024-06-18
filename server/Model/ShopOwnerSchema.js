@@ -52,6 +52,10 @@ const shopOwnerSchema = new mongoose.Schema({
     type: String,
     default: "pending",
   },
+  ActiveStatus: {
+    type: String,
+    default: "inactive",
+  },
 });
 
 module.exports = mongoose.model("ShopOwner", shopOwnerSchema);

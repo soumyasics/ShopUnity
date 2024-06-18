@@ -1,212 +1,412 @@
 import React, { useState } from "react";
 import "./wholesale.css";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
-import validator from "validator";
+import wholesaledealerreg from "../../images/wholesaledealerreg.png"
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import axiosMultipartInstance from "../../APIS/axiosMultipartInstance";
 
 function WholesaleDealerRegistration() {
-  const [wholesaleDealerRegister, setWholeSaleDealerRegister] = useState({
-    companyname: "",
-    lisenceno: "",
-    email: "",
-    password: "",
-    address: "",
-  });
+ 
+  const[data,setData]=useState({
+    storeName:"",
+    dealername:"",
+    address:"",
+    districts:"",
+    city:"",
+    pincode:"",
+    contact:"",
+    email:"",
+    wholesaleregisternumber:"",
+    dealerlisence:null,
+    password:"",
+    confirmPassword:""
+    })
 
-  const [errors, setErrors] = useState({
-    companyname: "",
-    lisenceno: "",
-    email: "",
-    password: "",
-    address: "",
-  });
+    const[errors,setErrors]=useState({
+    storeName:"",
+    dealername:"",
+    address:"",
+    districts:"",
+    city:"",
+    pincode:"",
+    contact:"",
+    email:"",
+    wholesaleregisternumber:"",
+    dealerlisence:null,
+    password:"",
+    confirmPassword:""
+    })
 
-  let formValid = true;
+  const districts = [
+    "Alappuzha",
+    "Ernakulam",
+    "Idukki",
+    "Kannur", 
+    "Kasaragod",
+    "Kollam",
+    "Kottayam",
+    "Kozhikode",
+    "Malappuram",
+    "Palakkad",
+    "Pathanamthitta",
+    "Thiruvananthapuram",
+    "Thrissur",
+    "Wayanad",
+  ];
 
-  const WholeSaledealerChange = (e) => {
-    console.log(e.target.value);
-    setWholeSaleDealerRegister({
-      ...wholesaleDealerRegister,
-      [e.target.name]: e.target.value,
-    });
+
+  const Navigate=useNavigate();
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
-  const navigate = useNavigate();
 
-  const registerHandled = (e) => {
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setData({ ...data, [name]: files[0] });
+  };
+
+  const validateField=(fieldName,value)=>{
+    if(!value.trim()){
+      return `${fieldName} is Required`;
+    }
+    if(fieldName === 'Email' && !value.endsWith("@gmail.com")){
+      return "Email must be a valid Gmail address";
+    }
+    return;
+  }
+
+  function validateContact(fieldName, value) {
+    if (typeof value === 'string' && !value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 10) {
+      return "Please enter a valid Contact Number";
+    }
+    return "";
+  }
+
+  function validatePincode(fieldName, value) {
+    if (typeof value === 'string' && !value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 6) {
+      return "Please enter a valid Pincode";
+    }
+    return "";
+  }
+
+  const handleSubmit = async (e) =>{
+    console.log(data)
     e.preventDefault();
+    let errors={}
+    let formIsValid=true;
 
-    // let errors = {};
-    // if (!wholesaleDealerRegister.companyname.trim()) {
-    //   formValid = false;
-    //   errors.name = "companyname is required";
-    // }
+    errors.storeName=validateField("StoreName",data.storeName)
+    errors.dealername=validateField("DealerName",data.dealername)
+    errors.address=validateField("Address",data.address)
+    errors.districts=validateField("District",data.districts)
+    errors.city=validateField("City",data.city)
+    errors.pincode=validatePincode("Pincode",data.pincode)
+    errors.contact=validateContact("Contact",data.contact)
+    errors.email=validateField("Email",data.email)
+    errors.wholesaleregisternumber=validateField("RegistrationNumber",data.wholesaleregisternumber)
+    // errors.dealerlisence=validateField("DealerLicense",data.dealerlisence)
+    errors.password=validateField("Password",data.password)
+    errors.confirmPassword=validateField("ConfirmPassword",data.confirmPassword)
 
-    // if (!wholesaleDealerRegister.lisenceno.trim()) {
-    //   formValid = false;
-    //   errors.age = "lisenceno is required";
-    // }
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
 
-    // if (!wholesaleDealerRegister.email.trim()) {
-    //   formValid = false;
-    //   errors.email = "Email is required";
-    // }
-    // if (!wholesaleDealerRegister.password.trim()) {
-    //   formValid = false;
-    //   errors.password = "Password is required";
-    // } else if (wholesaleDealerRegister.password.length < 5) {
-    //   errors.password = "Password should be atleast 6 characters";
-    // }
-    // if (!wholesaleDealerRegister.address.trim()) {
-    //   formValid = false;
-    //   errors.password = "address is required";
-    // }
+    if (!data.password || !data.password.trim()) {
+      formIsValid = false;
+      errors.password = "Password is required";
+      console.log("in 1");
+    } else if (!passwordRegex.test(data.password)) {
+      errors.password =
+        "Password must contain at least one number, one special character, and one capital letter";
+        console.log("in 2");
 
-    // setErrors(errors);
+    }
 
-    // if (
-    //   wholesaleDealerRegister.companyname &&
-    //   wholesaleDealerRegister.lisenceno &&
-    //   wholesaleDealerRegister.email &&
-    //   wholesaleDealerRegister.password &&
-    //   wholesaleDealerRegister.address
-    // ) {
-    //   formValid = true;
-    // }
-    // if (formValid) {
-    //   // sendDataToServer();
+    if (
+      !data.confirmPassword ||
+      !data.confirmPassword.trim()
+    ) {
+      formIsValid = false;
+      console.log("in 3");
 
-    //   e.preventDefault();
-    //   //Soumya
-    //   const formData = new FormData();
-    //   formData.append("companyname", wholesaleDealerRegister.companyname);
-    //   formData.append("lisenceno", wholesaleDealerRegister.lisenceno);
-    //   formData.append("email", wholesaleDealerRegister.email);
-    //   formData.append("password", wholesaleDealerRegister.password);
-    //   formData.append("address", wholesaleDealerRegister.address);
-    //   console.log('form ', formData)
+      errors.confirmPassword = "Confirm Password is required";
+    } else if (data.confirmPassword !== data.password) {
+      formIsValid = false;
+      console.log("in 4");
 
-    //   axiosInstance
-    //     .post("wholesaleDealerRegister", formData, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     })
-    //     .then((res) => {
-    //       console.log("Response:", res);
-    //       // alert("Waiting for Admin approval..");
-    //       // setTimeout(() => {
-    //       //   navigate("/admin");
-    //       // }, 1500);
-    //     })
-    //     .catch((err) => {
-    //       console.error("Error:", err);
-    //       let msg = err?.response?.data?.message || "Error occurred";
-    //       alert(msg);
-    //     });
-    // } else {
-    //   console.log("form is not valid", formValid);
-    //   console.log("data entered", wholesaleDealerRegister);
-    // }
+      errors.confirmPassword = "Passwords do not match";
+    }
+  
+    setErrors(errors);
 
-    // console.log(wholesaleDealerRegister);
-  };
-  //  if (!validator.isByteLength(wholesaleDealerRegister.lisenceno, {
-  //       min: 6,
-  //       max: 6
-  //     })) {
-  //       alert("invalid Lisence number");
-  //     } else if (!validator.isStrongPassword(wholesaleDealerRegister.password)) {
-  //       alert("password should have mininum 8 charecters including  1 Uppercase letter,1 lowercase letter, a number and special charecter ");
-  //     } else {
-  // navigate("/wholesaledealerlogin");
-  // };
-  console.log(wholesaleDealerRegister);
+    for (let key in errors) {
+      if (errors[key]) {
+        formIsValid = false;
+        break;
+      }
+    }
+console.log('form',formIsValid);
+    if(formIsValid){
+      const formData = new FormData();
+      formData.append('dealername',data.dealername)
+      formData.append('dealerlisence',data.dealerlisence)
+      formData.append('contact',data.contact)
+      formData.append('wholesaleregisternumber',data.wholesaleregisternumber)
+      formData.append('address',data.address)
+      formData.append('pincode',data.pincode)
+      formData.append('email',data.email)
+      formData.append('password',data.password)
+
+      try{
+         const res = await axiosMultipartInstance.post('/wholesale_register',data);
+         console.log(res);
+         if (res.data.status === 200) {
+          alert("Register Successfully")
+          Navigate("/wholesaledealerlogin")
+         }
+         else{
+          alert("Registration is Falied")
+         }
+      }
+      catch(error){
+        console.error('There was an error!',error)
+        alert('Error')
+      }
+    }
+
+  }
 
   return (
-    <div className="Wholesale_dealer_register p-5">
-      <h5 className="text-center mt-5 text-light pt-4">
-        Wholesale dealer register
-      </h5>
-      <Container>
-        <Row className="wholesale_dealer_register_main">
-          <Col></Col>
-          <Col className=" wholesale_dealer_register_form">
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Company Name"
-              className="mb-3"
-            >
-              <Form.Control
-                type="text"
-                placeholder="mm"
-                required
-                onChange={WholeSaledealerChange}
-                name="companyname"
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingPassword"
-              label="whole sale lisense number"
-              className="mb-3"
-            >
-              <Form.Control
-                type="text"
-                placeholder="cs"
-                required
-                onChange={WholeSaledealerChange}
-                name="lisenceno"
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Email address"
-              className="mb-3"
-            >
-              <Form.Control
-                type="email"
-                placeholder="sdc"
-                required
-                onChange={WholeSaledealerChange}
-                name="email"
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingPassword"
-              label="Password"
-              className="mb-3"
-            >
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                onChange={WholeSaledealerChange}
-                name="password"
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Address"
-              className="mb-3"
-            >
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                onChange={WholeSaledealerChange}
-                name="address"
-                required
-              />
-            </FloatingLabel>
-            <button onClick={registerHandled} className="btn btn-primary mt-2">
-              {" "}
+    <div>
+      <div className="row">
+        <div className="col-6 container">
+          <img className="wholesale-dealer-reg-img" src={wholesaledealerreg} alt="img"></img>
+        </div>
+        <div className="col-6 container">
+        <div className="wholesale-dealer-reg-box container">
+          <h1 className="wholesale-dealer-reg-h1 mt-2 text-center">WholeSale Dealer Register</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className=" col-6 container">
+                <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2">
+                        Store Name
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Store Name"
+                        className="form-control m-2 wholesale-dealer-register-textbox " 
+                        name="storeName"
+                        value={data.storeName}
+                        onChange={handleChange}
+                      />
+                      {errors.storeName && <span className="text-danger">{errors.storeName}</span>}
+                    </div>
+                    <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2">
+                        Dealer Name
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Dealer Name"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="dealername"
+                        value={data.dealername}
+                        onChange={handleChange}
+                      />
+                      {errors.dealername && <span className="text-danger">{errors.dealername}</span>}
+                    </div>
+                    <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2">
+                        Address
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Address"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="address"
+                        value={data.address}
+                        onChange={handleChange}
+                      />
+                      {errors.address && <span  className="text-danger">{errors.address}</span>}
+                    </div>
+                    <div className="input-box mt-3">
+                      {" "}
+                      <label className="container font" id="font">
+                        District
+                      </label>{" "}
+                      <select
+                        className="form-select m-2  wholesale-dealer-register-textbox"
+                        name="districts"
+                        value={data.districts}
+                        onChange={handleChange}
+                      >
+                        <option>Select District</option>
+                        {districts.map((district, index) => (
+                          <option key={index} value={district}>
+                            {district}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.districts && <span  className="text-danger">{errors.districts}</span>}
+                    </div>
+                    <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2">
+                        City
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="City"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="city"
+                        value={data.city}
+                        onChange={handleChange}
+                      />
+                      {errors.city && <span  className="text-danger">{errors.city}</span>}
+                    </div>
+                    <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2">
+                        Pincode
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Pincode"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="pincode"
+                        value={data.pincode}
+                        onChange={handleChange}
+                      />
+                      {errors.pincode && <span  className="text-danger">{errors.pincode}</span>}
+                    </div>
+
+              </div>
+              <div className=" col-6 container">
+                <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2" >
+                        Contact Number
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Contact Number"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="contact"
+                        value={data.contact}
+                        onChange={handleChange}
+
+                      />
+                      {errors.contact && <span  className="text-danger">{errors.contact}</span>}
+                  </div>
+                  <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2" >
+                        Email ID
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Email id"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="email"
+                        value={data.email}
+                        onChange={handleChange}
+                      />
+                      {errors.email && <span  className="text-danger">{errors.email}</span>}
+                  </div>
+                  <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2" >
+                        Registration Number
+                      </label>{" "}
+                      <input
+                        type="text"
+                        placeholder="Registration Number"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="wholesaleregisternumber"
+                        value={data.wholesaleregisternumber}
+                        onChange={handleChange}
+                      />
+                      {errors.wholesaleregisternumber && <span className="text-danger">{errors.wholesaleregisternumber}</span>}
+                  </div>
+                  <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2" >
+                        Dealer License
+                      </label>{" "}
+                      <input
+                        type="file"
+                        placeholder="Dealer License"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="dealerlisence"
+                        onChange={handleFileChange}
+                      />
+                      {/* {errors.dealerlisence && <span className="text-danger">{errors.dealerlisence}</span>} */}
+                  </div>
+                  <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2" >
+                       Password
+                      </label>{" "}
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="password"
+                        value={data.password}
+                        onChange={handleChange}
+
+                      />
+                      {errors.password && <span className="text-danger">{errors.password}</span>}
+                  </div>
+                  <div className="input-box mt-3">
+                      {" "}
+                      <label className="wholesale-dealer-register-label ms-2" >
+                       Confirm Password
+                      </label>{" "}
+                      <input
+                        type="password"
+                        placeholder=" Confirm Password"
+                        className="form-control m-2 wholesale-dealer-register-textbox" 
+                        name="confirmPassword"
+                        value={data.confirmPassword}
+                        onChange={handleChange}
+                      />
+                      {errors.confirmPassword && <span className="text-danger">{errors.confirmPassword}</span>}
+                  </div>
+              </div>
+            </div>
+            <button type="submit" className="wholesale-dealer-register-regbtn mt-4">
               Register
             </button>
-          </Col>
-        </Row>
-      </Container>
+          </form>
+          <div className="wholesale-dealer-register-text">
+                <h6 className="text-center">
+                  Already have an account?{" "}
+                  <Link to="/wholesaledealerlogin" className="wholesale-dealer-register-link">
+                    Log In
+                  </Link>
+                </h6>
+              </div>
+        </div>
+        </div>
+      </div>
     </div>
   );
 }

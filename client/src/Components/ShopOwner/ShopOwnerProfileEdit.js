@@ -2,13 +2,18 @@ import React from "react";
 import ShopOwnerNav from "../../Pages/Navs/ShopOwnerNav";
 import ShopOwnerprofileEditpage from "../../Pages/ShopOwner/ShopOwnerprofileEditpage";
 import Footer from "../../Pages/Footer";
+import ShopOwnerSidebar from "../../Pages/ShopOwner/ShopOwnerSidebar";
 
 function ShopOwnerProfileEdit() {
   return (
-    <div>
-      <ShopOwnerNav />
-      <ShopOwnerprofileEditpage />
-      {/* <Footer /> */}
+    <div className="row">
+      <div className="col-2">
+        <ShopOwnerSidebar />
+      </div>
+      <div className="col-9 ms-4">
+        <ShopOwnerprofileEditpage />
+      </div>
+      <Footer />
     </div>
   );
 }

@@ -17,7 +17,7 @@ function ShopOwnerProfileEditPage() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    shoplicense:""
+    files:""
   })
 
   const[errors,setErrors]=useState({
@@ -30,7 +30,7 @@ function ShopOwnerProfileEditPage() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    shoplicense:""
+    shoplicence:""
   })
 
   const districts=[
@@ -39,12 +39,14 @@ function ShopOwnerProfileEditPage() {
     'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
   ];
 
-  const handleChange = (event) => {    
-    const { name, value } = event.target;
+  const handleChange = (e) => {    
+    const { name, value, files} = e.target;
+
     setData(prevData => ({
       ...prevData,
-      [name]: value
+      [name]: name == 'files' ? files[0] : value
     }));
+
     setErrors(prevErrors => ({
       ...prevErrors,
       [name]: ''
@@ -62,6 +64,10 @@ function ShopOwnerProfileEditPage() {
     return '';
   }
 
+
+  const handlecancel=()=>{
+    navigate("/shopownerprofile")
+  }
   function validateContact(fieldName, value) {
     if (!(value).trim()) {
       return `${fieldName} is required`;
@@ -86,59 +92,61 @@ function ShopOwnerProfileEditPage() {
     errors.shopownercontact=validateField('Shopownercontact',data.shopownercontact);
     errors.shopowneremail=validateField('Shopowneremail',data.shopowneremail);
     errors.shopownerregistration=validateField('Shopownerregistration',data.shopownerregistration);
-    errors.shoplicense=validateField('Shoplicense',data.shoplicense);
+    errors.shoplicence=validateField('shoplicence',data.shoplicence);
 
 
     setErrors(errors);
     if (formIsValid){
-      console.log("data",data);
     }
   }
-  // const navigate = useNavigate();
-  // const shopownerid = localStorage.getItem("shopowner");
+  const navigate = useNavigate();
+  const shopownerid = localStorage.getItem("shopowner");
 
-  // useEffect(() => {
-  //   axiosInstance
-  //     .get("/get_a_shopowner/" + shopownerid)
-  //     .then((res) => {
-  //       setData(res.data.data);
-  //       console.log(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [shopownerid]);
+  useEffect(() => {
+    axiosInstance
+      .get("/get_a_shopowner/" + shopownerid)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {      });
+  }, [shopownerid]);
 
   // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setData({ ...data, [name]: value });
+  //   const { name, files } = e.target;
+  //   setData({ ...data, [name]: files[0] });
+  //   console.log(files);
   // };
 
-  // const handleEdit = (e) => {
-  //   e.preventDefault();
-  //   axiosInstance
-  //     .post("/edit_a_shopowner/" + shopownerid, data)
-  //     .then((res) => {
-  //       console.log(res);
-  //       navigate("/shopownerprofile");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const handleEdit = (e) => {
+    const formData=new FormData();
+
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
+    console.log(data,"j")
+    e.preventDefault();
+    axiosInstance
+      .post("/edit_a_shopowner/" + shopownerid, formData)
+      .then((res) => {
+        navigate("/shopownerprofile");
+      })
+      .catch((err) => {
+      });
+  };
 
   return (
    <div className="container">
     <div className="shopprofile-editpage-header">
       <form onSubmit={handleSubmit}>
-        <Row className="container shopprofile-editpage">
-          <Row>
+        <Row className="container shopprofile-editpage mt-5 pt-3">
+          {/* <Row>
             <Col><img className="shopprofile-editpage-img" src={editprofile} alt="img"></img>
             <img className="shopprofile-editpage-imgs" src={editprooutline} alt="img"></img>
             </Col>
             <Col></Col> 
           </Row>
-          
+           */}
         <h2 className="shopprofile-editpage-h2">Edit Profile</h2>
           <Col className="container">
           <div >
@@ -240,7 +248,7 @@ function ShopOwnerProfileEditPage() {
             placeholder="Registration"
             id="shopprofile-editpage-text2"
             name="shopownerregistration"
-            value={data.shopownerregistration}
+            value={data.shopregistrationnumber}
             onChange={handleChange}
             />
              {errors.shopownerregistration && <div  className="text-danger color">{errors.shopownerregistration}</div>}
@@ -251,17 +259,19 @@ function ShopOwnerProfileEditPage() {
             
             placeholder="Shop License"
             id="shopprofile-editpage-text2"
-            name="shoplicense"
-            value={data.shoplicense}
+            name="files"
+                     
             onChange={handleChange}
             />
             
-            {errors.shoplicense && <div  className="text-danger color">{errors.shoplicense}</div>}
+            {errors.shoplicence && <div  className="text-danger color">{errors.shoplicence}</div>}
           </div>
           </Col>
-          <div className="shopprofile-editpage-btn">
-            <button type="submit" className="shopprofile-editpage-subbtn">
+          <div className="shopprofile-editpage-btn ms-5">
+            <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handleEdit}>
               Update</button>
+              <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handlecancel}>
+              Cancel</button>
           </div>
         </Row>
       </form>

@@ -8,42 +8,56 @@ const storage = multer.diskStorage({
     cb(null, "./upload");
   },
   filename: function (req, file, cb) {
-    cb(null, file)
+    cb(null, file.originalname)
   },
 });
 
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({ storage: storage }).single("files");
 
 const shopeOwnerRegister = (req, res) => {
   console.log(req.body);
+  console.log(req.file, "n");
 
-  const newShopOwner = new shopownerschema({
-    shopname: req.body.shopname,
-    shopownername: req.body.shopownername,
-    shopownercontact: req.body.shopownercontact,
-    shopowneremail: req.body.shopowneremail,
-    shopowneraddress: req.body.shopowneraddress,
-    shopregistrationnumber: req.body.shopregistrationnumber,
-    shoplicence: req.body.shoplicence,
-    shopownerpassword: req.body.shopownerpassword,
-    shopownerpincode: req.body.shopownerpincode,
-    shopownerdistrict: req.body.shopownerdistrict,
-    shopownerconfirmpassword: req.body.shopownerconfirmpassword,
-    shopownercity: req.body.shopownercity,
-  })
-  newShopOwner
-    .save()
-    .then((result) => {
-      res.status(200).json({
-        message: "Registered Successfully",
-        data: result,
+  shopownerschema.findOne({ shopowneremail: req.body.shopowneremail })
+    .then(existingShopOwner => {
+      if (existingShopOwner) {
+        return res.status(400).json({
+          message: "Email ID is already used",
+        });
+      }
+
+      const newShopOwner = new shopownerschema({
+        shopname: req.body.shopname,
+        shopownername: req.body.shopownername,
+        shopownercontact: req.body.shopownercontact,
+        shopowneremail: req.body.shopowneremail,
+        shopowneraddress: req.body.shopowneraddress,
+        shopregistrationnumber: req.body.shopregistrationnumber,
+        shoplicence: req.file.originalname,
+        shopownerpassword: req.body.shopownerpassword,
+        shopownerpincode: req.body.shopownerpincode,
+        shopownerdistrict: req.body.shopownerdistrict,
+        shopownerconfirmpassword: req.body.shopownerconfirmpassword,
+        shopownercity: req.body.shopownercity,
       });
+
+      return newShopOwner.save();
     })
-    .catch((err) => {
-      res.status(500).json({
-        message: "Please type valid data",
-        error: err,
-      });
+    .then(result => {
+      if (result) {
+        res.status(200).json({
+          message: "Registered Successfully",
+          data: result,
+        });
+      }
+    })
+    .catch(err => {
+      if (!res.headersSent) {
+        res.status(500).json({
+          message: "Please type valid data",
+          error: err,
+        });
+      }
     });
 };
 
@@ -72,6 +86,7 @@ const ShopeOwnerLogin = async (req, res) => {
             message: "Login successful",
             token,
             id: shopowner._id,
+            shopname: shopowner.shopname,
             status: shopowner.status,
           });
       } else {
@@ -104,7 +119,7 @@ const getAllShopOwners = (req, res) => {
 };
 
 const getAshopowner = (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   const shopownerid = req.params.shopownerid;
   shopownerschema
     .findById(shopownerid)
@@ -126,13 +141,18 @@ const getAshopowner = (req, res) => {
 
 const EditAShopOwner = (req, res) => {
   const shopownerid = req.params.shopownerid;
-
+console.log(req.files,"j");
   const updateData = {
     shopname: req.body.shopname,
     shopownername: req.body.shopownername,
     shopownercontact: req.body.shopownercontact,
     shopowneremail: req.body.shopowneremail,
     shopowneraddress: req.body.shopowneraddress,
+    shopregistrationnumber: req.body.shopregistrationnumber,
+    shopownerpincode: req.body.shopownerpincode,
+    shopownerdistrict: req.body.shopownerdistrict,
+    shopownercity: req.body.shopownercity,
+    shoplicence:  req.file.originalname
   };
 
   shopownerschema
@@ -177,14 +197,14 @@ const DeleteAShopOwner = (req, res) => {
 };
 
 const Shopownerforgot = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const Shopownerforgotpswrd = await shopownerschema.findOneAndUpdate(
       { shopowneremail: req.body.email },
       { shopownerpassword: req.body.password },
       { new: true }
     );
-    console.log(Shopownerforgotpswrd);
+    // console.log(Shopownerforgotpswrd);
     if (Shopownerforgotpswrd) {
       return res.json({
         status: 200,
@@ -219,10 +239,11 @@ const acceptShopOwner = async (req, res) => {
     }
 
     shopowner.status = "accepted";
+    shopowner.ActiveStatus = "active"
     await shopowner.save();
     return res
       .status(200)
-      .json({ message: "shopowner registration accepted", data: shopowner });
+      .json({ message: "shopowner registration accepted and activated", data: shopowner });
   } catch (error) {
     return res
       .status(500)
@@ -253,6 +274,31 @@ const rejectshopowner = async (req, res) => {
   }
 };
 
+const InactivateShopOwner = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: "Id is required" });
+    }
+
+    const shopowner = await shopownerschema.findById(id);
+    if (!shopowner) {
+      return res.status(404).json({ message: "shopowner not found" });
+    }
+
+    shopowner.ActiveStatus = "inactive"
+    await shopowner.save();
+    return res
+      .status(200)
+      .json({ message: "inactivated shopowner", data: shopowner });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "server error on accept shopowner", error });
+  }
+};
+
+
 module.exports = {
   upload,
   shopeOwnerRegister,
@@ -263,5 +309,5 @@ module.exports = {
   DeleteAShopOwner,
   Shopownerforgot,
   acceptShopOwner,
-  rejectshopowner,
+  rejectshopowner,InactivateShopOwner
 };

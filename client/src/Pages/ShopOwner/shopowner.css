@@ -124,8 +124,7 @@ height: 25px;
   background-color: #CAFAE2;
   margin-top: 100px;
   border-radius: 16px;
-  box-shadow: #333232;
-  
+  box-shadow: #333232; 
 }
 .reg{
   margin-top: 150px;
@@ -214,19 +213,19 @@ height: 25px;
 /* ShopownerEditProfilePage */
 
 .shopprofile-editpage-header{
-  padding-top:150px;
+  padding:25px;
 
 }
 #shopprofile-editpage-text2{
   height: 44px;
-  width:100%;
+  width: 400px;
   font-size: 13px;
 }
 .shopprofile-editpage-subbtn{
   color: white;
   height: 40px;
   width: 150px;
-  /* margin-left: 500px; */
+  /* margin-left: 440px; */
   background-color: #459197;
   border-color: #459197;
   border-radius: 10px;
@@ -242,7 +241,7 @@ height: 25px;
 .shopprofile-editpage-h2{
   color: #89B7BA;
   padding-top: 10px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .shopprofile-editpage-btn{
   padding-top: 30px;
@@ -266,7 +265,7 @@ height: 25px;
 /* ShopOwnerProfilePage */
 
 .shopprofile-edit-header{
-  padding-top:150px;
+  padding:50px;
 }
 .shopprofile-edit{
   background-color: #CAFAE2;
@@ -279,7 +278,7 @@ height: 25px;
 .shopprofile-edit-h2{
   color: #89B7BA;
   padding-top: 10px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 /* Shopowner Dashboard */

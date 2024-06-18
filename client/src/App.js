@@ -27,12 +27,13 @@ import ShopOwnerList from './Components/Admin/ShopOwnerList';
 import AdminMainNav from './Pages/Navs/AdminMainNav';
 import MainNav from './Pages/Navs/MainNav';
 import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
+import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 
 
 function App() {
-  // const url="http://hybrid.srishticampus.in/shopunity_api/"
-  const url="http:/localhost:4028/shopunity_api"
-
+  const url="http://hybrid.srishticampus.in:4028/"
+  // const url="http://localhost:4028/"
+  
   return (
     <BrowserRouter basename="/shopunity">
     <Routes>
@@ -40,9 +41,10 @@ function App() {
 
     {/* wholesaledealer */}
 
-    <Route path='/wholesaledealerregistration' element={[<Navigation/>,<WholesaleDealerRegistration/>,<Footer/>]} />
-    <Route path='/wholesaledealerlogin' element={[<Navigation/>,<WholesaleDealerLogin/>,<Footer/>]} />
+    <Route path='/wholesaledealerregistration' element={[<MainNav/>,<WholesaleDealerRegistration/>,<Footer/>]} />
+    <Route path='/wholesaledealerlogin' element={[<MainNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
     <Route path='/wholesaledealerhome' element={[<Navigation/>,<WholesaleDealerHomepage/>,<Footer/>]} />
+    <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
 
 {/* Customer */}
 
