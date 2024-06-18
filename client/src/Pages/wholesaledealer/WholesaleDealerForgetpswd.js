@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './wholesale.css'
 import wholesaledealerforgetpswd from '../../images/wholesaledealerforgetpswd.png'
 import { useNavigate } from 'react-router-dom'
+import axiosInstance from '../../APIS/axiosinstatnce'
 function WholesaleDealerForgetpswd() {
 
     const[data,setData]=useState({
@@ -55,6 +56,19 @@ function WholesaleDealerForgetpswd() {
         }
     
       setErrors(errors);
+
+      if(formValid){
+        axiosInstance.post('/wholesaledealer_forgot',data)
+        .then((result) => {
+            console.log(result);
+            alert("Password updated successfully")
+            Navigate("/wholesaledealerlogin")
+        })
+        .catch((err) => {
+            console.log(err);
+            alert("Failed to update password",err)
+        })
+      }
     }
 
   return (
@@ -88,7 +102,7 @@ function WholesaleDealerForgetpswd() {
                                 Password
                             </label>{' '}
                             <input
-                                type="email"
+                                type="password"
                                 className="form-control form-input container mt-2"
                                 id="wholesale-dealer-forgetpswd-textbox"
                                 placeholder=" Password" 
@@ -103,7 +117,7 @@ function WholesaleDealerForgetpswd() {
                                 Confirm Password
                             </label>{' '}
                             <input
-                                type="email"
+                                type="password"
                                 className="form-control form-input container mt-2"
                                 id="wholesale-dealer-forgetpswd-textbox"
                                 placeholder="Confirm Password"
