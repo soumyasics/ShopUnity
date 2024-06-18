@@ -1,41 +1,164 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import "./wholesale.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import wholesaledealerlogin from "../../images/wholesaledealerlogin.png"
+import axios from "axios";
+import axiosInstance from "../../APIS/axiosinstatnce";
 
 function WholesaleDealerLogin() {
+
+  const[data,setData]=useState({
+    email:"",
+    password:""
+  })
+
+  const[errors,setErrors]=useState({
+    email:"",
+    password:""
+  });
+
+  const Navigate=useNavigate();
+
+  const formValidating =(fieldName,value) => {
+    if(!value.trim()){
+      return `${fieldName} is required.`;
+    }
+
+    if(fieldName === 'Email' && !value.endsWith("@gmail.com")){
+      return "Email must be a valid Gmail address";
+    }
+
+    if(fieldName === "Passwors"){
+      const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
+      if(!passwordRegex.test(value)){
+        return "Passowrd must contain at least one number, one special character, and one capital letter";
+      }
+    }
+    return;
+  };
+
+  const handleInputChange = (e) => {
+    const {name,value}= e.target;
+    setData({
+      ...data,[name]:value,
+    })
+    setErrors((prevErrors)=> ({...prevErrors, [name]: "" }));
+  }
+
+  // const validateForm = () =>{
+  //   let formErrors={}
+
+  //   if(!data.email)
+  //     formErrors.email="Email Required"
+  //   if(!data.password)
+  //     formErrors="Password Required"
+
+  //   return formErrors
+  // }
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    // const formErrors=validateForm()
+    let formIsValid=true;
+    let errors={};
+
+    errors.email = formValidating("Email", data.email);
+    if(errors.email) formIsValid=false;
+    errors.password = formValidating("Password", data.password);
+    if(errors.password) formIsValid=false;
+
+    setErrors(errors);
+    
+
+    if(formIsValid){
+      axiosInstance.post("/wholesaledealer_login",data)
+      .then((res)=>{
+        if(res.data.status === 200){
+            console.log("Login Successfully",res);
+            alert("Login Successfully")
+             Navigate('')
+        }
+        else{
+          alert("Logged in Failed")
+          console.log("Error",res);
+        }
+      })
+      .catch((err)=>{
+        console.log("Error",err);
+        alert("Error",err)
+      })
+      console.log(data);
+    }
+  }
   return (
-    <div className="wholesale_dealer_login ">
-    <h5 className='text-center mt-5 text-light'>Wholesale dealer Login</h5>
-      <Container>
-        <Row className="wholesale_dealer_login_main">
-          <Col>
-            
-          </Col>
+    <div>
+      <Row>
+        <Col className="container">
+          <img className="wholesale-dealer-login-img" src={wholesaledealerlogin} alt="img"></img>
+        </Col>
+        <Col className="container">
+          <div className="wholesale-dealer-login-div">
+            <h1 className="wholesale-dealer-login-h1 text-center">Wholesale Dealer Login</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="row">
+              <div className="col-2"></div>
+              <div className="col-8">
 
-          <Col className=" wholesale_dealer_login_form">
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Email address"
-              className="mb-3"
-            >
-              <Form.Control type="email" placeholder="name@example.com" />
-            </FloatingLabel>
-            <FloatingLabel controlId="floatingPassword" label="Password">
-              <Form.Control type="password" placeholder="Password" />
-            </FloatingLabel>
-            <Link to="" className="forgotpassword" style={{float:"right"}} >forgot password</Link>
-            <Link to="/wholesaledealerhome" className="btn btn-primary mt-3 "> Login</Link>
+                {/* Email */}
+                <div>
+                  <label className="wholesale-dealer-login-email mt-3 ">Email</label><br></br>
+                  <input 
+                    className="form-control wholesale-dealer-login-textbox mt-2 " 
+                    type="Email"
+                    placeholder="Email"
+                    name="email"
+                    value={data.email}
+                    onChange={handleInputChange}
+                  ></input>
+                  {errors.email && <span className="text-danger">{errors.email}</span>}
+                </div>
+                {/* Password */}
+                <div>
+                  <label className="wholesale-dealer-login-email mt-3 ">Password</label><br></br>
+                  <input 
+                    className="form-control wholesale-dealer-login-textbox mt-2 " 
+                    type="Password"
+                    placeholder="Passowrd"
+                    name="password"
+                    value={data.password}
+                    onChange={handleInputChange}
+                  ></input>
+                  {errors.password && <span className="text-danger">{errors.password}</span>}
+                </div>
+                {/* Forget Password */}
+                <Link  to={""} className="wholesale-dealer-login-forgetpswd"><a>Forgot Password?</a></Link>
 
-          </Col>
-          <label className='text-center text-light'>not a member? <Link to={'/wholesaledealerregistration'}>Sign up now</Link></label>
+                {/* Button */}
+                <button type="submit" className="wholesale-dealer-login-btn mt-4">Login</button>
 
-        </Row>
-      </Container>
+                {/* Signup */}
+                <div className="">
+                  <h6 className="text-dark text-center">
+                    Not a member?{" "}
+                    <Link to="/wholesaledealerregistration" className="text-decoration-none ">
+                      Sign up now
+                    </Link>
+                  </h6>
+                </div>
+
+              </div>
+              <div className="col-2"></div>
+              </div>
+            </form>
+          </div>
+          
+           
+          
+        </Col>
+      </Row>
     </div>
   );
 }

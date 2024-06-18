@@ -33,7 +33,7 @@ function AdminLogin() {
     if (fieldName === "Email" && !value.endsWith("@gmail.com")) {
       return "Email must be a valid Gmail address";
     }
-
+ 
     if (fieldName === "Password") {
       const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
       if (!passwordRegex.test(value)) {

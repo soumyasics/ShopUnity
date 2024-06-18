@@ -8,7 +8,7 @@ const ShopeOwnerController=require('../Controller/shopOwnerController')
 
 
 // wholesale
-Route.post('/wholesale_register',WholesaleController.WholesaleDealerRegister)
+Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.WholesaleDealerRegister)
 Route.post('/wholesaledealer_login',WholesaleController.WholesaleDealerLogin)
 Route.get('/get_all_wholesaledealer',WholesaleController.getAllWholesaleDealer)
 Route.get('/get_a_wholesaledealer/:wholesaledealerid',WholesaleController.getAWholesaledealer)

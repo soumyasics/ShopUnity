@@ -18,41 +18,7 @@ function Navigation() {
     <div className="col-2">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        
-
         <Nav className="navlist">
-          {/* <div class="dropdown ms-5 me-3" >
-            <button
-              class="btn btn-outline-success dropdown-toggle rounded-4"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Register
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <Link class="dropdown-item" to="/customerregistration">
-                  Customer
-                </Link>
-              </li>
-              <li>
-                <Link class="dropdown-item" to="/shopownerregistration">
-                  Shop Owner
-                </Link>
-              </li>
-              <li>
-                <Link class="dropdown-item" to="/deliveryagentregistration">
-                  Delivery Agent
-                </Link>
-              </li>
-              <li>
-                <Link class="dropdown-item" to="/wholesaledealerregistration">
-                  Wholesale Dealer
-                </Link>
-              </li>
-            </ul>
-          </div> */}
           <div>
             <button  class="btn btn-outline-success dropdown-toggle rounded-4"
               type="button"

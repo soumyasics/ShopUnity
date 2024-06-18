@@ -1,9 +1,22 @@
 const wholesaledealerschema = require("../Model/WholesaleSchema");
 
+const multer = require("multer");
+const jwt = require("jsonwebtoken");
+
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, "./upload");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage }).single("dealerlisence");
 const WholesaleDealerRegister = (req, res) => {
   const wholesaledealer = new wholesaledealerschema({
     dealername: req.body.dealername,
-    dealerlisence: req.body.dealerlisence,
+    dealerlisence: req.file,
     contact: req.body.contact,
     wholesaleregisternumber: req.body.wholesaleregisternumber,
     address: req.body.address,
@@ -21,9 +34,10 @@ const WholesaleDealerRegister = (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.json({
         status: 500,
-        message: "pleas enter valid data",
+        message: "please enter valid data",
         data: err,
       });
     });
@@ -49,7 +63,7 @@ const WholesaleDealerLogin = async (req, res) => {
         );
         return res
           .status(200)
-          .json({ message: "Login successful", token, id: customer._id });
+          .json({ message: "Login successful", token, id: wholesaledealer._id });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }
@@ -59,6 +73,7 @@ const WholesaleDealerLogin = async (req, res) => {
         .json({ message: "wholesaledealer does not exist" });
     }
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ error: error, message: "wholesaledealer does not exist" });
@@ -153,4 +168,5 @@ module.exports = {
   getAWholesaledealer,
   EditAWholesaledealer,
   DeleteAWholesaleDealer,
+  upload
 };
