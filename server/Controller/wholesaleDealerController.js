@@ -161,12 +161,43 @@ const DeleteAWholesaleDealer = (req, res) => {
     });
 };
 
+const wholesaleforgot = async (req, res) => {
+  // console.log(req.body);
+  try {
+    const wholesaleforgotpswrd = await wholesaledealerschema.findOneAndUpdate(
+      { email: req.body.email },
+      { password: req.body.password },
+      { new: true }
+    );
+    // console.log(Shopownerforgotpswrd);
+    if (wholesaleforgotpswrd) {
+      return res.json({
+        status: 200,
+        msg: "Password updated successfully",
+      });
+    } else {
+      return res.status(404).json({
+        status: 404,
+        msg: "wholesale Dealer not found",
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      status: 500,
+      msg: "Failed to update password",
+      error: err.message,
+    });
+  }
+};
+
+
 module.exports = {
   WholesaleDealerRegister,
   WholesaleDealerLogin,
   getAllWholesaleDealer,
   getAWholesaledealer,
   EditAWholesaledealer,
-  DeleteAWholesaleDealer,
+  DeleteAWholesaleDealer,wholesaleforgot,
   upload
 };
