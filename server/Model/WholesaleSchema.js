@@ -1,36 +1,37 @@
 const mongoose = require("mongoose");
 
 const wholesaledealerschema = mongoose.Schema({
-  storename:{
-    type:String,
-    required:true
+
+  storeName: {
+    type: String,
+    required: true,
   },
   dealername: {
     type: String,
     required: true,
   },
   address: {
-    type: String,
+    type: Object,
     required: true,
   },
   districts: {
     type: String,
-    required:true,
+    required: true,
   },
   city: {
     type: String,
-    required:true,
+    required: true,
   },
   pincode: {
-    type: String,
+    type: Number,
     required: true,
   },
   contact: {
     type: Number,
     required: true,
   },
-  email: {
-    type: String,
+  dealerlisence: {
+    type: Object,
     required: true,
   },
   wholesaleregisternumber: {
@@ -45,7 +46,6 @@ const wholesaledealerschema = mongoose.Schema({
     type: String,
     required: true,
   },
-  
 });
 
 module.exports = mongoose.model("wholesaledealers", wholesaledealerschema);
