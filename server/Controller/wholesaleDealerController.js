@@ -14,14 +14,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single("dealerlisence");
 const WholesaleDealerRegister = (req, res) => {
+  console.log(req.body);
   const wholesaledealer = new wholesaledealerschema({
-    dealername: req.body.dealername,
-    dealerlisence: req.file,
-    contact: req.body.contact,
-    wholesaleregisternumber: req.body.wholesaleregisternumber,
+
+    storeName:req.body.storeName,
+    dealername:req.body.dealername,
     address: req.body.address,
+    districts:req.body.districts,
+    city:req.body.city,
     pincode: req.body.pincode,
+    contact: req.body.contact,
     email: req.body.email,
+    wholesaleregisternumber: req.body.wholesaleregisternumber,
+    dealerlisence: req.file,
     password: req.body.password,
   });
   wholesaledealer

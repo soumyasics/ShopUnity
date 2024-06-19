@@ -1,7 +1,40 @@
 const mongoose = require("mongoose");
 
 const wholesaledealerschema = mongoose.Schema({
+
+  storeName: {
+    type: String,
+    required: true,
+  },
   dealername: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: Object,
+    required: true,
+  },
+  districts: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  pincode: {
+    type: Number,
+    required: true,
+  },
+  contact: {
+    type: Number,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  wholesaleregisternumber: {
     type: String,
     required: true,
   },
@@ -9,27 +42,7 @@ const wholesaledealerschema = mongoose.Schema({
     type: Object,
     required: true,
   },
-  contact: {
-    type: Number,
-    required: true,
-  },
-  wholesaleregisternumber: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
   password: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  pincode: {
     type: String,
     required: true,
   },
