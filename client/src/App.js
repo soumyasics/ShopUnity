@@ -28,6 +28,7 @@ import AdminMainNav from './Pages/Navs/AdminMainNav';
 import MainNav from './Pages/Navs/MainNav';
 import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
+import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
     <Route path='/wholesaledealerlogin' element={[<MainNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
     <Route path='/wholesaledealerhome' element={[<Navigation/>,<WholesaleDealerHomepage/>,<Footer/>]} />
     <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
+    <Route path='/wholesalealldealerviewpage' element={[<MainNav/>,<WholesaleAllDealerViewpage/>]} />
 
 {/* Customer */}
 

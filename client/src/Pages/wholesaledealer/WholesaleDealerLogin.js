@@ -95,12 +95,12 @@ function WholesaleDealerLogin() {
   }
   return (
     <div>
-      <Row>
+      <Row className="container">
         <Col className="container">
           <img className="wholesale-dealer-login-img" src={wholesaledealerlogin} alt="img"></img>
         </Col>
         <Col className="container">
-          <div className="wholesale-dealer-login-div">
+          <div className="wholesale-dealer-login-div container">
             <h1 className="wholesale-dealer-login-h1 text-center">Wholesale Dealer Login</h1>
             <form onSubmit={handleSubmit}>
               <div className="row">
@@ -134,7 +134,10 @@ function WholesaleDealerLogin() {
                   {errors.password && <span className="text-danger">{errors.password}</span>}
                 </div>
                 {/* Forget Password */}
-                <Link  to={""} className="wholesale-dealer-login-forgetpswd"><a>Forgot Password?</a></Link>
+                <div className="mt-2 ">
+                 <Link  to={""} className="wholesale-dealer-login-forgetpswd">Forgot Password?</Link>
+                </div>
+                
 
                 {/* Button */}
                 <button type="submit" className="wholesale-dealer-login-btn mt-4">Login</button>
