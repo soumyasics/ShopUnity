@@ -15,14 +15,17 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("dealerlisence");
 const WholesaleDealerRegister = (req, res) => {
   const wholesaledealer = new wholesaledealerschema({
-    dealername: req.body.dealername,
-    dealerlisence: req.file,
-    contact: req.body.contact,
-    wholesaleregisternumber: req.body.wholesaleregisternumber,
-    address: req.body.address,
-    pincode: req.body.pincode,
-    email: req.body.email,
-    password: req.body.password,
+      storename: req.body.storename,
+      dealername: req.body.dealername,
+      address: req.body.address,
+      districts: req.body.districts,
+      city: req.body.city,
+      pincode: req.body.pincode,
+      contact: req.body.contact,
+      email: req.body.email,
+      wholesaleregisternumber: req.body.wholesaleregisternumber,
+      dealerlisence: req.file,
+      password: req.body.password 
   });
   wholesaledealer
     .save()
@@ -119,15 +122,17 @@ const EditAWholesaledealer = (req, res) => {
   const wholesaledealerid = req.params.wholesaledealerid;
   wholesaledealerschema
     .findByIdAndUpdate(wholesaledealerid, {
+      storename:req.body.storename,
       dealername: req.body.dealername,
-      companyname: req.body.companyname,
-      lisencenumber: req.body.companyname,
-      email: req.body.companyname,
-      password: req.body.companyname,
+      address: req.body.address,
+      districts: req.body.districts,
+      city: req.body.city,
+      pincode: req.body.pincode,
       contact: req.body.contact,
-      address: req.body.companyname,
-      pincode: req.body.companyname,
-      registrationnumber: req.body.registrationnumber,
+      email: req.body.email,
+      wholesaleregisternumber: req.body.wholesaleregisternumber,
+      dealerlisence: req.file,
+      password: req.body.password 
     })
     .then((result) => {
       res.json({

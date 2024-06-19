@@ -9,7 +9,7 @@ import axiosMultipartInstance from "../../APIS/axiosMultipartInstance";
 function WholesaleDealerRegistration() {
  
   const[data,setData]=useState({
-    storeName:"",
+    storename:"",
     dealername:"",
     address:"",
     districts:"",
@@ -24,7 +24,7 @@ function WholesaleDealerRegistration() {
     })
 
     const[errors,setErrors]=useState({
-    storeName:"",
+    storename:"",
     dealername:"",
     address:"",
     districts:"",
@@ -109,7 +109,7 @@ function WholesaleDealerRegistration() {
     let errors={}
     let formIsValid=true;
 
-    errors.storeName=validateField("StoreName",data.storeName)
+    errors.storename=validateField("Storename",data.storename)
     errors.dealername=validateField("DealerName",data.dealername)
     errors.address=validateField("Address",data.address)
     errors.districts=validateField("District",data.districts)
@@ -154,31 +154,39 @@ function WholesaleDealerRegistration() {
 
     for (let key in errors) {
       if (errors[key]) {
+        console.log(errors[key]);
         formIsValid = false;
+        console.log("in 6");
         break;
       }
     }
 console.log('form',formIsValid);
     if(formIsValid){
       const formData = new FormData();
+      formData.append('storename',data.storename)
       formData.append('dealername',data.dealername)
-      formData.append('dealerlisence',data.dealerlisence)
-      formData.append('contact',data.contact)
-      formData.append('wholesaleregisternumber',data.wholesaleregisternumber)
       formData.append('address',data.address)
+      formData.append('districts',data.districts)
+      formData.append('city',data.city)
       formData.append('pincode',data.pincode)
+      formData.append('contact',data.contact)
       formData.append('email',data.email)
+      formData.append('wholesaleregisternumber',data.wholesaleregisternumber)
+      formData.append('dealerlisence',data.dealerlisence)
       formData.append('password',data.password)
 
       try{
+        console.log("in try");
          const res = await axiosMultipartInstance.post('/wholesale_register',data);
          console.log(res);
          if (res.data.status === 200) {
           alert("Register Successfully")
+          console.log("Register Successfully",res);
           Navigate("/wholesaledealerlogin")
          }
          else{
           alert("Registration is Falied")
+          console.log("Registration is Falied",res);
          }
       }
       catch(error){
@@ -210,11 +218,11 @@ console.log('form',formIsValid);
                         type="text"
                         placeholder="Store Name"
                         className="form-control m-2 wholesale-dealer-register-textbox " 
-                        name="storeName"
-                        value={data.storeName}
+                        name="storename"
+                        value={data.storename}
                         onChange={handleChange}
                       />
-                      {errors.storeName && <span className="text-danger">{errors.storeName}</span>}
+                      {errors.storename && <span className="text-danger">{errors.storename}</span>}
                     </div>
                     <div className="input-box mt-3">
                       {" "}
