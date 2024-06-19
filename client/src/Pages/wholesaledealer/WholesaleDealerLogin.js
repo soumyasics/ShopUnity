@@ -48,17 +48,6 @@ function WholesaleDealerLogin() {
     setErrors((prevErrors)=> ({...prevErrors, [name]: "" }));
   }
 
-  // const validateForm = () =>{
-  //   let formErrors={}
-
-  //   if(!data.email)
-  //     formErrors.email="Email Required"
-  //   if(!data.password)
-  //     formErrors="Password Required"
-
-  //   return formErrors
-  // }
-
   const handleSubmit = (e) =>{
     e.preventDefault();
     // const formErrors=validateForm()
@@ -71,23 +60,35 @@ function WholesaleDealerLogin() {
     if(errors.password) formIsValid=false;
 
     setErrors(errors);
-    
+    // setFormIsValid(formIsValid);
 
     if(formIsValid){
       axiosInstance.post("/wholesaledealer_login",data)
       .then((res)=>{
+<<<<<<< HEAD
+        if(res.status === 200){
+            console.log("Login Successfully",res);
+            alert("Login Successfully")
+             Navigate('')
+        }
+        else{
+          alert("Logged in Failed",res)
+          console.log("Error",res);
+        }
+=======
         
             console.log(res.data.message);
             alert(res.data.message)
              Navigate('')
         
        
+>>>>>>> 19d777fa08ddb59a888a5036941a387bec387e10
       })
       .catch((err)=>{
         console.log("Error",err);
         alert("Error",err)
       })
-      console.log(data);
+      // console.log(data);
     }
   }
   return (
@@ -132,7 +133,7 @@ function WholesaleDealerLogin() {
                 </div>
                 {/* Forget Password */}
                 <div className="mt-2 ">
-                 <Link  to={""} className="wholesale-dealer-login-forgetpswd">Forgot Password?</Link>
+                 <Link  to="/wholesaledealerforgetpswd" className="wholesale-dealer-login-forgetpswd">Forgot Password?</Link>
                 </div>
                 
 

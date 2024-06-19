@@ -124,15 +124,17 @@ const EditAWholesaledealer = (req, res) => {
   const wholesaledealerid = req.params.wholesaledealerid;
   wholesaledealerschema
     .findByIdAndUpdate(wholesaledealerid, {
+      storename:req.body.storename,
       dealername: req.body.dealername,
-      companyname: req.body.companyname,
-      lisencenumber: req.body.companyname,
-      email: req.body.companyname,
-      password: req.body.companyname,
+      address: req.body.address,
+      districts: req.body.districts,
+      city: req.body.city,
+      pincode: req.body.pincode,
       contact: req.body.contact,
-      address: req.body.companyname,
-      pincode: req.body.companyname,
-      registrationnumber: req.body.registrationnumber,
+      email: req.body.email,
+      wholesaleregisternumber: req.body.wholesaleregisternumber,
+      dealerlisence: req.file,
+      password: req.body.password 
     })
     .then((result) => {
       res.json({

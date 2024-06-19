@@ -158,7 +158,7 @@
 
 /* Wholesale All Dealer ViewPage*/
 
-#wholesale-alldealer-viewpage-box{
+/* #wholesale-alldealer-viewpage-box{
   height: 90vh;
   width: 100%;
   background-color: #CCEDF4;
@@ -183,4 +183,50 @@
 }
 .wholesale-alldealer-viewpage-table-thead{
   background-color: #CCEDF4;
+}
+.wholesale-alldealer-viewpage-tablediv{
+  height: 10vh;
+  width: 100%;
+  margin-left: 40px; */
+/* } */
+/* .wholesale-alldealer-viewpage-viewbtn{
+  border: none;
+  height: 4vh;
+  width: 40%;
+  top: 293px;
+  left: 144px;
+  gap: 0px;
+  opacity: 0px;
+  background-color: #DFDFDF;
+  box-shadow: 0px 2px 3px 0px #0000004F;
+  border-radius: 15px;
+} */
+/* .wholesale-alldealer-viewpage-table1{
+  font-size: 17px;
+  color: #74767B;
+  background-color: white;
+  height: 6vh;
+  width: 95%;
+  border-radius: 15px;
+} */
+
+.wholesale-alldealer-viewpage-div1{
+  background-color: #CCEDF4;
+  margin-top: 150px;
+  width: 1365px;
+  height: 90vh;
+  top: 10px;
+  left: -40px;
+  gap: 0px;
+  border-radius: 43px ;
+  opacity: 0px;
+  margin-bottom: 50px;
+}
+.wholesale-alldealer-viewpage-h3{
+  color: #74767B;
+  text-decoration: underline;
+}
+#wholesale-alldealer-viewpage-viewbtn{
+  border: none;
+  background-color: #DFDFDF;
 }
