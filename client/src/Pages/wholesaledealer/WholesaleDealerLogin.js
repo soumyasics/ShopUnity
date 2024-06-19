@@ -76,15 +76,12 @@ function WholesaleDealerLogin() {
     if(formIsValid){
       axiosInstance.post("/wholesaledealer_login",data)
       .then((res)=>{
-        if(res.data.status === 200){
-            console.log("Login Successfully",res);
-            alert("Login Successfully")
+        
+            console.log(res.data.message);
+            alert(res.data.message)
              Navigate('')
-        }
-        else{
-          alert("Logged in Failed")
-          console.log("Error",res);
-        }
+        
+       
       })
       .catch((err)=>{
         console.log("Error",err);
