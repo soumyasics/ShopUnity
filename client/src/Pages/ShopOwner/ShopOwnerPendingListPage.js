@@ -5,7 +5,6 @@ import Sidebar from "../Admin/Sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shopownerpendinglist.css";
 import { Card, Row, Col } from "react-bootstrap";
-
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";

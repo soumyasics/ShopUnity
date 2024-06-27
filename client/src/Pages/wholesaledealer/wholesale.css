@@ -212,7 +212,6 @@
 
 .wholesale-alldealer-viewpage-div1{
   background-color: #CCEDF4;
-  margin-top: 150px;
   width: 1365px;
   height: 90vh;
   top: 10px;
@@ -229,4 +228,8 @@
 #wholesale-alldealer-viewpage-viewbtn{
   border: none;
   background-color: #DFDFDF;
+}
+.wholesale-alldealer-viewpage-icon{
+  font-size: 30px;
+  color: black;
 }
