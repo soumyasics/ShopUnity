@@ -31,6 +31,7 @@ import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerFo
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 
 
+
 function App() {
   const url="http://hybrid.srishticampus.in:4028/"
   // const url="http://localhost:4028/"
@@ -47,8 +48,9 @@ function App() {
     <Route path='/wholesaledealerhome' element={[<Navigation/>,<WholesaleDealerHomepage/>,<Footer/>]} />
     <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
     <Route path='/wholesalealldealerviewpage' element={[<MainNav/>,<WholesaleAllDealerViewpage/>]} />
+    
 
-{/* Customer */}
+{/* Customer */} 
 
     <Route path='/customerregistration' element={[<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
     <Route path='/customerlogin' element={[<Navigation/>,<CustomerLogin/>,<Footer/>]} />

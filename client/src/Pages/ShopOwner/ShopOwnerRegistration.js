@@ -456,7 +456,7 @@ function ShopOwnerRegistration() {
                         </label>{" "}
                       </div>
                       <input
-                        type="text"
+                        type="password"
                         value={data.shopownerpassword}
                         placeholder="Password"
                         name="shopownerpassword"
@@ -480,7 +480,7 @@ function ShopOwnerRegistration() {
                         </label>{" "}
                       </div>
                       <input
-                        type="text"
+                        type="password"
                         value={data.shopownerconfirmpassword}
                         placeholder="Confirm Password"
                         name="shopownerconfirmpassword"

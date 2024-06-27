@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './wholesale.css';
 import axiosInstance from '../../APIS/axiosinstatnce';
+import { FaArrowLeft } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 function WholesaleAllDealerViewpage() {
   const[data,setData]=useState([])
@@ -17,109 +19,24 @@ function WholesaleAllDealerViewpage() {
       }
     })
     .catch((err)=>{
-      console.log("error",err);
+      console.log("Error",err);
     })
   }, [])
   
   return (
-    // <div>
-    //   <div className='container'>
-    //     <div id='wholesale-alldealer-viewpage-box'>
-    //       <div className='pt-4 text-center' id='wholesale-alldealer-viewpage-h4'>
-    //         <h4 >Wholesale Dealers List</h4>
-    //       </div>
-    //       <div className='ms-5 mt-5'>
-    //         <label className='wholesale-alldealer-viewpage-label text-center'>Row Per Page {" "}
-    //           <select className='mt-2'>
-    //             <option>1</option>
-    //             <option>2</option>
-    //             <option>3</option>
-    //             <option>4</option>
-    //             <option>5</option>
-    //           </select>
-    //         </label>
-    //       </div>
-          
-    //         <div className='wholesale-alldealer-viewpage-table mt-4 container'>
-    //           <div className='row container ms-5'>
-    //             <div className='col-1'>
-    //               <span>S.No</span>
-    //             </div>
-    //             <div className='col'>
-    //               <span>DealerName</span>
-    //             </div>
-    //             <div className='col'>
-    //               <span>StoreName</span>
-    //             </div>
-    //             <div className='col'>
-    //               <span>Email ID</span>
-    //             </div>
-    //             <div className='col'>
-    //               <span>Contact</span>
-    //             </div>
-    //             <div className='col'>
-    //               <span>View</span>
-    //             </div>
-    //           </div>
-    //        </div>
-    //        <div className='table'>
-    //         <table className='table'>
-    //           <tbody className='container'>
-    //             <tr>
-    //               <td ms-5>1</td>
-    //               <td>Vikas</td>
-    //               <td>Vk</td>
-    //               <td>vikas@gmail.com</td>
-    //               <td>90900909</td>
-    //               <td><button type='submit'>View</button></td>
-    //             </tr>
-    //           </tbody>
-    //           </table>
-    //        </div>
-           
-    //         {/* <div className='mt-5  ms-5 wholesale-alldealer-viewpage-table1'>
-    //         <div className='row'>
-    //             <div className='col-1 mt-1'>
-    //               <span> &nbsp; &nbsp; &nbsp; 1</span>
-    //             </div>
-    //             <div className='col mt-1 ms-5'>
-    //               <span></span>
-    //             </div>
-    //             <div className='col v'>
-    //               <span></span>
-    //             </div>
-    //             <div className='col mt-1 '>
-    //               <span>vikas@gmail.com</span>
-    //             </div>
-    //             <div className='col mt-1'>
-    //               <span>9090909090</span>
-    //             </div>
-    //             <div className='col mt-1'>
-    //               <button className='wholesale-alldealer-viewpage-viewbtn'>view</button>
-    //             </div>
-    //         </div>
-    //      </div> */}
-           
-    //         {/* <div>
-    //           <h1>No data found</h1>
-    //         </div> */}
-         
-           
-           
-    //     </div>
-    //   </div>
-    // </div>
     <div>
+      <div className='mt-5 pt-5'>
+        <Link className='wholesale-alldealer-viewpage-icon'><FaArrowLeft className='mt-5 ms-5 '/></Link>
+      </div>
           <div className="">
-        {/* <Link className="text-dark w-100" to="/admin_dashboard">
-          <FaArrowLeftLong />
-        </Link> */}
       </div>
       <div className="">
         <div className="">
           <div className="wholesale-alldealer-viewpage-div1 container">
             {data.length === 0 && (
-             <h1 className="text-center"> No ShopOwner Found</h1>
+              <div className='pt-3'>
+                <h1 className="text-center "> No WholeSaleDealer Found</h1>
+             </div>
              )} 
              {data.length > 0 && ( 
               <div>
