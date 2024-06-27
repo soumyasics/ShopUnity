@@ -33,27 +33,25 @@ function LandingPage() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <a
-                href="#home"
-                className="navlink ms-5 me-3 text-dark text-decoration-none"
-              >
-                <h6 className="landing-home">
-                  <MdHome />
-                  Home
+              <span className="marginav ms-5">
+                <a href="#home" className="text-decoration-none text-dark ">
+                  <h6 className="landing-home-lpage">
+                    <MdHome />
+                    Home
+                  </h6>
+                </a>
+              </span>
+              <span className="marginav ms-5">
+              <a href="#about" className="text-decoration-none text-dark ">
+                <h6 className="landing-home-lpage">
+                <MdOutlineRoundaboutRight className="landing-about-icon" />
+                About
                 </h6>
               </a>
+            </span>
+             
 
-              <a
-                href="#about"
-                className="navlink ms-5 me-3 text-dark text-decoration-none"
-              >
-                <h6 className="landing-home">
-                  <MdOutlineRoundaboutRight className="landing-about-icon" />
-                  About
-                </h6>
-              </a>
-
-              <div class="dropdown" style={{ marginRight: "50px" }}>
+              <div class="dropdown ms-4" >
                 <button
                   // class="btn btn-outline-success dropdown-toggle rounded-4"
                   type="button"

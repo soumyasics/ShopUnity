@@ -23,7 +23,7 @@ import { FiAlignJustify } from "react-icons/fi";
 function ShopOwnerSidebar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  let shopname=localStorage.getItem("shopname");
+  let shopname = localStorage.getItem("shopname");
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -33,32 +33,40 @@ function ShopOwnerSidebar() {
   };
 
   return (
-    <div className={`shopownersidebar ${open ? 'open' : ''}`}>
-      <button  className=" btn sidebaricon mb-3 d-lg-none"
+    <div className={`shopownersidebar ${open ? "open" : ""}`}>
+      <button
+        className=" btn sidebaricon mb-3 d-lg-none"
         onClick={() => setOpen(!open)}
         aria-controls="sidebar"
         aria-expanded={open}
-       
       >
-        <FiAlignJustify  className="toggglesidebar"/>
+        <FiAlignJustify className="toggglesidebar" />
       </button>
       <Collapse in={open} className="d-lg-block">
         <div id="sidebar" className="sidebar">
           <div className="sidebar-div1-color p-3">
-            <Row className="align-items-center">
-              <Col xs={3} md={2}>
-                <img className="sidebarimg mt-3" src={sidebarimg} alt="img" />
-              </Col>
-              <Col xs={9} md={10}>
-                <p className="sidebar-para mb-1 ms-3">{shopname}</p>
-              </Col>
-            </Row>
+              <Row className="align-items-center">
+                <Col xs={3} md={2}>
+                  <img className="sidebarimg mt-3" src={sidebarimg} alt="img" />
+                </Col>
+                <Col xs={9} md={10}>
+                  <p to="" className="sidebar-para mb-1 ms-3">{shopname}</p>
+                </Col>
+              </Row>
           </div>
           <div className="sidebar-div2-color flex-grow-1">
             <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
-              <li className="nav-item" style={{marginTop:"55%"}}>
-                <Link to="/shopownerhome" className="shopownersidebar-dashboard rounded-end-5 ">
+              <li className="nav-item" style={{ marginTop: "55%" }}>
+                <Link
+                  to="/shopownerhome"
+                  className="shopownersidebar-dashboard rounded-end-5 "
+                >
                   <MdDashboard /> Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/shopownerprofile" className="nav-link sidebar-shop">
+                  <FaUserAlt /> Profile
                 </Link>
               </li>
               <li className="nav-item">
@@ -77,7 +85,10 @@ function ShopOwnerSidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/wholesaledealerslist" className="nav-link sidebar-shop">
+                <Link
+                  to="/wholesaledealerslist"
+                  className="nav-link sidebar-shop"
+                >
                   <FaBoxOpen /> Wholesale Dealers
                 </Link>
               </li>
@@ -86,11 +97,7 @@ function ShopOwnerSidebar() {
                   <GiInjustice /> Dealer Comparison
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/shopownerprofile" className="nav-link sidebar-shop">
-                  <FaUserAlt /> Profile
-                </Link>
-              </li>
+
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
                   <FaBell /> Notification
@@ -102,7 +109,17 @@ function ShopOwnerSidebar() {
                 </Link>
               </li>
               <li className="nav-item mt-auto">
-                <Link to="" className="nav-link sidebar-logout" onClick={handleLogout}  style={{ background :"linear-gradient(90deg, #FF0000 0%, #990000 100%)", margin:"25%",borderRadius:"25px"}}>
+                <Link
+                  to=""
+                  className="nav-link sidebar-logout"
+                  onClick={handleLogout}
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FF0000 0%, #990000 100%)",
+                    margin: "25%",
+                    borderRadius: "25px",
+                  }}
+                >
                   <RiLogoutCircleLine /> Logout
                 </Link>
               </li>
