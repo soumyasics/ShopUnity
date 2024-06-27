@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
     cb(null, "./upload");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, file.originalname);
   },
 });
 
@@ -18,8 +18,9 @@ const shopeOwnerRegister = (req, res) => {
   console.log(req.body);
   console.log(req.file, "n");
 
-  shopownerschema.findOne({ shopowneremail: req.body.shopowneremail })
-    .then(existingShopOwner => {
+  shopownerschema
+    .findOne({ shopowneremail: req.body.shopowneremail })
+    .then((existingShopOwner) => {
       if (existingShopOwner) {
         return res.status(400).json({
           message: "Email ID is already used",
@@ -43,7 +44,7 @@ const shopeOwnerRegister = (req, res) => {
 
       return newShopOwner.save();
     })
-    .then(result => {
+    .then((result) => {
       if (result) {
         res.status(200).json({
           message: "Registered Successfully",
@@ -51,7 +52,7 @@ const shopeOwnerRegister = (req, res) => {
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       if (!res.headersSent) {
         res.status(500).json({
           message: "Please type valid data",
@@ -80,15 +81,15 @@ const ShopeOwnerLogin = async (req, res) => {
           "secret_key",
           { expiresIn: 86400 }
         );
-        return res
-          .status(200)
-          .json({
-            message: "Login successful",
-            token,
-            id: shopowner._id,
-            shopname: shopowner.shopname,
-            status: shopowner.status,
-          });
+        return res.status(200).json({
+          message: "Login successful",
+          token,
+          id: shopowner._id,
+          shopname: shopowner.shopname,
+          status: shopowner.status,
+          ActiveStatus: shopowner.ActiveStatus,
+
+        });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }
@@ -105,7 +106,7 @@ const ShopeOwnerLogin = async (req, res) => {
 
 const getAllShopOwners = (req, res) => {
   shopownerschema
-    .find({})
+    .find({ status: "accepted" })
     .then((result) => {
       res.json({
         status: 200,
@@ -118,6 +119,20 @@ const getAllShopOwners = (req, res) => {
     });
 };
 
+const getAllPendingShopOwners = (req, res) => {
+  shopownerschema
+    .find({ status: "pending" })
+    .then((result) => {
+      res.json({
+        status: 200,
+        data: result,
+        message: "find",
+      });
+    })
+    .catch((err) => {
+      res.json({ status: 500, message: "not find", data: err });
+    });
+};
 const getAshopowner = (req, res) => {
   // console.log(req.params);
   const shopownerid = req.params.shopownerid;
@@ -141,7 +156,7 @@ const getAshopowner = (req, res) => {
 
 const EditAShopOwner = (req, res) => {
   const shopownerid = req.params.shopownerid;
-console.log(req.files,"j");
+  console.log(req.files, "j");
   const updateData = {
     shopname: req.body.shopname,
     shopownername: req.body.shopownername,
@@ -152,7 +167,7 @@ console.log(req.files,"j");
     shopownerpincode: req.body.shopownerpincode,
     shopownerdistrict: req.body.shopownerdistrict,
     shopownercity: req.body.shopownercity,
-    shoplicence:  req.file.originalname
+    shoplicence: req.file.originalname,
   };
 
   shopownerschema
@@ -239,11 +254,12 @@ const acceptShopOwner = async (req, res) => {
     }
 
     shopowner.status = "accepted";
-    shopowner.ActiveStatus = "active"
+    shopowner.ActiveStatus = true;
     await shopowner.save();
-    return res
-      .status(200)
-      .json({ message: "shopowner registration accepted and activated", data: shopowner });
+    return res.status(200).json({
+      message: "shopowner registration accepted and activated",
+      data: shopowner,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -286,7 +302,7 @@ const InactivateShopOwner = async (req, res) => {
       return res.status(404).json({ message: "shopowner not found" });
     }
 
-    shopowner.ActiveStatus = "inactive"
+    shopowner.ActiveStatus = "inactive";
     await shopowner.save();
     return res
       .status(200)
@@ -298,6 +314,45 @@ const InactivateShopOwner = async (req, res) => {
   }
 };
 
+const deActivateShopOwnerById = (req, res) => {
+  shopownerschema
+    .findByIdAndUpdate({ _id: req.params.id }, { ActiveStatus: false })
+    .exec()
+    .then((data) => {
+      res.json({
+        status: 200,
+        msg: "Shop owner Inactivated",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
+
+const activateShopownerById = (req, res) => {
+  shopownerschema
+    .findByIdAndUpdate({ _id: req.params.id }, { ActiveStatus: true })
+    .exec()
+    .then((data) => {
+      res.json({
+        status: 200,
+        msg: "Shop owner Activated",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
 
 module.exports = {
   upload,
@@ -309,5 +364,9 @@ module.exports = {
   DeleteAShopOwner,
   Shopownerforgot,
   acceptShopOwner,
-  rejectshopowner,InactivateShopOwner
+  rejectshopowner,
+  InactivateShopOwner,
+  getAllPendingShopOwners,
+  deActivateShopOwnerById,
+  activateShopownerById,
 };

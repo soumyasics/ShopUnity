@@ -29,12 +29,13 @@ import MainNav from './Pages/Navs/MainNav';
 import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
+import LocalNav from './Pages/Navs/LocalNav';
 
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url="http://localhost:4028/"
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url="http://localhost:4028/"
   
   return (
     <BrowserRouter basename="/shopunity">
@@ -43,10 +44,10 @@ function App() {
 
     {/* wholesaledealer */}
 
-    <Route path='/wholesaledealerregistration' element={[<MainNav/>,<WholesaleDealerRegistration/>,<Footer/>]} />
-    <Route path='/wholesaledealerlogin' element={[<MainNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
+    <Route path='/wholesaledealerregistration' element={[<LocalNav/>,<WholesaleDealerRegistration/>,<Footer/>]} />
+    <Route path='/wholesaledealerlogin' element={[<LocalNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
     <Route path='/wholesaledealerhome' element={[<Navigation/>,<WholesaleDealerHomepage/>,<Footer/>]} />
-    <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
+    <Route path='/wholesaledealerforgetpswd' element={[<LocalNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
     <Route path='/wholesalealldealerviewpage' element={[<MainNav/>,<WholesaleAllDealerViewpage/>]} />
     
 
@@ -58,14 +59,14 @@ function App() {
 
 {/* deliveryagent */}
 
-    <Route path='/deliveryagentregistration' element={[<Navigation/>,<DeliveryAgentRegistration/>,<Footer/>]} />
-    <Route path='/deliveryagentlogin' element={[<Navigation/>,<DeliveryagentLogin/>,<Footer/>]} />
+    <Route path='/deliveryagentregistration' element={[<LocalNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
+    <Route path='/deliveryagentlogin' element={[<LocalNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
 
 {/* shopowner */}
 
-    <Route path='/shopownerregistration' element={[<MainNav/>,<ShopOwnerRegistration/>,<Footer/>]} />
-    <Route path='/shopownerlogin' element={[<MainNav/>,<ShopOwnerLogin/>,<Footer/>]} />
+    <Route path='/shopownerregistration' element={[<LocalNav/>,<ShopOwnerRegistration/>,<Footer/>]} />
+    <Route path='/shopownerlogin' element={[<LocalNav/>,<ShopOwnerLogin/>,<Footer/>]} />
     <Route path='/shopownerhome' element={[<ShopHomePage/>]} />
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
     <Route path='/shopownerprofile' element={<ShopownerProfile url={{url}}/>}/>
