@@ -75,22 +75,24 @@
     position: absolute;
     z-index: 1;
     background-color: #00000000;
-    margin-left: 123%;
-    margin-top: -11%;
+    margin-left: 31%;
+    margin-top: -2.8%;
     border: none;
 
 }
 
 .CustomerLogin-inputcontain-div-pword-container {
 
+    position: inherit;
     height: 58px;
     width: 390px;
+    border: 2px solid;
+    margin-left: 136px;
 
 }
 
 .CustomerLogin-inputcontain-div-a {
 
-    text-align: right;
-    margin-top: 5%;
+    margin-left: 60%;
 
 }
