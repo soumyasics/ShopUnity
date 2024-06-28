@@ -64,7 +64,7 @@ function AdminLogin() {
       const values = { email: data.email, password: data.password };
       console.log(values);
       if (mail == data.email && pass == data.password) {
-        alert("Loggedin Successfully");
+        // alert("Loggedin Successfully");
         localStorage.setItem("admin", 1);
         Navigate("/admin_dashboard");
       } else {

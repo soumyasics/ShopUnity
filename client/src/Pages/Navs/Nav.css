@@ -6,7 +6,6 @@
     text-align: center;
     padding-top: 5px;
     font-weight: bold;
-    margin-left: 100%;
   }
   .landing-about{
     background-color: #CAFAE2;
@@ -25,7 +24,7 @@
     text-align: center;
     padding-left: 10px;
     border: none;
-    margin-left: 150%;
+    /* margin-left: 150%; */
     font-weight: bold;
   }
   .landing-about-icon{

@@ -76,7 +76,7 @@
     text-align: center;
     color: white;
   }
-  .landing-home{
+  .landing-home-lpage{
     background-color: #CAFAE2;
     border-radius: 10px;
     height: 30px;
@@ -120,4 +120,7 @@
     margin-left: 10px;
     margin-right: 10px;
     width: 230px;
+  }
+  .marginav{
+    margin-left:10%;
   }
