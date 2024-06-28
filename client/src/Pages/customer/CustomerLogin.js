@@ -38,11 +38,11 @@ function CustomerLogin() {
             <p className="CustomerLogin-inputcontain-div-p">Username</p>
             <input type="text" placeholder="Username" className='CustomerLogin-inputcontain-div-inp'></input>
             <p className="CustomerLogin-inputcontain-div-p">Password</p>
-            <input type="text" placeholder="Password" id="pword" className='CustomerLogin-inputcontain-div-inp'></input>
+            <input type="password" placeholder="Password" id="pword" className='CustomerLogin-inputcontain-div-inp'></input>
             <button className="CustomerLogin-inputcontain-div-pwordbutton"><img src={img2} alt=""/></button>
             <a href=" " alt=" " className="CustomerLogin-inputcontain-div-a" >Forgot Password?</a>
             <button className="CustomerLogin-inputcontain-div-button">Login</button>
-            <p className='CustomerLogin-inputcontain-div-p-2'>Not a member?<a href=" " alt=" "> Sign up now</a></p>
+            <p className='CustomerLogin-inputcontain-div-p-2'>Not a member?<Link to="/customerregistration" alt=" "> Sign up now</Link></p>
             
 
             

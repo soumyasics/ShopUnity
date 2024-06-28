@@ -56,7 +56,7 @@ function App() {
 {/* Customer */} 
 
     <Route path='/customerregistration' element={ [<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
-    <Route path='/customerlogin' element={[<Navigation/>,<CustomerLogin/>,<Footer/>]} />
+    <Route path='/customerlogin' element={[<MainNav/>,<CustomerLogin/>,<Footer/>]} />
     <Route path='/customerhome' element={[<Navigation/>,<CustomerHomePage/>,<Footer/>]} />
 
 {/* deliveryagent */}
