@@ -26,6 +26,7 @@ Route.get('/get_all_accepted_wholesaledealer',WholesaleController.getAllAccepted
 // customer
 Route.post("/customer_register",CustomerController.customerRegister)
 Route.post('/customer_login',CustomerController.customerLogin)
+Route.post('/customerforget',CustomerController.customerforget)
 Route.get('/get_all_customers',CustomerController.getAllCustomers)
 Route.get('/get_a_customer/:customerid',CustomerController.getACustomer)
 Route.post('/edit_a_customer/:customerid',CustomerController.EditACustomer)

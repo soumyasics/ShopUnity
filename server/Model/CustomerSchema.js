@@ -1,41 +1,57 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const customerschema = mongoose.Schema({
-  customername: {
+const customerSchema = new Schema({
+  name: {
     type: String,
-    required: true,
+    required: [true, 'Name is required'],
+    match: [/^[A-Za-z]+$/, 'Name should contain only alphabets'],
   },
-  customergender:{
-    type:String,
-    required:true
-  },
-  customeremail: {
+  gender: {
     type: String,
-    required: true,
+    required: [true, 'Gender is required'],
+    enum: ['M', 'F', 'Other'],
   },
-  customercontact: {
-    type: Number,
-    required: true,
-  },
-  customerpassword: {
+  address: {
     type: String,
-    required: true,
+    required: [true, 'Address is required'],
   },
-  customercity: {
+  district: {
     type: String,
-    required: true,
+    required: [true, 'District is required'],
+    enum: [
+      "Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod",
+      "Kollam", "Kottayam", "Kozhikode", "Malappuram", "Palakkad",
+      "Pathanamthitta", "Thiruvananthapuram", "Thrissur", "Wayanad"
+    ],
   },
-  customerdistrict: {
+  city: {
     type: String,
-    required: true,
+    required: [true, 'City is required'],
   },
-  customeraddress: {
+  pincode: {
     type: String,
-    required: true,
+    required: [true, 'Pincode is required'],
+    match: [/^\d{6}$/, 'Pincode should be a 6 digit number'],
   },
-  customerpincode: {
-    type: Number,
-    required: true,
+  contactNumber: {
+    type: String,
+    required: [true, 'Contact Number is required'],
+    match: [/^\d{10}$/, 'Contact Number should be a 10 digit number'],
   },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    match: [/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/, 'Email should be valid'],
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password should contain a special character, a number, a capital and a small letter'],
+  }
 });
-module.exports = mongoose.model("customers", customerschema);
+
+const Customer = mongoose.model('Customer', customerSchema);
+
+module.exports = Customer;

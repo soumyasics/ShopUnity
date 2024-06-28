@@ -1,4 +1,4 @@
-const customerSchema = require("../Model/CustomerSchema");
+const Customer = require("../Model/CustomerSchema");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const jwt = require("jsonwebtoken");
@@ -15,74 +15,127 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("file");
 
 const customerRegister = async (req, res) => {
-  let customer = new customerSchema({
-    customername: req.body.customername,
-    customergender:req.body.customergender,
-    customeremail: req.body.customeremail,
-    customercontact: req.body.customercontact,
-    customerpassword: req.body.customerpassword,
-    customercity: req.body.customercity,
-    customerdistrict: req.body.customerdistrict,
-    customeraddress: req.body.customeraddress,
-    customerpincode: req.body.customerpincode,
-  });
-  await customer
-    .save()
-    .then((result) => {
-      res.json({
-        status: 200,
-        message: "Registration Sucessfully Done",
-        data: result,
+  try {
+    const { 
+      name, 
+      gender, 
+      email, 
+      contactNumber, 
+      password, 
+      city, 
+      district, 
+      address, 
+      pincode, 
+      confirmPassword 
+    } = req.body;
+
+    // Validate the passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        status: 400,
+        msg: "Passwords do not match"
       });
-    })
-    .catch((err) => {
-      if (err.code == 11000) {
-        res.json({
-          status: 409,
-          msg: "Email Id Already Registered",
-        });
-      } else {
-        console.log(err);
-        res.json({
-          status: 500,
-          msg: "registration failed",
-        });
-      }
+    }
+
+    let customer = new Customer({
+      name,
+      gender,
+      email,
+      contactNumber,
+      password,
+      city,
+      district,
+      address,
+      pincode
     });
+
+    const result = await customer.save();
+    return res.json({
+      status: 200,
+      message: "Registration Successfully Done",
+      data: result
+    });
+  } catch (err) {
+    console.log(err)
+
+    if (err.code === 11000) {
+      return res.status(409).json({
+        status: 409,
+        msg: "Email Id Already Registered"
+      });
+    }
+    if (err.name === 'ValidationError') {
+      const messages = Object.values(err.errors).map(val => val.message);
+      return res.status(400).json({
+        status: 400,
+        msg: "Validation Error",
+        errors: messages
+      });
+    }
+    console.error(err);
+    return res.status(500).json({
+      status: 500,
+      msg: "Registration failed"
+    });
+  }
+
 };
 
 const customerLogin = async (req, res) => {
   try {
-    const { customeremail, customerpassword } = req.body;
-    console.log(req.body);
-    const customer = await customerSchema.findOne({
-      customeremail: customeremail,
-    });
-    console.log(customer.customerpassword);
-    console.log();
-    if (customer) {
-      if (customer.customerpassword == customerpassword) {
-        const token = jwt.sign(
-          {
-            customeremail: customer.customeremail,
-            customerpassword: customer.customerpassword,
-          },
-          "secret_key",
-          { expiresIn: 86400 }
-        );
-        return res
-          .status(200)
-          .json({ message: "Login successful", token, id: customer._id });
-      } else {
-        return res.status(401).json({ message: "Password is incorrect" });
-      }
-    } else {
-      return res.status(404).json({ message: "Customer does not exist" });
+    const { username, password } = req.body;
+
+    const customer = await Customer.findOne({ 'email': username });
+    console.log(customer);
+
+    if (!customer) {
+      return res.status(200).json({ message: "Customer does not exist" });
     }
+
+    const isPasswordValid = customer.password === password;
+
+    if (!isPasswordValid) {
+      return res.status(200).json({ message: "Password is incorrect" });
+    }
+
+    const token = jwt.sign(
+      {
+        customeremail: customer.customeremail,
+        customerpassword: customer.customerpassword,
+      },
+      "secret_key",
+      { expiresIn: 86400 }
+    );
+
+    return res.status(200).json({ message: "Login successful", token, id: customer._id });
+
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error)
+    return res.status(500).json({ error: error.message });
   }
 };
+
+const customerforget = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const customer = await Customer.findOne({ email: email });
+
+    if (!customer) {
+      return res.status(404).json({ message: 'Email not found' });
+    }
+
+    // Update customer password
+    customer.password = password;
+    await customer.save();
+
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 
 const getAllCustomers = (req, res) => {
   customerSchema
@@ -171,5 +224,6 @@ module.exports = {
   customerLogin,
   getAllCustomers,
   getACustomer,
-  EditACustomer,DeleteACustomer
+  EditACustomer,DeleteACustomer,
+  customerforget
 };
