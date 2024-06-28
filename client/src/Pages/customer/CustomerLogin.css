@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta+Mahee:wght@200;300;400;500;600;700;800&display=swap');
+
+.CustomerLogin {
+
+    padding-top: 11%;
+    padding-left: 3%;
+
+}
+
+.CustomerLogin-contain-div {
+
+    /* padding-top: 10%; */
+    margin-left: 154px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 74px;
+
+}
+
+.CustomerLogin-inputcontain-div {
+
+    width: 660px;
+    height: 471px;
+    margin-left: 108px;
+    border-radius: 18px;
+    background: #CAFAE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.CustomerLogin-inputcontain-div-h1 {
+
+    color: #666;
+    font-family: "Mukta Mahee";
+    font-size: 50.23px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+    text-align: center;
+
+}
+
+.CustomerLogin-inputcontain-div-p {
+
+    color: #11B1C7;
+    font-family: "Mukta Mahee";
+    font-size: 18.23px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+    margin-left: 136px;
+    margin-bottom: 0;
+
+}
+
+.CustomerLogin-inputcontain-div-inp {
+
+    display: flex;
+    width: 388px;
+    height: 55px;
+    padding: 4px 39px;
+    margin-left: 136px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    border: 1px solid #929292;
+    background: #FFF;
+
+}
+
+.CustomerLogin-inputcontain-div-pwordbutton {
+
+    position: absolute;
+    z-index: 1;
+    background-color: #00000000;
+    margin-left: 123%;
+    margin-top: -11%;
+    border: none;
+
+}
+
+.CustomerLogin-inputcontain-div-pword-container {
+
+    height: 58px;
+    width: 390px;
+
+}
+
+.CustomerLogin-inputcontain-div-a {
+
+    text-align: right;
+    margin-top: 5%;
+
+}
