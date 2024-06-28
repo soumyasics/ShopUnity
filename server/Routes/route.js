@@ -39,13 +39,17 @@ Route.post('/delete_a_deliveryagent/:deliveryagentid',DeliveryAgentController.De
 Route.post("/shopeowner_register",ShopeOwnerController.upload,ShopeOwnerController.shopeOwnerRegister)
 Route.post('/shopowner_login',ShopeOwnerController.ShopeOwnerLogin)
 Route.get('/get_all_shopowners',ShopeOwnerController.getAllShopOwners)
+Route.get('/get_all_pending_shopowners',ShopeOwnerController.getAllPendingShopOwners)
 Route.get('/get_a_shopowner/:shopownerid',ShopeOwnerController.getAshopowner)
 Route.post('/edit_a_shopowner/:shopownerid',ShopeOwnerController.upload,ShopeOwnerController.EditAShopOwner)
 Route.post('/delete_a_shopowner/:shopownerid',ShopeOwnerController.DeleteAShopOwner)
 Route.post('/shopowner_forgot',ShopeOwnerController.Shopownerforgot)
 Route.post("/acceptshopowner/:id",ShopeOwnerController.acceptShopOwner)
 Route.post("/rejectshopowner/:id",ShopeOwnerController.rejectshopowner)
-Route.post("/innactivateshopowner/:id",ShopeOwnerController.InactivateShopOwner)
+
+Route.post("/activateShopowner/:id",ShopeOwnerController.activateShopownerById)
+Route.post("/inactivateshopowner/:id",ShopeOwnerController.deActivateShopOwnerById)
+
 
 
 module.exports=Route

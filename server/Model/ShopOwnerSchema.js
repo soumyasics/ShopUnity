@@ -53,8 +53,8 @@ const shopOwnerSchema = new mongoose.Schema({
     default: "pending",
   },
   ActiveStatus: {
-    type: String,
-    default: "inactive",
+    type: Boolean,
+    default: true,
   },
 });
 

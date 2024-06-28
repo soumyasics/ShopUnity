@@ -8,17 +8,20 @@ import { Card, Row, Col } from "react-bootstrap";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ShopOwnerPendingListPage({ url }) {
   const [data, setData] = useState([]);
   const [Ashopownerdata, setAshopownerdata] = useState({});
 
   const [show, setShow] = useState(false);
+  const [isDisabled, setisDisabled] = useState(false);
 
   const handleClose = () => setShow(false);
+
   const handleShow = (shopownerid) => {
     setShow(true);
+    setisDisabled(false);
     axiosInstance
       .get("/get_a_shopowner/" + shopownerid)
       .then((res) => {
@@ -31,10 +34,10 @@ function ShopOwnerPendingListPage({ url }) {
   useEffect(() => {
     getData();
   }, []);
-
+  const navigate = useNavigate();
   function getData() {
     axiosInstance
-      .get("/get_all_shopowners")
+      .get("/get_all_pending_shopowners")
       .then((res) => {
         let allShopowners = res?.data?.data || [];
         const filterPendingReqs = allShopowners.filter(
@@ -54,6 +57,7 @@ function ShopOwnerPendingListPage({ url }) {
         if (res.status === 200) {
           let msg =
             res?.data?.message || "Shopowner Registration Request Rejected";
+          setisDisabled(true);
           alert(msg);
           getData();
         } else {
@@ -71,7 +75,8 @@ function ShopOwnerPendingListPage({ url }) {
       .then((res) => {
         if (res.status === 200) {
           let msg =
-            res?.data?.message || "Shopowner Registration Request Accepted";
+            res?.data?.message || "Shopowner Registrationeque Rst Accepted";
+          setisDisabled(true);
           alert(msg);
           getData();
         } else {
@@ -87,7 +92,9 @@ function ShopOwnerPendingListPage({ url }) {
     <div>
       <div className="m-4">
         <div className="mt-2">
-          <Link className="text-dark w-100" to="/admin_dashboard"><FaArrowLeftLong/></Link>
+          <Link className="text-dark w-100" to="/admin_dashboard">
+            <FaArrowLeftLong />
+          </Link>
         </div>
         <div className="mt-4">
           <div className="shopownerpendingrequestdiv">
@@ -266,7 +273,7 @@ function ShopOwnerPendingListPage({ url }) {
                     <tr>
                       <td>
                         <Card.Subtitle className="mb-2 text-muted">
-                        Shopowner City
+                          Shopowner City
                         </Card.Subtitle>
                       </td>
                       <td className="ps-3">
@@ -279,7 +286,7 @@ function ShopOwnerPendingListPage({ url }) {
                     <tr>
                       <td>
                         <Card.Subtitle className="mb-2 text-muted">
-                        Shopowner District
+                          Shopowner District
                         </Card.Subtitle>
                       </td>
                       <td className="ps-3">
@@ -291,7 +298,7 @@ function ShopOwnerPendingListPage({ url }) {
                     <tr>
                       <td>
                         <Card.Subtitle className="mb-2 text-muted">
-                        Shopowner Pincode
+                          Shopowner Pincode
                         </Card.Subtitle>
                       </td>
                       <td className="ps-3">
@@ -305,6 +312,7 @@ function ShopOwnerPendingListPage({ url }) {
                       <td>
                         <button
                           className="btn btn-outline-success rounded-pill"
+                          disabled={isDisabled}
                           onClick={() => handleAccept(Ashopownerdata._id)}
                         >
                           Accept
@@ -313,6 +321,7 @@ function ShopOwnerPendingListPage({ url }) {
                       <td>
                         <button
                           className="btn btn-outline-danger rounded-pill"
+                          disabled={isDisabled}
                           onClick={() => handleReject(Ashopownerdata._id)}
                         >
                           Reject

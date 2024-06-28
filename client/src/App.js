@@ -29,6 +29,7 @@ import MainNav from './Pages/Navs/MainNav';
 import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
+import LocalNav from './Pages/Navs/LocalNav';
 
 
 
@@ -58,7 +59,9 @@ function App() {
 
 {/* deliveryagent */}
 
-    <Route path='/deliveryagentregistration' element={[<Navigation/>,<DeliveryAgentRegistration/>,<Footer/>]} />
+
+    <Route path='/deliveryagentregistration' element={[<LocalNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
+
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
 
