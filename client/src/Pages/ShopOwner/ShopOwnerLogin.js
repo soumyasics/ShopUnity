@@ -6,6 +6,7 @@ import "./shopowner.css";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import shopownerlogin from "../../images/shopownerlogin.png";
+
 function ShopOwnerLogin() {
   const [data, setData] = useState({
     email: "",

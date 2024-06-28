@@ -64,8 +64,13 @@ function Sidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="sidebar-shop">
+                <Link to="/wholesalealldealerviewpage" className="sidebar-shop">
                   <FaBoxOpen /> Wholesale Dealers
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/wholesalealldealerviewpage" className="sidebar-shop">
+                  <FaBoxOpen /> Wholesale Dealers Pending
                 </Link>
               </li>
               <li className="nav-item">
