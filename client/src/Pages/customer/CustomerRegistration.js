@@ -18,93 +18,93 @@ function CustomerRegistration() {
   return (
 
 
-    // <div className="customer_register">
-    //   <h5 className='text-center mt-5 text-light'>Customer Register</h5>
+    <div className="customer_register">
+      <h5 className='text-center mt-5 text-light'>Customer Register</h5>
 
-    //   <Container>
-    //     <Row className="customer_register_main">
-    //       <Col>
-    //         <FloatingLabel
-    //           controlId="floatingInput"
-    //           label="Customer Name"
-    //           className="mb-3 mt-4"
-    //         >
-    //           <Form.Control type="text" placeholder="name@example.com" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingPassword"
-    //           label="Email ID"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="email" placeholder="Password" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingPassword"
-    //           label="Contact"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="text" placeholder="Password" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingPassword"
-    //           label="Password"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="password" placeholder="Password" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingInput"
-    //           label="District"
-    //           className="mb-3 mt-4"
-    //         >
-    //           <Form.Control type="text" placeholder="name@example.com" />
-    //         </FloatingLabel>
-    //       </Col>
+      <Container>
+        <Row className="customer_register_main">
+          <Col>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Customer Name"
+              className="mb-3 mt-4"
+            >
+              <Form.Control type="text" placeholder="name@example.com" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingPassword"
+              label="Email ID"
+              className="mb-3"
+            >
+              <Form.Control type="email" placeholder="Password" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingPassword"
+              label="Contact"
+              className="mb-3"
+            >
+              <Form.Control type="text" placeholder="Password" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingPassword"
+              label="Password"
+              className="mb-3"
+            >
+              <Form.Control type="password" placeholder="Password" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="District"
+              className="mb-3 mt-4"
+            >
+              <Form.Control type="text" placeholder="name@example.com" />
+            </FloatingLabel>
+          </Col>
 
-    //       <Col className=" customer_register_form">
-    //         <FloatingLabel
-    //           controlId="floatingPassword"
-    //           label="Conform Password"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="password" placeholder="Password" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingInput"
-    //           label="Delivery Address"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="text" placeholder="name@example.com" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingInput"
-    //           label="Address"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="text" placeholder="name@example.com" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingInput"
-    //           label="city"
-    //           className="mb-3 mt-4"
-    //         >
-    //           <Form.Control type="text" placeholder="name@example.com" />
-    //         </FloatingLabel>
-    //         <FloatingLabel
-    //           controlId="floatingInput"
-    //           label="Pin code"
-    //           className="mb-3"
-    //         >
-    //           <Form.Control type="text" placeholder="name@example.com" />
-    //         </FloatingLabel>
-    //         <button onClick={registerHandled} className="btn btn-primary mt-2">
-    //           {" "}
-    //           Register
-    //         </button>
-    //       </Col>
-    //     </Row>
-    //   </Container>
-    // </div>
+          <Col className=" customer_register_form">
+            <FloatingLabel
+              controlId="floatingPassword"
+              label="Conform Password"
+              className="mb-3"
+            >
+              <Form.Control type="password" placeholder="Password" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Delivery Address"
+              className="mb-3"
+            >
+              <Form.Control type="text" placeholder="name@example.com" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Address"
+              className="mb-3"
+            >
+              <Form.Control type="text" placeholder="name@example.com" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="city"
+              className="mb-3 mt-4"
+            >
+              <Form.Control type="text" placeholder="name@example.com" />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Pin code"
+              className="mb-3"
+            >
+              <Form.Control type="text" placeholder="name@example.com" />
+            </FloatingLabel>
+            <button onClick={registerHandled} className="btn btn-primary mt-2">
+              {" "}
+              Register
+            </button>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 

@@ -30,6 +30,11 @@ import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 import LocalNav from './Pages/Navs/LocalNav';
+import Deliveryagentforgetpswd from './Pages/delivery agent/Deliveryagentforgetpswd';
+import ForgetPswdCustomer from './Pages/customer/ForgetPswdCustomer';
+
+// import LocalNav from './Pages/Navs/LocalNav';
+
 
 
 
@@ -56,7 +61,8 @@ function App() {
     <Route path='/customerregistration' element={ [<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
     <Route path='/customerlogin' element={[<Navigation/>,<CustomerLogin/>,<Footer/>]} />
     <Route path='/customerhome' element={[<Navigation/>,<CustomerHomePage/>,<Footer/>]} />
-
+    <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
+    
 {/* deliveryagent */}
 
 
@@ -64,6 +70,7 @@ function App() {
 
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
+    <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
 
 {/* shopowner */}
 

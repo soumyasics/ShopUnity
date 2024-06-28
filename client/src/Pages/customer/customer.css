@@ -34,3 +34,49 @@ color: aliceblue;
 .customer_register_img {
   padding-top: 30%;
 }
+
+
+/* Customer Forgetpassword */
+
+.customer-img{
+  margin-top: 50px;
+  height: 120vh;
+  width: 100%;
+}
+.customerforgetpswd-h1{
+  padding-top: 30px;
+  color: #89B7BA;
+}
+.customer-forgetpswd-box{
+  width:90%;
+  height: 80vh;
+  top: 191px;
+  left: 900px;
+  gap: 0px;
+  border-radius: 18px ;
+  opacity: 0px;
+  background-color: #CAFAE2;
+  margin-top: 180px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  padding-bottom: 100px;
+  margin-bottom: 100px;
+}
+.customer-forgetpswd-label{
+  color: #11B1C7;
+  font-size: 17px;
+  font-weight: bold;
+}
+#customer-forgetpswd-textbox{
+  height: 44px;
+  width: 83%;
+}
+.customer-forgetpswd-btn{
+  color: white;
+  background-color: #459197;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border: none;
+  border-radius: 10px;
+  height: 44px;
+  width: 83%;
+  margin-left: 40px;
+}
