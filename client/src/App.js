@@ -59,7 +59,7 @@ function App() {
 {/* deliveryagent */}
 
     <Route path='/deliveryagentregistration' element={[<Navigation/>,<DeliveryAgentRegistration/>,<Footer/>]} />
-    <Route path='/deliveryagentlogin' element={[<Navigation/>,<DeliveryagentLogin/>,<Footer/>]} />
+    <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
 
 {/* shopowner */}
