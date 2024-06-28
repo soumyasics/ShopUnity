@@ -59,7 +59,9 @@ function App() {
 
 {/* deliveryagent */}
 
+
     <Route path='/deliveryagentregistration' element={[<LocalNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
+
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
 
