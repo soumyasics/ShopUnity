@@ -290,29 +290,29 @@ const rejectshopowner = async (req, res) => {
   }
 };
 
-const InactivateShopOwner = async (req, res) => {
-  try {
-    const id = req.params.id;
-    if (!id) {
-      return res.status(400).json({ message: "Id is required" });
-    }
+// const InactivateShopOwner = async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     if (!id) {
+//       return res.status(400).json({ message: "Id is required" });
+//     }
 
-    const shopowner = await shopownerschema.findById(id);
-    if (!shopowner) {
-      return res.status(404).json({ message: "shopowner not found" });
-    }
+//     const shopowner = await shopownerschema.findById(id);
+//     if (!shopowner) {
+//       return res.status(404).json({ message: "shopowner not found" });
+//     }
 
-    shopowner.ActiveStatus = "inactive";
-    await shopowner.save();
-    return res
-      .status(200)
-      .json({ message: "inactivated shopowner", data: shopowner });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "server error on accept shopowner", error });
-  }
-};
+//     shopowner.ActiveStatus = "inactive";
+//     await shopowner.save();
+//     return res
+//       .status(200)
+//       .json({ message: "inactivated shopowner", data: shopowner });
+//   } catch (error) {
+//     return res
+//       .status(500)
+//       .json({ message: "server error on accept shopowner", error });
+//   }
+// };
 
 const deActivateShopOwnerById = (req, res) => {
   shopownerschema
@@ -365,7 +365,6 @@ module.exports = {
   Shopownerforgot,
   acceptShopOwner,
   rejectshopowner,
-  InactivateShopOwner,
   getAllPendingShopOwners,
   deActivateShopOwnerById,
   activateShopownerById,

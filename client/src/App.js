@@ -30,7 +30,7 @@ import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 import LocalNav from './Pages/Navs/LocalNav';
-<
+
 import WholesaleDealerRequestList from './Pages/wholesaledealer/WholesaleDealerRequestList';
 
 import Deliveryagentforgetpswd from './Pages/delivery agent/Deliveryagentforgetpswd';

@@ -1,31 +1,10 @@
-const mongoose = require("mongoose");
+// Import mongoose and define schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const deliveryagentschema = mongoose.Schema({
-  agentname: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  contact: {
-    type: Number,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  vehicletype: {
-    type: String,
-    required: true,
-  },
-  vehiclenumber: {
-    type: String,
-    required: true,
-  },
-  drivinglisence: {
+// Define DeliveryAgent schema
+const DeliveryAgentSchema = new Schema({
+  name: {
     type: String,
     required: true,
   },
@@ -42,14 +21,35 @@ const deliveryagentschema = mongoose.Schema({
     required: true,
   },
   pincode: {
-    type: Number,
-    required: true,
-  },
-  deliveryareas: {
     type: String,
     required: true,
   },
-  
+  vehicleType: {
+    type: String,
+    required: true,
+  },
+  vehicleNumber: {
+    type: String,
+    required: true,
+  },
+  drivingLicense: {
+    type: String,
+    required: true,
+  },
+  contactNumber: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("deliveryagents", deliveryagentschema);
+// Create and export DeliveryAgent model
+const DeliveryAgent = mongoose.model('DeliveryAgent', DeliveryAgentSchema);
+module.exports = DeliveryAgent;

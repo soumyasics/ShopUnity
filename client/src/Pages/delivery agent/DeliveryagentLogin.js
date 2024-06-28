@@ -6,6 +6,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import deliveryagentlogin from "../../images/deliveryagentlogin.png";
+import axiosInstance from "../../APIS/axiosinstatnce"; // Adjust this import based on your actual axios instance setup
 
 function DeliveryagentLogin() {
   const [data, setData] = useState({
@@ -27,14 +28,15 @@ function DeliveryagentLogin() {
       return "Email must be a valid Gmail address";
     }
 
-    if (fieldName === "Passwors") {
+    if (fieldName === "Password") {
       const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
       if (!passwordRegex.test(value)) {
-        return "Passowrd must contain at least one number, one special character, and one capital letter";
+        return "Password must contain at least one number, one special character, and one capital letter";
       }
     }
     return;
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -44,7 +46,7 @@ function DeliveryagentLogin() {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let formIsValid = true;
     let errors = {};
@@ -55,13 +57,42 @@ function DeliveryagentLogin() {
     if (errors.password) formIsValid = false;
 
     setErrors(errors);
+
+    if (formIsValid) {
+      try {
+        const response = await axiosInstance.post("/delivery_agent_login", {
+          email: data.email,
+          password: data.password,
+        });
+
+        // Handle successful login response
+        alert(response.data.message); // Example: Navigate to home page on success
+        Navigate("/home"); // Adjust path based on your routing setup
+      } catch (error) {
+        // Handle errors from API (e.g., display error messages)
+        console.error("Login error:", error.response.data);
+        // Example: Display error message to user
+        if (error.response && error.response.data) {
+          setErrors({
+            email: error.response.data.message,
+            password: "", // Clear password error on generic error
+          });
+        } else {
+          setErrors({
+            email: "Login failed. Please try again.",
+            password: "",
+          });
+        }
+      }
+    }
   };
+
   return (
     <div>
       <div>
         <Row className="container">
           <Col>
-            <img src={deliveryagentlogin} className="delivery-agent-img"></img>
+            <img src={deliveryagentlogin} className="delivery-agent-img" alt="Delivery Agent Login"></img>
           </Col>
           <Col>
             <div className="delivery-agent-box">
@@ -73,13 +104,11 @@ function DeliveryagentLogin() {
                   <div className="col-2"></div>
                   <div className="col-8">
                     <div>
-                      <label className="delivery-agent-login-email mt-3 ">
-                        Email
-                      </label>
+                      <label className="delivery-agent-login-email mt-3">Email</label>
                       <br></br>
                       <input
-                        className="form-control delivery-agent-login-textbox mt-2 "
-                        type="Email"
+                        className="form-control delivery-agent-login-textbox mt-2"
+                        type="email"
                         placeholder="Email"
                         name="email"
                         value={data.email}
@@ -90,14 +119,12 @@ function DeliveryagentLogin() {
                       )}
                     </div>
                     <div>
-                      <label className="delivery-agent-login-email mt-3 ">
-                        Password
-                      </label>
+                      <label className="delivery-agent-login-email mt-3">Password</label>
                       <br></br>
                       <input
-                        className="form-control delivery-agent-login-textbox mt-2 "
-                        type="Password"
-                        placeholder="Passowrd"
+                        className="form-control delivery-agent-login-textbox mt-2"
+                        type="password"
+                        placeholder="Password"
                         name="password"
                         value={data.password}
                         onChange={handleInputChange}
@@ -112,10 +139,7 @@ function DeliveryagentLogin() {
                       </Link>
                     </div>
                     <div>
-                      <button
-                        type="submit"
-                        className="delivery-agent-login-btn mt-4"
-                      >
+                      <button type="submit" className="delivery-agent-login-btn mt-4">
                         Login
                       </button>
                     </div>
@@ -141,3 +165,5 @@ function DeliveryagentLogin() {
 }
 
 export default DeliveryagentLogin;
+
+  
