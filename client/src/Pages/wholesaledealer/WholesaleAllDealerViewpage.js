@@ -25,8 +25,8 @@ function WholesaleAllDealerViewpage() {
   
   return (
     <div>
-      <div className='mt-5 pt-5'>
-        <Link className='wholesale-alldealer-viewpage-icon'><FaArrowLeft className='mt-5 ms-5 '/></Link>
+      <div className=''>
+        <Link to="/admin_dashboard" className='wholesale-alldealer-viewpage-icon'><FaArrowLeft className='mt-5 ms-5 '/></Link>
       </div>
           <div className="">
       </div>
