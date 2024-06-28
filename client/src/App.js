@@ -30,12 +30,13 @@ import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 import LocalNav from './Pages/Navs/LocalNav';
+import WholesaleDealerRequestList from './Pages/wholesaledealer/WholesaleDealerRequestList';
 
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url="http://localhost:4028/"
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url="http://localhost:4028/"
   
   return (
     <BrowserRouter basename="/shopunity">
@@ -48,8 +49,9 @@ function App() {
     <Route path='/wholesaledealerlogin' element={[<MainNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
     <Route path='/wholesaledealerhome' element={[<Navigation/>,<WholesaleDealerHomepage/>,<Footer/>]} />
     <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
-    <Route path='/wholesalealldealerviewpage' element={[<MainNav/>,<WholesaleAllDealerViewpage/>]} />
-    
+    <Route path='/wholesalealldealerviewpage' element={[<WholesaleAllDealerViewpage/>]} />
+    <Route path='/wholesaledealerrequests' element={[<WholesaleDealerRequestList url={url} />]} />
+
 
 {/* Customer */} 
 

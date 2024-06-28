@@ -15,7 +15,13 @@ Route.get('/get_a_wholesaledealer/:wholesaledealerid',WholesaleController.getAWh
 Route.post('/edit_a_wholesaledealer/:wholesaledealerid',WholesaleController.EditAWholesaledealer)
 Route.post('/delete_a_wholesaledealer/:wholesaledealerid',WholesaleController.DeleteAWholesaleDealer)
 Route.post('/wholesaledealer_forgot',WholesaleController.wholesaleforgot)
+Route.post('/wholesaledealer_acceptrequest/:id',WholesaleController.acceptwholesaledealer)
+Route.post('/wholesaledealer_rejectrequest/:id',WholesaleController.rejecrWholesaledealer)
 
+Route.post("/activatewholesale/:id",WholesaleController.activatewholesaleById)
+Route.post("/inactivatewholesale/:id",WholesaleController.deActivatewholesaleById)
+
+Route.get('/get_all_accepted_wholesaledealer',WholesaleController.getAllAcceptedWholesaleDealer)
 
 // customer
 Route.post("/customer_register",CustomerController.customerRegister)
