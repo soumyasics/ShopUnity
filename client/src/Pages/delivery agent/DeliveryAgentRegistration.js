@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,10 +9,11 @@ import { useNavigate } from "react-router-dom";
 import img from "../../images/image 72.png";
 
 function DeliveryAgentRegistration() {
-  const navigate = useNavigate();
-  const handleRegister = () => {
-    navigate("/deliveryagentlogin");
-  };
+
+  const[data,setData]=useState({
+    
+  })
+  
   return (
     <div className="AgentRegistration">
       <div className="AgentRegistration-contain">
@@ -171,6 +172,12 @@ function DeliveryAgentRegistration() {
         </div>
       </div>
     </div>
+
+    
+
+  </div>
+
+
   );
 }
 
