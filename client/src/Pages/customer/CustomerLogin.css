@@ -96,3 +96,33 @@
     margin-left: 60%;
 
 }
+
+.CustomerLogin-inputcontain-div-button {
+
+    display: flex;
+    width: 388px;
+    height: 53px;
+    padding: 4px 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    background: #459197;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 66px;
+    margin-left: 136px;
+
+}
+
+.CustomerLogin-inputcontain-div-p-2 {
+
+    color: #459197;
+    font-family: "Mukta Mahee";
+    font-size: 18.89px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+    margin-top: 3px;
+
+}
