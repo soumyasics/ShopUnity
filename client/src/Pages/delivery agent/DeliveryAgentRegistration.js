@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import "./deliveryagent.css";
+import './DeliveryAgentRegistration.css';
 import { useNavigate } from "react-router-dom";
 import img from "../../images/image 72.png";
 
@@ -172,11 +172,6 @@ function DeliveryAgentRegistration() {
         </div>
       </div>
     </div>
-
-    
-
-  </div>
-
 
   );
 }
