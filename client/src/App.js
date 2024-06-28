@@ -29,6 +29,7 @@ import MainNav from './Pages/Navs/MainNav';
 import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
+import LocalNav from './Pages/Navs/LocalNav';
 
 
 
