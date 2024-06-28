@@ -55,13 +55,15 @@ function App() {
 
 {/* Customer */} 
 
-    <Route path='/customerregistration' element={[<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
+    <Route path='/customerregistration' element={ [<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
     <Route path='/customerlogin' element={[<Navigation/>,<CustomerLogin/>,<Footer/>]} />
     <Route path='/customerhome' element={[<Navigation/>,<CustomerHomePage/>,<Footer/>]} />
 
 {/* deliveryagent */}
 
+
     <Route path='/deliveryagentregistration' element={[<LocalNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
+
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
 
