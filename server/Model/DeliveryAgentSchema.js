@@ -1,5 +1,5 @@
 // Import mongoose and define schema
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define DeliveryAgent schema
@@ -48,8 +48,15 @@ const DeliveryAgentSchema = new Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+  },
+  ActiveStatus: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 // Create and export DeliveryAgent model
-const DeliveryAgent = mongoose.model('DeliveryAgent', DeliveryAgentSchema);
+const DeliveryAgent = mongoose.model("DeliveryAgent", DeliveryAgentSchema);
 module.exports = DeliveryAgent;

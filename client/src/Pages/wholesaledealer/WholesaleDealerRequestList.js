@@ -94,7 +94,7 @@ function WholesaleDealerRequestList({ url }) {
       <div>
         <div className="m-4">
           <div className="mt-2">
-            <Link to="/admin_dashboard"  className="text-dark w-100" >
+            <Link to="/admin_dashboard" className="text-dark w-100">
               <FaArrowLeftLong />
             </Link>
           </div>

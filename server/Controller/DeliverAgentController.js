@@ -1,8 +1,6 @@
 const deliveryagentschema = require("../Model/DeliveryAgentSchema");
 const jwt = require("jsonwebtoken");
 
-
-
 const DeliveryAgentRegister = (req, res) => {
   const Agent = new deliveryagentschema({
     name: req.body.name,
@@ -11,11 +9,11 @@ const DeliveryAgentRegister = (req, res) => {
     password: req.body.password,
     vehicleType: req.body.vehicleType,
     vehicleNumber: req.body.vehicleNumber,
-    drivingLicense:req.body.drivingLicense,
-    address:req.body.address,
-    district:req.body.district,
-    city:req.body.city,
-    pincode:req.body.pincode,
+    drivingLicense: req.body.drivingLicense,
+    address: req.body.address,
+    district: req.body.district,
+    city: req.body.city,
+    pincode: req.body.pincode,
   });
   Agent.save()
     .then((response) => {
@@ -33,7 +31,6 @@ const DeliveryAgentRegister = (req, res) => {
     });
 };
 const DeliveryagentLogin = async (req, res) => {
-
   try {
     const { email, password } = req.body;
 
@@ -50,10 +47,12 @@ const DeliveryagentLogin = async (req, res) => {
             id: deliveryAgent._id,
           },
           "secret_key", // Replace with your secret key
-          { expiresIn: '1d' } // Token expires in 1 day
+          { expiresIn: "1d" } // Token expires in 1 day
         );
 
-        return res.status(200).json({ message: "Login successful", token, id: deliveryAgent._id });
+        return res
+          .status(200)
+          .json({ message: "Login successful", token, id: deliveryAgent._id });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }
@@ -61,16 +60,20 @@ const DeliveryagentLogin = async (req, res) => {
       return res.status(404).json({ message: "Delivery agent does not exist" });
     }
   } catch (error) {
-    console.log(error) 
+    console.log(error);
 
-    return res.status(500).json({ error: error.message, message: "An error occurred during login" });
+    return res
+      .status(500)
+      .json({
+        error: error.message,
+        message: "An error occurred during login",
+      });
   }
 };
 
-
 const getAllDeliveryAgents = (req, res) => {
   deliveryagentschema
-    .find({})
+    .find({ status: "accepted" })
     .then((result) => {
       res.json({
         status: 200,
@@ -135,17 +138,41 @@ const EditADeliveryAgent = (req, res) => {
 
 const DeleteDeliveryAgent = (req, res) => {
   const deliveryagentid = req.params.deliveryagentid;
-  deliveryagentschema.findByIdAndDelete(deliveryagentid).then((result) => {
-    res.json({
-      status: 200,
-      message: "deleted sucesfully",
-    });
-  }).catch((err)=>{
-    res.json({
-      status:500,
-      message:"not deleted"
+  deliveryagentschema
+    .findByIdAndDelete(deliveryagentid)
+    .then((result) => {
+      res.json({
+        status: 200,
+        message: "deleted sucesfully",
+      });
     })
-  })
+    .catch((err) => {
+      res.json({
+        status: 500,
+        message: "not deleted",
+      });
+    });
+};
+
+const deliveryagentforget = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const agent = await deliveryagentschema.findOne({ email: email });
+
+    if (!agent) {
+      return res.status(404).json({ message: "Email not found" });
+    }
+
+    // Update customer password
+    agent.password = password;
+    await agent.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 module.exports = {
@@ -153,5 +180,7 @@ module.exports = {
   DeliveryagentLogin,
   getAllDeliveryAgents,
   getADeliveryAgent,
-  EditADeliveryAgent,DeleteDeliveryAgent
+  EditADeliveryAgent,
+  DeleteDeliveryAgent,
+  deliveryagentforget,
 };
