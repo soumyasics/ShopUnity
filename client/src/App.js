@@ -30,17 +30,22 @@ import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 import LocalNav from './Pages/Navs/LocalNav';
+
+import WholesaleDealerRequestList from './Pages/wholesaledealer/WholesaleDealerRequestList';
+
 import Deliveryagentforgetpswd from './Pages/delivery agent/Deliveryagentforgetpswd';
 import ForgetPswdCustomer from './Pages/customer/ForgetPswdCustomer';
+import AllDeliveryAgentViewPage from './Pages/delivery agent/AllDeliveryAgentViewPage';
 
 // import LocalNav from './Pages/Navs/LocalNav';
 
 
 
 
+
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url="http://localhost:4028/"
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url="http://localhost:4028/"
   
   return (
     <BrowserRouter basename="/shopunity">
@@ -53,13 +58,14 @@ function App() {
     <Route path='/wholesaledealerlogin' element={[<MainNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
     <Route path='/wholesaledealerhome' element={[<Navigation/>,<WholesaleDealerHomepage/>,<Footer/>]} />
     <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
-    <Route path='/wholesalealldealerviewpage' element={[<MainNav/>,<WholesaleAllDealerViewpage/>]} />
-    
+    <Route path='/wholesalealldealerviewpage' element={[<WholesaleAllDealerViewpage/>]} />
+    <Route path='/wholesaledealerrequests' element={[<WholesaleDealerRequestList url={url} />]} />
+
 
 {/* Customer */} 
 
     <Route path='/customerregistration' element={ [<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
-    <Route path='/customerlogin' element={[<Navigation/>,<CustomerLogin/>,<Footer/>]} />
+    <Route path='/customerlogin' element={[<MainNav/>,<CustomerLogin/>,<Footer/>]} />
     <Route path='/customerhome' element={[<CustomerHomePage/>]} />
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
     
@@ -69,6 +75,7 @@ function App() {
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
+    <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage/>]}/>
 
 {/* shopowner */}
 

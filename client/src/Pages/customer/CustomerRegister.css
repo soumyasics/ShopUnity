@@ -1,0 +1,148 @@
+.CustomerRegistration {
+
+    padding-top: 169px;
+    padding-left: 137px;
+    padding-bottom: 156px;
+
+}
+
+.CustomerRegistration-contain {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.CustomerRegistration-input-div {
+
+    background-color: #CAFAE2;
+    width: 695px;
+    height: max-content;
+    border-radius: 23px;
+    background: #CAFAE2;
+    box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.CustomerRegistration-input-div-h1 {
+
+    text-align: center;
+    color: #41455B;
+    font-family: "Mukta Mahee";
+    font-size: 40.651px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+
+}
+
+.CustomerRegistration-input-div-div {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.CustomerRegistration-input-div-leftdiv {
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+
+}
+
+.CustomerRegistration-input-div-rightdiv {
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+
+
+}
+
+.CustomerRegistration-input-div-leftdiv-h1 {
+
+    color: #11B1C7;
+    font-family: "Mukta Mahee";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+    margin-bottom: 0px;
+    margin-top: 27.5px;
+
+}
+
+.CustomerRegistration-input-div-leftdiv-inp {
+
+    display: flex;
+    width: 314.005px;
+    height: 44.511px;
+    padding: 3.237px 31.562px;
+    align-items: center;
+    gap: 8.093px;
+    border-radius: 4.856px;
+    border: 1px solid #84B2B4;
+    background: #FFF;
+    margin-bottom: 27.5px;
+
+}
+
+.CustomerRegistration-input-div-leftdiv-inp-radio {
+
+    margin-top: 0px;    
+    margin-left: 15px;
+
+}
+
+.CustomerRegistration-input-radio {
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 27.5px;
+    width: 314.005px;
+    height: 44.511px;
+
+}
+
+.CustomerRegistration-input-div-button {
+
+    display: flex;
+    height: 43px;
+    width: 203px;
+    padding: 3.237px 17.804px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 40px;
+    gap: 8.093px;
+    border-radius: 4.856px;
+    background: #459197;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.CustomerRegistration-input-div-p {
+
+    color: #459197;
+    font-family: "Mukta Mahee";
+    font-size: 15.288px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+
+}
+
+.CustomerRegistration-inputcontain-div-pwordbutton {
+
+    position: absolute;
+    background-color: #00000000;
+    margin-top: -4.3%;
+    margin-left: 17.5%;
+    border: none;
+
+} 

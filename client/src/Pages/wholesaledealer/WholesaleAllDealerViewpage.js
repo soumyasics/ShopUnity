@@ -8,7 +8,7 @@ function WholesaleAllDealerViewpage() {
   const[data,setData]=useState([])
 
   useEffect(()=>{
-    axiosInstance.get("/get_all_wholesaledealer")
+    axiosInstance.get("/get_all_accepted_wholesaledealer")
     .then((res)=>{
       if(res.data.status === 200){
         console.log(res);
@@ -25,20 +25,20 @@ function WholesaleAllDealerViewpage() {
   
   return (
     <div>
-      <div className='mt-5 pt-5'>
-        <Link className='wholesale-alldealer-viewpage-icon'><FaArrowLeft className='mt-5 ms-5 '/></Link>
+      <div className=''>
+        <Link to="/admin_dashboard" className='wholesale-alldealer-viewpage-icon'><FaArrowLeft className='mt-5 ms-5 '/></Link>
       </div>
           <div className="">
       </div>
       <div className="">
         <div className="">
           <div className="wholesale-alldealer-viewpage-div1 container">
-            {data.length === 0 && (
+            {data?.length === 0 && (
               <div className='pt-3'>
                 <h1 className="text-center "> No WholeSaleDealer Found</h1>
              </div>
              )} 
-             {data.length > 0 && ( 
+             {data?.length > 0 && ( 
               <div>
                 <h3 className="text-center pt-4 wholesale-alldealer-viewpage-h3 ">WholeSale Dealer List</h3>
                 <div className="row rounded-pill m-5 p-2 container">

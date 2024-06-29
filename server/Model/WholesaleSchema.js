@@ -42,9 +42,20 @@ const wholesaledealerschema = mongoose.Schema({
     type: Object,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
+  },status: {
+    type: String,
+    default: "pending",
+  },
+  ActiveStatus: {
+    type: Boolean,
+    default: true,
   },
 });
 

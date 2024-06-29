@@ -1,20 +1,21 @@
 const deliveryagentschema = require("../Model/DeliveryAgentSchema");
+const jwt = require("jsonwebtoken");
+
 
 
 const DeliveryAgentRegister = (req, res) => {
   const Agent = new deliveryagentschema({
-    agentname: req.body.agentname,
+    name: req.body.name,
     email: req.body.email,
-    contact: req.body.contact,
+    contactNumber: req.body.contactNumber,
     password: req.body.password,
-    vehicletype: req.body.vehicletype,
-    vehiclenumber: req.body.vehiclenumber,
-    drivinglisence:req.body.drivinglisence,
+    vehicleType: req.body.vehicleType,
+    vehicleNumber: req.body.vehicleNumber,
+    drivingLicense:req.body.drivingLicense,
     address:req.body.address,
     district:req.body.district,
     city:req.body.city,
     pincode:req.body.pincode,
-    deliveryareas: req.body.deliveryareas,
   });
   Agent.save()
     .then((response) => {
@@ -32,38 +33,40 @@ const DeliveryAgentRegister = (req, res) => {
     });
 };
 const DeliveryagentLogin = async (req, res) => {
+
   try {
     const { email, password } = req.body;
-    console.log(req.body);
-    const deliveryagent = await deliveryagentschema.findOne({
-      email: email,
-    });
-    console.log(deliveryagent.password);
-    if (deliveryagent) {
-      if (deliveryagent.password == password) {
+
+    // Find the delivery agent by email
+    const deliveryAgent = await deliveryagentschema.findOne({ email });
+
+    if (deliveryAgent) {
+      const isPasswordCorrect = password == deliveryAgent.password;
+      if (isPasswordCorrect) {
+        // Generate JWT token
         const token = jwt.sign(
           {
-            remail: deliveryagent.email,
-            password: deliveryagent.password,
+            email: deliveryAgent.email,
+            id: deliveryAgent._id,
           },
-          "secret_key",
-          { expiresIn: 86400 }
+          "secret_key", // Replace with your secret key
+          { expiresIn: '1d' } // Token expires in 1 day
         );
-        return res
-          .status(200)
-          .json({ message: "Login successful", token, id: customer._id });
+
+        return res.status(200).json({ message: "Login successful", token, id: deliveryAgent._id });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }
     } else {
-      return res.status(404).json({ message: "delivery agent does not exist" });
+      return res.status(404).json({ message: "Delivery agent does not exist" });
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: error, message: "delivery agent does not exist" });
+    console.log(error) 
+
+    return res.status(500).json({ error: error.message, message: "An error occurred during login" });
   }
 };
+
 
 const getAllDeliveryAgents = (req, res) => {
   deliveryagentschema
