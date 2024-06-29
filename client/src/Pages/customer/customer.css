@@ -80,3 +80,55 @@ color: aliceblue;
   width: 83%;
   margin-left: 40px;
 }
+
+/* Customer HomePage */
+
+.customer-home-div1{
+  background-color: #ECECEC;
+  height: 15vh;
+  width: 100%;
+  margin-top: 140px;
+  border-radius: 22px 22px 0 0;
+}
+.customer-home-div2{
+  background-color: white;
+  height: 40px;
+  width: 100%;
+}
+.customer-home-nav-link{
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: -11px;
+  word-spacing: 15px;
+}
+.customer-home-icon{
+  margin-top: -4px;
+  font-size: 20px;
+  color: #515151;
+}
+.customer-home-about-icon{
+  color: #FF971C;
+  font-size: 20px;
+  margin-top: -4px;
+}
+.customer-home-cart-icon{
+  font-size: 28px;
+  color: #A9A9A9;
+}
+.customer-home-backgoround{
+  background-image: url("../../images/customerhome.png");
+  height: 80vh;
+  width: 116%;
+  margin-left: -95px;
+  border-radius: 50px;
+  margin-top: 18px;
+}
+.customer-home-customerpage2{
+  height: 90vh;
+  width: 100%;
+}
+.customer-home-customerpage1{
+  margin-top: 290px;
+  height: 40vh;
+  width: 100%;
+}
