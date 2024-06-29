@@ -59,7 +59,7 @@ function Sidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="sidebar-shop">
+                <Link to="/customerlistpage" className="sidebar-shop">
                   <FaPeopleGroup /> Customers
                 </Link>
               </li>
@@ -84,7 +84,7 @@ function Sidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="sidebar-shop">
+                <Link to="/alldeliveryagentviewpage" className="sidebar-shop">
                   <GrDeliver /> Delivery Agents
                 </Link>
               </li>

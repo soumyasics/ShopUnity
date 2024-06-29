@@ -3,11 +3,32 @@ import "./wholesale.css";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import { Card } from "react-bootstrap";
 
 function WholesaleAllDealerViewpage() {
   const [data, setData] = useState([]);
+  const [Ashopownerdata, setAshopownerdata] = useState({});
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = (deliveryagentid) => {
+    setShow(true);
+    axiosInstance
+      .get("/get_all_deliveryagents/" + deliveryagentid)
+      .then((res) => {
+        setAshopownerdata(res.data.data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+  
   useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
     axiosInstance
       .get("/get_all_accepted_wholesaledealer")
       .then((res) => {
@@ -21,7 +42,29 @@ function WholesaleAllDealerViewpage() {
       .catch((err) => {
         console.log("Error", err);
       });
-  }, []);
+  };
+
+  const toggleShopOwnerStatus = (id, currentStatus) => {
+    const endpoint = currentStatus ? "/inactivatewholesale/" : "/activatewholesale/";
+    axiosInstance
+      .post(endpoint + id)
+      .then((res) => {
+        if (res.status === 200) {
+          let msg = res?.data?.message || `Shopowner is now ${currentStatus ? "Inactive" : "Active"}`;
+          alert(msg);
+          getData();
+          setAshopownerdata(prevState => ({
+            ...prevState,
+            ActiveStatus: !currentStatus
+          }));
+        } else {
+          console.log("Error on status change");
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
 
   return (
     <div>
@@ -92,6 +135,92 @@ function WholesaleAllDealerViewpage() {
           </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+          <Modal.Header closeButton></Modal.Header>
+          <div>
+           
+            <div>
+              <table>
+                <div className="p-4">
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Shop Name</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopname}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Owner Name</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownername}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Address</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopowneraddress}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Contact Number</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownercontact}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Email ID</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopowneremail}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Shopowner City</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownercity}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Shopowner District</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownerdistrict}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Shopowner Pincode</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownerpincode}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr className="mt-3 text-center">
+                    <td colSpan="2">
+                      <button
+                        onClick={() => toggleShopOwnerStatus(Ashopownerdata._id, Ashopownerdata.ActiveStatus)}
+                        className="btn btn-success rounded-pill"
+                      >
+                        {Ashopownerdata.ActiveStatus ? "DeActivate" : "Activate"}
+                      </button>
+                    </td>
+                  </tr>
+                </div>
+              </table>
+            </div>
+          </div>
+        </Modal>
     </div>
   );
 }

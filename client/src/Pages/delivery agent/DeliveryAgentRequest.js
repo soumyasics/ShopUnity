@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Table from "react-bootstrap/Table";
-import axiosInstance from "../../APIS/axiosinstatnce";
-import Sidebar from "../Admin/Sidebar";
-import "bootstrap/dist/css/bootstrap.min.css";
-// import "./shopownerpendinglist.css";
-import { Card, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaArrowLeftLong } from "react-icons/fa6";
-import Button from "react-bootstrap/Button";
+import { Card, Row, Col } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import { Link, useNavigate } from "react-router-dom";
-
-function WholesaleDealerRequestList({ url }) {
-  const [data, setData] = useState([]);
-  const [Ashopownerdata, setAshopownerdata] = useState({});
+import axiosInstance from '../../APIS/axiosinstatnce';
+function DeliveryAgentRequest({url}) {
+    const[data,setData]=useState([])
+    const [Ashopownerdata, setAshopownerdata] = useState({});
 
   const [show, setShow] = useState(false);
   const [isDisabled, setisDisabled] = useState(false);
@@ -37,7 +31,7 @@ function WholesaleDealerRequestList({ url }) {
   const navigate = useNavigate();
   function getData() {
     axiosInstance
-      .get("/get_all_wholesaledealer")
+      .get("/get_all_deliveryagents")
       .then((res) => {
         console.log(res);
         let allWholesaledealer = res?.data?.data || [];
@@ -53,11 +47,11 @@ function WholesaleDealerRequestList({ url }) {
 
   function handleReject(id) {
     axiosInstance
-      .post("/wholesaledealer_rejectrequest/" + id)
+      .post("//" + id)
       .then((res) => {
         if (res.status === 200) {
           let msg =
-            res?.data?.message || "wholesale Registration Request Rejected";
+            res?.data?.message || "DeliveryAgent Registration Request Rejected";
           setisDisabled(true);
           alert(msg);
           getData();
@@ -72,11 +66,11 @@ function WholesaleDealerRequestList({ url }) {
 
   function handleAccept(id) {
     axiosInstance
-      .post("/wholesaledealer_acceptrequest/" + id)
+      .post("/" + id)
       .then((res) => {
         if (res.status === 200) {
           let msg =
-            res?.data?.message || "wholesale Registrationeque Rst Accepted";
+            res?.data?.message || "DeliveryAgent Registrationeque Rst Accepted";
           setisDisabled(true);
           alert(msg);
           getData();
@@ -88,11 +82,9 @@ function WholesaleDealerRequestList({ url }) {
         console.log("err", err);
       });
   }
-
   return (
     <div>
-      <div>
-        <div className="m-4">
+      <div className="m-4">
           <div className="mt-2">
             <Link to="/admin_dashboard" className="text-dark w-100">
               <FaArrowLeftLong />
@@ -102,10 +94,11 @@ function WholesaleDealerRequestList({ url }) {
             <div className="shopownerpendingrequestdiv">
               <div style={{ maxWidth: "100%" }} className="p-4">
                 {data?.length === 0 && (
-                  <h1 className="mt-5"> No wholesale Found</h1>
+                  <h1 className="mt-5"> No DeliveryAgent Found</h1>
                 )}
                 {data?.length > 0 && (
                   <Row>
+                    <h1>Delivery Agent Request</h1>
                     {data.map((item, index) => (
                       <Col key={index} sm={12} md={6} lg={4} className="mb-4">
                         <Card style={{ width: "25rem", borderRadius: "25px" }}>
@@ -114,31 +107,19 @@ function WholesaleDealerRequestList({ url }) {
                               <tr>
                                 <td>
                                   <Card.Subtitle className="mb-2 text-muted">
-                                    Store Name
+                                   Name
                                   </Card.Subtitle>
                                 </td>
                                 <td className="ps-3">
                                   <Card.Subtitle className="mb-2 text-muted">
-                                    {item.storeName}
+                                    {item.name}
                                   </Card.Subtitle>
                                 </td>
                               </tr>
                               <tr>
                                 <td>
                                   <Card.Subtitle className="mb-2 text-muted">
-                                    Delaer name
-                                  </Card.Subtitle>
-                                </td>
-                                <td className="ps-3">
-                                  <Card.Subtitle className="mb-2 text-muted">
-                                    {item.dealername}
-                                  </Card.Subtitle>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <Card.Subtitle className="mb-2 text-muted">
-                                    address
+                                   Address
                                   </Card.Subtitle>
                                 </td>
                                 <td className="ps-3">
@@ -150,12 +131,24 @@ function WholesaleDealerRequestList({ url }) {
                               <tr>
                                 <td>
                                   <Card.Subtitle className="mb-2 text-muted">
+                                    City
+                                  </Card.Subtitle>
+                                </td>
+                                <td className="ps-3">
+                                  <Card.Subtitle className="mb-2 text-muted">
+                                    {item.city}
+                                  </Card.Subtitle>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <Card.Subtitle className="mb-2 text-muted">
                                     contact number
                                   </Card.Subtitle>
                                 </td>
                                 <td className="ps-3">
                                   <Card.Subtitle className="mb-2 text-muted">
-                                    {item.contact}
+                                    {item.contactNumber}
                                   </Card.Subtitle>
                                 </td>
                               </tr>
@@ -207,7 +200,7 @@ function WholesaleDealerRequestList({ url }) {
                   className="parentimage"
                   alt="img"
                   style={{ width: "100%", height: "380px" }}
-                  src={`${url}${Ashopownerdata.dealerlisence}`}
+                  src={`${url}${Ashopownerdata.shoplicence}`}
                 ></img>
                 <div>
                   <table>
@@ -215,36 +208,36 @@ function WholesaleDealerRequestList({ url }) {
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            Store name
+                            shop name
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.storeName}
+                            {Ashopownerdata.shopname}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            Dealer name
+                            owner name
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.dealername}
+                            {Ashopownerdata.shopownername}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            Address
+                            address
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.address}
+                            {Ashopownerdata.shopowneraddress}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -256,7 +249,7 @@ function WholesaleDealerRequestList({ url }) {
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.contact}
+                            {Ashopownerdata.shopownercontact}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -268,19 +261,19 @@ function WholesaleDealerRequestList({ url }) {
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.email}
+                            {Ashopownerdata.shopowneremail}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                             City
+                            Shopowner City
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.city}
+                            {Ashopownerdata.shopownercity}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -288,24 +281,24 @@ function WholesaleDealerRequestList({ url }) {
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                             District
+                            Shopowner District
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.districts}
+                            {Ashopownerdata.shopownerdistrict}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                             Pincode
+                            Shopowner Pincode
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.pincode}
+                            {Ashopownerdata.shopownerpincode}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -337,9 +330,8 @@ function WholesaleDealerRequestList({ url }) {
             </div>
           </Modal>
         </>
-      </div>
     </div>
-  );
+  )
 }
 
-export default WholesaleDealerRequestList;
+export default DeliveryAgentRequest

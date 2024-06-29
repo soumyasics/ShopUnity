@@ -14,10 +14,10 @@ function AllDeliveryAgentViewPage({url}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-  const handleShow = (shopownerid) => {
+  const handleShow = (deliveryagentid) => {
     setShow(true);
     axiosInstance
-      .get("/get_a_shopowner/" + shopownerid)
+      .get("/get_all_deliveryagents/" + deliveryagentid)
       .then((res) => {
         setAshopownerdata(res.data.data);
       })
@@ -101,9 +101,6 @@ function AllDeliveryAgentViewPage({url}) {
                 <div className="col-2">
                   <b>Contact</b>
                 </div>
-                <div className="col-2">
-                  <b> </b>
-                </div>
               </div>
               {data.map((deliveryagent, index) => (
                 <div className="row bg-light rounded-pill m-5 p-2">
@@ -134,12 +131,7 @@ function AllDeliveryAgentViewPage({url}) {
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
           <Modal.Header closeButton></Modal.Header>
           <div>
-            <img
-              className="parentimage"
-              alt="img"
-              style={{ width: "100%", height: "380px" }}
-              src={`${url}${Ashopownerdata.shoplicence}`}
-            />
+           
             <div>
               <table>
                 <div className="p-4">
