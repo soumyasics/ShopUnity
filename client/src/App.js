@@ -36,6 +36,8 @@ import WholesaleDealerRequestList from './Pages/wholesaledealer/WholesaleDealerR
 import Deliveryagentforgetpswd from './Pages/delivery agent/Deliveryagentforgetpswd';
 import ForgetPswdCustomer from './Pages/customer/ForgetPswdCustomer';
 import AllDeliveryAgentViewPage from './Pages/delivery agent/AllDeliveryAgentViewPage';
+import CustomerlistPage from './Pages/customer/CustomerlistPage';
+import DeliveryAgentRequest from './Pages/delivery agent/DeliveryAgentRequest';
 
 // import LocalNav from './Pages/Navs/LocalNav';
 
@@ -68,6 +70,7 @@ function App() {
     <Route path='/customerlogin' element={[<MainNav/>,<CustomerLogin/>,<Footer/>]} />
     <Route path='/customerhome' element={[<CustomerHomePage/>]} />
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
+    <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>]} />
     
 {/* deliveryagent */}
 
@@ -76,6 +79,7 @@ function App() {
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
     <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage/>]}/>
+    <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>]}/>
 
 {/* shopowner */}
 

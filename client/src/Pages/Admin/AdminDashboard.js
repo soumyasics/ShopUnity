@@ -15,17 +15,31 @@ function AdminHome() {
   useEffect(() => {
     axiosInstance.get("/get_all_customers").then((responce) => {
       console.log(responce, "ll");
-      setCustomers(responce.data.data);
+      if(responce.data.data!=null)
+        setCustomers(responce.data.data);
+      else
+        setCustomers([])
     });
     axiosInstance.get("/get_all_shopowners").then((responce) => {
-      setShopOwners(responce.data.data);
+      console.log(responce);
+      if(responce.data.data!=null)
+        setShopOwners(responce.data.data);
+      else
+        setShopOwners([])
     });
     axiosInstance.get("/get_all_wholesaledealer").then((responce) => {
       console.log(responce.data.data);
-      setWholesale(responce.data.data);
+      if(responce.data.data!=null)
+        setWholesale(responce.data.data);
+      else
+      setWholesale([])
     });
     axiosInstance.get("/get_all_deliveryagents").then((responce) => {
-      setDeliveryagent(responce.data.data);
+      console.log(responce);
+      if(responce.data.data !=null)
+        setDeliveryagent(responce.data.data);
+      else
+        setDeliveryagent([])
     });
   }, []);
 
@@ -55,7 +69,7 @@ function AdminHome() {
                   <br></br>
                   <br></br>
                   <span>
-                    {customers.length}
+                    {(customers.length) > 0 ? customers.length:0}
                     <p className="admin-dash-para">Customers</p>
                   </span>
                 </div>
@@ -73,7 +87,7 @@ function AdminHome() {
                   <br></br>
                   <br></br>
                   <span>
-                    {Wholesale.length}
+                    {(Wholesale.length) > 0 ? Wholesale.length :0}
                     <p className="admin-dash-para">Dealers</p>
                   </span>
                 </div>
@@ -90,7 +104,7 @@ function AdminHome() {
                   <br></br>
                   <br></br>
                   <span>
-                    {shopOwners.length}
+                    {(shopOwners.length > 0 ? shopOwners.length : 0)}
                     <p className="admin-dash-para">Shop Owners</p>
                   </span>
                 </div>
@@ -107,7 +121,7 @@ function AdminHome() {
                   <br></br>
                   <br></br>
                   <span>
-                    {Deliveryagent.length}
+                   {( Deliveryagent.length > 0 ? Deliveryagent : 0)}
                     <p className="admin-dash-para">Delivery Agent</p>
                   </span>
                 </div>
