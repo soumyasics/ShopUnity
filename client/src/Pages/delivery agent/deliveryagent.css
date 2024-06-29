@@ -128,3 +128,29 @@
   width: 83%;
   margin-left: 40px;
 }
+
+/* All DeliveryAgent view Page */
+
+.alldeliveryagent-viewpage-icon{
+  font-size: 30px;
+  color: black;
+}
+.alldeliveryagent-viewpage-div1{
+  background-color: #CCEDF4;
+  width: 1365px;
+  height: 90vh;
+  top: 10px;
+  left: -40px;
+  gap: 0px;
+  border-radius: 43px ;
+  opacity: 0px;
+  margin-bottom: 50px;
+}
+.alldeliveryagent-viewpage-h3{
+  color: #74767B;
+  text-decoration: underline;
+}
+#alldeliveryagent-viewpage-viewbtn{
+  border: none;
+  background-color: #DFDFDF;
+}
