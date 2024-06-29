@@ -69,6 +69,7 @@ function WholesaleDealerRegistration() {
   };
 
   const handleFileChange = (e) => {
+    console.log(data,"mmm");
     const { name, files } = e.target;
     setData({ ...data, [name]: files[0] });
   };

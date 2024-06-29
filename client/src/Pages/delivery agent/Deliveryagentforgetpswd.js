@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import deliveryagentforgetpswd from '../../images/deliveryagentforgetpswd.png'
 import './deliveryagent.css'
 import { useNavigate } from 'react-router-dom'
+import axiosInstance from '../../APIS/axiosinstatnce'
 function Deliveryagentforgetpswd() {
 
   const[data,setData]=useState({
@@ -26,7 +27,8 @@ function Deliveryagentforgetpswd() {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleSubmit = (e) =>{
+  const handleSubmit =async (e) =>{
+    console.log(data);
     e.preventDefault();
     let errors={};
     let formValid=true;
@@ -54,9 +56,26 @@ function Deliveryagentforgetpswd() {
     }
 
   setErrors(errors);
+  if (formValid) {
+    try {
+      const response =await axiosInstance.post('/delivery_agent_forgot', {
+        email: data.email,
+        password: data.password,
+      });
 
+      if (response.status === 200) {
+        alert("Password updated successfully");
+        Navigate("/deliveryagentlogin")
+      }
+    } catch (error) {
+      if (error.response || error.response.data || error.response.data.message) {
+        alert(error.response.data.message);
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
+  }}
   
-}
 
   return (
     <div className='container'>

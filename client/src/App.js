@@ -64,14 +64,14 @@ function App() {
 
 {/* Customer */} 
 
-    <Route path='/customerregistration' element={ [<Navigation/>,<CustomerRegistration/>,<Footer/>]} />
+    <Route path='/customerregistration' element={ [<MainNav/>,<CustomerRegistration/>,<Footer/>]} />
     <Route path='/customerlogin' element={[<MainNav/>,<CustomerLogin/>,<Footer/>]} />
     <Route path='/customerhome' element={[<CustomerHomePage/>]} />
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
     
 {/* deliveryagent */}
 
-    <Route path='/deliveryagentregistration' element={[<LocalNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
+    <Route path='/deliveryagentregistration' element={[<MainNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<Navigation/>,<DeliveryagentHomepage/>,<Footer/>]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />

@@ -1,46 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import './wholesale.css';
-import axiosInstance from '../../APIS/axiosinstatnce';
+import React, { useEffect, useState } from "react";
+import "./wholesale.css";
+import axiosInstance from "../../APIS/axiosinstatnce";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function WholesaleAllDealerViewpage() {
-  const[data,setData]=useState([])
+  const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    axiosInstance.get("/get_all_accepted_wholesaledealer")
-    .then((res)=>{
-      if(res.data.status === 200){
-        console.log(res);
-        setData(res.data.data || [])
-      }
-      else{
-        setData([])
-      }
-    })
-    .catch((err)=>{
-      console.log("Error",err);
-    })
-  }, [])
-  
+  useEffect(() => {
+    axiosInstance
+      .get("/get_all_accepted_wholesaledealer")
+      .then((res) => {
+        if (res.data.status === 200) {
+          console.log(res);
+          setData(res.data.data || []);
+        } else {
+          setData([]);
+        }
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  }, []);
+
   return (
     <div>
-      <div className=''>
-        <Link to="/admin_dashboard" className='wholesale-alldealer-viewpage-icon'><FaArrowLeft className='mt-5 ms-5 '/></Link>
+      <div className="">
+        <Link
+          to="/admin_dashboard"
+          className="wholesale-alldealer-viewpage-icon"
+        >
+          <FaArrowLeft className="mt-5 ms-5 " />
+        </Link>
       </div>
-          <div className="">
-      </div>
+      <div className=""></div>
       <div className="">
         <div className="">
           <div className="wholesale-alldealer-viewpage-div1 container">
             {data?.length === 0 && (
-              <div className='pt-3'>
+              <div className="pt-3">
                 <h1 className="text-center "> No WholeSaleDealer Found</h1>
-             </div>
-             )} 
-             {data?.length > 0 && ( 
+              </div>
+            )}
+            {data?.length > 0 && (
               <div>
-                <h3 className="text-center pt-4 wholesale-alldealer-viewpage-h3 ">WholeSale Dealer List</h3>
+                <h3 className="text-center pt-4 wholesale-alldealer-viewpage-h3 ">
+                  WholeSale Dealer List
+                </h3>
                 <div className="row rounded-pill m-5 p-2 container">
                   <div className="col-1">
                     <b>Sl/No</b>
@@ -74,7 +80,7 @@ function WholesaleAllDealerViewpage() {
                       <button
                         className="rounded-pill px-3 border-none ms-5"
                         // onClick={() => handleShow()}
-                        id='wholesale-alldealer-viewpage-viewbtn'
+                        id="wholesale-alldealer-viewpage-viewbtn"
                       >
                         view
                       </button>
@@ -82,12 +88,12 @@ function WholesaleAllDealerViewpage() {
                   </div>
                 ))}
               </div>
-             )} 
+            )}
           </div>
         </div>
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default WholesaleAllDealerViewpage
+export default WholesaleAllDealerViewpage;

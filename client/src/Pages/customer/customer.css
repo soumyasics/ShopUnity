@@ -128,7 +128,58 @@ color: aliceblue;
   width: 100%;
 }
 .customer-home-customerpage1{
-  margin-top: 290px;
+  margin-top: 295px;
   height: 40vh;
   width: 100%;
+}
+.customer-home-delivered{
+  font-size: 27px;
+  text-transform: capitalize;
+  color: #5E5E5E;
+  font-weight: 600;
+}
+.customer-home-delivered1{
+  text-transform: capitalize;
+  color: #5E5E5E;
+  font-weight: 600;
+}
+.customer-home-h4{
+  color:#5E5E5E;
+  margin-left: -20px;
+}
+.customer-home-row-img{
+  height: 20vh;
+  width: 90%;
+}
+.customer-home-carouselitem1{
+  height: 60vh;
+  width: 60%;
+  border-radius: 50px;
+}
+.customer-home-carouselitem2{
+  height: 60vh;
+  width: 60%;
+  border-radius: 50px;
+}
+.customer-home-carouselitem3{
+  height: 60vh;
+  width: 60%;
+  border-radius: 50px;
+}
+.customer-home-customerdelivery{
+  height: 90vh;
+  width: 100%;
+}
+.customer-home-deliverycustomer{
+  height: 100px;
+  width: 100px;
+}
+.customer-home-deliveryfast{
+  font-size: 20px;
+  font-weight: bold;
+  color: #5E5E5E;
+}
+.customer-home-deliveryfast1{
+  color: #A8A8A8;
+  font-size: 20px;
 }

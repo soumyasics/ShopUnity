@@ -18,7 +18,7 @@
     background-color: #CAFAE2;
     width: 695px;
     height: max-content;
-    border-radius: 23px;
+    border-radius: 23px;  
     background: #CAFAE2;
     box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
 
@@ -105,7 +105,8 @@
     border-radius: 4.856px;
     background: #459197;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
+    border: none;
+    color: white;
 }
 
 .AgentRegistration-input-div-p {
