@@ -100,8 +100,8 @@ const customerLogin = async (req, res) => {
 
     const token = jwt.sign(
       {
-        customeremail: customer.customeremail,
-        customerpassword: customer.customerpassword,
+        customeremail: customer.email,
+        customerpassword: customer.password,
       },
       "secret_key",
       { expiresIn: 86400 }
@@ -138,7 +138,7 @@ const customerforget = async (req, res) => {
 
 
 const getAllCustomers = (req, res) => {
-  customerSchema
+  Customer
     .find({})
     .then((result) => {
       res.json({

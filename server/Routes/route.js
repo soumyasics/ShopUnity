@@ -40,7 +40,7 @@ Route.get('/get_all_deliveryagents',DeliveryAgentController.getAllDeliveryAgents
 Route.get('/get_a_deliveryagent/:deliveryagentid',DeliveryAgentController.getADeliveryAgent)
 Route.post('/edit_a_deliveryagent/:deliveryagentid',DeliveryAgentController.EditADeliveryAgent)
 Route.post('/delete_a_deliveryagent/:deliveryagentid',DeliveryAgentController.DeleteDeliveryAgent)
-
+Route.post('/delivery_agent_forgot',DeliveryAgentController.deliveryagentforget)
 
 // shop ownerS
 Route.post("/shopeowner_register",ShopeOwnerController.upload,ShopeOwnerController.shopeOwnerRegister)

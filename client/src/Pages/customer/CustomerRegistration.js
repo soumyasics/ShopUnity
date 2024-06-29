@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,Link} from "react-router-dom";
 import axios from 'axios';
 import img from '../../images/image 75.png';
 import img2 from '../../images/Component 5.svg';
@@ -87,6 +87,7 @@ function CustomerRegistration() {
       setErrors({});
       try {
         await axiosInstance.post('/customer_register', formData);
+        alert(" Successfully Registrated")
         navigate("/customerlogin");
       } catch (error) {
         console.error("There was an error registering!", error);
@@ -183,7 +184,7 @@ function CustomerRegistration() {
             </div>
 
             <Button type="submit" className="CustomerRegistration-input-div-button">Register</Button>
-            <p className="CustomerRegistration-input-div-p">Already have an account? <a href="/customerlogin">Log in</a></p>
+            <p className="CustomerRegistration-input-div-p">Already have an account? <Link to="/customerlogin">Log in</Link></p>
           </Form>
         </div>
       </div>

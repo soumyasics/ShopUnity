@@ -56,7 +56,7 @@ const WholesaleDealerLogin = async (req, res) => {
     });
     console.log(wholesaledealer.password);
     if (wholesaledealer) {
-      if (wholesaledealer.password == password) {
+      if (wholesaledealer.password === password) {
         const token = jwt.sign(
           {
             email: wholesaledealer.email,
@@ -229,7 +229,6 @@ const wholesaleforgot = async (req, res) => {
   }
 };
 
-
 const acceptwholesaledealer = async (req, res) => {
   try {
     const id = req.params.id;
@@ -331,5 +330,6 @@ module.exports = {
   rejecrWholesaledealer,
   acceptwholesaledealer,
   deActivatewholesaleById,
-  activatewholesaleById,getAllAcceptedWholesaleDealer
+  activatewholesaleById,
+  getAllAcceptedWholesaleDealer,
 };

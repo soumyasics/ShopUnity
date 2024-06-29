@@ -30,7 +30,9 @@ function CustomerLogin() {
       });
       
       if (response.data.message == 'Login successful') {
-        navigate('/home');
+        alert("Login Successfully ")
+
+        navigate('/customerhome');
       } else {
         console.log(response)
         setError(response.data.message);

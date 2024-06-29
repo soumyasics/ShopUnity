@@ -67,7 +67,7 @@ function DeliveryagentLogin() {
 
         // Handle successful login response
         alert(response.data.message); // Example: Navigate to home page on success
-        Navigate("/home"); // Adjust path based on your routing setup
+        Navigate("/deliveryagenthome"); // Adjust path based on your routing setup
       } catch (error) {
         // Handle errors from API (e.g., display error messages)
         console.error("Login error:", error.response.data);
@@ -134,7 +134,7 @@ function DeliveryagentLogin() {
                       )}
                     </div>
                     <div className="mt-2 delivery-agent-login-forgetpswdlink">
-                      <Link to="" className="delivery-agent-login-forgetpswd">
+                      <Link to="/deliveryagentforgetpswd" className="delivery-agent-login-forgetpswd">
                         Forgot Password?
                       </Link>
                     </div>
@@ -147,7 +147,7 @@ function DeliveryagentLogin() {
                     <div className="">
                       <h6 className="text-dark text-center">
                         Not a member?{" "}
-                        <Link to="" className="text-decoration-none ">
+                        <Link to="/deliveryagentregistration" className="text-decoration-none ">
                           Sign up now
                         </Link>
                       </h6>

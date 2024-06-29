@@ -4,9 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import axiosInstance from "../../APIS/axiosinstatnce"; 
-import "./deliveryagent.css";
-import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../APIS/axiosinstatnce";
+import "./DeliveryAgentRegistration.css";
+import { useNavigate ,Link} from "react-router-dom";
 import img from "../../images/image 72.png";
 
 function DeliveryAgentRegistration() {
@@ -25,6 +25,23 @@ function DeliveryAgentRegistration() {
     confirmPassword: "",
   });
 
+  const district = [
+    "Alappuzha",
+    "Ernakulam",
+    "Idukki",
+    "Kannur",
+    "Kasaragod",
+    "Kollam",
+    "Kottayam",
+    "Kozhikode",
+    "Malappuram",
+    "Palakkad",
+    "Pathanamthitta",
+    "Thiruvananthapuram",
+    "Thrissur",
+    "Wayanad",
+  ];
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -36,10 +53,14 @@ function DeliveryAgentRegistration() {
     if (!data.district.trim()) errors.district = "District is required";
     if (!data.city.trim()) errors.city = "City is required";
     if (!data.pincode.trim()) errors.pincode = "Pincode is required";
-    if (!data.vehicleType.trim()) errors.vehicleType = "Vehicle type is required";
-    if (!data.vehicleNumber.trim()) errors.vehicleNumber = "Vehicle number is required";
-    if (!data.drivingLicense.trim()) errors.drivingLicense = "Driving license is required";
-    if (!data.contactNumber.trim()) errors.contactNumber = "Contact number is required";
+    if (!data.vehicleType.trim())
+      errors.vehicleType = "Vehicle type is required";
+    if (!data.vehicleNumber.trim())
+      errors.vehicleNumber = "Vehicle number is required";
+    if (!data.drivingLicense.trim())
+      errors.drivingLicense = "Driving license is required";
+    if (!data.contactNumber.trim())
+      errors.contactNumber = "Contact number is required";
     if (!data.email.trim()) {
       errors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(data.email)) {
@@ -72,11 +93,15 @@ function DeliveryAgentRegistration() {
   };
 
   const handleSubmit = async (e) => {
+  console.log(data,);
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axiosInstance.post("/delivery_agent_register", data);
+        const response = await axiosInstance.post(
+          "/delivery_agent_register",
+          data
+        );
         if (response.status === 200) {
           alert("Registration successful");
           navigate("/deliveryagentlogin"); // Adjust the route as needed
@@ -106,7 +131,9 @@ function DeliveryAgentRegistration() {
             <div className="AgentRegistration-input-div-div">
               <div className="AgentRegistration-input-div-leftdiv">
                 <div>
-                  <h1 className="AgentRegistration-input-div-leftdiv-h1">Name</h1>
+                  <h1 className="AgentRegistration-input-div-leftdiv-h1">
+                    Name
+                  </h1>
                   <input
                     type="text"
                     className="AgentRegistration-input-div-leftdiv-inp"
@@ -115,7 +142,9 @@ function DeliveryAgentRegistration() {
                     value={data.name}
                     onChange={handleInputChange}
                   />
-                  {errors.name && <span className="text-danger">{errors.name}</span>}
+                  {errors.name && (
+                    <span className="text-danger">{errors.name}</span>
+                  )}
                 </div>
 
                 <div>
@@ -130,26 +159,39 @@ function DeliveryAgentRegistration() {
                     value={data.address}
                     onChange={handleInputChange}
                   />
-                  {errors.address && <span className="text-danger">{errors.address}</span>}
+                  {errors.address && (
+                    <span className="text-danger">{errors.address}</span>
+                  )}
                 </div>
 
-                <div>
-                  <h1 className="AgentRegistration-input-div-leftdiv-h1">
+                <div className="input-box mt-3">
+                  {" "}
+                  <label className="container font" id="font">
                     District
-                  </h1>
-                  <input
-                    type="text"
-                    className="AgentRegistration-input-div-leftdiv-inp"
-                    placeholder="District"
+                  </label>{" "}
+                  <select
+                    className="form-select m-2  wholesale-dealer-register-textbox"
                     name="district"
                     value={data.district}
                     onChange={handleInputChange}
-                  />
-                  {errors.district && <span className="text-danger">{errors.district}</span>}
+                  >
+                    <option>Select District</option>
+                    {district.map((district, index) => (
+                      <option key={index} value={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.district && (
+                    <span className="text-danger">{errors.district}</span>
+                  )}
                 </div>
+                <div></div>
 
                 <div>
-                  <h1 className="AgentRegistration-input-div-leftdiv-h1">City</h1>
+                  <h1 className="AgentRegistration-input-div-leftdiv-h1">
+                    City
+                  </h1>
                   <input
                     type="text"
                     className="AgentRegistration-input-div-leftdiv-inp"
@@ -158,7 +200,9 @@ function DeliveryAgentRegistration() {
                     value={data.city}
                     onChange={handleInputChange}
                   />
-                  {errors.city && <span className="text-danger">{errors.city}</span>}
+                  {errors.city && (
+                    <span className="text-danger">{errors.city}</span>
+                  )}
                 </div>
 
                 <div>
@@ -173,7 +217,9 @@ function DeliveryAgentRegistration() {
                     value={data.pincode}
                     onChange={handleInputChange}
                   />
-                  {errors.pincode && <span className="text-danger">{errors.pincode}</span>}
+                  {errors.pincode && (
+                    <span className="text-danger">{errors.pincode}</span>
+                  )}
                 </div>
 
                 <div>
@@ -188,7 +234,9 @@ function DeliveryAgentRegistration() {
                     value={data.vehicleType}
                     onChange={handleInputChange}
                   />
-                  {errors.vehicleType && <span className="text-danger">{errors.vehicleType}</span>}
+                  {errors.vehicleType && (
+                    <span className="text-danger">{errors.vehicleType}</span>
+                  )}
                 </div>
               </div>
 
@@ -205,7 +253,9 @@ function DeliveryAgentRegistration() {
                     value={data.vehicleNumber}
                     onChange={handleInputChange}
                   />
-                  {errors.vehicleNumber && <span className="text-danger">{errors.vehicleNumber}</span>}
+                  {errors.vehicleNumber && (
+                    <span className="text-danger">{errors.vehicleNumber}</span>
+                  )}
                 </div>
 
                 <div>
@@ -220,7 +270,9 @@ function DeliveryAgentRegistration() {
                     value={data.drivingLicense}
                     onChange={handleInputChange}
                   />
-                  {errors.drivingLicense && <span className="text-danger">{errors.drivingLicense}</span>}
+                  {errors.drivingLicense && (
+                    <span className="text-danger">{errors.drivingLicense}</span>
+                  )}
                 </div>
 
                 <div>
@@ -235,7 +287,9 @@ function DeliveryAgentRegistration() {
                     value={data.contactNumber}
                     onChange={handleInputChange}
                   />
-                  {errors.contactNumber && <span className="text-danger">{errors.contactNumber}</span>}
+                  {errors.contactNumber && (
+                    <span className="text-danger">{errors.contactNumber}</span>
+                  )}
                 </div>
 
                 <div>
@@ -250,7 +304,9 @@ function DeliveryAgentRegistration() {
                     value={data.email}
                     onChange={handleInputChange}
                   />
-                  {errors.email && <span className="text-danger">{errors.email}</span>}
+                  {errors.email && (
+                    <span className="text-danger">{errors.email}</span>
+                  )}
                 </div>
 
                 <div>
@@ -265,7 +321,9 @@ function DeliveryAgentRegistration() {
                     value={data.password}
                     onChange={handleInputChange}
                   />
-                  {errors.password && <span className="text-danger">{errors.password}</span>}
+                  {errors.password && (
+                    <span className="text-danger">{errors.password}</span>
+                  )}
                 </div>
 
                 <div>
@@ -280,21 +338,28 @@ function DeliveryAgentRegistration() {
                     value={data.confirmPassword}
                     onChange={handleInputChange}
                   />
-                  {errors.confirmPassword && <span className="text-danger">{errors.confirmPassword}</span>}
+                  {errors.confirmPassword && (
+                    <span className="text-danger">
+                      {errors.confirmPassword}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
 
-            <button className="AgentRegistration-input-div-button" type="submit">
+            <button
+              className="AgentRegistration-input-div-button"
+              type="submit"
+            >
               Register
             </button>
           </form>
 
           <p className="AgentRegistration-input-div-p">
             Already have an account?{" "}
-            <a href="/login" alt="">
+            <Link to="/deliveryagentlogin" alt="">
               Log in
-            </a>
+            </Link>
           </p>
         </div>
       </div>
