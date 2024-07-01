@@ -14,7 +14,7 @@ function AllDeliveryAgentViewPage({url}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-  const handleShow = (deliveryagentid) => {
+    const handleShow = (deliveryagentid) => {
     setShow(true);
     axiosInstance
       .get("/get_all_deliveryagents/" + deliveryagentid)
@@ -114,7 +114,7 @@ function AllDeliveryAgentViewPage({url}) {
                   <div className="col-1">
                     <button
                       className="rounded-pill px-3 border-none ms-5"
-                      // onClick={() => handleShow()}
+                      onClick={() => handleShow(deliveryagent._id)}
                       id='alldeliveryagent-viewpage-viewbtn'
                     >
                       view

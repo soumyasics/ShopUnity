@@ -11,7 +11,7 @@ function CustomerlistPage({url}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-  const handleShow = (customerid) => {
+    const handleShow = (customerid) => {
     setShow(true);
     axiosInstance
       .get("/get_all_customers/" + customerid)

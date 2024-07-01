@@ -8,16 +8,16 @@ import { Card } from "react-bootstrap";
 
 function WholesaleAllDealerViewpage() {
   const [data, setData] = useState([]);
-  const [Ashopownerdata, setAshopownerdata] = useState({});
+  const [Awholesalerdata, setAwholesalerdata] = useState({});
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = (deliveryagentid) => {
+  const handleShow = (wholesaledealerid) => {
     setShow(true);
     axiosInstance
-      .get("/get_all_deliveryagents/" + deliveryagentid)
+      .get("/get_all_wholesaledealer/" + wholesaledealerid)
       .then((res) => {
-        setAshopownerdata(res.data.data);
+        setAwholesalerdata(res.data.data);
       })
       .catch((err) => {
         console.log("err", err);
@@ -30,7 +30,7 @@ function WholesaleAllDealerViewpage() {
 
   const getData = () => {
     axiosInstance
-      .get("/get_all_accepted_wholesaledealer")
+      .get("/get_all_wholesaledealer")
       .then((res) => {
         if (res.data.status === 200) {
           console.log(res);
@@ -44,27 +44,73 @@ function WholesaleAllDealerViewpage() {
       });
   };
 
-  const toggleShopOwnerStatus = (id, currentStatus) => {
-    const endpoint = currentStatus ? "/inactivatewholesale/" : "/activatewholesale/";
-    axiosInstance
-      .post(endpoint + id)
-      .then((res) => {
-        if (res.status === 200) {
-          let msg = res?.data?.message || `Shopowner is now ${currentStatus ? "Inactive" : "Active"}`;
-          alert(msg);
-          getData();
-          setAshopownerdata(prevState => ({
-            ...prevState,
-            ActiveStatus: !currentStatus
-          }));
-        } else {
-          console.log("Error on status change");
-        }
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
+  // const toggleShopOwnerStatus = (id, currentStatus) => {
+  //   const endpoint = currentStatus ? "/inactivatewholesale/" : "/activatewholesale/";
+  //   axiosInstance
+  //     .post(endpoint + id)
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         let msg = res?.data?.message || `Wholesaledealer is now ${currentStatus ? "Inactive" : "Active"}`;
+  //         alert(msg);
+  //         getData();
+  //         setAwholesalerdata(prevState => ({
+  //           ...prevState,
+  //           ActiveStatus: !currentStatus
+  //         }));
+  //       } else {
+  //         console.log("Error on status change");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err);
+  //     });
+  // };
+
+  const handleActive = (id) => {
+    console.log(id);
+    axiosInstance.post(`/activatewholesale/${id}`)
+    .then((res)=>{
+      if(res.data.status === 200){
+        const updatedData = data.map((wholesaledealer) => {
+          if (wholesaledealer._id === id){
+            wholesaledealer.isActive = true;
+          }
+          return wholesaledealer;
+        });
+        setData(updatedData)
+      }
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
+
+  const handleDeactive = (id) => {
+    axiosInstance.post(`/inactivatewholesale/${id}`)
+    .then((res) => {
+      if(res.data.status === 200){
+        const updatedData = data.map((wholesaledealer) => {
+          if(wholesaledealer._id === id){
+            wholesaledealer.isActive = false;
+          }
+          return wholesaledealer;
+        })
+        setData(updatedData);
+      }
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
+
+  const toggleUserActiveState = (wholesaledealer) => {
+    if(wholesaledealer.isActive){
+      handleDeactive(wholesaledealer._id)
+    }
+    else{
+      handleActive(wholesaledealer._id)
+    }
+  }
 
   return (
     <div>
@@ -116,13 +162,13 @@ function WholesaleAllDealerViewpage() {
                       <b>{index + 1}.</b>
                     </div>
                     <div className="col-2">{wholesaledealer.dealername}</div>
-                    <div className="col-2">{wholesaledealer.storename}</div>
+                    <div className="col-2">{wholesaledealer.storeName}</div>
                     <div className="col-2">{wholesaledealer.email} </div>
                     <div className="col-2 ms-5">{wholesaledealer.contact}</div>
                     <div className="col-1">
                       <button
                         className="rounded-pill px-3 border-none ms-5"
-                        // onClick={() => handleShow()}
+                        onClick={() => handleShow(wholesaledealer._id)}
                         id="wholesale-alldealer-viewpage-viewbtn"
                       >
                         view
@@ -144,18 +190,18 @@ function WholesaleAllDealerViewpage() {
                 <div className="p-4">
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shop Name</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Store Name</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopname}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.storeName}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Owner Name</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Dealer Name</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownername}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.dealername}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
@@ -163,7 +209,31 @@ function WholesaleAllDealerViewpage() {
                       <Card.Subtitle className="mb-2 text-muted">Address</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopowneraddress}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.address}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">District</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.districts}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">City</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.city}</Card.Subtitle>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted">Pincode</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.pincode}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
@@ -171,49 +241,51 @@ function WholesaleAllDealerViewpage() {
                       <Card.Subtitle className="mb-2 text-muted">Contact Number</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownercontact}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.contact}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Email ID</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Email Id</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopowneremail}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.email}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shopowner City</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Registration Number</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownercity}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.wholesaleregisternumber}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shopowner District</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Shop License</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownerdistrict}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Awholesalerdata.dealerlisence}</Card.Subtitle>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shopowner Pincode</Card.Subtitle>
-                    </td>
-                    <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownerpincode}</Card.Subtitle>
-                    </td>
-                  </tr>
+
                   <tr className="mt-3 text-center">
                     <td colSpan="2">
-                      <button
-                        onClick={() => toggleShopOwnerStatus(Ashopownerdata._id, Ashopownerdata.ActiveStatus)}
+                      {/* <button
+                        onClick={() => toggleShopOwnerStatus(Awholesalerdata._id, Awholesalerdata.ActiveStatus)}
                         className="btn btn-success rounded-pill"
                       >
-                        {Ashopownerdata.ActiveStatus ? "DeActivate" : "Activate"}
+                        {Awholesalerdata.ActiveStatus ? "DeActivate" : "Activate"}
+                      </button> */}
+                      <div className="text-center">
+                        <button
+                      className={`toggle-button ${Awholesalerdata.isActive ? 'active' : 'inactive'}`} 
+                      onClick={()=>{toggleUserActiveState(Awholesalerdata)}}
+                      >
+                        {Awholesalerdata.isActive ? 'Active' : 'Inactive'}
                       </button>
+                      </div>
+                      
                     </td>
                   </tr>
                 </div>

@@ -15,6 +15,8 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import Collapse from "react-bootstrap/Collapse";
 import { FaUserClock } from "react-icons/fa";
 import { FiAlignJustify } from "react-icons/fi";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Sidebar() {
   const [open, setOpen] = useState(false);
