@@ -71,7 +71,7 @@ function Sidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/wholesalealldealerviewpage" className="sidebar-shop">
+                <Link to="/wholesaledealerrequests" className="sidebar-shop">
                   <FaBoxOpen /> Wholesale Dealers Pending
                 </Link>
               </li>
@@ -90,6 +90,11 @@ function Sidebar() {
                   <GrDeliver /> Delivery Agents
                 </Link>
               </li>
+              <li className="nav-item">
+              <Link to="/deliveryagentrequest" className="sidebar-shop">
+                <GrDeliver /> Delivery Agents pending
+              </Link>
+            </li>
               <li className="nav-item">
                 <Link to="" className="sidebar-shop">
                   <BsBoxSeam /> Customers Orders

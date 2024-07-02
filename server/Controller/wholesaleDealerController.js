@@ -50,41 +50,39 @@ const WholesaleDealerRegister = (req, res) => {
 const WholesaleDealerLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
-    const wholesaledealer = await wholesaledealerschema.findOne({
-      email: email,
-    });
-    console.log(wholesaledealer.password);
-    if (wholesaledealer) {
-      if (wholesaledealer.password === password) {
-        const token = jwt.sign(
-          {
-            email: wholesaledealer.email,
-            password: wholesaledealer.password,
-          },
-          "secret_key",
-          { expiresIn: 86400 }
-        );
-        return res.status(200).json({
-          message: "Login successful",
-          token,
-          id: wholesaledealer._id,
-        });
-      } else {
-        return res.status(401).json({ message: "Password is incorrect" });
-      }
-    } else {
-      return res
-        .status(404)
-        .json({ message: "wholesaledealer does not exist" });
+    const wholesaledealer = await wholesaledealerschema.findOne({ email });
+
+    if (!wholesaledealer) {
+      return res.status(404).json({ message: "Wholesale dealer does not exist" });
     }
+
+    if (wholesaledealer.password !== password) {
+      return res.status(401).json({ message: "Password is incorrect" });
+    }
+
+    if (wholesaledealer.status === "pending") {
+      return res.status(403).json({ message: "Your account is pending admin approval", status: "pending" });
+    }
+
+    const token = jwt.sign(
+      { email: wholesaledealer.email, id: wholesaledealer._id },
+      "secret_key",
+      { expiresIn: 86400 }
+    );
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      id: wholesaledealer._id,
+      status: "approved"
+    });
+
   } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .json({ error: error, message: "wholesaledealer does not exist" });
+    console.error(error);
+    return res.status(500).json({ error, message: "An error occurred during login" });
   }
 };
+
 const getAllAcceptedWholesaleDealer = async (req, res) => {
   try {
     const result = await wholesaledealerschema.find({ status: "accepted" });

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Modal from "react-bootstrap/Modal";
 import { Card } from "react-bootstrap";
 import axiosInstance from '../../APIS/axiosinstatnce';
-function CustomerlistPage({url}) {
 
-    const[data,setData]=useState([])
-    const [Ashopownerdata, setAshopownerdata] = useState({});
-    const [show, setShow] = useState(false);
+function CustomerlistPage({ url }) {
+  const [data, setData] = useState([]);
+  const [Ashopownerdata, setAshopownerdata] = useState({});
+  const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = (customerid) => {
+  const handleClose = () => setShow(false);
+  const handleShow = (customerid) => {
     setShow(true);
     axiosInstance
-      .get("/get_all_customers/" + customerid)
+      .get("/get_a_customer/" + customerid)
       .then((res) => {
         setAshopownerdata(res.data.data);
       })
@@ -26,36 +26,42 @@ function CustomerlistPage({url}) {
   useEffect(() => {
     getData();
   }, []);
-   
-  const getData = () =>{
+
+  const getData = () => {
     axiosInstance.get('/get_all_customers')
-    .then ((res) => {
-        if(res.data.status  === 200){
-            console.log(res);
-            setData(res.data.data || [])
+      .then((res) => {
+        if (res.data.status === 200) {
+          setData(res.data.data || []);
+        } else {
+          setData([]);
         }
-        else{
-            setData([])
-        }
-    })
-    .catch((err) => {
-        console.log("Error",err);
-    })
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
   }
 
   const toggleShopOwnerStatus = (id, currentStatus) => {
-    const endpoint = currentStatus ? "/inactivatecustomer/" : "/activatecustomer/";
+    const endpoint = currentStatus ? "/diactivate_customer/" : "/activate_customer/";
     axiosInstance
       .post(endpoint + id)
       .then((res) => {
         if (res.status === 200) {
           let msg = res?.data?.message || `Customer is now ${currentStatus ? "Inactive" : "Active"}`;
           alert(msg);
-          getData();
-          setAshopownerdata(prevState => ({
-            ...prevState,
-            ActiveStatus: !currentStatus
-          }));
+          // Update the data array to reflect the change in status
+          setData(prevData =>
+            prevData.map(customer =>
+              customer._id === id ? { ...customer, ActiveStatus: !currentStatus } : customer
+            )
+          );
+          // Update the state for the selected customer if it's currently being viewed
+          if (Ashopownerdata._id === id) {
+            setAshopownerdata(prevState => ({
+              ...prevState,
+              ActiveStatus: !currentStatus
+            }));
+          }
         } else {
           console.log("Error on status change");
         }
@@ -128,12 +134,6 @@ function CustomerlistPage({url}) {
         <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
           <Modal.Header closeButton></Modal.Header>
           <div>
-            {/* <img
-              className="parentimage"
-              alt="img"
-              style={{ width: "100%", height: "380px" }}
-              src={`${url}${Ashopownerdata.shoplicence}`}
-            /> */}
             <div>
               <table>
                 <div className="p-4">
@@ -207,7 +207,7 @@ function CustomerlistPage({url}) {
                         onClick={() => toggleShopOwnerStatus(Ashopownerdata._id, Ashopownerdata.ActiveStatus)}
                         className="btn btn-success rounded-pill"
                       >
-                        {Ashopownerdata.ActiveStatus ? "DeActivate" : "Activate"}
+                        {Ashopownerdata.ActiveStatus ? "Deactivate" : "Activate"}
                       </button>
                     </td>
                   </tr>
@@ -218,7 +218,7 @@ function CustomerlistPage({url}) {
         </Modal>
       </div>
     </div>
-  )
+  );
 }
 
-export default CustomerlistPage
+export default CustomerlistPage;

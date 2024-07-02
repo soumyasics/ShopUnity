@@ -52,7 +52,12 @@ const DeliveryagentLogin = async (req, res) => {
 
         return res
           .status(200)
-          .json({ message: "Login successful", token, id: deliveryAgent._id });
+          .json({
+            message: "Login successful",
+            token,
+            id: deliveryAgent._id,
+            status: deliveryAgent.status,
+          });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
       }
@@ -62,18 +67,16 @@ const DeliveryagentLogin = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res
-      .status(500)
-      .json({
-        error: error.message,
-        message: "An error occurred during login",
-      });
+    return res.status(500).json({
+      error: error.message,
+      message: "An error occurred during login",
+    });
   }
 };
 
 const getAllDeliveryAgents = (req, res) => {
   deliveryagentschema
-    .find({ status: "accepted" })
+    .find({ status: "pending" })
     .then((result) => {
       res.json({
         status: 200,
@@ -175,6 +178,114 @@ const deliveryagentforget = async (req, res) => {
   }
 };
 
+const acceptDeliveryagent = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: "Id is required" });
+    }
+
+    const delivery = await deliveryagentschema.findById(id);
+    if (!delivery) {
+      return res.status(404).json({ message: "delivery not found" });
+    }
+
+    delivery.status = "accepted";
+    delivery.ActiveStatus = true;
+    await delivery.save();
+    return res.status(200).json({
+      message: "delivery agent registration accepted and activated",
+      data: delivery,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "server error on accept delivery", error });
+  }
+};
+
+const rejectDeliveryagent = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: "Id is required" });
+    }
+    const delivery = await deliveryagentschema.findById(id);
+    if (!delivery) {
+      return res.status(404).json({ message: "delivery agent not found" });
+    }
+
+    delivery.status = "rejected";
+    await delivery.save();
+    return res
+      .status(200)
+      .json({ message: "delivery registration rejected", data: delivery });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "server error on reject delivery agent", error });
+  }
+};
+
+const deActivateDeliveryagentById = (req, res) => {
+  deliveryagentschema
+    .findByIdAndUpdate({ _id: req.params.id }, { ActiveStatus: false })
+    .exec()
+    .then((data) => {
+      res.json({
+        status: 200,
+        msg: "delivery agent Inactivated",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
+
+const activateDeliveryagentById = (req, res) => {
+  deliveryagentschema
+    .findByIdAndUpdate({ _id: req.params.id }, { ActiveStatus: true })
+    .exec()
+    .then((data) => {
+      res.json({
+        status: 200,
+        msg: "delivery agent Activated",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
+
+const getAllAcceptedDeliveryAgents = (req, res) => {
+  deliveryagentschema
+    .find({ status: "accepted" })
+    .then((result) => {
+      res.json({
+        status: 200,
+        message: "find",
+        data: result,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        status: 500,
+        message: "No delivery agents Fount",
+        data: err,
+      });
+    });
+};
+
 module.exports = {
   DeliveryAgentRegister,
   DeliveryagentLogin,
@@ -183,4 +294,8 @@ module.exports = {
   EditADeliveryAgent,
   DeleteDeliveryAgent,
   deliveryagentforget,
+  deActivateDeliveryagentById,
+  activateDeliveryagentById,
+  rejectDeliveryagent,
+  acceptDeliveryagent,getAllAcceptedDeliveryAgents
 };

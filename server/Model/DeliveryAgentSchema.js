@@ -50,6 +50,7 @@ const DeliveryAgentSchema = new Schema({
   },
   status: {
     type: String,
+    default: "pending",
   },
   ActiveStatus: {
     type: Boolean,

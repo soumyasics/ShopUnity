@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import deliveryagentlogin from "../../images/deliveryagentlogin.png";
 import axiosInstance from "../../APIS/axiosinstatnce"; // Adjust this import based on your actual axios instance setup
@@ -17,7 +14,7 @@ function DeliveryagentLogin() {
     email: "",
     password: "",
   });
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const formValidating = (fieldName, value) => {
     if (!value.trim()) {
@@ -34,7 +31,7 @@ function DeliveryagentLogin() {
         return "Password must contain at least one number, one special character, and one capital letter";
       }
     }
-    return;
+    return "";
   };
 
   const handleInputChange = (e) => {
@@ -49,14 +46,14 @@ function DeliveryagentLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formIsValid = true;
-    let errors = {};
+    let validationErrors = {};
 
-    errors.email = formValidating("Email", data.email);
-    if (errors.email) formIsValid = false;
-    errors.password = formValidating("Password", data.password);
-    if (errors.password) formIsValid = false;
+    validationErrors.email = formValidating("Email", data.email);
+    if (validationErrors.email) formIsValid = false;
+    validationErrors.password = formValidating("Password", data.password);
+    if (validationErrors.password) formIsValid = false;
 
-    setErrors(errors);
+    setErrors(validationErrors);
 
     if (formIsValid) {
       try {
@@ -66,23 +63,29 @@ function DeliveryagentLogin() {
         });
 
         // Handle successful login response
-        alert(response.data.message); // Example: Navigate to home page on success
-        Navigate("/deliveryagenthome"); // Adjust path based on your routing setup
-      } catch (error) {
-        // Handle errors from API (e.g., display error messages)
-        console.error("Login error:", error.response.data);
-        // Example: Display error message to user
-        if (error.response && error.response.data) {
-          setErrors({
-            email: error.response.data.message,
-            password: "", // Clear password error on generic error
-          });
+        if (response.data && response.data.token) {
+          if (response.data.status === "pending") {
+            alert("Your account is pending admin approval.");
+          } else if (response.data.status === "approved") {
+            alert("Login successful!"); // Successful login alert
+            localStorage.setItem("deliveryagent", response.data.id);
+            localStorage.setItem("token", response.data.token);
+            navigate("/deliveryagenthome"); // Adjust path based on your routing setup
+          }
         } else {
           setErrors({
             email: "Login failed. Please try again.",
             password: "",
           });
         }
+      } catch (error) {
+        // Handle errors from API (e.g., display error messages)
+        console.error("Login error:", error.response?.data);
+        // Example: Display error message to user
+        setErrors({
+          email: error.response?.data?.message || "Login failed. Please try again.",
+          password: "", // Clear password error on generic error
+        });
       }
     }
   };
@@ -92,7 +95,7 @@ function DeliveryagentLogin() {
       <div>
         <Row className="container">
           <Col>
-            <img src={deliveryagentlogin} className="delivery-agent-img" alt="Delivery Agent Login"></img>
+            <img src={deliveryagentlogin} className="delivery-agent-img" alt="Delivery Agent Login" />
           </Col>
           <Col>
             <div className="delivery-agent-box">
@@ -105,7 +108,7 @@ function DeliveryagentLogin() {
                   <div className="col-8">
                     <div>
                       <label className="delivery-agent-login-email mt-3">Email</label>
-                      <br></br>
+                      <br />
                       <input
                         className="form-control delivery-agent-login-textbox mt-2"
                         type="email"
@@ -113,14 +116,14 @@ function DeliveryagentLogin() {
                         name="email"
                         value={data.email}
                         onChange={handleInputChange}
-                      ></input>
+                      />
                       {errors.email && (
                         <span className="text-danger">{errors.email}</span>
                       )}
                     </div>
                     <div>
                       <label className="delivery-agent-login-email mt-3">Password</label>
-                      <br></br>
+                      <br />
                       <input
                         className="form-control delivery-agent-login-textbox mt-2"
                         type="password"
@@ -128,7 +131,7 @@ function DeliveryagentLogin() {
                         name="password"
                         value={data.password}
                         onChange={handleInputChange}
-                      ></input>
+                      />
                       {errors.password && (
                         <span className="text-danger">{errors.password}</span>
                       )}
@@ -147,7 +150,7 @@ function DeliveryagentLogin() {
                     <div className="">
                       <h6 className="text-dark text-center">
                         Not a member?{" "}
-                        <Link to="/deliveryagentregistration" className="text-decoration-none ">
+                        <Link to="/deliveryagentregistration" className="text-decoration-none">
                           Sign up now
                         </Link>
                       </h6>
@@ -165,5 +168,3 @@ function DeliveryagentLogin() {
 }
 
 export default DeliveryagentLogin;
-
-  
