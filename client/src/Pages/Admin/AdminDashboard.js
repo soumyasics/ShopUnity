@@ -27,14 +27,14 @@ function AdminHome() {
       else
         setShopOwners([])
     });
-    axiosInstance.get("/get_all_wholesaledealer").then((responce) => {
+    axiosInstance.get("/get_all_accepted_wholesaledealer").then((responce) => {
       console.log(responce.data.data);
       if(responce.data.data!=null)
         setWholesale(responce.data.data);
       else
       setWholesale([])
     });
-    axiosInstance.get("/get_all_deliveryagents").then((responce) => {
+    axiosInstance.get("/get_all_accepted_Deliveryagent").then((responce) => {
       console.log(responce);
       if(responce.data.data !=null)
         setDeliveryagent(responce.data.data);
@@ -121,7 +121,7 @@ function AdminHome() {
                   <br></br>
                   <br></br>
                   <span>
-                   {( Deliveryagent.length > 0 ? Deliveryagent : 0)}
+                   {( Deliveryagent.length > 0 ? Deliveryagent.length : 0)}
                     <p className="admin-dash-para">Delivery Agent</p>
                   </span>
                 </div>

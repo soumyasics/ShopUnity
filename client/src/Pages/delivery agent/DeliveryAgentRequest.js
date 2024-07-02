@@ -13,11 +13,11 @@ function DeliveryAgentRequest({url}) {
 
   const handleClose = () => setShow(false);
 
-  const handleShow = (wholesaleid) => {
+  const handleShow = (deliveryid) => {
     setShow(true);
     setisDisabled(false);
     axiosInstance
-      .get("/get_a_wholesaledealer/" + wholesaleid)
+      .get("/get_a_deliveryagent/" + deliveryid)
       .then((res) => {
         setAshopownerdata(res.data.data);
       })
@@ -47,7 +47,7 @@ function DeliveryAgentRequest({url}) {
 
   function handleReject(id) {
     axiosInstance
-      .post("//" + id)
+      .post("/Deliveryagent_rejectrequest/" + id)
       .then((res) => {
         if (res.status === 200) {
           let msg =
@@ -66,11 +66,11 @@ function DeliveryAgentRequest({url}) {
 
   function handleAccept(id) {
     axiosInstance
-      .post("/" + id)
+      .post("/Deliveryagent_acceptrequest/" + id)
       .then((res) => {
         if (res.status === 200) {
           let msg =
-            res?.data?.message || "DeliveryAgent Registrationeque Rst Accepted";
+            res?.data?.message || "DeliveryAgent Registrationequest Accepted";
           setisDisabled(true);
           alert(msg);
           getData();
@@ -196,36 +196,31 @@ function DeliveryAgentRequest({url}) {
             <div>
               <div>
                 {" "}
-                <img
-                  className="parentimage"
-                  alt="img"
-                  style={{ width: "100%", height: "380px" }}
-                  src={`${url}${Ashopownerdata.shoplicence}`}
-                ></img>
+                
                 <div>
                   <table>
                     <div className="p-4">
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            shop name
+                             name
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopname}
+                            {Ashopownerdata.name}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            owner name
+                          vehicleNumber
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopownername}
+                            {Ashopownerdata.vehicleNumber}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -237,7 +232,7 @@ function DeliveryAgentRequest({url}) {
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopowneraddress}
+                            {Ashopownerdata.address}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -249,7 +244,7 @@ function DeliveryAgentRequest({url}) {
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopownercontact}
+                            {Ashopownerdata.contactNumber}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -261,19 +256,19 @@ function DeliveryAgentRequest({url}) {
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopowneremail}
+                            {Ashopownerdata.email}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            Shopowner City
+                          district
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopownercity}
+                            {Ashopownerdata.district}
                           </Card.Subtitle>
                         </td>
                       </tr>
@@ -281,24 +276,24 @@ function DeliveryAgentRequest({url}) {
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            Shopowner District
+                          vehicleType
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopownerdistrict}
+                            {Ashopownerdata.vehicleType}
                           </Card.Subtitle>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <Card.Subtitle className="mb-2 text-muted">
-                            Shopowner Pincode
+                             Pincode
                           </Card.Subtitle>
                         </td>
                         <td className="ps-3">
                           <Card.Subtitle className="mb-2 text-muted">
-                            {Ashopownerdata.shopownerpincode}
+                            {Ashopownerdata.pincode}
                           </Card.Subtitle>
                         </td>
                       </tr>

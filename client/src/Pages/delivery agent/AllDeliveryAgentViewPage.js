@@ -17,7 +17,7 @@ function AllDeliveryAgentViewPage({url}) {
     const handleShow = (deliveryagentid) => {
     setShow(true);
     axiosInstance
-      .get("/get_all_deliveryagents/" + deliveryagentid)
+      .get("/get_a_deliveryagent/" + deliveryagentid)
       .then((res) => {
         setAshopownerdata(res.data.data);
       })
@@ -31,7 +31,7 @@ function AllDeliveryAgentViewPage({url}) {
   }, []);
 
     const getData = ()=> { 
-        axiosInstance.get("/get_all_deliveryagents")
+        axiosInstance.get("/get_all_accepted_Deliveryagent")
         .then ((res) => {
             if(res.data.status  === 200){
                 console.log(res);
@@ -137,18 +137,18 @@ function AllDeliveryAgentViewPage({url}) {
                 <div className="p-4">
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shop Name</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted"> Name</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopname}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.name}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Owner Name</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted"> drivingLicense</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownername}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.drivingLicense}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
@@ -156,7 +156,7 @@ function AllDeliveryAgentViewPage({url}) {
                       <Card.Subtitle className="mb-2 text-muted">Address</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopowneraddress}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.address}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
@@ -164,7 +164,7 @@ function AllDeliveryAgentViewPage({url}) {
                       <Card.Subtitle className="mb-2 text-muted">Contact Number</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownercontact}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.contactNumber}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
@@ -172,32 +172,42 @@ function AllDeliveryAgentViewPage({url}) {
                       <Card.Subtitle className="mb-2 text-muted">Email ID</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopowneremail}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.email}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shopowner City</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">vehicleNumbery</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownercity}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.vehicleNumber}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shopowner District</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted"> District</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownerdistrict}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.district}</Card.Subtitle>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <Card.Subtitle className="mb-2 text-muted">Shopowner Pincode</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted"> Pincode</Card.Subtitle>
                     </td>
                     <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.shopownerpincode}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.pincode}</Card.Subtitle>
                     </td>
+                    
+                  </tr>
+                  <tr>
+                    <td>
+                      <Card.Subtitle className="mb-2 text-muted"> vehicleType</Card.Subtitle>
+                    </td>
+                    <td className="ps-3">
+                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.vehicleType}</Card.Subtitle>
+                    </td>
+                    
                   </tr>
                   <tr className="mt-3 text-center">
                     <td colSpan="2">

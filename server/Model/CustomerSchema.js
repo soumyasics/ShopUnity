@@ -49,7 +49,11 @@ const customerSchema = new Schema({
     type: String,
     required: [true, 'Password is required'],
     // match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password should contain a special character, a number, a capital and a small letter'],
-  }
+  },
+  ActiveStatus: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const Customer = mongoose.model('Customer', customerSchema);

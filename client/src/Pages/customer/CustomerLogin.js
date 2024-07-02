@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
-import './CustomerLogin.css';
+import { Container, Row, Col, FloatingLabel, Form } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
+import './CustomerLogin.css';
 import img from '../../images/image 77.png';
 import img2 from '../../images/Component 5.svg';
 import axiosInstance from "../../APIS/axiosinstatnce";
-
 
 function CustomerLogin() {
   const [username, setUsername] = useState('');
@@ -28,13 +23,14 @@ function CustomerLogin() {
         username,
         password,
       });
-      
-      if (response.data.message == 'Login successful') {
-        alert("Login Successfully ")
 
+      if (response.data.message === 'Login successful') {
+        localStorage.setItem("customer", response.data.id);
+        localStorage.setItem("token", response.data.token);
+
+        alert("Login Successfully");
         navigate('/customerhome');
       } else {
-        console.log(response)
         setError(response.data.message);
       }
     } catch (err) {
