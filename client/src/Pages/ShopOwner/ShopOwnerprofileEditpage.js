@@ -254,17 +254,7 @@ function ShopOwnerProfileEditPage() {
              {errors.shopownerregistration && <div  className="text-danger color">{errors.shopownerregistration}</div>}
           </div>
           <div>
-          <label className="container-fluid font" id="font">Shop License</label>
-            <input type="file"className="form-control m-2" 
-            
-            placeholder="Shop License"
-            id="shopprofile-editpage-text2"
-            name="files"
-                     
-            onChange={handleChange}
-            />
-            
-            {errors.shoplicence && <div  className="text-danger color">{errors.shoplicence}</div>}
+          
           </div>
           </Col>
           <div className="shopprofile-editpage-btn ms-5">

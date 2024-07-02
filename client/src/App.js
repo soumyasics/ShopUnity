@@ -39,6 +39,7 @@ import AllDeliveryAgentViewPage from './Pages/delivery agent/AllDeliveryAgentVie
 import CustomerlistPage from './Pages/customer/CustomerlistPage';
 import DeliveryAgentRequest from './Pages/delivery agent/DeliveryAgentRequest';
 import CommonNav from './Components/CommonNav';
+import WholesaleHome from './Pages/wholesaledealer/WholesaleHome';
 
 // import LocalNav from './Pages/Navs/LocalNav';
 
@@ -47,8 +48,8 @@ import CommonNav from './Components/CommonNav';
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url="http://localhost:4028/"
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url="http://localhost:4028/"
   
   return (
     <BrowserRouter basename="/shopunity">
@@ -59,7 +60,7 @@ function App() {
 
     <Route path='/wholesaledealerregistration' element={[<MainNav/>,<WholesaleDealerRegistration/>,<Footer/>]} />
     <Route path='/wholesaledealerlogin' element={[<MainNav/>,<WholesaleDealerLogin/>,<Footer/>]} />
-    <Route path='/wholesaledealerhome' element={[<CommonNav/>,<WholesaleDealerHomepage/>]} />
+    <Route path='/wholesaledealerhome' element={[<CommonNav/>,<WholesaleHome/>]} />
     <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
     <Route path='/wholesalealldealerviewpage' element={[<WholesaleAllDealerViewpage url={url} />]} />
     <Route path='/wholesaledealerrequests' element={[<WholesaleDealerRequestList url={url} />]} />

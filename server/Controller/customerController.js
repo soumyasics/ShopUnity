@@ -99,8 +99,8 @@ const customerLogin = async (req, res) => {
 
     const token = jwt.sign(
       {
-        customeremail: customer.email,
-        customerpassword: customer.password,
+        email: customer.email,
+        password: customer.password,
       },
       "secret_key",
       { expiresIn: 86400 }
