@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { BsBoxes } from "react-icons/bs";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { MdNoSim } from "react-icons/md";
-
-function DeliveryagentHomepage() {
-  const[products,setProducts]=useState([])
-  const[added,setAdded]=useState([])
-  const[unsold,setUnsold]=useState([])
+function WholesaleHome() {
+    const[products,setProducts]=useState([])
+    const[added,setAdded]=useState([])
+    const[unsold,setUnsold]=useState([])
+  
   return (
-
-
+    <div>
     <div className="container">
     <div className="shop-dash-color mt-5">
       <section className="pt-5">
@@ -57,7 +56,8 @@ function DeliveryagentHomepage() {
     </div>
   </div>
 
+    </div>
   )
 }
 
-export default DeliveryagentHomepage
+export default WholesaleHome
