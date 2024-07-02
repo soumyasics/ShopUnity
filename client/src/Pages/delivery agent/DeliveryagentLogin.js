@@ -66,7 +66,7 @@ function DeliveryagentLogin() {
         if (response.data && response.data.token) {
           if (response.data.status === "pending") {
             alert("Your account is pending admin approval.");
-          } else if (response.data.status === "approved") {
+          } else if (response.data.status === "accepted") {
             alert("Login successful!"); // Successful login alert
             localStorage.setItem("deliveryagent", response.data.id);
             localStorage.setItem("token", response.data.token);

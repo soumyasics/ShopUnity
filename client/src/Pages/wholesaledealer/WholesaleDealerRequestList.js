@@ -203,12 +203,12 @@ function WholesaleDealerRequestList({ url }) {
             <div>
               <div>
                 {" "}
-                <img
+                {/*<img
                   className="parentimage"
                   alt="img"
                   style={{ width: "100%", height: "380px" }}
                   src={`${url}${Ashopownerdata.dealerlisence}`}
-                ></img>
+                ></img>*/}
                 <div>
                   <table>
                     <div className="p-4">
