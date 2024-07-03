@@ -7,14 +7,14 @@ import axiosInstance from '../../APIS/axiosinstatnce';
 import { useNavigate } from 'react-router-dom';
 
 function WholesaleDelaerProfilePage({url}) {
-
+console.log(url);
     const[data,setData]=useState({})
     const Navigate=useNavigate();
 
     const wholesaledealerid = localStorage.getItem("wholesaledealer")
      
     useEffect(() => {
-        axiosInstance.get('/get_a_wholesaledealer/' + wholesaledealerid )
+        axiosInstance.get('/get_a_wholesaledealer/'+wholesaledealerid )
         .then((res) => {
             setData(res.data.data);
             console.log(res);
@@ -39,7 +39,7 @@ function WholesaleDelaerProfilePage({url}) {
           <div>
             <img
               className="mt-3 mb-3"
-              src={`${url.url.url}${data.shoplicence}`}
+              src={`${url}${data.shoplicence}`}
               style={{
                 width:"50%",
                 height:"200px",
