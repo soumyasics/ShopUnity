@@ -36,6 +36,8 @@ function WholesaleDealerSidebar({url}) {
     const handleLogout = (e) => {
       e.preventDefault();
       localStorage.removeItem("wholesaledealer");
+      localStorage.removeItem("token");
+
       alert("Logged out Successfully")
       navigate("/wholesaledealerlogin");
     };

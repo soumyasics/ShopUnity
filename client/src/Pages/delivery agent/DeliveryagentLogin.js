@@ -70,7 +70,7 @@ function DeliveryagentLogin() {
             alert("Login successful!"); // Successful login alert
             localStorage.setItem("deliveryagent", response.data.id);
             localStorage.setItem("token", response.data.token);
-            navigate("/deliveryagenthome"); // Adjust path based on your routing setup
+            navigate("/deliveryagentmain"); // Adjust path based on your routing setup
           }
         } else {
           setErrors({

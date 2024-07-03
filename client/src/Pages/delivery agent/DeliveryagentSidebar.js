@@ -20,6 +20,8 @@ function DeliveryagentSidebar() {
     const handleLogout = (e) => {
       e.preventDefault();
       localStorage.removeItem("deliveryagent");
+      localStorage.removeItem("token");
+
       alert("Logged out Successfully")
       navigate("/deliveryagentlogin");
     };
