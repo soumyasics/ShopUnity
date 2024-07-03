@@ -167,7 +167,7 @@ const EditAShopOwner = (req, res) => {
     shopownerpincode: req.body.shopownerpincode,
     shopownerdistrict: req.body.shopownerdistrict,
     shopownercity: req.body.shopownercity,
-    shoplicence: req.file.originalname,
+    // shoplicence: req.file.originalname,
   };
 
   shopownerschema

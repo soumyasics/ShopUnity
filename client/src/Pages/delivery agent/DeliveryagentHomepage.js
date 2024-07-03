@@ -12,11 +12,11 @@ function DeliveryagentHomepage() {
   return (
 
 
-    <div className="container">
+    <div className="">
     <div className="shop-dash-color mt-5">
       <section className="pt-5">
-        <div className="row container-fluid">
-          <div className="col-12 col-sm-6 col-md-3 mb-4">
+        <div className="row ">
+          <div className="col-12 col-sm-6 col-md-3 mb-4 ms-5">
           <Link className="shop-dash-link">
             <div>
             <h5 className="shop-dash-h5-1"><BsBoxes/> Total Products</h5>
