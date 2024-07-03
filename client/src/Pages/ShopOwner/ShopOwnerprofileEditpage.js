@@ -17,7 +17,7 @@ function ShopOwnerProfileEditPage() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    files:""
+    // files:""
   })
 
   const[errors,setErrors]=useState({
@@ -30,9 +30,10 @@ function ShopOwnerProfileEditPage() {
     shopownercontact:"",
     shopowneremail:"",
     shopownerregistration:"",
-    shoplicence:""
+    // shoplicence:""
   })
 
+   
   const districts=[
     'Alappuzha','Ernakulam','Idukki','Kannur','Kasaragod',
     'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
@@ -40,11 +41,11 @@ function ShopOwnerProfileEditPage() {
   ];
 
   const handleChange = (e) => {    
-    const { name, value, files} = e.target;
+    const { name, value} = e.target;
 
     setData(prevData => ({
       ...prevData,
-      [name]: name == 'files' ? files[0] : value
+      [name]: name ==  value
     }));
 
     setErrors(prevErrors => ({
@@ -53,51 +54,18 @@ function ShopOwnerProfileEditPage() {
     }));
   };
 
-  function validateField(fieldName, value) {
-    if (!value.trim()) {
-      return `${fieldName} is required`;
-    }
-
-    if(fieldName === "Email" && !value.endsWith("@gmail.com")){
-      return "Email must be a valid Gmail address."
-    }
-    return '';
-  }
+ 
 
 
   const handlecancel=()=>{
+    
     navigate("/shopownerprofile")
   }
-  function validateContact(fieldName, value) {
-    if (!(value).trim()) {
-      return `${fieldName} is required`;
-    } else if (value.length !== 10) {
-      return 'Please enter a valid Contact Number';
-    }
-    return '';
-  }
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    let errors = {};
-    let formIsValid=true;
-
-    errors.shopname=validateField('Shopname',data.shopname);
-    errors.shopownername=validateField('Shopownername',data.shopownername);
-    errors.shopowneraddress=validateField('Shopowneraddress',data.shopowneraddress);
-    errors.shopownerdistrict=validateField('Shopownerdistrict',data.shopownerdistrict);
-    errors.shopownercity=validateField('Shopownercity',data.shopownercity);
-    errors.shopownerpincode=validateContact('Shopownerpincode',data.shopownerpincode);
-    errors.shopownercontact=validateField('Shopownercontact',data.shopownercontact);
-    errors.shopowneremail=validateField('Shopowneremail',data.shopowneremail);
-    errors.shopownerregistration=validateField('Shopownerregistration',data.shopownerregistration);
-    errors.shoplicence=validateField('shoplicence',data.shoplicence);
-
-
-    setErrors(errors);
-    if (formIsValid){
-    }
+  
   }
   const navigate = useNavigate();
   const shopownerid = localStorage.getItem("shopowner");
@@ -108,7 +76,9 @@ function ShopOwnerProfileEditPage() {
       .then((res) => {
         setData(res.data.data);
       })
-      .catch((err) => {      });
+      .catch((err) => {      
+        console.log(err);
+      });
   }, [shopownerid]);
 
   // const handleInputChange = (e) => {
@@ -127,7 +97,7 @@ function ShopOwnerProfileEditPage() {
     console.log(data,"j")
     e.preventDefault();
     axiosInstance
-      .post("/edit_a_shopowner/" + shopownerid, formData)
+      .post(`/edit_a_shopowner/${shopownerid}` + shopownerid, formData)
       .then((res) => {
         navigate("/shopownerprofile");
       })
@@ -157,7 +127,6 @@ function ShopOwnerProfileEditPage() {
             name="shopname"
             value={data.shopname}
             onChange={handleChange}/>
-            {errors.shopname && <div  className="text-danger color">{errors.shopname}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">Owner Name</label>
@@ -168,7 +137,6 @@ function ShopOwnerProfileEditPage() {
             value={data.shopownername}
             onChange={handleChange}/>
           </div>
-          {errors.shopownername && <div  className="text-danger color">{errors.shopownername}</div>}
           <div>
           <label className="container-fluid font" id="font">Address</label>
             <input type="text"className="form-control m-2" 
@@ -178,7 +146,6 @@ function ShopOwnerProfileEditPage() {
             value={data.shopowneraddress}
             onChange={handleChange}
             />
-            {errors.shopowneraddress && <div  className="text-danger color">{errors.shopowneraddress}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">District</label>
@@ -193,7 +160,6 @@ function ShopOwnerProfileEditPage() {
                                         <option key={index} value={district}>{district}</option>
                                     ))}
               </select>
-            {errors.shopownerdistrict && <div  className="text-danger color">{errors.shopownerdistrict}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">City</label>
@@ -204,7 +170,6 @@ function ShopOwnerProfileEditPage() {
             value={data.shopownercity}
             onChange={handleChange}
             />
-            {errors.shopownercity && <div  className="text-danger color">{errors.shopownercity}</div>}
           </div>
           
           </Col>
@@ -218,18 +183,17 @@ function ShopOwnerProfileEditPage() {
             value={data.shopownerpincode}
             onChange={handleChange}
             />
-             {errors.shopownerpincode && <div  className="text-danger color">{errors.shopownerpincode}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">Contact Number</label>
-            <input type="text"className="form-control m-2" 
+            <input type="text" className="form-control m-2" 
             placeholder="Contact No"
             id="shopprofile-editpage-text2"
             name="shopownercontact"
             value={data.shopownercontact}
             onChange={handleChange}
             />
-             {errors.shopownercontact && <div  className="text-danger color">{errors.shopownercontact}</div>}
+        
           </div>
           <div>
           <label className="container-fluid font" id="font">Email Id</label>
@@ -240,7 +204,6 @@ function ShopOwnerProfileEditPage() {
             value={data.shopowneremail}
             onChange={handleChange}
             />
-             {errors.shopowneremail && <div  className="text-danger color">{errors.shopowneremail}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">Registration Number</label>
@@ -251,7 +214,6 @@ function ShopOwnerProfileEditPage() {
             value={data.shopregistrationnumber}
             onChange={handleChange}
             />
-             {errors.shopownerregistration && <div  className="text-danger color">{errors.shopownerregistration}</div>}
           </div>
           <div>
           

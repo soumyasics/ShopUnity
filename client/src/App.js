@@ -35,6 +35,12 @@ import CustomerlistPage from './Pages/customer/CustomerlistPage';
 import DeliveryAgentRequest from './Pages/delivery agent/DeliveryAgentRequest';
 import CommonNav from './Components/CommonNav';
 import WholesaleHome from './Pages/wholesaledealer/WholesaleHome';
+import DeliveryagentSidebar from './Pages/delivery agent/DeliveryagentSidebar';
+import WholesaleDealerSidebar from './Pages/wholesaledealer/WholesaleDealerSidebar';
+import WholesaleDelaerProfilePage from './Pages/wholesaledealer/WholesaleDelaerProfilePage';
+import WholesaleDealerEditProfile from './Pages/wholesaledealer/WholesaleDealerEditProfile';
+import WholesalerMain from './Pages/wholesaledealer/WholesalerMain';
+import DeliveryagentMain from './Pages/delivery agent/DeliveryagentMain';
 
 
 
@@ -42,8 +48,8 @@ import WholesaleHome from './Pages/wholesaledealer/WholesaleHome';
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url="http://localhost:4028/"
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url="http://localhost:4028/"
   
   return (
     <BrowserRouter basename="/shopunity">
@@ -58,7 +64,10 @@ function App() {
     <Route path='/wholesaledealerforgetpswd' element={[<MainNav/>,<WholesaleDealerForgetpswd/>,<Footer/>]} />
     <Route path='/wholesalealldealerviewpage' element={[<WholesaleAllDealerViewpage url={url} />]} />
     <Route path='/wholesaledealerrequests' element={[<WholesaleDealerRequestList url={url} />]} />
-
+    <Route path='/wholesaledealersidebar' element={<WholesaleDealerSidebar/>} />
+    <Route path='/wholesaledealerprofile' element={<WholesaleDelaerProfilePage url={{url}}/>} />
+    <Route path='/wholesaledealereditprofile' element={<WholesaleDealerEditProfile />} />
+    <Route path='/wholesalermain' element={<WholesalerMain/>} />
 
 {/* Customer */} 
 
@@ -76,6 +85,8 @@ function App() {
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
     <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage/>]}/>
     <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>]}/>
+    <Route path='/deliveryagentsidebar' element={<DeliveryagentSidebar/>}/>
+    <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
 
 {/* shopowner */}
 

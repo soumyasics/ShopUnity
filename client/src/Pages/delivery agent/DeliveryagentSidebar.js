@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import { FaPeopleGroup } from "react-icons/fa6";
-import { FaBoxOpen } from "react-icons/fa";
-import { BsPeopleFill } from "react-icons/bs";
-import { GrDeliver } from "react-icons/gr";
-import { BsBoxSeam } from "react-icons/bs";
 import { GrCompliance } from "react-icons/gr";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,13 +7,10 @@ import Col from "react-bootstrap/Col";
 import sidebarimg from "../../images/sidebarimg.png";
 import { MdDashboard } from "react-icons/md";
 import { BsBoxes } from "react-icons/bs";
-import { GiInjustice } from "react-icons/gi";
-import { FaBell } from "react-icons/fa";
-import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
 import { FaUserAlt } from "react-icons/fa";
-import "./shopownersidebar.css";
 import { FiAlignJustify } from "react-icons/fi";
+import '../Admin/Admin.css'
 
 function DeliveryagentSidebar() {
     const [open, setOpen] = useState(false);
@@ -27,9 +19,9 @@ function DeliveryagentSidebar() {
   
     const handleLogout = (e) => {
       e.preventDefault();
-      localStorage.removeItem("shopowner");
-      localStorage.removeItem("shopownertoken");
-      navigate("/shopownerlogin");
+      localStorage.removeItem("deliveryagent");
+      alert("Logged out Successfully")
+      navigate("/deliveryagentlogin");
     };
   
       
@@ -59,49 +51,20 @@ function DeliveryagentSidebar() {
             <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
               <li className="nav-item" style={{ marginTop: "55%" }}>
                 <Link
-                  to="/shopownerhome"
+                  to=""
                   className="shopownersidebar-dashboard rounded-end-5 "
                 >
                   <MdDashboard /> Dashboard
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/shopownerprofile" className="nav-link sidebar-shop">
-                  <FaUserAlt /> Profile
+                <Link to="" className="nav-link sidebar-shop">
+                  <FaUserAlt /> Delivery Requests
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
-                  <BsBoxes /> Products
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <FaPeopleGroup /> Customer Orders
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <BsBoxSeam /> Orders Products
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/wholesaledealerslist"
-                  className="nav-link sidebar-shop"
-                >
-                  <FaBoxOpen /> Wholesale Dealers
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/shopownerslist" className="nav-link sidebar-shop">
-                  <GiInjustice /> Dealer Comparison
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <FaBell /> Notification
+                  <BsBoxes /> Delivery Updates
                 </Link>
               </li>
               <li className="nav-item">

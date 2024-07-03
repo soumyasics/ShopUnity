@@ -66,10 +66,12 @@ function WholesaleDealerLogin() {
       axiosInstance
         .post("/wholesaledealer_login", data)
         .then((res) => {
+          const id = res.data
           if (res.status === 200) {
             console.log("Login Successfully", res);
             alert("Login Successfully");
-            Navigate("/wholesaledealerhome");
+            Navigate("/wholesalermain");
+            localStorage.setItem("wholesaledealer",id)
           } else {
             alert("Logged in Failed", res);
             console.log("Error", res);
