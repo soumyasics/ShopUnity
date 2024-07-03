@@ -1,39 +1,3 @@
-.customer_register {
- padding-top: 15%;
-  /* background-image: url("../../images/customer1.png"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.customer_register_main{
-margin-top: 5%;
-padding: 10%;
-}
-.customer_register_form {
-  padding: 2%;
-  margin: 0 8%;
-}
-
-.customer_register {
-  padding-top: 5%;
-}
-.customer_login {
-  /* background-image: url("../../images/customer2.png"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-color: aliceblue;
-  padding: 5%;
-}
-.customer_login_main {
-  margin: 5%;
-}
-.customer_login_form {
-  padding: 6%;
-  margin: 0 8%;
-}
-
-.customer_register_img {
-  padding-top: 30%;
-}
 
 
 /* Customer Forgetpassword */
