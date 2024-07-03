@@ -1,6 +1,6 @@
 .customer_register {
  padding-top: 15%;
-  background-image: url("../../images/customer1.png");
+  /* background-image: url("../../images/customer1.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -17,7 +17,7 @@ padding: 10%;
   padding-top: 5%;
 }
 .customer_login {
-  background-image: url("../../images/customer2.png");
+  /* background-image: url("../../images/customer2.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 color: aliceblue;

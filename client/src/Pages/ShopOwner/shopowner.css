@@ -10,7 +10,7 @@
   margin-top: 30%;
 }
 .shop_register{
-  background-image:url("../../images/shopowner2.png");
+  /* background-image:url("../../images/shopowner2.png"); */
 background-repeat: no-repeat;
 background-size: cover;
   padding-top: 5%;
@@ -41,7 +41,7 @@ padding: 5%;
 min-height: 100vh;
 }
 .shopownerhome3{
-background-image: url("../../images/couple-barista-standing-counter-coffee-shop-coffee-business-concept.jpg");
+/* background-image: url("../../images/couple-barista-standing-counter-coffee-shop-coffee-business-concept.jpg"); */
 background-size: cover;
 }
 .shopownerhome4{
