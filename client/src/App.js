@@ -9,16 +9,12 @@ import DeliveryagentLogin from './Pages/delivery agent/DeliveryagentLogin'
 import ShopOwnerRegistration from './Pages/ShopOwner/ShopOwnerRegistration'
 import ShopOwnerLogin from './Pages/ShopOwner/ShopOwnerLogin'
 import AdminLogin from './Pages/Admin/AdminLogin';
-import WholesaleDealerHomepage from './Pages/wholesaledealer/WholesaleDealerHomepage'
-import ShopownerHomepage from './Pages/ShopOwner/ShopownerHomepage'
 import DeliveryagentHomepage from './Pages/delivery agent/DeliveryagentHomepage'
 import CustomerHomePage from './Pages/customer/CustomerHomePage'
-import Navigation from './Pages/Navigation'
 import Footer from './Pages/Footer'
 import LandingPage from './Pages/Admin/LandingPage';
 import AdminDashboard from './Components/Admin/AdminDashboard';
 import ShopHomePage from './Components/ShopOwner/ShopHomePage';
-import ShopOwnerNav from './Pages/Navs/ShopOwnerNav';
 import Shopownerforgotpswrd from './Components/ShopOwner/Shopownerforgotpswrd';
 import ShopownerProfile from './Components/ShopOwner/ShopownerProfile';
 import ShopOwnerProfileEdit from './Components/ShopOwner/ShopOwnerProfileEdit';
@@ -29,7 +25,6 @@ import MainNav from './Pages/Navs/MainNav';
 import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
-import LocalNav from './Pages/Navs/LocalNav';
 
 import WholesaleDealerRequestList from './Pages/wholesaledealer/WholesaleDealerRequestList';
 

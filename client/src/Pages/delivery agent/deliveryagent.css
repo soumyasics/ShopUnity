@@ -10,12 +10,12 @@
 
 .delivery_login {
   padding-top: 5%;
-  background-image: url("../../images/deliveryagent1.png");
+  /* background-image: url("../../images/deliveryagent1.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
 .delivery_agent_register {
-  background-image: url("../../images/deliveryagent2.png");
+  /* background-image: url("../../images/deliveryagent2.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 
