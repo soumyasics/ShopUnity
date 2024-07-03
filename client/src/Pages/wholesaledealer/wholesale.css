@@ -190,3 +190,29 @@
   background-color: red;
   color: white;
 }
+
+/* Wholesale Dealer Sidebar */
+
+.wholesaler-dash-icon{
+  font-size: 25px;
+}
+.wholesaler-dash-iconspan{
+  font-size: 20px;
+}
+.wholesaler-dash-backgroundcolor{
+  background-color: #B6FBFF;
+  height: 80px;
+  width: 200px;
+  border-radius: 20px;
+}
+.wholesaler-dash-label:hover{
+  color: red;
+  cursor: pointer;
+}
+.wholesaler-dash-link{
+  color: black;
+}
+.sidebar-link{
+  text-decoration: none;
+  color: white;
+}

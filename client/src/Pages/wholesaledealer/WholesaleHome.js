@@ -10,7 +10,7 @@ function WholesaleHome() {
     const[unsold,setUnsold]=useState([])
   
   return (
-    <div>
+    <div className="mt-5 pt-3 me-5">
     <div className="container">
     <div className="shop-dash-color mt-5">
       <section className="pt-5">
