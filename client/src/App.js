@@ -36,7 +36,6 @@ import DeliveryAgentRequest from './Pages/delivery agent/DeliveryAgentRequest';
 import CommonNav from './Components/CommonNav';
 import WholesaleHome from './Pages/wholesaledealer/WholesaleHome';
 
-// import LocalNav from './Pages/Navs/LocalNav';
 
 
 
