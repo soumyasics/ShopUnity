@@ -73,8 +73,10 @@ const WholesaleDealerLogin = async (req, res) => {
     return res.status(200).json({
       message: "Login successful",
       token,
+      storeName: wholesaledealer.storeName,
+      status: wholesaledealer.status,
+      ActiveStatus: wholesaledealer.ActiveStatus,
       id: wholesaledealer._id,
-      status: "approved"
     });
 
   } catch (error) {
