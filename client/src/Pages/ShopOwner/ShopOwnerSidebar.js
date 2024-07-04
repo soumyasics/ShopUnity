@@ -27,8 +27,11 @@ function ShopOwnerSidebar() {
 
   const handleLogout = (e) => {
     e.preventDefault();
+    alert("logged out ")
     localStorage.removeItem("shopowner");
     localStorage.removeItem("shopownertoken");
+    localStorage.removeItem("shopname");
+
     navigate("/shopownerlogin");
   };
 

@@ -180,6 +180,7 @@ function ShopOwnerLogin() {
                       >
                         Sign up now
                       </Link>
+                      <p style={{display:"none"}}>Ajeena</p>
                     </h6>
                   </div>
                 </form>
