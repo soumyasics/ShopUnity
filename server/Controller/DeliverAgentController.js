@@ -57,6 +57,7 @@ const DeliveryagentLogin = async (req, res) => {
             token,
             id: deliveryAgent._id,
             status: deliveryAgent.status,
+            name:deliveryAgent.name
           });
       } else {
         return res.status(401).json({ message: "Password is incorrect" });
