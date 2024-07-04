@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../images/LOGO SHOP UNITY-1.png";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";

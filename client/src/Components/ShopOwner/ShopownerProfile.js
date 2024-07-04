@@ -1,5 +1,4 @@
 import React from "react";
-import ShopOwnerNav from "../../Pages/Navs/ShopOwnerNav";
 import ShopownerProfilepage from "../../Pages/ShopOwner/ShopownerProfilepage";
 import Footer from "../../Pages/Footer";
 import ShopOwnerSidebar from "../../Pages/ShopOwner/ShopOwnerSidebar";

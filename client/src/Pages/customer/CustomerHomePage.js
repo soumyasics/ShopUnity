@@ -72,12 +72,12 @@ function CustomerHomePage() {
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="">
                     <Nav className=" customer-home-nav-link">
-                      <Nav.Link href="#home"><MdHome className='customer-home-icon' />Home</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><MdOutlineRoundaboutRight className='customer-home-about-icon' />About</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><FaShop className='customer-home-icon' />Shops</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><BsBoxes className='customer-home-icon' />Products</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><BsBoxSeam className='customer-home-icon' />Orders</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><GrCompliance className='customer-home-icon' />Complaints</Nav.Link>
+                      <Nav.Link href="#home"><MdHome className='customer-home-icon ms-2' />Home</Nav.Link>
+                      {/* <Nav.Link href="#link" className='ms-2'><MdOutlineRoundaboutRight className='customer-home-about-icon' />About</Nav.Link> */}
+                      <Nav.Link href="#link" className='ms-2'><FaShop className='customer-home- ms-2' />Shops</Nav.Link>
+                      <Nav.Link href="#link" className='ms-2'><BsBoxes className='customer-home-icon ms-2' />Products</Nav.Link>
+                      <Nav.Link href="#link" className='ms-2'><BsBoxSeam className='customer-home-icon ms-2' />Orders</Nav.Link>
+                      <Nav.Link href="#link" className='ms-2'><GrCompliance className='customer-home-icon ms-2' />Complaints</Nav.Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Navbar>
@@ -88,7 +88,10 @@ function CustomerHomePage() {
                     <FaCartShopping className='ms-5 customer-home-cart-icon mt-2' />
                   </div>
                   <div className='col'>
-                    <IoMdContact className='ms-5 customer-home-cart-icon mt-2' />
+                    <Link to='/customerprofile'>
+                      <IoMdContact className='ms-5 customer-home-cart-icon mt-2' />
+                    </Link>
+                    
                   </div>
                   <div onClick={handlelogout} className='col'>
                     <RiLogoutCircleLine className='ms-5 customer-home-cart-icon mt-2' />

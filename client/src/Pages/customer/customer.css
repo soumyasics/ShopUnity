@@ -1,6 +1,6 @@
 .customer_register {
  padding-top: 15%;
-  background-image: url("../../images/customer1.png");
+  /* background-image: url("../../images/customer1.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -17,7 +17,7 @@ padding: 10%;
   padding-top: 5%;
 }
 .customer_login {
-  background-image: url("../../images/customer2.png");
+  /* background-image: url("../../images/customer2.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 color: aliceblue;
@@ -181,4 +181,17 @@ color: aliceblue;
 .customer-home-deliveryfast1{
   color: #A8A8A8;
   font-size: 20px;
+}
+
+/* Customer Profile */
+.customer-profile-label{
+  color: #11B1C7;
+  font-weight: bold;
+}
+.customer-profile-text{
+  height: 44px;
+}
+.customer-profile-link{
+  color: black;
+  font-size: 25px;
 }

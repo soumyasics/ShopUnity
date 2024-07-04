@@ -55,7 +55,7 @@ function WholesaleDealerSidebar({url}) {
               <Row className="align-items-center">
                 <Col xs={3} md={2}>
                 <Link to="/wholesaledealerprofile" className="sidebar-link">
-                  <img className="sidebarimg mt-3" src={sidebarimg} alt="img" />tyt
+                  <img className="sidebarimg mt-3" src={sidebarimg} alt="img" />
                   </Link>
                 </Col>
                 <Col xs={9} md={10}>
@@ -68,7 +68,7 @@ function WholesaleDealerSidebar({url}) {
             <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
               <li className="nav-item" style={{ marginTop: "55%" }}>
                 <Link
-                  to="/wholesaledealerprofile"
+                  to=""
                   className="shopownersidebar-dashboard rounded-end-5 "
                 >
                   <MdDashboard /> Dashboard
