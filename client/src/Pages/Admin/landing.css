@@ -1,4 +1,8 @@
-
+.landingloginbtn{
+    outline: none;
+    padding: 4%;
+    border-radius: 12px;
+}
 
 .shopunitytittle{
     position: absolute;

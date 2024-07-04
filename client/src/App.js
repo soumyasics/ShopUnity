@@ -41,6 +41,7 @@ import WholesaleDelaerProfilePage from './Pages/wholesaledealer/WholesaleDelaerP
 import WholesaleDealerEditProfile from './Pages/wholesaledealer/WholesaleDealerEditProfile';
 import WholesalerMain from './Pages/wholesaledealer/WholesalerMain';
 import DeliveryagentMain from './Pages/delivery agent/DeliveryagentMain';
+import CustomerProfile from './Pages/customer/CustomerProfile';
 
 
 
@@ -76,6 +77,7 @@ function App() {
     <Route path='/customerhome' element={[<CustomerHomePage/>]} />
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
     <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>]} />
+    <Route path='/customerprofile' element={<CustomerProfile/>} />
     
 {/* deliveryagent */}
 

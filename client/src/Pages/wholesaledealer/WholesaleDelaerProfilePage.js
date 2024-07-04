@@ -4,7 +4,9 @@ import Col from "react-bootstrap/Col";
 import { BsPencil } from "react-icons/bs";
 import '../ShopOwner/shopowner.css'
 import axiosInstance from '../../APIS/axiosinstatnce';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import './wholesale.css'
 
 function WholesaleDelaerProfilePage({url}) {
 console.log(url);
@@ -29,8 +31,16 @@ console.log(url);
         Navigate("/wholesaledealereditprofile")
     }
   return (
-    <div className="container">
+    <div className="container ">
+      <div className="mt-2">
+        <Link to="/wholesalermain" className='wholesale-dealer-profile-icon mt-5' >
+          <FaArrowLeftLong />
+        </Link>
+      </div>
     <div className="shopprofile-edit-header">
+    
+            
+          
       <form>
         <Row className="container shopprofile-edit">
           <h2 className="shopprofile-edit-h2">My Profile</h2>
