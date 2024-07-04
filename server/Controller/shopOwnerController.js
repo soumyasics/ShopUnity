@@ -134,21 +134,26 @@ const getAllPendingShopOwners = (req, res) => {
     });
 };
 const getAshopowner = (req, res) => {
-  // console.log(req.params);
   const shopownerid = req.params.shopownerid;
   shopownerschema
     .findById(shopownerid)
     .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          status: 404,
+          message: "Shop owner not found",
+        });
+      }
       res.json({
         status: 200,
-        message: "find",
+        message: "Shop owner found",
         data: result,
       });
     })
     .catch((err) => {
-      res.json({
+      res.status(500).json({
         status: 500,
-        message: "not find",
+        message: "Failed to retrieve shop owner",
         data: err,
       });
     });
@@ -157,7 +162,9 @@ const getAshopowner = (req, res) => {
 const EditAShopOwner = (req, res) => {
   const shopownerid = req.params.shopownerid;
   console.log(req.files, "j");
-  const updateData = {
+
+  // Check if there's a new file uploaded
+  let updateData = {
     shopname: req.body.shopname,
     shopownername: req.body.shopownername,
     shopownercontact: req.body.shopownercontact,
@@ -167,8 +174,11 @@ const EditAShopOwner = (req, res) => {
     shopownerpincode: req.body.shopownerpincode,
     shopownerdistrict: req.body.shopownerdistrict,
     shopownercity: req.body.shopownercity,
-    // shoplicence: req.file.originalname,
   };
+
+  if (req.file) {
+    updateData.shoplicence = req.file.originalname;
+  }
 
   shopownerschema
     .findByIdAndUpdate(shopownerid, updateData, { new: true })
@@ -181,6 +191,7 @@ const EditAShopOwner = (req, res) => {
       }
       res.status(200).json({
         status: 200,
+        message: "Shop owner updated successfully",
         data: result,
       });
     })
@@ -188,7 +199,7 @@ const EditAShopOwner = (req, res) => {
       console.error(err);
       res.status(500).json({
         status: 500,
-        message: "Failed to update",
+        message: "Failed to update shop owner",
       });
     });
 };
