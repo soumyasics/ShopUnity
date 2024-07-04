@@ -9,23 +9,23 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import './wholesale.css'
 
 function WholesaleDelaerProfilePage({url}) {
-console.log(url);
+
     const[data,setData]=useState({})
     const Navigate=useNavigate();
 
     const wholesaledealerid = localStorage.getItem("wholesaledealer")
-     
-    useEffect(() => {
-        axiosInstance.get('/get_a_wholesaledealer/'+wholesaledealerid )
-        .then((res) => {
-            setData(res.data.data);
-            console.log(res);
-            
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    },[])
+     console.log(wholesaledealerid);
+   useEffect(() => {
+    axiosInstance.get("/get_a_wholesaledealer/" + wholesaledealerid)
+    .then((res) => {
+      setData(res.data.data)
+      console.log(res,"gg");
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+   },[])
+
     const gotoEdit = (e) =>{
         e.preventDefault();
         Navigate("/wholesaledealereditprofile")
@@ -37,10 +37,7 @@ console.log(url);
           <FaArrowLeftLong />
         </Link>
       </div>
-    <div className="shopprofile-edit-header">
-    
-            
-          
+    <div className="shopprofile-edit-header">    
       <form>
         <Row className="container shopprofile-edit">
           <h2 className="shopprofile-edit-h2">My Profile</h2>

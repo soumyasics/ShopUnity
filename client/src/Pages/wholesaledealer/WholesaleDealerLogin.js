@@ -66,20 +66,20 @@ function WholesaleDealerLogin() {
       axiosInstance
         .post("/wholesaledealer_login", data)
         .then((res) => {
-          const id = res.data
+          
           if (res.status === 200) {
             console.log("Login Successfully", res);
             alert("Login Successfully");
             Navigate("/wholesalermain");
-            localStorage.setItem("wholesaledealer",id)
+            localStorage.setItem("wholesaledealer",res.data.data.id)
           } else {
             alert("Logged in Failed", res);
             console.log("Error", res);
           }
         })
         .catch((err) => {
-          console.log(err.response.data.message);
-          alert(err.response.data.message);
+          // console.log(err.response.data.message);
+          // alert(err.response.data.message);
 
         });
       // console.log(data);

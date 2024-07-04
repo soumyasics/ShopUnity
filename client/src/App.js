@@ -96,7 +96,7 @@ function App() {
     <Route path='/shopownerlogin' element={[<MainNav/>,<ShopOwnerLogin/>,<Footer/>]} />
     <Route path='/shopownerhome' element={[<CommonNav/>,<ShopHomePage/>]} />
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
-    <Route path='/shopownerprofile' element={<ShopownerProfile url={{url}}/>}/>
+    <Route path='/shopownerprofile' element={<ShopownerProfile url={url}/>}/>
     <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEdit/>}/>
 {/* Admin */}
 
