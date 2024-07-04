@@ -1,4 +1,53 @@
+<<<<<<< HEAD
+.shop_register_main{
+  padding: 2%;
+  margin: 5%;
+}
+.shop_register_form{
+    padding: 2%;
+    margin: 0 8%;
+}
+.shop_register_main img{
+  margin-top: 30%;
+}
+.shop_register{
+  /* background-image:url("../../images/shopowner2.png"); */
+background-repeat: no-repeat;
+background-size: cover;
+  padding-top: 5%;
+}
+.shop_login{
+  padding-top: 5%;
+background-repeat: no-repeat;
+background-size: cover;
+}
+.shop_login_main{
+  padding:2% 2%;
+  margin: 5%;
+}
+.shop_login_form{
+  padding: 2%;
+  margin: 0 8%;
+}
+.shopownerhome{
+background-image: url("https://img.freepik.com/premium-photo/small-business-owner-entrance_1033130-1135.jpg?w=740");
+background-size: cover;
+background-repeat: no-repeat;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+min-height: 100vh;
+}
+.shopownerhomemain{
+background-color: rgba(0, 0, 0, 0.652);
+padding: 5%;
+min-height: 100vh;
+}
+.shopownerhome3{
+/* background-image: url("../../images/couple-barista-standing-counter-coffee-shop-coffee-business-concept.jpg"); */
+background-size: cover;
+}
+=======
 
+>>>>>>> 9657fff02c15c82b170c67b51a8aba842708f78d
 .shopownerhome4{
 background-color: rgba(0, 0, 0, 0.638);
 min-height: 90vh;

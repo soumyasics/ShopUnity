@@ -216,3 +216,9 @@
   text-decoration: none;
   color: white;
 }
+
+/* Wholesale Dealer Profile */
+.wholesale-dealer-profile-icon{
+  color: black;
+  font-size: 25px;
+}
