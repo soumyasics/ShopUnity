@@ -54,7 +54,7 @@ function ShopownerViewProduct() {
                         </div>
                     </Card> 
                 </div>
-                <div className='col'>
+                {/* <div className='col'>
                     <Card className='shopowner-viewproduct-card'>
                         <label className='shopowner-viewproduct-label ms-2 ps-3 mt-2'>Sprite</label>
                         <Card.Img className='shopowner-viewproduct-cardimg mt-3' src={sprite} />
@@ -62,8 +62,8 @@ function ShopownerViewProduct() {
                             <button className='shopowner-viewproduct-viewbtn me-4 mt-2 mb-3'>View</button>
                         </div>
                     </Card> 
-                </div>
-                <div className='col'>
+                </div> */}
+                {/* <div className='col'>
                     <Card className='shopowner-viewproduct-card'>
                         <label className='shopowner-viewproduct-label ms-2 ps-3 mt-2'>Sprite</label>
                         <Card.Img className='shopowner-viewproduct-cardimg mt-3' src={sprite} />
@@ -71,7 +71,7 @@ function ShopownerViewProduct() {
                             <button className='shopowner-viewproduct-viewbtn me-4 mt-2 mb-3'>View</button>
                         </div>
                     </Card>  
-                </div>
+                </div> */}
             </div>
         </div>
     </div>

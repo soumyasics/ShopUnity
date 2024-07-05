@@ -6,6 +6,7 @@ import chocolate from '../../images/chocolate.png'
 import minus from '../../images/minus.png'
 import plus from '../../images/plus.png'
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 function CustomerViewProductPage() {
 
     const[count,setCount]=useState(1)
@@ -68,14 +69,17 @@ function CustomerViewProductPage() {
                                 <button className='shopowner-viewproduct-minusbtn' onClick={decrement}><img src={minus}></img></button>
                             </div>
                             <div className='col-1 '>
-                                <label>{count}</label>
+                            <label>{count}</label>
                             </div>
                             <div className='col-2 '>
                                 <button className='shopowner-viewproduct-plusbtn' onClick={increment}><img src={plus}></img></button>
                             </div>
                         </div>
                         <div className='mt-3'>
-                            <button className='shopowner-viewproduct-cartbtn'><HiOutlineShoppingCart/> Add to Cart</button>
+                            <Link to='/customerviewproductdetail'>
+                                <button className='shopowner-viewproduct-cartbtn'><HiOutlineShoppingCart/> Add to Cart</button>
+                            </Link>
+                            
                         </div>
                     </div> 
                 </Card> 

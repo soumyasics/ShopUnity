@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
-    category: {
+  category: {
     type: String,
     required: true,
   },
@@ -10,7 +10,7 @@ const ProductSchema = new mongoose.Schema({
     required: true,
   },
   brand: {
-    type: Number,
+    type: String,
     required: true,
   },
   expirydate: {
@@ -34,4 +34,4 @@ const ProductSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("ShopOwner", shopOwnerSchema);
+module.exports = mongoose.model("Product", ProductSchema);
