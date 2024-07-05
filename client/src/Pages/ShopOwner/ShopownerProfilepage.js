@@ -30,7 +30,7 @@ function ShopownerProfilepage({ url }) {
     e.preventDefault();
     Navigate("/shopownerprofileedit");
   };
-  console.log(`${url.url.url}${data.shoplicence}`,"kk");
+  console.log(`${url}${data.shoplicence}`,"kk");
   return (
   
     <div className="container">

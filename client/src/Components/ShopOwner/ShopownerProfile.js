@@ -11,7 +11,7 @@ function ShopownerProfile({ url }) {
       </div>
       <div className="col-9 ms-3">
         {" "}
-        <ShopownerProfilepage url={{ url }} />
+        <ShopownerProfilepage url={url } />
       </div>
       <Footer />
     </div>

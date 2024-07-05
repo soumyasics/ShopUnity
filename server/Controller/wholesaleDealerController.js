@@ -154,11 +154,13 @@ const getAWholesaledealer = async (req, res) => {
   }
 };
 
-const EditAWholesaledealer =async (req, res) => {
-  const wholesaledealerid = req.params.wholesaledealerid;
-  await wholesaledealerschema
-    .findByIdAndUpdate(wholesaledealerid, {
-      storename: req.body.storename,
+const EditAWholesaledealer = async (req, res) => {
+  try {
+    console.log(req.body);
+    const wholesaledealerid = req.params.wholesaledealerid;
+
+    const updateData = {
+      storeName: req.body.storeName,
       dealername: req.body.dealername,
       address: req.body.address,
       districts: req.body.districts,
@@ -167,22 +169,41 @@ const EditAWholesaledealer =async (req, res) => {
       contact: req.body.contact,
       email: req.body.email,
       wholesaleregisternumber: req.body.wholesaleregisternumber,
-      dealerlisence: req.file,
       password: req.body.password,
-    })
-    .then((result) => {
-      res.json({
-        status: 200,
-        data: result,
+    };
+
+    // If a file is uploaded, add it to the update data
+    if (req.file) {
+      updateData.dealerlisence = req.file.path; // assuming req.file.path contains the file path
+    }
+
+    const result = await wholesaledealerschema.findByIdAndUpdate(
+      wholesaledealerid,
+      updateData,
+      { new: true } // This option returns the updated document
+    );
+
+    if (!result) {
+      return res.status(404).json({
+        status: 404,
+        message: "Wholesaler dealer not found",
       });
-    })
-    .catch((err) => {
-      res.json({
-        status: 500,
-        message: "Failed to Update",
-      });
+    }
+
+    res.status(200).json({
+      status: 200,
+      data: result,
     });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: 500,
+      message: "Failed to update",
+    });
+  }
 };
+
+
 
 const DeleteAWholesaleDealer = (req, res) => {
   const wholesaledealerid = req.params.wholesaledealerid;

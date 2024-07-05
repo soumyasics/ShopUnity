@@ -47,7 +47,7 @@ function WholesaleDelaerProfilePage({url}) {
           <div>
             <img
               className="mt-3 mb-3"
-              src={`${url}${data.dealerlisence}`}
+              src={`${url}${data?.dealerlisence?.filename}`}
               style={{
                 width:"50%",
                 height:"200px",
