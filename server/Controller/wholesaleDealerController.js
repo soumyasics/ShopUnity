@@ -154,9 +154,9 @@ const getAWholesaledealer = async (req, res) => {
   }
 };
 
-const EditAWholesaledealer = (req, res) => {
+const EditAWholesaledealer =async (req, res) => {
   const wholesaledealerid = req.params.wholesaledealerid;
-  wholesaledealerschema
+  await wholesaledealerschema
     .findByIdAndUpdate(wholesaledealerid, {
       storename: req.body.storename,
       dealername: req.body.dealername,

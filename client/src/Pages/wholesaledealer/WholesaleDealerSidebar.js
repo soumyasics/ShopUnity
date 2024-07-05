@@ -18,6 +18,7 @@ import './wholesale.css'
 import { FaAngleRight } from "react-icons/fa6";
 import { BsShop } from "react-icons/bs";
 import '../Admin/Admin.css'
+import { FaUserAlt } from "react-icons/fa";
 
 function WholesaleDealerSidebar({url}) {
     const [open, setOpen] = useState(false);
@@ -61,7 +62,7 @@ function WholesaleDealerSidebar({url}) {
                   </Link>
                 </Col>
                 <Col xs={9} md={10}>
-                  <p to="" className="sidebar-para mb-1 ms-3">{shopname}</p>
+                  <p to="" className="sidebar-para mb-1 ms-3">{open.storeName}</p>
                 </Col>
               </Row>
           </div>
@@ -74,6 +75,11 @@ function WholesaleDealerSidebar({url}) {
                   className="shopownersidebar-dashboard rounded-end-5 "
                 >
                   <MdDashboard /> Dashboard
+                </Link>
+              </li>
+              <li className="nav-item mt-3">
+                <Link to="/wholesaledealerprofile" className="nav-link sidebar-shop">
+                   <FaUserAlt  className="wholesaler-dash-icon ms-3"/><span className="wholesaler-dash-iconspan ms-2"> Profile</span>
                 </Link>
               </li>
               <li>

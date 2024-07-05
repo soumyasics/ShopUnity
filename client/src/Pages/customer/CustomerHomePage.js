@@ -72,12 +72,12 @@ function CustomerHomePage() {
                   <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   <Navbar.Collapse id="">
                     <Nav className=" customer-home-nav-link">
-                      <Nav.Link href="#home"><MdHome className='customer-home-icon ms-2' />Home</Nav.Link>
+                      <Link to='/customerhome' className='ms-2 mt-2 customer-home-link'><MdHome className='customer-home-icon ms-2' />Home</Link>
                       {/* <Nav.Link href="#link" className='ms-2'><MdOutlineRoundaboutRight className='customer-home-about-icon' />About</Nav.Link> */}
-                      <Nav.Link href="#link" className='ms-2'><FaShop className='customer-home- ms-2' />Shops</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><BsBoxes className='customer-home-icon ms-2' />Products</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><BsBoxSeam className='customer-home-icon ms-2' />Orders</Nav.Link>
-                      <Nav.Link href="#link" className='ms-2'><GrCompliance className='customer-home-icon ms-2' />Complaints</Nav.Link>
+                      <Link to='/customerviewshop' className='ms-2 mt-2 customer-home-link'><FaShop className='customer-home- ms-2' />Shops</Link>
+                      <Link to='/customerviewproduct' className='ms-2 mt-2 customer-home-link'><BsBoxes className='customer-home-icon ms-2' />Products</Link>
+                      <Link to='' className='ms-2 mt-2 customer-home-link'><BsBoxSeam className='customer-home-icon ms-2' />Orders</Link>
+                      <Link to='' className='ms-2 mt-2 customer-home-link'><GrCompliance className='customer-home-icon ms-2' />Complaints</Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Navbar>

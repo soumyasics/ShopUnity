@@ -45,7 +45,7 @@ function ShopOwnerProfileEditPage() {
 
     setData(prevData => ({
       ...prevData,
-      [name]: name ==  value
+      [name]:value
     }));
 
     setErrors(prevErrors => ({
@@ -97,8 +97,10 @@ function ShopOwnerProfileEditPage() {
     console.log(data,"j")
     e.preventDefault();
     axiosInstance
-      .post(`/edit_a_shopowner/${shopownerid}` + shopownerid, formData)
+      .post(`/edit_a_shopowner/${shopownerid}`, formData)
       .then((res) => {
+        alert("Updated Successfully")
+        console.log("Updated Successfully");
         navigate("/shopownerprofile");
       })
       .catch((err) => {
@@ -108,7 +110,7 @@ function ShopOwnerProfileEditPage() {
   return (
    <div className="container">
     <div className="shopprofile-editpage-header">
-      <form onSubmit={handleSubmit}>
+      <form>
         <Row className="container shopprofile-editpage mt-5 pt-3">
           {/* <Row>
             <Col><img className="shopprofile-editpage-img" src={editprofile} alt="img"></img>
@@ -122,28 +124,28 @@ function ShopOwnerProfileEditPage() {
           <div >
           <label className="container-fluid font" id="font">ShopName</label>
             <input type="text"className="form-control m-2" 
-            placeholder="ShopName"
+            placeholder={data.shopname}
             id="shopprofile-editpage-text2"
             name="shopname"
-            value={data.shopname}
+            
             onChange={handleChange}/>
           </div>
           <div>
           <label className="container-fluid font" id="font">Owner Name</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Owner Name"
+            placeholder={data.shopownername}
             id="shopprofile-editpage-text2"
             name="shopownername"
-            value={data.shopownername}
+            
             onChange={handleChange}/>
           </div>
           <div>
           <label className="container-fluid font" id="font">Address</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Address"
+            placeholder={data.shopowneraddress}
             id="shopprofile-editpage-text2"
             name="shopowneraddress"
-            value={data.shopowneraddress}
+            
             onChange={handleChange}
             />
           </div>
@@ -151,23 +153,24 @@ function ShopOwnerProfileEditPage() {
           <label className="container-fluid font" id="font">District</label>
           <select className="form-control m-2" 
                               id="shopprofile-editpage-text2"
+                              
                                 name="shopownerdistrict" 
-                                value={data.shopownerdistrict}
+                                
                                 onChange={handleChange}
                                 >
                                     <option >Select District</option>
                                     {districts.map((district, index) => (
-                                        <option key={index} value={district}>{district}</option>
+                                        <option key={index}  placeholde={data.shopownerdistrict}>{district}</option>
                                     ))}
               </select>
           </div>
           <div>
           <label className="container-fluid font" id="font">City</label>
             <input type="text"className="form-control m-2" 
-            placeholder="City"
+            placeholder={data.shopownercity}
             id="shopprofile-editpage-text2"
             name="shopownercity"
-            value={data.shopownercity}
+            
             onChange={handleChange}
             />
           </div>
@@ -177,20 +180,20 @@ function ShopOwnerProfileEditPage() {
           <div>
           <label className="container-fluid font" id="font">Pincode</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Pincode"
+            placeholder={data.shopownerpincode}
             id="shopprofile-editpage-text2"
             name="shopownerpincode"
-            value={data.shopownerpincode}
+            
             onChange={handleChange}
             />
           </div>
           <div>
           <label className="container-fluid font" id="font">Contact Number</label>
             <input type="text" className="form-control m-2" 
-            placeholder="Contact No"
+            placeholder={data.shopownercontact}
             id="shopprofile-editpage-text2"
             name="shopownercontact"
-            value={data.shopownercontact}
+            
             onChange={handleChange}
             />
         
@@ -198,20 +201,20 @@ function ShopOwnerProfileEditPage() {
           <div>
           <label className="container-fluid font" id="font">Email Id</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Email"
+            placeholder={data.shopowneremail}
             id="shopprofile-editpage-text2"
             name="shopowneremail"
-            value={data.shopowneremail}
+            
             onChange={handleChange}
             />
           </div>
           <div>
           <label className="container-fluid font" id="font">Registration Number</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Registration"
+            placeholder={data.shopregistrationnumber}
             id="shopprofile-editpage-text2"
             name="shopownerregistration"
-            value={data.shopregistrationnumber}
+            
             onChange={handleChange}
             />
           </div>
@@ -219,7 +222,7 @@ function ShopOwnerProfileEditPage() {
           
           </div>
           </Col>
-          <div className="shopprofile-editpage-btn ms-5">
+          <div className="shopprofile-editpage-btn ms-5 text-center">
             <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handleEdit}>
               Update</button>
               <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handlecancel}>

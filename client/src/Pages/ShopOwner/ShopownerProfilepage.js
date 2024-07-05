@@ -43,7 +43,7 @@ function ShopownerProfilepage({ url }) {
             <div>
               <img
                 className="mt-3 mb-3"
-                src={`${url.url.url}${data.shoplicence}`}
+                src={`${url}${data.shoplicence}`}
                 style={{
                   width:"50%",
                   height:"200px",
@@ -167,7 +167,7 @@ function ShopownerProfilepage({ url }) {
                 />
               </div>
             </Col>
-            <div className="shopprofile-editpage-btn">
+            <div className="shopprofile-editpage-btn text-center">
               <button
                 type="submit"
                 className="shopprofile-editpage-subbtn"
