@@ -42,6 +42,13 @@ import WholesaleDealerEditProfile from './Pages/wholesaledealer/WholesaleDealerE
 import WholesalerMain from './Pages/wholesaledealer/WholesalerMain';
 import DeliveryagentMain from './Pages/delivery agent/DeliveryagentMain';
 import CustomerProfile from './Pages/customer/CustomerProfile';
+import ShopAddItem from './Pages/ShopOwner/ShopAddItem';
+import ShopownerViewProduct from './Pages/ShopOwner/ShopownerViewProduct';
+import ShopownerviewProductDetails from './Pages/ShopOwner/ShopownerviewProductDetails';
+import ShopownerEditProduct from './Pages/ShopOwner/ShopownerEditProduct';
+import CustomerNavbar from './Pages/customer/CustomerNavbar';
+import CustomerviewShops from './Pages/customer/CustomerviewShops';
+import CustomerViewProductPage from './Pages/customer/CustomerViewProductPage';
 
 
 
@@ -78,6 +85,8 @@ function App() {
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
     <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>]} />
     <Route path='/customerprofile' element={<CustomerProfile/>} />
+    <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
+    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage/>]} />
     
 {/* deliveryagent */}
 
@@ -98,6 +107,10 @@ function App() {
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
     <Route path='/shopownerprofile' element={<ShopownerProfile url={url}/>}/>
     <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEdit/>}/>
+    <Route path='/shopowneradditem' element={<ShopAddItem/>} />
+    <Route path='/shopownerviewproduct' element={<ShopownerViewProduct/>}/>
+    <Route path='/shopownerviewproductdetails' element={<ShopownerviewProductDetails/>}/>
+    <Route path='/shopownereditproduct' element={<ShopownerEditProduct/>}/>
 {/* Admin */}
 
     <Route path='/Admin' element={[<AdminMainNav/>,<AdminLogin/>,<Footer/>]} />

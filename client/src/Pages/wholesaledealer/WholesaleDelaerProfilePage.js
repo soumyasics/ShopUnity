@@ -10,6 +10,7 @@ import './wholesale.css'
 
 function WholesaleDelaerProfilePage({url}) {
 
+  console.log(url);
     const[data,setData]=useState({})
     const Navigate=useNavigate();
 
@@ -18,7 +19,7 @@ function WholesaleDelaerProfilePage({url}) {
    useEffect(() => {
     axiosInstance.get("/get_a_wholesaledealer/" + wholesaledealerid)
     .then((res) => {
-      setData(res.data.data)
+      setData(res.data.data);
       console.log(res,"gg");
     })
     .catch((err) => {
@@ -46,7 +47,7 @@ function WholesaleDelaerProfilePage({url}) {
           <div>
             <img
               className="mt-3 mb-3"
-              src={`${url}${data.shoplicence}`}
+              src={`${url}${data.dealerlisence}`}
               style={{
                 width:"50%",
                 height:"200px",

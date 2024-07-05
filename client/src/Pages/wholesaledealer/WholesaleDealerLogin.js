@@ -50,42 +50,48 @@ function WholesaleDealerLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const formErrors=validateForm()
+  
     let formIsValid = true;
     let errors = {};
-
+  
     errors.email = formValidating("Email", data.email);
     if (errors.email) formIsValid = false;
     errors.password = formValidating("Password", data.password);
     if (errors.password) formIsValid = false;
-
+  
     setErrors(errors);
-    // setFormIsValid(formIsValid);
-
+  
     if (formIsValid) {
       axiosInstance
         .post("/wholesaledealer_login", data)
         .then((res) => {
-          
+          console.log("Response:", res); // Log the entire response
           if (res.status === 200) {
-            console.log("Login Successfully", res);
+            const { data: responseData } = res;
+            console.log("Login Successfully", responseData);
             alert("Login Successfully");
             Navigate("/wholesalermain");
-            localStorage.setItem("wholesaledealer",res.data.data.id)
+            localStorage.setItem("wholesaledealer", responseData.id);
+            localStorage.setItem("storeName", responseData.storeName);
+            localStorage.setItem("token", responseData.token);
+
           } else {
             alert("Logged in Failed", res);
             console.log("Error", res);
           }
         })
         .catch((err) => {
-          // console.log(err.response.data.message);
-          // alert(err.response.data.message);
-
+          console.log("Error Response:", err.response); // Log the entire error response
+          if (err.response && err.response.data && err.response.data.message) {
+            console.log(err.response.data.message);
+            alert(err.response.data.message);
+          } else {
+            console.error("An unexpected error occurred:", err);
+          }
         });
-      // console.log(data);
     }
   };
-  return (
+      return (
     <div>
       <Row className="container">
         <Col className="container">

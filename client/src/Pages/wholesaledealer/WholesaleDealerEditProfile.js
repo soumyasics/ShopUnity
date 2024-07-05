@@ -80,31 +80,31 @@ function WholesaleDealerEditProfile() {
         return '';
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
 
-        let errors = {};
-        let formIsValid=true;
+    //     let errors = {};
+    //     let formIsValid=true;
 
-        errors.storeName=validateField('StoreName',data.storeName);
-        errors.dealername=validateField('DealerName',data.dealername);
-        errors.address=validateField('Address',data.address);
-        errors.city=validateField('City',data.city);
-        errors.districts=validateField('District',data.districts);
-        errors.contact=validateContact('Contact',data.contact);
-        errors.pincode=validatePincode('Pincode',data.pincode);
-        errors.wholesaleregisternumber=validateField('Wholesalergister',data.wholesaleregisternumber);
-        errors.email=validatePincode('Email',data.email);
+    //     errors.storeName=validateField('StoreName',data.storeName);
+    //     errors.dealername=validateField('DealerName',data.dealername);
+    //     errors.address=validateField('Address',data.address);
+    //     errors.city=validateField('City',data.city);
+    //     errors.districts=validateField('District',data.districts);
+    //     errors.contact=validateContact('Contact',data.contact);
+    //     errors.pincode=validatePincode('Pincode',data.pincode);
+    //     errors.wholesaleregisternumber=validateField('Wholesalergister',data.wholesaleregisternumber);
+    //     errors.email=validatePincode('Email',data.email);
 
-        setErrors(errors);
+    //     setErrors(errors);
 
-    }
+    // }
 
     const Navigation=useNavigate();
     const wholesaledealerid = localStorage.getItem("wholesaledealer");
 
     useEffect(() => {
-        axiosInstance.get('/get_all_wholesaledealer/' + wholesaledealerid)
+        axiosInstance.get('/get_a_wholesaledealer/' + wholesaledealerid)
         .then((res) => {
             setData(res.data.data);
         })
@@ -123,6 +123,8 @@ function WholesaleDealerEditProfile() {
         e.preventDefault();
         axiosInstance.post('/edit_a_wholesaledealer/' + wholesaledealerid,formData)
         .then((res) => {
+          alert("Updated Successfully");
+          console.log(res);
             // Navigation("/wholesaledealerprofile");
         })
         .catch((err) => {
@@ -133,7 +135,7 @@ function WholesaleDealerEditProfile() {
   return (
     <div className="container">
     <div className="shopprofile-editpage-header">
-      <form onSubmit={handleSubmit}>
+      <form >
         <Row className="container shopprofile-editpage mt-5 pt-3">
           {/* <Row>
             <Col><img className="shopprofile-editpage-img" src={editprofile} alt="img"></img>
@@ -145,47 +147,45 @@ function WholesaleDealerEditProfile() {
         <h2 className="shopprofile-editpage-h2">Edit Profile</h2>
           <Col className="container">
           <div >
-          <label className="container-fluid font" id="font">ShopName</label>
+          <label className="container-fluid font" id="font">StoreName</label>
             <input type="text"className="form-control m-2" 
-            placeholder="ShopName"
+            placeholder={data.storeName}
             id="shopprofile-editpage-text2"
             name="shopname"
-            value={data.shopname}
+            
             onChange={handleChange}/>
-            {errors.shopname && <div  className="text-danger color">{errors.shopname}</div>}
+            
           </div>
           <div>
-          <label className="container-fluid font" id="font">Owner Name</label>
+          <label className="container-fluid font" id="font">Dealer Name</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Owner Name"
+            placeholder={data.dealername}
             id="shopprofile-editpage-text2"
             name="shopownername"
-            value={data.shopownername}
+            
             onChange={handleChange}/>
           </div>
-          {errors.shopownername && <div  className="text-danger color">{errors.shopownername}</div>}
           <div>
           <label className="container-fluid font" id="font">Address</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Address"
+            placeholder={data.address}
             id="shopprofile-editpage-text2"
             name="shopowneraddress"
-            value={data.shopowneraddress}
+            
             onChange={handleChange}
             />
-            {errors.shopowneraddress && <div  className="text-danger color">{errors.shopowneraddress}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">District</label>
           <select className="form-control m-2" 
                               id="shopprofile-editpage-text2"
                                 name="shopownerdistrict" 
-                                value={data.shopownerdistrict}
+                                
                                 onChange={handleChange}
                                 >
                                     <option >Select District</option>
                                     {districts.map((district, index) => (
-                                        <option key={index} value={district}>{district}</option>
+                                        <option key={index} placeholder={data.districts}>{district}</option>
                                     ))}
               </select>
             {errors.shopownerdistrict && <div  className="text-danger color">{errors.shopownerdistrict}</div>}
@@ -193,13 +193,12 @@ function WholesaleDealerEditProfile() {
           <div>
           <label className="container-fluid font" id="font">City</label>
             <input type="text"className="form-control m-2" 
-            placeholder="City"
+            placeholder={data.city}
             id="shopprofile-editpage-text2"
             name="shopownercity"
-            value={data.shopownercity}
+            
             onChange={handleChange}
             />
-            {errors.shopownercity && <div  className="text-danger color">{errors.shopownercity}</div>}
           </div>
           
           </Col>
@@ -207,53 +206,45 @@ function WholesaleDealerEditProfile() {
           <div>
           <label className="container-fluid font" id="font">Pincode</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Pincode"
+            placeholder={data.pincode}
             id="shopprofile-editpage-text2"
             name="shopownerpincode"
-            value={data.shopownerpincode}
             onChange={handleChange}
             />
-             {errors.shopownerpincode && <div  className="text-danger color">{errors.shopownerpincode}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">Contact Number</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Contact No"
+            placeholder={data.contact}
             id="shopprofile-editpage-text2"
             name="shopownercontact"
-            value={data.shopownercontact}
             onChange={handleChange}
             />
-             {errors.shopownercontact && <div  className="text-danger color">{errors.shopownercontact}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">Email Id</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Email"
+            placeholder={data.email}
             id="shopprofile-editpage-text2"
             name="shopowneremail"
-            value={data.shopowneremail}
             onChange={handleChange}
             />
-             {errors.shopowneremail && <div  className="text-danger color">{errors.shopowneremail}</div>}
           </div>
           <div>
           <label className="container-fluid font" id="font">Registration Number</label>
             <input type="text"className="form-control m-2" 
-            placeholder="Registration"
+            placeholder={data.wholesaleregisternumber}
             id="shopprofile-editpage-text2"
             name="shopownerregistration"
-            value={data.shopregistrationnumber}
             onChange={handleChange}
             />
-             {errors.shopownerregistration && <div  className="text-danger color">{errors.shopownerregistration}</div>}
           </div>
           <div>
           
           </div>
           </Col>
           <div className="shopprofile-editpage-btn ms-5">
-            <button type="submit" className="shopprofile-editpage-subbtn ms-5" >
+            <button type="submit" className="shopprofile-editpage-subbtn ms-5"onClick={handleEdit} >
               Update</button>
               <button type="submit" className="shopprofile-editpage-subbtn ms-5" onClick={handlecancel}>
               Cancel</button>

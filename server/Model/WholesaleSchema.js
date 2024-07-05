@@ -38,10 +38,6 @@ const wholesaledealerschema = mongoose.Schema({
     type: String,
     required: true,
   },
-  dealerlisence: {
-    type: Object,
-    required: true,
-  },
   email: {
     type: String,
     required: true,

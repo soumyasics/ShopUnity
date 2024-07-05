@@ -293,3 +293,241 @@ height: 25px;
 .shop-dash-para{
   font-size: 15px;
 }
+
+/* Shopowner Add Item */
+
+.shopowner-additem-link{
+  font-size: 30px;
+  margin-top: 50px;
+}
+.shopowner-additem-box{
+  width: 90%;
+  height: 135vh;
+  margin-left: 70px;
+  border: 7px solid #CCEDF4;
+  border-radius: 43px ;
+  border: 7px 0px 0px 0px;
+}
+.shopowner-additem-h1{
+  color: #74767B;
+  text-decoration: underline;
+}
+.shopowner-additem-label{
+  font-size: 25px;
+  color: #74767B;
+  font-weight: 500;
+}
+.shopowner-additem-labelbox{
+  width: 100%;
+  height: 100px;
+  gap: 0px;
+  border-radius: 8px;
+  border: 1.41px 0px 0px 0px;
+  border: 1.41px solid #9C9C9C;
+}
+.shopowner-additem-labelbox1{
+  width: 100%;
+  height: 150px;
+  gap: 0px;
+  border-radius: 8px;
+  border: 1.41px 0px 0px 0px;
+  border: 1.41px solid #9C9C9C;
+}
+.shopowner-additem-select{
+  height: 40px;
+  border-radius: 5px;
+  width: 80%;
+  border: 1.41px solid #9C9C9C;
+}
+.shopowner-additem-textbox{
+  height: 40px;
+  border-radius: 5px;
+  width: 80%;
+  border: 1.41px solid #9C9C9C;
+}
+.shopowner-additem-textbox1{
+  height: 100px;
+  border-radius: 5px;
+  width: 80%;
+  border: 1.41px solid #9C9C9C;
+}
+.shopowner-additem-divimglabel{
+  width: 100%;
+  height: 337px;
+  border-radius: 8px;
+  border: 1.41px 0px 0px 0px;
+  border: 1.41px solid #9C9C9C;
+}
+.shopowner-additem-imgupload{
+  width: 183.26px;
+  height: 183.26px;
+  background: #EDEDED;
+  border-radius: 7.97px;
+  border: 1.99px 0px 0px 0px;
+  border: 1.99px solid #000000;
+  margin-left: 190px;
+}
+.shopowner-additem-btn{
+  height: 44px;
+  width: 120px;
+  border: none;
+  color: white;
+  background: #459197;
+  box-shadow: 0px 5.13px 5.13px 0px #00000040;
+  border-radius: 10px;
+}
+.shopowner-additem-quantitybtn{
+  border: none;
+  height: 44px;
+  width: 44px;
+  border-radius: 10px;
+  color: white;
+  background-color: #D5564F;
+  font-size: 30px;
+  padding-bottom: 10px;
+  border: 1.41px solid #FFFFFF
+}
+.shopowner-additem-quantitybtn1{
+  border: none;
+  height: 44px;
+  width: 44px;
+  border-radius: 10px;
+  color: white;
+  background-color: #0176D6;
+  font-size: 25px;
+  padding-bottom: 10px;
+  border: 1.41px solid #FFFFFF
+}
+.shopowner-additem-addbtn{
+  height: 50px;
+  width: 250px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: #459197;
+  box-shadow: 0px 6.56px 6.56px 0px #00000040;
+  font-size: 20px;
+}
+.shopowner-additem-plusicon{
+  font-size: 40px;
+}
+
+/* Shopowner View Product */
+
+.shopowner-viewproduct-link{
+  font-size: 25px;
+}
+.shopowner-viewproduct-h2{
+  color: #74767B;
+  text-decoration: underline;
+}
+.shopowner-viewproduct-divbox{
+  width: 100%;
+  height: 100vh;
+  border-radius: 46px;
+  box-shadow: 0px 4.29px 4.29px 0px #00000040;
+  background: #CCEDF4;
+}
+.shopowner-viewproduct-select{
+  height: 44px;
+  width: 150px;
+  border: none;
+  border-radius: 20px;
+}
+.shopowner-viewproduct-cardimg{
+  height: 180px;
+  width: 20px;
+}
+.shopowner-viewproduct-card{
+  height: 250px;
+}
+.shopowner-viewproduct-viewbtn{
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 50px;
+  background-color: #DFDFDF;
+  box-shadow: 0px 0.75px 1.13px 0px #0000004F;
+}
+.shopowner-viewproduct-button{
+  text-align: right;
+}
+.shopowner-viewproduct-label{
+    background-color:#DFDFDF ;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+/* Shopowner ViewProduct Details */
+
+.shopowner-viewproductdetails-link{
+  font-size: 25px;
+}
+.shopowner-viewproductdetails-boxdiv{
+  width: 100%;
+  height: 120vh;
+  border-radius: 42px;
+  border: 7.15px 0px 0px 0px;
+  background: #FFFFFF;
+  border: 7.15px solid #CCEDF4;
+  box-shadow: 0px 8.42px 8.42px 0px #00000040;
+}
+.shopowner-viewproductdetails-h1{
+  color: #74767B;
+  text-decoration: underline;
+}
+.shopowner-viewproductdetailslabel{
+  color: #74767B;
+  font-size: 25px;
+  font-weight: bold;
+}
+.shopowner-viewproductdetailslabel1{
+  color: #929292;
+  font-size: 21px;
+  font-weight: bold;
+}
+.shopowner-viewproductdetails-imgdiv{
+  width: 320px;
+  height: 320px;
+  border-radius: 16px;
+  background: #EDEDED;
+  border: 1px solid #000000;
+  box-shadow: 0px 11.27px 11.27px 0px #00000040;
+  margin-top: 150px;
+}
+.shopowner-viewproductdetails-editbtn{
+    color: white;
+    background-color: #459197;
+    box-shadow: 0px 9.51px 9.51px 0px #00000040;
+    height: 44px;
+    width: 150px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 230px;
+}
+/* Shopowner Edit Details */
+
+.shopowner-editproduct-details-link{
+    font-size: 25px;
+}
+.shopowner-editproduct-tickbtn{
+    border: 1.93px solid #3CB657;
+    height: 44px;
+    width: 150px;
+    background-color: white;
+    border-radius: 20px;
+    color: #3CB657;
+}
+.shopowner-wrongproduct-img{
+  height: 25px;
+  width: 25px;
+}
+.shopowner-editproduct-wrongbtn{
+    background-color: white;
+    border-radius: 20px;
+    border: 1.93px solid #FF1E1E;
+    height: 44px;
+    width: 150px;
+    color: #FF1E1E;
+}

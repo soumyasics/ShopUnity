@@ -73,8 +73,10 @@ const WholesaleDealerLogin = async (req, res) => {
     return res.status(200).json({
       message: "Login successful",
       token,
+      storeName: wholesaledealer.storeName,
+      status: wholesaledealer.status,
+      ActiveStatus: wholesaledealer.ActiveStatus,
       id: wholesaledealer._id,
-      status: "approved"
     });
 
   } catch (error) {
@@ -129,29 +131,32 @@ const getAllWholesaleDealer = async (req, res) => {
   }
 };
 
-const getAWholesaledealer = (req, res) => {
-  const wholesaledealerid = req.params.wholesaledealerid;
-  wholesaledealerschema
-    .findById(wholesaledealerid)
-    .then((result) => {
-      res.json({
-        status: 200,
-        message: "find",
-        data: result,
-      });
-    })
-    .catch((err) => {
-      res.json({
-        status: 500,
-        message: "not find",
-        data: err,
-      });
+const getAWholesaledealer = async (req, res) => {
+  try {
+    const wholesaledealerid = req.params.wholesaledealerid;
+    const wholesaledealer = await wholesaledealerschema.findById(wholesaledealerid);
+
+    if (!wholesaledealer) {
+      return res.status(404).json({ message: "Wholesale dealer not found" });
+    }
+
+    res.status(200).json({
+      status: 200,
+      message: "Wholesale dealer found",
+      data: wholesaledealer,
     });
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      message: "An error occurred while retrieving the wholesale dealer",
+      data: err,
+    });
+  }
 };
 
-const EditAWholesaledealer = (req, res) => {
+const EditAWholesaledealer =async (req, res) => {
   const wholesaledealerid = req.params.wholesaledealerid;
-  wholesaledealerschema
+  await wholesaledealerschema
     .findByIdAndUpdate(wholesaledealerid, {
       storename: req.body.storename,
       dealername: req.body.dealername,
