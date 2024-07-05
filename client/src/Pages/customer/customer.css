@@ -275,3 +275,44 @@
   width: 180px;
   font-size: 19px;
 }
+
+
+/* Customer View Product Details */
+
+.customer-viewproduct-details-divbox{
+  width: 1332px;
+  height: 930px;
+  border-radius: 41px;
+  border: 7px;
+  background: #FFFFFF;
+  border: 7px solid #CCEDF4;
+}
+
+.customer-viewproduct-details-img{
+  height: 80vh;
+  width: 100%;
+}
+.customer-viewproduct-details-imgbox{
+  border: 1px solid #0000004D;
+  border-radius: 10px;
+}
+.customer-viewproduct-details-span{
+  color: #11B1C7;
+}
+.customer-viewproduct-details-h5{
+  color: #74767B;
+  font-weight: bold;
+}
+.customer-viewproduct-details-h2{
+  color:#74767B ;
+  font-weight: bold;
+}
+.customer-viewproduct-details-p{
+  color:#74767B ;
+  font-weight: bold;
+}
+.customer-viewproduct-details-h2label{
+  color:#74767B ;
+  font-weight: bold;
+  font-size: 30px;
+}

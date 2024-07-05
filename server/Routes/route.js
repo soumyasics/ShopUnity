@@ -5,7 +5,7 @@ const CustomerController=require("../Controller/customerController")
 const WholesaleController=require('../Controller/wholesaleDealerController')
 const DeliveryAgentController=require("../Controller/DeliverAgentController")
 const ShopeOwnerController=require('../Controller/shopOwnerController')
-
+const productController=require("../Controller/productController")
 
 // wholesale
 Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.WholesaleDealerRegister)
@@ -69,5 +69,11 @@ Route.post("/activateShopowner/:id",ShopeOwnerController.activateShopownerById)
 Route.post("/inactivateshopowner/:id",ShopeOwnerController.deActivateShopOwnerById)
 
 
+
+Route.post("/add_a_product",productController.addProduct)
+Route.post("/view_a_product",productController.viewProduct)
+Route.post("/view_all_product",productController.viewAllProducts)
+Route.post("/edit_a_product",productController.editProduct)
+Route.post("/delete_a_product",productController.deleteProduct)
 
 module.exports=Route
