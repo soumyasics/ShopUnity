@@ -12,7 +12,7 @@ Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.
 Route.post('/wholesaledealer_login',WholesaleController.WholesaleDealerLogin)
 Route.get('/get_all_wholesaledealer',WholesaleController.getAllWholesaleDealer)
 Route.get('/get_a_wholesaledealer/:wholesaledealerid',WholesaleController.getAWholesaledealer)
-Route.post('/edit_a_wholesaledealer/:wholesaledealerid',WholesaleController.EditAWholesaledealer)
+Route.post('/edit_a_wholesaledealer/:wholesaledealerid',WholesaleController.upload,WholesaleController.EditAWholesaledealer)
 Route.post('/delete_a_wholesaledealer/:wholesaledealerid',WholesaleController.DeleteAWholesaleDealer)
 Route.post('/wholesaledealer_forgot',WholesaleController.wholesaleforgot)
 
