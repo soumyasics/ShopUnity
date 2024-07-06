@@ -17,6 +17,7 @@ function WholesaleDealerEditProfile() {
         wholesaleregisternumber: "",
         email: "",
         dealerlisence: null,
+        file:''
     });
 
     const [errors, setErrors] = useState({
@@ -39,13 +40,28 @@ function WholesaleDealerEditProfile() {
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
+
+        if (name == 'pincode') {
+            setErrors(d => ({
+                ...d,
+                pincode:  validatePincode(name, value)
+            }))
+        }
+        if (name == 'contact') {
+            setErrors(d => ({
+                ...d,
+                contact:  validateContact(name, value)
+            }))
+        }
+        if (name == 'dealerlisence') {
+            setData(prevData => ({
+                ...prevData,
+                file: files[0]
+            }));
+        }
         setData(prevData => ({
             ...prevData,
-            [name]: name === 'dealerlisence' ? files[0] : value
-        }));
-        setErrors(prevErrors => ({
-            ...prevErrors,
-            [name]: ''
+            [name]: value
         }));
     };
 
@@ -100,8 +116,8 @@ function WholesaleDealerEditProfile() {
         validationErrors.address = validateField('Address', data.address);
         validationErrors.city = validateField('City', data.city);
         validationErrors.districts = validateField('District', data.districts);
-        validationErrors.contact = validateContact('Contact', data.contact);
-        validationErrors.pincode = validatePincode('Pincode', data.pincode);
+        // validationErrors.contact = validateContact('Contact', data.contact);
+        // validationErrors.pincode = validatePincode('Pincode', data.pincode);
         validationErrors.wholesaleregisternumber = validateField('Wholesale Register Number', data.wholesaleregisternumber);
         validationErrors.email = validateField('Email', data.email);
 
@@ -115,10 +131,18 @@ function WholesaleDealerEditProfile() {
 
         const formData = new FormData();
         for (const key in data) {
-            formData.append(key, data[key]);
+            if (key != 'dealerlisence' && key != 'file') {
+                formData.append(key, data[key]);
+            }
+            if (key == 'dealerlisence') {
+                console.log(data.file)
+                formData.append('file', data.file);
+            }
         }
 
-        axiosInstance.post('/edit_a_wholesaledealer/' + wholesaledealerid, formData)
+        axiosInstance.post('/edit_a_wholesaledealer/' + wholesaledealerid, formData,{ headers: {
+            'Content-Type': 'multipart/form-data',
+          }})
             .then((res) => {
                 alert("Updated Successfully");
                 Navigation("/wholesaledealerprofile");
@@ -212,13 +236,14 @@ function WholesaleDealerEditProfile() {
                             <div>
                                 <label className="container-fluid font" id="font">Pincode</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control m-2"
                                     placeholder="Pincode"
                                     id="shopprofile-editpage-text2"
                                     name="pincode"
                                     value={data.pincode}
                                     onChange={handleChange}
+                                     pattern="^\d+$"
                                 />
                                 {errors.pincode && <div className="text-danger color">{errors.pincode}</div>}
                             </div>
@@ -232,6 +257,7 @@ function WholesaleDealerEditProfile() {
                                     name="contact"
                                     value={data.contact}
                                     onChange={handleChange}
+                                     pattern="^\d+$"
                                 />
                                 {errors.contact && <div className="text-danger color">{errors.contact}</div>}
                             </div>
