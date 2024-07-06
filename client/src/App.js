@@ -52,6 +52,8 @@ import CustomerViewProductPage from './Pages/customer/CustomerViewProductPage';
 import CustomerViewProductDetail from './Pages/customer/CustomerViewProductDetail';
 import CustomerMainNav from './Pages/customer/CustomerMainNav';
 import CustomerEditProfile from './Pages/customer/CustomerEditProfile';
+import DeliveryAgentProfile from './Pages/delivery agent/DeliveryAgentProfile';
+import DeliveryagentProfileEdit from './Pages/delivery agent/DeliveryagentProfileEdit';
 
 
 
@@ -103,6 +105,8 @@ function App() {
     <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>]}/>
     <Route path='/deliveryagentsidebar' element={<DeliveryagentSidebar/>}/>
     <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
+    <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile/>} />
+    <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit/>} />
 
 {/* shopowner */}
 
