@@ -49,6 +49,9 @@ import ShopownerEditProduct from './Pages/ShopOwner/ShopownerEditProduct';
 import CustomerNavbar from './Pages/customer/CustomerNavbar';
 import CustomerviewShops from './Pages/customer/CustomerviewShops';
 import CustomerViewProductPage from './Pages/customer/CustomerViewProductPage';
+import CustomerViewProductDetail from './Pages/customer/CustomerViewProductDetail';
+import CustomerMainNav from './Pages/customer/CustomerMainNav';
+import CustomerEditProfile from './Pages/customer/CustomerEditProfile';
 
 
 
@@ -85,8 +88,10 @@ function App() {
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
     <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>]} />
     <Route path='/customerprofile' element={<CustomerProfile/>} />
+    <Route path='/customereditprofile' element={<CustomerEditProfile/>} />
     <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
     <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage/>]} />
+    <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail/>} />
     
 {/* deliveryagent */}
 
