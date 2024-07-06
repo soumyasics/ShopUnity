@@ -1,4 +1,4 @@
-const Product = require("../models/ProductSchema");
+const Product = require("../Model/ProductSchema");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -22,7 +22,15 @@ const addProduct = (req, res) => {
       });
     }
 
-    const { category, productname, brand, expirydate, description, quantity, price } = req.body;
+    const {
+      category,
+      productname,
+      brand,
+      expirydate,
+      description,
+      quantity,
+      price,
+    } = req.body;
 
     const product = new Product({
       category,
@@ -66,7 +74,15 @@ const editProduct = (req, res) => {
       });
     }
 
-    const { category, productname, brand, expirydate, description, quantity, price } = req.body;
+    const {
+      category,
+      productname,
+      brand,
+      expirydate,
+      description,
+      quantity,
+      price,
+    } = req.body;
     const updateData = {
       category,
       productname,

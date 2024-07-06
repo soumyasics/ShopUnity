@@ -115,16 +115,21 @@ const getADeliveryAgent = (req, res) => {
 };
 
 const EditADeliveryAgent = (req, res) => {
+  console.log(req.body,"k");
   const deliveryagentid = req.params.deliveryagentid;
   deliveryagentschema
     .findByIdAndUpdate(deliveryagentid, {
-      agentname: req.body.agentname,
+      name: req.body.name,
       email: req.body.email,
-      contact: req.body.contact,
+      contactNumber: req.body.contactNumber,
       password: req.body.password,
-      vehicletype: req.body.vehicletype,
-      lisenseNumber: req.body.lisenseNumber,
-      deliveryareas: req.body.deliveryareas,
+      vehicleType: req.body.vehicleType,
+      vehicleNumber: req.body.vehicleNumber,
+      drivingLicense: req.body.drivingLicense,
+      address: req.body.address,
+      district: req.body.district,
+      city: req.body.city,
+      pincode: req.body.pincode,
     })
     .then((result) => {
       res.json({
