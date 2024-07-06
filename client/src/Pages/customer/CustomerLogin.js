@@ -28,6 +28,7 @@ function CustomerLogin() {
         localStorage.setItem("customer", response.data.id);
         localStorage.setItem("token", response.data.token);
 
+
         alert("Login Successfully");
         navigate('/customerhome');
       } else {

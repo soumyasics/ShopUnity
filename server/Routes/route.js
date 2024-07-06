@@ -36,11 +36,11 @@ Route.post('/diactivate_customer/:id',CustomerController.deActivateCustomer)
 Route.post('/activate_customer/:id',CustomerController.activatecustomer)
 
 // deliveryagent
-Route.post('/delivery_agent_register',DeliveryAgentController.DeliveryAgentRegister)
+Route.post('/delivery_agent_register',DeliveryAgentController.upload,DeliveryAgentController.DeliveryAgentRegister)
 Route.post('/delivery_agent_login',DeliveryAgentController.DeliveryagentLogin)
 Route.get('/get_all_deliveryagents',DeliveryAgentController.getAllDeliveryAgents)
 Route.get('/get_a_deliveryagent/:deliveryagentid',DeliveryAgentController.getADeliveryAgent)
-Route.post('/edit_a_deliveryagent/:deliveryagentid',DeliveryAgentController.EditADeliveryAgent)
+Route.post('/edit_a_deliveryagent/:deliveryagentid',DeliveryAgentController.upload,DeliveryAgentController.EditADeliveryAgent)
 Route.post('/delete_a_deliveryagent/:deliveryagentid',DeliveryAgentController.DeleteDeliveryAgent)
 Route.post('/delivery_agent_forgot',DeliveryAgentController.deliveryagentforget)
 

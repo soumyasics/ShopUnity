@@ -271,6 +271,7 @@ function WholesaleDealerEditProfile() {
                                     name="email"
                                     value={data.email}
                                     onChange={handleChange}
+                                    disabled
                                 />
                                 {errors.email && <div className="text-danger color">{errors.email}</div>}
                             </div>
@@ -296,16 +297,7 @@ function WholesaleDealerEditProfile() {
                                     name="dealerlisence"
                                     onChange={handleChange}
                                 />
-                                {data.dealerlisence && (
-                                    <div className="mt-2">
-                                        <img
-                                            src={(data.dealerlisence)}
-                                            alt="Dealer License"
-                                            className="img-thumbnail"
-                                            width="100"
-                                        />
-                                    </div>
-                                )}
+                            
                             </div>
                         </Col>
                         <div className="shopprofile-editpage-btn ms-5">
