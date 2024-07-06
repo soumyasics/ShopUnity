@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BsPencil } from "react-icons/bs";
-function DeliveryAgentProfile() {
+import { FaArrowLeftLong } from "react-icons/fa6";
+
+function DeliveryAgentProfile({url}) {
   const [data, setData] = useState({});
 
   const deliveryagent = localStorage.getItem("deliveryagent");
@@ -32,13 +34,31 @@ function DeliveryAgentProfile() {
   return (
     <div>
       {" "}
+
       <div className="container">
+      <div className="mt-3">
+            <Link className="customer-profile-link" to="/deliveryagentmain">
+            <FaArrowLeftLong />
+            </Link>
+        </div>
         <div className="shopprofile-edit-header">
           <form>
             <Row className="container shopprofile-edit">
               <h2 className="shopprofile-edit-h2">My Profile</h2>
 
               <Col>
+              <div>
+            <img
+              className="mt-3 mb-3"
+              src={`${url}${data?.drivingLicense?.filename}`}
+              style={{
+                width:"50%",
+                height:"200px",
+                borderRadius: "5%",
+                boxShadow: "rgba(0, 0, 0, 0.65) 0px 5px 15px",
+              }}
+            ></img>
+          </div>
                 <div>
                   <label className="container-fluid font mt-4" id="font">
                   name
@@ -75,7 +95,11 @@ function DeliveryAgentProfile() {
                     disabled
                   />
                 </div>
-                <div>
+                
+                
+              </Col>
+              <Col>
+              <div>
                   <label className="container-fluid font" id="font">
                     Email Id
                   </label>
@@ -87,20 +111,6 @@ function DeliveryAgentProfile() {
                     disabled
                   />
                 </div>
-                <div>
-                  <label className="container-fluid font" id="font">
-                  drivingLicense
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control m-2"
-                    placeholder={data.drivingLicense}
-                    id="shopprofile-editpage-text2"
-                    disabled
-                  />
-                </div>
-              </Col>
-              <Col>
                 <div>
                   <label className="container-fluid font" id="font">
                     {" "}

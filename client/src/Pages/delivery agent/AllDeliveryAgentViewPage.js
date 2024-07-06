@@ -131,7 +131,12 @@ function AllDeliveryAgentViewPage({url}) {
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
           <Modal.Header closeButton></Modal.Header>
           <div>
-           
+          <img
+          className="parentimage"
+          alt="img"
+          style={{ width: "100%", height: "380px" }}
+          src={`${url}${Ashopownerdata.drivingLicense?.originalname}`}
+        />
             <div>
               <table>
                 <div className="p-4">
@@ -143,14 +148,7 @@ function AllDeliveryAgentViewPage({url}) {
                       <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.name}</Card.Subtitle>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <Card.Subtitle className="mb-2 text-muted"> drivingLicense</Card.Subtitle>
-                    </td>
-                    <td className="ps-3">
-                      <Card.Subtitle className="mb-2 text-muted">{Ashopownerdata.drivingLicense}</Card.Subtitle>
-                    </td>
-                  </tr>
+                  
                   <tr>
                     <td>
                       <Card.Subtitle className="mb-2 text-muted">Address</Card.Subtitle>

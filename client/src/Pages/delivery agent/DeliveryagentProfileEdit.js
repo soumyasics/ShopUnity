@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import editprofile from "../../images/editprofile.png";
 import editprooutline from "../../images/editprooutline.png";
 
-function DeliveryagentProfileEdit() {
+function DeliveryagentProfileEdit({url}) {
   const [data, setData] = useState({
     name: "",
     vehicleNumber: "",
@@ -16,9 +16,9 @@ function DeliveryagentProfileEdit() {
     pincode: "",
     contactNumber: "",
     email: "",
-    drivingLicense: "",
-    vehicleType:""
-    // files:""
+    drivingLicense: null,
+    vehicleType: "",
+    file: ""
   });
 
   const [errors, setErrors] = useState({
@@ -31,11 +31,10 @@ function DeliveryagentProfileEdit() {
     contactNumber: "",
     email: "",
     drivingLicense: "",
-    vehicleType:""
-    // shoplicence:""
+    vehicleType: ""
   });
 
-  const districts = [
+  const district = [
     "Alappuzha",
     "Ernakulam",
     "Idukki",
@@ -49,27 +48,66 @@ function DeliveryagentProfileEdit() {
     "Pathanamthitta",
     "Thiruvananthapuram",
     "Thrissur",
-    "Wayanad",
+    "Wayanad"
   ];
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
+    
+    if (name === 'pincode') {
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        pincode: validatePincode(name, value)
+      }));
+    }
+    
+    if (name === 'contact') {
+      setErrors(prevErrors => ({
+        ...prevErrors,
+        contact: validateContact(name, value)
+      }));
+    }
 
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
+    if (name === 'drivingLicense') {
+      setData(prevData => ({
+        ...prevData,
+        file: files[0]
+      }));
+    } else {
+      setData(prevData => ({
+        ...prevData,
+        [name]: value
+      }));
+    }
   };
 
-  const handlecancel = () => {
-    navigate("/deliveryagentprofile");
-  };
+  function validateField(fieldName, value) {
+    if (typeof value !== 'string' || !value.trim()) {
+      return `${fieldName} is required`;
+    }
+    if (fieldName === "email" && !value.endsWith("@gmail.com")) {
+      return "Email must be a valid Gmail address.";
+    }
+    return '';
+  }
 
+  function validateContact(fieldName, value) {
+    if (typeof value !== 'string' || !value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 10) {
+      return 'Please enter a valid Contact Number';
+    }
+    return '';
+  }
+
+  function validatePincode(fieldName, value) {
+    if (typeof value !== 'string' || !value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 6) {
+      return 'Please enter a valid Pincode';
+    }
+    return '';
+  }
 
   const navigate = useNavigate();
   const deliveryagent = localStorage.getItem("deliveryagent");
@@ -85,43 +123,60 @@ function DeliveryagentProfileEdit() {
       });
   }, [deliveryagent]);
 
-  // const handleInputChange = (e) => {
-  //   const { name, files } = e.target;
-  //   setData({ ...data, [name]: files[0] });
-  //   console.log(files);
-  // };
-
   const handleEdit = (e) => {
-    const formData = new FormData();
+    e.preventDefault();
 
-    for (const key in data) {
-      formData.append(key, data[key]);
+    // Validate form fields
+    let validationErrors = {};
+    validationErrors.name = validateField('name', data.name);
+    validationErrors.address = validateField('Address', data.address);
+    validationErrors.city = validateField('City', data.city);
+    validationErrors.district = validateField('District', data.district);
+    validationErrors.vehicleNumber = validateField('vehicleNumber', data.vehicleNumber);
+    validationErrors.email = validateField('Email', data.email);
+
+    setErrors(validationErrors);
+
+    // Check if there are any validation errors
+    const isValid = Object.values(validationErrors).every(error => error === '');
+    if (!isValid) {
+      return;
     }
 
-    console.log(data, "j");
-    e.preventDefault();
-    axiosInstance
-      .post(`/edit_a_deliveryagent/${deliveryagent}`, data)
-      .then((res) => {
-        alert("Updated Successfully");
-        console.log("Updated Successfully");
-        navigate("/deliveryagentprofile");
-      })
-      .catch((err) => {});
+    const formData = new FormData();
+    for (const key in data) {
+      if (key !== 'drivingLicense' && key !== 'file') {
+        formData.append(key, data[key]);
+      }
+      if (key === 'drivingLicense') {
+        console.log(data.file)
+        formData.append('file', data.file);
+      }
+    }
+
+    axiosInstance.post('/edit_a_deliveryagent/' + deliveryagent, formData, { 
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+    .then((res) => {
+      alert("Updated Successfully");
+      navigate("/deliveryagentprofile");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
+
+  const handlecancel = () => {
+    navigate("/deliveryagentprofile")
+  }
 
   return (
     <div className="container">
       <div className="shopprofile-editpage-header">
-        <form>
+        <form onSubmit={handleEdit}>
           <Row className="container shopprofile-editpage mt-5 pt-3">
-            {/* <Row>
-            <Col><img className="shopprofile-editpage-img" src={editprofile} alt="img"></img>
-            <img className="shopprofile-editpage-imgs" src={editprooutline} alt="img"></img>
-            </Col>
-            <Col></Col> 
-          </Row>
-           */}
             <h2 className="shopprofile-editpage-h2">Edit Profile</h2>
             <Col className="container">
               <div>
@@ -137,19 +192,21 @@ function DeliveryagentProfileEdit() {
                   onChange={handleChange}
                 />
               </div>
+              {errors.name && <div className="text-danger color">{errors.name}</div>}
               <div>
                 <label className="container-fluid font" id="font">
-                  drivingLicense
+                  Driving License
                 </label>
                 <input
-                  type="text"
+                  type="file"
                   className="form-control m-2"
-                  placeholder={data.drivingLicense}
                   id="shopprofile-editpage-text2"
                   name="drivingLicense"
                   onChange={handleChange}
                 />
               </div>
+              {errors.drivingLicense && <div className="text-danger color">{errors.drivingLicense}</div>}
+
               <div>
                 <label className="container-fluid font" id="font">
                   Address
@@ -163,6 +220,8 @@ function DeliveryagentProfileEdit() {
                   onChange={handleChange}
                 />
               </div>
+              {errors.address && <div className="text-danger color">{errors.address}</div>}
+
               <div>
                 <label className="container-fluid font" id="font">
                   District
@@ -174,12 +233,13 @@ function DeliveryagentProfileEdit() {
                   onChange={handleChange}
                 >
                   <option>Select District</option>
-                  {districts.map((district, index) => (
+                  {district.map((district, index) => (
                     <option key={index} placeholde={data.district}>
                       {district}
                     </option>
                   ))}
                 </select>
+                {errors.district && <div className="text-danger color">{errors.district}</div>}
               </div>
               <div>
                 <label className="container-fluid font" id="font">
@@ -193,6 +253,7 @@ function DeliveryagentProfileEdit() {
                   name="city"
                   onChange={handleChange}
                 />
+                {errors.city && <div className="text-danger color">{errors.city}</div>}
               </div>
             </Col>
             <Col>
@@ -208,6 +269,7 @@ function DeliveryagentProfileEdit() {
                   name="pincode"
                   onChange={handleChange}
                 />
+                {errors.pincode && <div className="text-danger color">{errors.pincode}</div>}
               </div>
               <div>
                 <label className="container-fluid font" id="font">
@@ -221,6 +283,7 @@ function DeliveryagentProfileEdit() {
                   name="contactNumber"
                   onChange={handleChange}
                 />
+                {errors.contactNumber && <div className="text-danger color">{errors.contactNumber}</div>}
               </div>
               <div>
                 <label className="container-fluid font" id="font">
@@ -234,10 +297,11 @@ function DeliveryagentProfileEdit() {
                   name="email"
                   onChange={handleChange}
                 />
+                {errors.email && <div className="text-danger color">{errors.email}</div>}
               </div>
               <div>
                 <label className="container-fluid font" id="font">
-                  vehicleTyper
+                  Vehicle Type
                 </label>
                 <input
                   type="text"
@@ -247,10 +311,11 @@ function DeliveryagentProfileEdit() {
                   name="vehicleType"
                   onChange={handleChange}
                 />
+                {errors.vehicleType && <div className="text-danger color">{errors.vehicleType}</div>}
               </div>
               <div>
                 <label className="container-fluid font" id="font">
-                  vehicle Number
+                  Vehicle Number
                 </label>
                 <input
                   type="text"
@@ -260,6 +325,7 @@ function DeliveryagentProfileEdit() {
                   name="vehicleNumber"
                   onChange={handleChange}
                 />
+                {errors.vehicleNumber && <div className="text-danger color">{errors.vehicleNumber}</div>}
               </div>
               <div></div>
             </Col>
@@ -267,7 +333,6 @@ function DeliveryagentProfileEdit() {
               <button
                 type="submit"
                 className="shopprofile-editpage-subbtn ms-5"
-                onClick={handleEdit}
               >
                 Update
               </button>

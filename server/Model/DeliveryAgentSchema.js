@@ -33,7 +33,7 @@ const DeliveryAgentSchema = new Schema({
     required: true,
   },
   drivingLicense: {
-    type: String,
+    type: Object,
     required: true,
   },
   contactNumber: {

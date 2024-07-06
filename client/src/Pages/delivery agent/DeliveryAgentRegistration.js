@@ -8,7 +8,7 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 import "./DeliveryAgentRegistration.css";
 import { useNavigate ,Link} from "react-router-dom";
 import img from "../../images/image 72.png";
-
+import axiosMultipartInstance from "../../APIS/axiosMultipartInstance";
 function DeliveryAgentRegistration() {
   const [data, setData] = useState({
     name: "",
@@ -18,13 +18,27 @@ function DeliveryAgentRegistration() {
     pincode: "",
     vehicleType: "",
     vehicleNumber: "",
-    drivingLicense: "",
+    drivingLicense: null,
     contactNumber: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    address: "",
+    district: "",
+    city: "",
+    pincode: "",
+    vehicleType: "",
+    vehicleNumber: "",
+    drivingLicense: null,
+    contactNumber: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    });
   const district = [
     "Alappuzha",
     "Ernakulam",
@@ -42,76 +56,151 @@ function DeliveryAgentRegistration() {
     "Wayanad",
   ];
 
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
 
-  const validate = () => {
-    const errors = {};
 
-    if (!data.name.trim()) errors.name = "Name is required";
-    if (!data.address.trim()) errors.address = "Address is required";
-    if (!data.district.trim()) errors.district = "District is required";
-    if (!data.city.trim()) errors.city = "City is required";
-    if (!data.pincode.trim()) errors.pincode = "Pincode is required";
-    if (!data.vehicleType.trim())
-      errors.vehicleType = "Vehicle type is required";
-    if (!data.vehicleNumber.trim())
-      errors.vehicleNumber = "Vehicle number is required";
-    if (!data.drivingLicense.trim())
-      errors.drivingLicense = "Driving license is required";
-    if (!data.contactNumber.trim())
-      errors.contactNumber = "Contact number is required";
-    if (!data.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-      errors.email = "Email is invalid";
+  const Navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+  }
+
+
+  const handleFileChange = (e) => {
+    console.log(data,"mmm");
+    const { name, files } = e.target;
+    setData({ ...data, [name]: files[0] });
+  };
+
+
+const validateField = (fieldName, value) => {
+    if (!value.trim()) {
+      return `${fieldName} is Required`;
     }
-    if (!data.password.trim()) {
+    if (fieldName === "Email" && !value.endsWith("@gmail.com")) {
+      return "Email must be a valid Gmail address";
+    }
+    return;
+  };
+
+  function validateContact(fieldName, value) {
+    if (typeof value === "string" && !value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 10) {
+      return "Please enter a valid Contact Number";
+    }
+    return "";
+  }
+
+  function validatePincode(fieldName, value) {
+    if (typeof value === "string" && !value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 6) {
+      return "Please enter a valid Pincode";
+    }
+    return "";
+  }
+
+  const handleSubmit = async (e) => {
+    console.log(data);
+    e.preventDefault();
+    let errors = {};
+    let formIsValid = true;
+
+    errors.name = validateField("name", data.name);
+    errors.vehicleType= validateField("vehicle Type", data.vehicleType);
+    errors.address = validateField("Address", data.address);
+    errors.district = validateField("District", data.district);
+    errors.city = validateField("City", data.city);
+    errors.pincode = validatePincode("Pincode", data.pincode);
+    errors.contactNumber = validateContact("contactNumber", data.contactNumber);
+    errors.email = validateField("Email", data.email);
+    errors.vehicleNumber = validateField(
+      "vehicleNumber",
+      data.vehicleNumber
+    );
+    // errors.dealerlisence=validateField("DealerLicense",data.dealerlisence)
+    errors.password = validateField("Password", data.password);
+    errors.confirmPassword = validateField(
+      "ConfirmPassword",
+      data.confirmPassword
+    );
+
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
+
+    if (!data.password || !data.password.trim()) {
+      formIsValid = false;
       errors.password = "Password is required";
-    } else if (data.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
+      console.log("in 1");
+    } else if (!passwordRegex.test(data.password)) {
+      errors.password =
+        "Password must contain at least one number, one special character, and one capital letter";
+      console.log("in 2");
     }
-    if (!data.confirmPassword.trim()) {
-      errors.confirmPassword = "Confirm password is required";
+
+    if (!data.confirmPassword || !data.confirmPassword.trim()) {
+      formIsValid = false;
+      console.log("in 3");
+
+      errors.confirmPassword = "Confirm Password is required";
     } else if (data.confirmPassword !== data.password) {
+      formIsValid = false;
+      console.log("in 4");
+
       errors.confirmPassword = "Passwords do not match";
     }
 
-    return errors;
-  };
+    setErrors(errors);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  };
+    for (let key in errors) {
+      if (errors[key]) {
+        console.log(errors[key]);
+        formIsValid = false;
+        console.log("in 6");
+        break;
+      }
+    }
+    console.log("form", formIsValid);
+    if (formIsValid) {
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("vehicleType", data.vehicleType);
+      formData.append("address", data.address);
+      formData.append("district", data.district);
+      formData.append("city", data.city);
+      formData.append("pincode", data.pincode);
+      formData.append("contactNumber", data.contactNumber);
+      formData.append("email", data.email);
+      formData.append("vehicleNumber", data.vehicleNumber);
+      formData.append("file", data.drivingLicense);
+      formData.append("password", data.password);
 
-  const handleSubmit = async (e) => {
-  console.log(data,);
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await axiosInstance.post(
+        console.log("in try");
+        const res = await axiosMultipartInstance.post(
           "/delivery_agent_register",
-          data
+          formData
         );
-        if (response.status === 200) {
-          alert("Registration successful");
-          navigate("/deliveryagentlogin"); // Adjust the route as needed
+        console.log(res);
+        if (res.data.status === 200) {
+          alert("Register Successfully");
+          console.log("Register Successfully", res);
+          Navigate("/deliveryagentlogin");
+        } else {
+          alert("Registration is Falied");
+          console.log("Registration is Falied", res);
         }
       } catch (error) {
         console.error("There was an error!", error);
-        alert("There was an error during registration");
+        alert("Error");
       }
-    } else {
-      setErrors(validationErrors);
     }
   };
 
@@ -140,7 +229,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Name"
                     name="name"
                     value={data.name}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.name && (
                     <span className="text-danger">{errors.name}</span>
@@ -157,7 +246,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Address"
                     name="address"
                     value={data.address}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.address && (
                     <span className="text-danger">{errors.address}</span>
@@ -173,7 +262,7 @@ function DeliveryAgentRegistration() {
                     className="form-select m-2  wholesale-dealer-register-textbox"
                     name="district"
                     value={data.district}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   >
                     <option>Select District</option>
                     {district.map((district, index) => (
@@ -198,7 +287,7 @@ function DeliveryAgentRegistration() {
                     placeholder="City"
                     name="city"
                     value={data.city}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.city && (
                     <span className="text-danger">{errors.city}</span>
@@ -215,7 +304,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Pincode"
                     name="pincode"
                     value={data.pincode}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.pincode && (
                     <span className="text-danger">{errors.pincode}</span>
@@ -232,7 +321,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Vehicle Type"
                     name="vehicleType"
                     value={data.vehicleType}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.vehicleType && (
                     <span className="text-danger">{errors.vehicleType}</span>
@@ -251,7 +340,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Vehicle Number"
                     name="vehicleNumber"
                     value={data.vehicleNumber}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.vehicleNumber && (
                     <span className="text-danger">{errors.vehicleNumber}</span>
@@ -263,12 +352,12 @@ function DeliveryAgentRegistration() {
                     Driving License
                   </h1>
                   <input
-                    type="text"
+                    type="file"
                     className="AgentRegistration-input-div-leftdiv-inp"
                     placeholder="Driving License"
                     name="drivingLicense"
-                    value={data.drivingLicense}
-                    onChange={handleInputChange}
+                    // value={data.drivingLicense}
+                    onChange={handleFileChange}
                   />
                   {errors.drivingLicense && (
                     <span className="text-danger">{errors.drivingLicense}</span>
@@ -285,7 +374,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Contact Number"
                     name="contactNumber"
                     value={data.contactNumber}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.contactNumber && (
                     <span className="text-danger">{errors.contactNumber}</span>
@@ -302,7 +391,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Email"
                     name="email"
                     value={data.email}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.email && (
                     <span className="text-danger">{errors.email}</span>
@@ -319,7 +408,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Password"
                     name="password"
                     value={data.password}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.password && (
                     <span className="text-danger">{errors.password}</span>
@@ -336,7 +425,7 @@ function DeliveryAgentRegistration() {
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     value={data.confirmPassword}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                   />
                   {errors.confirmPassword && (
                     <span className="text-danger">

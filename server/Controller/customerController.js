@@ -176,14 +176,15 @@ const getACustomer = (req, res) => {
 const EditACustomer = (req, res) => {
   const customerid = req.params.customerid;
   Customer.findByIdAndUpdate(customerid, {
-    customername: req.body.customername,
-    customeremail: req.body.customeremail,
-    customercontact: req.body.customercontact,
-    customerpassword: req.body.customerpassword,
-    customercity: req.body.customercity,
-    customerdistrict: req.body.customerdistrict,
-    customeraddress: req.body.customeraddress,
-    customerpincode: req.body.customerpincode,
+    name: req.body.name,
+      gender: req.body.gender,
+      email : req.body.email,
+      contactNumber: req.body.contactNumber,
+      password : req.body.password,
+      city : req.body.city,
+      district: req.body.district,
+      address: req.body.address,
+      pincode: req.body.pincode,
   })
     .then((result) => {
       res.json({

@@ -16,13 +16,11 @@ import LandingPage from './Pages/Admin/LandingPage';
 import AdminDashboard from './Components/Admin/AdminDashboard';
 import ShopHomePage from './Components/ShopOwner/ShopHomePage';
 import Shopownerforgotpswrd from './Components/ShopOwner/Shopownerforgotpswrd';
-import ShopownerProfile from './Components/ShopOwner/ShopownerProfile';
-import ShopOwnerProfileEdit from './Components/ShopOwner/ShopOwnerProfileEdit';
+// import ShopownerProfile from './Components/ShopOwner/ShopownerProfile';
 import ShopOwnerPendingList from './Components/Admin/ShopOwnerPendingList';
 import ShopOwnerList from './Components/Admin/ShopOwnerList';
 import AdminMainNav from './Pages/Navs/AdminMainNav';
 import MainNav from './Pages/Navs/MainNav';
-import ShopOwnerSidebar from './Pages/ShopOwner/ShopOwnerSidebar';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
 
@@ -54,6 +52,8 @@ import CustomerMainNav from './Pages/customer/CustomerMainNav';
 import CustomerEditProfile from './Pages/customer/CustomerEditProfile';
 import DeliveryAgentProfile from './Pages/delivery agent/DeliveryAgentProfile';
 import DeliveryagentProfileEdit from './Pages/delivery agent/DeliveryagentProfileEdit';
+import ShopownerProfilepage from './Pages/ShopOwner/ShopownerProfilepage';
+import ShopOwnerProfileEditPage from './Pages/ShopOwner/ShopOwnerprofileEditpage';
 
 
 
@@ -101,21 +101,21 @@ function App() {
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<CommonNav/>,<DeliveryagentHomepage/>]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
-    <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage/>]}/>
+    <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage url={url}/>]}/>
     <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>]}/>
     <Route path='/deliveryagentsidebar' element={<DeliveryagentSidebar/>}/>
     <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
-    <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile/>} />
-    <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit/>} />
+    <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
+    <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit url={url}/>} />
 
 {/* shopowner */}
 
     <Route path='/shopownerregistration' element={[<MainNav/>,<ShopOwnerRegistration/>,<Footer/>]} />
     <Route path='/shopownerlogin' element={[<MainNav/>,<ShopOwnerLogin/>,<Footer/>]} />
-    <Route path='/shopownerhome' element={[<CommonNav/>,<ShopHomePage/>]} />
+    <Route path='/shopownerhome' element={[<ShopHomePage/>]} />
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
-    <Route path='/shopownerprofile' element={<ShopownerProfile url={url}/>}/>
-    <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEdit/>}/>
+    <Route path='/shopownerprofile' element={<ShopownerProfilepage url={url}/>}/>
+    <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEditPage/>}/>
     <Route path='/shopowneradditem' element={<ShopAddItem/>} />
     <Route path='/shopownerviewproduct' element={<ShopownerViewProduct/>}/>
     <Route path='/shopownerviewproductdetails' element={<ShopownerviewProductDetails/>}/>

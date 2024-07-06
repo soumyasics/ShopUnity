@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BsPencil } from "react-icons/bs";
-
+import { FaArrowLeftLong } from "react-icons/fa6";
 function ShopownerProfilepage({ url }) {
   
 
@@ -34,6 +34,11 @@ function ShopownerProfilepage({ url }) {
   return (
   
     <div className="container">
+    <div className="mt-3">
+        <Link className="customer-profile-link" to="/shopownerhome">
+          <FaArrowLeftLong />
+        </Link>
+      </div>
       <div className="shopprofile-edit-header">
         <form>
           <Row className="container shopprofile-edit">
