@@ -54,6 +54,7 @@ function CustomerProfile() {
                     type="text"
                     placeholder={data.name}
                     className="customer-profile-text"
+                    disabled
                   />
                   {/* <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback> */}
                 </Form.Group>
@@ -100,6 +101,7 @@ function CustomerProfile() {
                   <Form.Control
                     type="text"
                     placeholder={data.address}
+                    disabled
                     className="customer-profile-text"
                   />
                   {/* <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback> */}
@@ -114,6 +116,7 @@ function CustomerProfile() {
                     type="text"
                     placeholder={data.district}
                     className="customer-profile-text"
+                    disabled
                   />
                   <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
                 </Form.Group>
@@ -126,6 +129,7 @@ function CustomerProfile() {
                     City
                   </Form.Label>
                   <Form.Control
+                  disabled
                     type="text"
                     placeholder={data.city}
                     className="customer-profile-text"
@@ -140,6 +144,7 @@ function CustomerProfile() {
                   </Form.Label>
                   <Form.Control
                     type="text"
+                    disabled
                     placeholder={data.pincode}
                     className="customer-profile-text"
                   />
@@ -155,6 +160,7 @@ function CustomerProfile() {
                     type="text"
                     placeholder={data.contactNumber}
                     className="customer-profile-text"
+                    disabled
                   />
                   {/* <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback> */}
                 </Form.Group>
@@ -168,6 +174,7 @@ function CustomerProfile() {
                     type="text"
                     placeholder={data.email}
                     className="customer-profile-text"
+                    disabled
                   />
                   {/* <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback> */}
                 </Form.Group>
