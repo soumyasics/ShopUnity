@@ -22,6 +22,8 @@ function CustomerViewProductDetail() {
       setCount(count-1)
     }
   }
+
+  
   return (
     <div>
       <div>

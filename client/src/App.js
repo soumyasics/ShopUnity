@@ -54,6 +54,7 @@ import DeliveryAgentProfile from './Pages/delivery agent/DeliveryAgentProfile';
 import DeliveryagentProfileEdit from './Pages/delivery agent/DeliveryagentProfileEdit';
 import ShopownerProfilepage from './Pages/ShopOwner/ShopownerProfilepage';
 import ShopOwnerProfileEditPage from './Pages/ShopOwner/ShopOwnerprofileEditpage';
+import ShopownerDashBoard from './Pages/ShopOwner/ShopownerDashBoard';
 
 
 
@@ -114,12 +115,14 @@ function App() {
     <Route path='/shopownerlogin' element={[<MainNav/>,<ShopOwnerLogin/>,<Footer/>]} />
     <Route path='/shopownerhome' element={[<ShopHomePage/>]} />
     <Route path='/shopownerforgotpaswd' element={<Shopownerforgotpswrd/>}/>
-    <Route path='/shopownerprofile' element={<ShopownerProfilepage url={url}/>}/>
+    <Route path='/shopownerprofile' element={<ShopownerDashBoard data="shopownerprofile" url={url}/>}/>
     <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEditPage/>}/>
-    <Route path='/shopowneradditem' element={<ShopAddItem/>} />
-    <Route path='/shopownerviewproduct' element={<ShopownerViewProduct url={url} />}/>
+    <Route path='/shopowneradditem' element={<ShopownerDashBoard data="shopownerproduct"/>} />
+    <Route path='/shopownerviewproduct' element={<ShopownerDashBoard data="shopownerviewproduct" url={url} />}/>
     <Route path='/shopownerviewproductdetails/:productid' element={<ShopownerviewProductDetails url={url} />}/>
     <Route path='/shopownereditproduct/:productid' element={<ShopownerEditProduct/>}/>
+    <Route path='/shopownerdashboard' element={<ShopownerDashBoard/>}/>
+    {/* /:productid */}
 {/* Admin */}
 
     <Route path='/Admin' element={[<AdminMainNav/>,<AdminLogin/>,<Footer/>]} />

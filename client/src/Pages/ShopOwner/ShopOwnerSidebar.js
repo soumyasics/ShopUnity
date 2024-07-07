@@ -96,7 +96,9 @@ function ShopOwnerSidebar() {
               <li className="nav-item">
               <div className='admin_dash_div mt-4'>
               <label onClick={toggleDropdown}>
-                <BsBoxes className="wholesaler-dash-icon"/> <span className="wholesaler-dash-iconspan"> Products</span><FaAngleRight className="ms-3"/>    
+                <div>
+                  <BsBoxes /><span> Products</span><FaAngleRight />    
+                </div>
               </label>
               {dropdownVisible && (
                   <div className="dropdown_menu sidebar_dash_drop">
