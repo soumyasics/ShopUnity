@@ -17,6 +17,7 @@ import { FaUserAlt } from "react-icons/fa";
 import "./shopownersidebar.css";
 import { FiAlignJustify } from "react-icons/fi";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { FaAngleRight } from "react-icons/fa6";
 
 function ShopOwnerSidebar() {
   const [open, setOpen] = useState(false);
@@ -49,6 +50,11 @@ function ShopOwnerSidebar() {
 
     navigate("/shopownerlogin");
   };
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const toggleDropdown = () => {
+      setDropdownVisible(!dropdownVisible);
+  };
+
 
   return (
     <div className={`shopownersidebar ${open ? "open" : ""}`}>
@@ -88,9 +94,19 @@ function ShopOwnerSidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <BsBoxes /> Products
-                </Link>
+              <div className='admin_dash_div mt-4'>
+              <label onClick={toggleDropdown}>
+                <BsBoxes className="wholesaler-dash-icon"/> <span className="wholesaler-dash-iconspan"> Products</span><FaAngleRight className="ms-3"/>    
+              </label>
+              {dropdownVisible && (
+                  <div className="dropdown_menu sidebar_dash_drop">
+                      <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                        <Link to="/shopowneradditem" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Add Product</label></Link>
+                        <Link to="/shopownerviewproduct" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View Product</label></Link>
+                      </div>
+                  </div>
+              )}
+            </div>
               </li>
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">

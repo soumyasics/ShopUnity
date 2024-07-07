@@ -61,8 +61,8 @@ import ShopOwnerProfileEditPage from './Pages/ShopOwner/ShopOwnerprofileEditpage
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url="http://localhost:4028/"
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url="http://localhost:4028/"
   
   return (
     <BrowserRouter basename="/shopunity">
@@ -117,9 +117,9 @@ function App() {
     <Route path='/shopownerprofile' element={<ShopownerProfilepage url={url}/>}/>
     <Route path='/shopownerprofileedit' element={<ShopOwnerProfileEditPage/>}/>
     <Route path='/shopowneradditem' element={<ShopAddItem/>} />
-    <Route path='/shopownerviewproduct' element={<ShopownerViewProduct/>}/>
-    <Route path='/shopownerviewproductdetails' element={<ShopownerviewProductDetails/>}/>
-    <Route path='/shopownereditproduct' element={<ShopownerEditProduct/>}/>
+    <Route path='/shopownerviewproduct' element={<ShopownerViewProduct url={url} />}/>
+    <Route path='/shopownerviewproductdetails/:productid' element={<ShopownerviewProductDetails url={url} />}/>
+    <Route path='/shopownereditproduct/:productid' element={<ShopownerEditProduct/>}/>
 {/* Admin */}
 
     <Route path='/Admin' element={[<AdminMainNav/>,<AdminLogin/>,<Footer/>]} />

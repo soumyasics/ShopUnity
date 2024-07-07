@@ -175,31 +175,43 @@ const getACustomer = (req, res) => {
 
 const EditACustomer = (req, res) => {
   const customerid = req.params.customerid;
-  Customer.findByIdAndUpdate(customerid, {
+  
+  // Define the update object
+  const update = {
     name: req.body.name,
-      gender: req.body.gender,
-      email : req.body.email,
-      contactNumber: req.body.contactNumber,
-      password : req.body.password,
-      city : req.body.city,
-      district: req.body.district,
-      address: req.body.address,
-      pincode: req.body.pincode,
-  })
+    gender: req.body.gender,
+    email: req.body.email,
+    contactNumber: req.body.contactNumber,
+    password: req.body.password,
+    city: req.body.city,
+    district: req.body.district,
+    address: req.body.address,
+    pincode: req.body.pincode,
+  };
+
+  // Find the customer by ID and update
+  Customer.findByIdAndUpdate(customerid, update, { new: true, runValidators: true })
     .then((result) => {
-      res.json({
+      if (!result) {
+        return res.status(404).json({
+          status: 404,
+          message: "Customer not found",
+        });
+      }
+      res.status(200).json({
         status: 200,
         data: result,
       });
     })
     .catch((err) => {
-      res.json({
+      console.error(err); // Log the error for debugging purposes
+      res.status(500).json({
         status: 500,
-        message: "Failed to Update",
+        message: "Failed to update customer",
+        error: err.message,
       });
     });
 };
-
 const DeleteACustomer = (req, res) => {
   const customerid = req.params.customerid;
   Customer.findByIdAndDelete(customerid)

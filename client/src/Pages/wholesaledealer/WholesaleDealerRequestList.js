@@ -207,7 +207,7 @@ function WholesaleDealerRequestList({ url }) {
                   className="parentimage"
                   alt="img"
                   style={{ width: "100%", height: "380px" }}
-                  src={`${url}${Ashopownerdata.dealerlisence.filename}`}
+                  src={`${url}${Ashopownerdata?.dealerlisence?.filename}`}
                 ></img>
                 <div>
                   <table>
