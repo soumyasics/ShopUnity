@@ -76,7 +76,7 @@ function App() {
     <Route path='/wholesalealldealerviewpage' element={[<WholesaleAllDealerViewpage url={url} />]} />
     <Route path='/wholesaledealerrequests' element={[<WholesaleDealerRequestList url={url} />]} />
     <Route path='/wholesaledealersidebar' element={<WholesaleDealerSidebar/>} />
-    <Route path='/wholesaledealerprofile' element={<WholesaleDelaerProfilePage url={{url}}/>} />
+    <Route path='/wholesaledealerprofile' element={<WholesaleDelaerProfilePage url={url}/>} />
     <Route path='/wholesaledealereditprofile' element={<WholesaleDealerEditProfile />} />
     <Route path='/wholesalermain' element={<WholesalerMain/>} />
 
