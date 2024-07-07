@@ -200,7 +200,7 @@ function DeliveryAgentRequest({url}) {
                   className="parentimage"
                   alt="img"
                   style={{ width: "100%", height: "380px" }}
-                  src={`${url}${Ashopownerdata.drivingLicense.filename}`}
+                  src={`${url}${Ashopownerdata.drivingLicense?.filename}`}
                 ></img>
                 <div>
                   <table>

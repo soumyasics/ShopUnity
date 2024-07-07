@@ -1,7 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React,{useState,useEffect} from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeftLong } from "react-icons/fa6";
-function ShopownerviewProductDetails() {
+import axiosInstance from '../../APIS/axiosinstatnce';
+
+function ShopownerviewProductDetails({url}) {
+    const [data, setData] = useState({});
+
+  const {productid}=useParams()
+
+    useEffect(() => {
+      axiosInstance
+        .post("/view_a_product/" + productid)
+        .then((res) => {
+          setData(res.data.data);
+          console.log(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
+
+    const navigate=useNavigate()
+    const GotoEditproduct=()=>{
+        navigate("/shopownereditproduct/"+productid)
+    }
+
   return (
     <div>
       <div>
@@ -23,7 +46,7 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>Drink</label>
+                        <label className='shopowner-viewproductdetailslabel1'> {data.category}</label>
                     </div>
                 </div>
                 <div className='row container ms-5 mt-5'>
@@ -34,7 +57,7 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>Sprite</label>
+                        <label className='shopowner-viewproductdetailslabel1'>{data.productname}</label>
                     </div>
                 </div>
                 <div className='row container ms-5 mt-5'>
@@ -45,7 +68,7 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>Coco cola</label>
+                        <label className='shopowner-viewproductdetailslabel1'>{data.brand}</label>
                     </div>
                 </div>
                 <div className='row container ms-5 mt-5'>
@@ -56,7 +79,7 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>18/07/2025</label>
+                        <label className='shopowner-viewproductdetailslabel1'>{data.expirydate}</label>
                     </div>
                 </div>
                 <div className='row container ms-5 mt-5'>
@@ -67,7 +90,7 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>Carbonated drink...</label>
+                        <label className='shopowner-viewproductdetailslabel1'> {data.description}</label>
                     </div>
                 </div>
                 <div className='row container ms-5 mt-5'>
@@ -78,7 +101,7 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>2</label>
+                        <label className='shopowner-viewproductdetailslabel1'> {data.quantity}</label>
                     </div>
                 </div>
                 <div className='row container ms-5 mt-5'>
@@ -89,19 +112,19 @@ function ShopownerviewProductDetails() {
                         <label className='shopowner-viewproductdetailslabel'>:</label>
                     </div>
                     <div className='col-5'>
-                        <label className='shopowner-viewproductdetailslabel1'>&#8377;185</label>
+                        <label className='shopowner-viewproductdetailslabel1'>&#8377; {data.price}</label>
                     </div>
                 </div>
             </div>
             <div className='col-4'>
                 <div className='shopowner-viewproductdetails-imgdiv '>
-                    <img></img>
+                    <img src={`${url}/${data.productimage?.filename}`}></img>
                 </div>
             </div>
             
         </div>
         <div className='text-center'>
-            <button className='shopowner-viewproductdetails-editbtn'>Edit</button>
+            <button className='shopowner-viewproductdetails-editbtn' onClick={()=>GotoEditproduct()} >Edit</button>
         </div>
       </div>
     </div>

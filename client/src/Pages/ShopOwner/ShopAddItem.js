@@ -1,213 +1,313 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { FaArrowLeftLong } from "react-icons/fa6";
-import { BiImageAdd } from "react-icons/bi";
-import { FaPlus } from "react-icons/fa6";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaArrowLeftLong } from 'react-icons/fa6';
+import { BiImageAdd } from 'react-icons/bi';
+import { FaPlus } from 'react-icons/fa6';
+import ShopOwnerSidebar from './ShopOwnerSidebar';
+import axiosInstance from '../../APIS/axiosinstatnce';
 
 function ShopAddItem() {
-    
-    const[profileImage,setProfileImage]=useState(null);
-    
-    const[count,setCount]=useState(1)
+  const [profileImage, setProfileImage] = useState(null);
+  const [count, setCount] = useState(1);
+  const [data, setData] = useState({
+    category: '',
+    productname: '',
+    brand: '',
+    description: '',
+    productimage: '',
+    price: '',
+    quantity: 1,
+    expirydate: ''
+  });
 
-    const increment = () =>{
-        setCount(count+1)
-        console.log(count);
-    }
-    const decrement = () =>{
-        if(count > 0){
-            setCount(count-1)
-        }
-        console.log(count);
-    }
+  const [errors, setErrors] = useState({
+    category: '',
+    productname: '',
+    brand: '',
+    description: '',
+    productimage: '',
+    price: '',
+    quantity: '',
+    expirydate: ''
+  });
 
-    const[data,setData]=useState({
-        name:"",
-        brand:"",
-        description:"",
-        image:"",
-        price:""
+  const increment = () => {
+    setCount(count + 1);
+    setData((prevData) => ({
+      ...prevData,
+      quantity: count + 1
+    }));
+  };
+
+  const decrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+      setData((prevData) => ({
+        ...prevData,
+        quantity: count - 1
+      }));
+    }
+  };
+
+  const validateField = (name, value) => {
+    let error = '';
+    if (name === 'category' && !value.trim()) {
+      error = 'Category is required';
+    } else if (name === 'productname' && !value.trim()) {
+      error = 'Product name is required';
+    } else if (name === 'brand' && !value.trim()) {
+      error = 'Brand is required';
+    } else if (name === 'description' && !value.trim()) {
+      error = 'Description is required';
+    } else if (name === 'price') {
+      if (!value) {
+        error = 'Price is required';
+      } else if (isNaN(value) || value <= 0) {
+        error = 'Price must be a positive number';
+      }
+    } else if (name === 'quantity') {
+      if (!value) {
+        error = 'Quantity is required';
+      } else if (isNaN(value) || value <= 0) {
+        error = 'Quantity must be a positive number';
+      }
+    } else if (name === 'expirydate') {
+      if (!value) {
+        error = 'Expiry date is required';
+      } else if (new Date(value) <= new Date()) {
+        error = 'Expiry date must be a future date';
+      }
+    } else if (name === 'productimage' && !value) {
+      error = 'Product image is required';
+    }
+    return error;
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField(name, value)
+    }));
+  };
+
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    const file = files[0];
+    setData((prevData) => ({
+      ...prevData,
+      [name]: file
+    }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField(name, file ? file.name : '')
+    }));
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.onloadend = () => {
+    //     setProfileImage(reader.result);
+    //   };
+    //   reader.readAsDataURL(file);
+    // } else {
+    //   setProfileImage(null);
+    // }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newErrors = {};
+    let formIsValid = true;
+
+    Object.keys(data).forEach((key) => {
+      const error = validateField(key, data[key]);
+      if (error) {
+        formIsValid = false;
+        newErrors[key] = error;
+      }
     });
 
-    const[errors,setErrors]=useState({
-        name:"",
-        brand:"",
-        description:"",
-        image:"",
-        price:""
-    })
+    setErrors(newErrors);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: "",
-        }));
-    };
-    
-    const handleFileChange = (e) => {
-        const { name, files } = e.target;
-        setData({ ...data, [name]: files[0] });
-    };
+    if (formIsValid) {
+      console.log(data);
+      const formData=new FormData();
 
-    function validateField(fieldName, value) {
-        if (typeof value === 'string' && !value.trim()) {
-          return `${fieldName} is required`;
-        }
+      for (const key in data) {
+        formData.append(key, data[key]);
+      }
+      axiosInstance.post("/add_a_product",formData).then((res)=>{
+        alert(res.data.message)
+      })
+      .catch((err)=>{
+        alert("Add product Failed")
+      })
     }
-
-    const handleSubmit = (e) => {
-        console.log(data);
-        e.preventDefault();
-        let errors = {};
-        let formIsValid = true;
-
-        errors.name =validateField("Name",data.name);
-        errors.brand =validateField("Brand",data.brand);
-        errors.description =validateField("Description",data.description);
-        errors.image =validateField("Image",data.image);
-        errors.price =validateField("Price",data.price);
-
-        setErrors(errors);
-    }
+  };
 
   return (
     <div>
-      <div className="">
-        <Link className="text-dark ms-5 shopowner-additem-link" to="">
-          <FaArrowLeftLong />
-        </Link>
-      </div>
-      <div className='shopowner-additem-box'>
-        <div className='text-center shopowner-additem-h1'>
-            <h1>Add Products</h1>
+      <div className="row">
+        <div className="col-2">
+          <ShopOwnerSidebar />
         </div>
-        <div className='row container mt-3 ms-5'>
-            <div className='col'>
-                <div>
-                    <label className='shopowner-additem-label'>Select Category</label>
-                    <div className='shopowner-additem-labelbox mt-2'>
-                        <select className='shopowner-additem-select ms-5 mt-4'>
-                            <option>Category</option>
-                            <option>Cookies</option>
-                            <option>Fruits</option>
-                            <option>Milk Products</option>
-                        </select>
-                    </div>
-                </div>
-                <div className='mt-3'>
-                    <label className='shopowner-additem-label'>Product Name & Brand</label>
-                    <div className='shopowner-additem-labelbox mt-2'>
-                        <input type='text'
-                        name='name'
-                        value={data.name}
-                        placeholder='Name'
-                        className='shopowner-additem-textbox ms-5 mt-4'
+        <div className="col-10">
+          <div>
+            <div className="">
+              <Link className="text-dark ms-5 shopowner-additem-link" to="">
+                <FaArrowLeftLong />
+              </Link>
+            </div>
+            <div className="shopowner-additem-box">
+              <div className="text-center shopowner-additem-h1">
+                <h1>Add Products</h1>
+              </div>
+              <div className="row container mt-3 ms-5">
+                <div className="col">
+                  <div>
+                    <label className="shopowner-additem-label">Select Category</label>
+                    <div className="shopowner-additem-labelbox mt-2">
+                      <select
+                        name="category"
+                        className="shopowner-additem-select ms-5 mt-4"
+                        value={data.category}
                         onChange={handleChange}
-                        />
+                      >
+                        <option value="">Category</option>
+                        <option value="Cookies">Cookies</option>
+                        <option value="Fruits">Fruits</option>
+                        <option value="Milk Products">Milk Products</option>
+                      </select>
+                      {errors.category && <span className="text-danger">{errors.category}</span>}
                     </div>
-                    {errors.name && <span className='text-danger'>{errors.name}</span>}
-                    <div className='shopowner-additem-labelbox mt-2'>
-                        <input type='text' 
-                        placeholder='Brand' 
-                        className='shopowner-additem-textbox ms-5 mt-4'
-                        name='brand'
+                  </div>
+                  <div className="mt-3">
+                    <label className="shopowner-additem-label">Product Name & Brand</label>
+                    <div className="shopowner-additem-labelbox mt-2">
+                      <input
+                        type="text"
+                        name="productname"
+                        value={data.productname}
+                        placeholder="Name"
+                        className="shopowner-additem-textbox ms-5 mt-4"
+                        onChange={handleChange}
+                      />
+                      {errors.productname && <span className="text-danger">{errors.productname}</span>}
+                    </div>
+                    <div className="shopowner-additem-labelbox mt-2">
+                      <input
+                        type="text"
+                        name="brand"
                         value={data.brand}
+                        placeholder="Brand"
+                        className="shopowner-additem-textbox ms-5 mt-4"
                         onChange={handleChange}
-                        />
+                      />
+                      {errors.brand && <span className="text-danger">{errors.brand}</span>}
                     </div>
-                    {errors.brand && <span className='text-danger'>{errors.brand}</span>}
-
-                </div>
-                <div className='mt-3'>
-                    <label className='shopowner-additem-label'>Expiry</label>
-                    <div className='shopowner-additem-labelbox mt-2'>
-                        <input type='date' className='shopowner-additem-textbox ms-5 mt-4'></input>
+                  </div>
+                  <div className="mt-3">
+                    <label className="shopowner-additem-label">Expiry</label>
+                    <div className="shopowner-additem-labelbox mt-2">
+                      <input
+                        type="date"
+                        name="expirydate"
+                        value={data.expirydate}
+                        className="shopowner-additem-textbox ms-5 mt-4"
+                        onChange={handleChange}
+                      />
+                      {errors.expirydate && <span className="text-danger">{errors.expirydate}</span>}
                     </div>
-                </div>
-                <div className='mt-3'>
-                    <label className='shopowner-additem-label'>Description</label>
-                    <div className='shopowner-additem-labelbox1 mt-2'>
-                        <input type='text' 
-                        className='shopowner-additem-textbox1 ms-5 mt-4'
-                        name='description'
+                  </div>
+                  <div className="mt-3">
+                    <label className="shopowner-additem-label">Description</label>
+                    <div className="shopowner-additem-labelbox1 mt-2">
+                      <input
+                        type="text"
+                        name="description"
                         value={data.description}
+                        className="shopowner-additem-textbox1 ms-5 mt-4"
                         onChange={handleChange}
+                      />
+                      {errors.description && <span className="text-danger">{errors.description}</span>}
+                    </div>
+                  </div>
+                </div>
+                <div className="col ms-5 me-5">
+                  <div>
+                    <label className="shopowner-additem-label">Product Image</label>
+                    <div className="mt-3 shopowner-additem-divimglabel text-center">
+                      <div className="shopowner-additem-imgupload text-center">
+                        {profileImage ? (
+                          <img src={profileImage} alt="profile" className="rounded-circle" width="200" height="200" />
+                        ) : (
+                          <label className="upload-icon text-primary mt-5 pt-3">
+                            <b>Click To Upload</b>
+                          </label>
+                        )}
+                        <label className="upload-icon text-primary mt-5 pt-3">
+                          <b>Click To Upload</b>
+                          <input
+                            type="file"
+                            name="productimage"
+                            style={{ display: 'none' }}
+                            onChange={handleFileChange}
+                          />
+                        </label>
+                        {errors.productimage && <span className="text-danger">{errors.productimage}</span>}
+                      </div>
+                      <div className="mt-5">
+                        <button className="shopowner-additem-btn">Remove</button>
+                        <button className="shopowner-additem-btn ms-4">Replace</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-2">
+                    <label className="shopowner-additem-label">Quantity</label>
+                    <div className="shopowner-additem-labelbox mt-2">
+                      <div className="d-flex justify-content-between">
+                        <button onClick={decrement}>-</button>
+                        <input
+                          type="text"
+                          name="quantity"
+                          value={data.quantity}
+                          readOnly
+                          className="shopowner-additem-textbox ms-5 mt-4"
                         />
+                        <button onClick={increment}>+</button>
+                      </div>
+                      {errors.quantity && <span className="text-danger">{errors.quantity}</span>}
                     </div>
-                </div>
-                {errors.description && <span className='text-danger'>{errors.description}</span>}
-
-            </div>
-            <div className='col ms-5 me-5'>
-                <div>
-                    <label className='shopowner-additem-label'>Product Image</label>
-                    <div className='mt-3  shopowner-additem-divimglabel text-center'>
-                        <div className='shopowner-additem-imgupload text-center'>
-                           
-                            {profileImage ? (
-                                <img src={profileImage} alt="profile" className="rounded-circle" width="200" height="200" />
-                            ) : (
-                                <label></label>
-                            )}
-                            <label className='upload-icon text-primary mt-5 pt-3'><b>Click To Upload</b>
-                                <input 
-                                type='file'
-                                style={{display:'none'}}
-                                name='image'
-                                value={data.image}
-                                onChange={handleFileChange}
-                                />
-                            </label>
-                            {errors.image && <span className='text-danger'>{errors.image}</span>}
-                        </div>
-                        <div className='mt-5 '>
-                            <button className='shopowner-additem-btn'>Remove</button>
-                            <button className='shopowner-additem-btn ms-4'>Replace</button>
-                        </div>
-                    </div>
-                </div>
-                <div className='mt-2'>
-                    <label className='shopowner-additem-label'>Quantity</label>
-                    <div className='shopowner-additem-labelbox mt-2'>
-                        <div className='row'>
-                            <div className='col-8'>
-                                <input type='text' placeholder='Quantity' className='shopowner-additem-textbox ms-5 mt-4' value={count}/>
-                            </div>
-                            <div className='col-2  mt-4'>
-                                <button className='shopowner-additem-quantitybtn' onClick={decrement}>-</button>
-                            </div>
-                            <div className='col-2 mt-4'>
-                                <button className='shopowner-additem-quantitybtn1' onClick={increment}>+</button>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
-                <div className='mt-2'>
-                    <label className='shopowner-additem-label'>Price</label> 
-                    <div className='shopowner-additem-labelbox mt-2'>
-                        <input type='text' 
-                        className='shopowner-additem-textbox ms-5 mt-4' 
-                        placeholder=''
-                        name='price'
+                  </div>
+                  <div className="mt-3">
+                    <label className="shopowner-additem-label">Price</label>
+                    <div className="shopowner-additem-labelbox mt-2">
+                      <input
+                        type="text"
+                        name="price"
                         value={data.price}
+                        className="shopowner-additem-textbox ms-5 mt-4"
                         onChange={handleChange}
-                        ></input>
-                    </div>    
+                      />
+                      {errors.price && <span className="text-danger">{errors.price}</span>}
+                    </div>
+                  </div>
+                  <div className="text-center mt-4">
+                    <button onClick={handleSubmit} className="shopowner-additem-submit">
+                      Submit
+                    </button>
+                  </div>
                 </div>
-                {errors.price && <span className='text-danger'>{errors.price}</span>}
-                <div className='text-center'>
-                    <button className='shopowner-additem-addbtn' onClick={handleSubmit}>Add Product</button>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ShopAddItem
+export default ShopAddItem;
