@@ -87,16 +87,19 @@ function CustomerRegistration() {
       setErrors({});
       try {
         await axiosInstance.post('/customer_register', formData);
-        alert(" Successfully Registrated")
+        alert("Successfully Registered");
         navigate("/customerlogin");
       } catch (error) {
-        console.error("There was an error registering!", error);
+        if (error.response && error.response.status === 409) {
+          alert("Email Id Already Registered");
+        } else {
+          console.error("There was an error registering!", error);
+        }
       }
     } else {
       setErrors(errors);
     }
   };
-
   return (
     <div className="CustomerRegistration">
       <div className="CustomerRegistration-contain">

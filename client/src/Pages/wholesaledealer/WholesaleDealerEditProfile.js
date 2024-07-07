@@ -17,6 +17,7 @@ function WholesaleDealerEditProfile() {
         wholesaleregisternumber: "",
         email: "",
         dealerlisence: null,
+        file:''
     });
 
     const [errors, setErrors] = useState({
@@ -39,13 +40,28 @@ function WholesaleDealerEditProfile() {
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
+
+        if (name == 'pincode') {
+            setErrors(d => ({
+                ...d,
+                pincode:  validatePincode(name, value)
+            }))
+        }
+        if (name == 'contact') {
+            setErrors(d => ({
+                ...d,
+                contact:  validateContact(name, value)
+            }))
+        }
+        if (name == 'dealerlisence') {
+            setData(prevData => ({
+                ...prevData,
+                file: files[0]
+            }));
+        }
         setData(prevData => ({
             ...prevData,
-            [name]: name === 'dealerlisence' ? files[0] : value
-        }));
-        setErrors(prevErrors => ({
-            ...prevErrors,
-            [name]: ''
+            [name]: value
         }));
     };
 
@@ -115,10 +131,18 @@ function WholesaleDealerEditProfile() {
 
         const formData = new FormData();
         for (const key in data) {
-            formData.append(key, data[key]);
+            if (key != 'dealerlisence' && key != 'file') {
+                formData.append(key, data[key]);
+            }
+            if (key == 'dealerlisence') {
+                console.log(data.file)
+                formData.append('file', data.file);
+            }
         }
 
-        axiosInstance.post('/edit_a_wholesaledealer/' + wholesaledealerid, formData)
+        axiosInstance.post('/edit_a_wholesaledealer/' + wholesaledealerid, formData,{ headers: {
+            'Content-Type': 'multipart/form-data',
+          }})
             .then((res) => {
                 alert("Updated Successfully");
                 Navigation("/wholesaledealerprofile");
@@ -189,7 +213,7 @@ function WholesaleDealerEditProfile() {
                                 >
                                     <option>Select District</option>
                                     {districts.map((district, index) => (
-                                        <option key={index} value={district}>{district}</option>
+                                        <option key={index} value={district}>{districts}</option>
                                     ))}
                                 </select>
                                 {errors.districts && <div className="text-danger color">{errors.districts}</div>}
@@ -212,26 +236,28 @@ function WholesaleDealerEditProfile() {
                             <div>
                                 <label className="container-fluid font" id="font">Pincode</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control m-2"
                                     placeholder="Pincode"
                                     id="shopprofile-editpage-text2"
                                     name="pincode"
                                     value={data.pincode}
                                     onChange={handleChange}
+                                     pattern="^\d+$"
                                 />
                                 {errors.pincode && <div className="text-danger color">{errors.pincode}</div>}
                             </div>
                             <div>
                                 <label className="container-fluid font" id="font">Contact Number</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="form-control m-2"
                                     placeholder="Contact Number"
                                     id="shopprofile-editpage-text2"
                                     name="contact"
                                     value={data.contact}
                                     onChange={handleChange}
+                                     pattern="^\d+$"
                                 />
                                 {errors.contact && <div className="text-danger color">{errors.contact}</div>}
                             </div>
@@ -245,6 +271,7 @@ function WholesaleDealerEditProfile() {
                                     name="email"
                                     value={data.email}
                                     onChange={handleChange}
+                                    disabled
                                 />
                                 {errors.email && <div className="text-danger color">{errors.email}</div>}
                             </div>
@@ -270,16 +297,7 @@ function WholesaleDealerEditProfile() {
                                     name="dealerlisence"
                                     onChange={handleChange}
                                 />
-                                {data.dealerlisence && (
-                                    <div className="mt-2">
-                                        <img
-                                            src={(data.dealerlisence)}
-                                            alt="Dealer License"
-                                            className="img-thumbnail"
-                                            width="100"
-                                        />
-                                    </div>
-                                )}
+                            
                             </div>
                         </Col>
                         <div className="shopprofile-editpage-btn ms-5">
@@ -295,6 +313,111 @@ function WholesaleDealerEditProfile() {
             </div>
         </div>
     )
+    //                             </select>
+    //                             {errors.districts && <div className="text-danger color">{errors.districts}</div>}
+    //                         </div>
+    //                         <div>
+    //                             <label className="container-fluid font" id="font">City</label>
+    //                             <input
+    //                                 type="text"
+    //                                 className="form-control m-2"
+    //                                 placeholder="City"
+    //                                 id="shopprofile-editpage-text2"
+    //                                 name="city"
+    //                                 value={data.city}
+    //                                 onChange={handleChange}
+    //                             />
+    //                             {errors.city && <div className="text-danger color">{errors.city}</div>}
+    //                         </div>
+    //                     </Col>
+    //                     <Col>
+    //                         <div>
+    //                             <label className="container-fluid font" id="font">Pincode</label>
+    //                             <input
+    //                                 type="text"
+    //                                 className="form-control m-2"
+    //                                 placeholder="Pincode"
+    //                                 id="shopprofile-editpage-text2"
+    //                                 name="pincode"
+    //                                 value={data.pincode}
+    //                                 onChange={handleChange}
+    //                             />
+    //                             {errors.pincode && <div className="text-danger color">{errors.pincode}</div>}
+    //                         </div>
+    //                         <div>
+    //                             <label className="container-fluid font" id="font">Contact Number</label>
+    //                             <input
+    //                                 type="text"
+    //                                 className="form-control m-2"
+    //                                 placeholder="Contact Number"
+    //                                 id="shopprofile-editpage-text2"
+    //                                 name="contact"
+    //                                 value={data.contact}
+    //                                 onChange={handleChange}
+    //                             />
+    //                             {errors.contact && <div className="text-danger color">{errors.contact}</div>}
+    //                         </div>
+    //                         <div>
+    //                             <label className="container-fluid font" id="font">Email Id</label>
+    //                             <input
+    //                                 type="email"
+    //                                 className="form-control m-2"
+    //                                 placeholder="Email Id"
+    //                                 id="shopprofile-editpage-text2"
+    //                                 name="email"
+    //                                 value={data.email}
+    //                                 onChange={handleChange}
+    //                             />
+    //                             {errors.email && <div className="text-danger color">{errors.email}</div>}
+    //                         </div>
+    //                         <div>
+    //                             <label className="container-fluid font" id="font">Registration Number</label>
+    //                             <input
+    //                                 type="text"
+    //                                 className="form-control m-2"
+    //                                 placeholder="Registration Number"
+    //                                 id="shopprofile-editpage-text2"
+    //                                 name="wholesaleregisternumber"
+    //                                 value={data.wholesaleregisternumber}
+    //                                 onChange={handleChange}
+    //                             />
+    //                             {errors.wholesaleregisternumber && <div className="text-danger color">{errors.wholesaleregisternumber}</div>}
+    //                         </div>
+    //                         <div>
+    //                             <label className="container-fluid font" id="font">Dealer License (optional)</label>
+    //                             <input
+    //                                 type="file"
+    //                                 className="form-control m-2"
+    //                                 id="shopprofile-editpage-text2"
+    //                                 name="dealerlisence"
+    //                                 onChange={handleChange}
+    //                             />
+    //                             {data.dealerlisence && (
+    //                                 <div className="mt-2">
+    //                                     <img
+    //                                         src={(data.dealerlisence)}
+    //                                         alt="Dealer License"
+    //                                         className="img-thumbnail"
+    //                                         width="100"
+    //                                     />
+    //                                 </div>
+    //                             )}
+    //                         </div>
+    //                     </Col>
+    //                     <div className="shopprofile-editpage-btn ms-5">
+    //                         <button type="submit" className="shopprofile-editpage-subbtn ms-5">
+    //                             Update
+    //                         </button>
+    //                         <button type="button" className="shopprofile-editpage-subbtn ms-5" onClick={handleCancel}>
+    //                             Cancel
+    //                         </button>
+    //                     </div>
+    //                 </Row>
+    //             </form>
+    //         </div>
+    //     </div>
+    // )
 }
 
 export default WholesaleDealerEditProfile;
+

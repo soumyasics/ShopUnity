@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaBoxOpen } from "react-icons/fa";
-import { BsPeopleFill } from "react-icons/bs";
-import { GrDeliver } from "react-icons/gr";
 import { BsBoxSeam } from "react-icons/bs";
 import { GrCompliance } from "react-icons/gr";
 import { RiLogoutCircleLine } from "react-icons/ri";
@@ -14,16 +12,33 @@ import { MdDashboard } from "react-icons/md";
 import { BsBoxes } from "react-icons/bs";
 import { GiInjustice } from "react-icons/gi";
 import { FaBell } from "react-icons/fa";
-import Button from "react-bootstrap/Button";
 import Collapse from "react-bootstrap/Collapse";
 import { FaUserAlt } from "react-icons/fa";
 import "./shopownersidebar.css";
 import { FiAlignJustify } from "react-icons/fi";
+import axiosInstance from "../../APIS/axiosinstatnce";
 
 function ShopOwnerSidebar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   let shopname = localStorage.getItem("shopname");
+
+  const [data, setData] = useState({});
+
+  const shopownerid = localStorage.getItem("shopowner");
+
+  useEffect(() => {
+    axiosInstance
+      .get("/get_a_shopowner/" + shopownerid)
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -53,7 +68,7 @@ function ShopOwnerSidebar() {
                   <img className="sidebarimg mt-3" src={sidebarimg} alt="img" />
                 </Col>
                 <Col xs={9} md={10}>
-                  <p to="" className="sidebar-para mb-1 ms-3">{shopname}</p>
+                  <p to="" className="sidebar-para mb-1 ms-3">{data.shopname}</p>
                 </Col>
               </Row>
           </div>

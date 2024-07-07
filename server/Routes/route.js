@@ -12,7 +12,7 @@ Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.
 Route.post('/wholesaledealer_login',WholesaleController.WholesaleDealerLogin)
 Route.get('/get_all_wholesaledealer',WholesaleController.getAllWholesaleDealer)
 Route.get('/get_a_wholesaledealer/:wholesaledealerid',WholesaleController.getAWholesaledealer)
-Route.post('/edit_a_wholesaledealer/:wholesaledealerid',WholesaleController.EditAWholesaledealer)
+Route.post('/edit_a_wholesaledealer/:wholesaledealerid',WholesaleController.upload,WholesaleController.EditAWholesaledealer)
 Route.post('/delete_a_wholesaledealer/:wholesaledealerid',WholesaleController.DeleteAWholesaleDealer)
 Route.post('/wholesaledealer_forgot',WholesaleController.wholesaleforgot)
 
@@ -36,11 +36,11 @@ Route.post('/diactivate_customer/:id',CustomerController.deActivateCustomer)
 Route.post('/activate_customer/:id',CustomerController.activatecustomer)
 
 // deliveryagent
-Route.post('/delivery_agent_register',DeliveryAgentController.DeliveryAgentRegister)
+Route.post('/delivery_agent_register',DeliveryAgentController.upload,DeliveryAgentController.DeliveryAgentRegister)
 Route.post('/delivery_agent_login',DeliveryAgentController.DeliveryagentLogin)
 Route.get('/get_all_deliveryagents',DeliveryAgentController.getAllDeliveryAgents)
 Route.get('/get_a_deliveryagent/:deliveryagentid',DeliveryAgentController.getADeliveryAgent)
-Route.post('/edit_a_deliveryagent/:deliveryagentid',DeliveryAgentController.EditADeliveryAgent)
+Route.post('/edit_a_deliveryagent/:deliveryagentid',DeliveryAgentController.upload,DeliveryAgentController.EditADeliveryAgent)
 Route.post('/delete_a_deliveryagent/:deliveryagentid',DeliveryAgentController.DeleteDeliveryAgent)
 Route.post('/delivery_agent_forgot',DeliveryAgentController.deliveryagentforget)
 

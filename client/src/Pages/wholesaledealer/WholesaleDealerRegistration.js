@@ -173,14 +173,14 @@ function WholesaleDealerRegistration() {
       formData.append("contact", data.contact);
       formData.append("email", data.email);
       formData.append("wholesaleregisternumber", data.wholesaleregisternumber);
-      formData.append("dealerlisence", data.dealerlisence);
+      formData.append("file", data.dealerlisence);
       formData.append("password", data.password);
 
       try {
         console.log("in try");
         const res = await axiosMultipartInstance.post(
           "/wholesale_register",
-          data
+          formData
         );
         console.log(res);
         if (res.data.status === 200) {

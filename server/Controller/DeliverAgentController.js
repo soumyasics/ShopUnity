@@ -1,5 +1,18 @@
 const deliveryagentschema = require("../Model/DeliveryAgentSchema");
+const multer = require("multer");
 const jwt = require("jsonwebtoken");
+
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, "./upload");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage }).single("file");
+
 
 const DeliveryAgentRegister = (req, res) => {
   const Agent = new deliveryagentschema({
@@ -9,7 +22,7 @@ const DeliveryAgentRegister = (req, res) => {
     password: req.body.password,
     vehicleType: req.body.vehicleType,
     vehicleNumber: req.body.vehicleNumber,
-    drivingLicense: req.body.drivingLicense,
+    drivingLicense:  req.file,
     address: req.body.address,
     district: req.body.district,
     city: req.body.city,
@@ -114,31 +127,56 @@ const getADeliveryAgent = (req, res) => {
     });
 };
 
-const EditADeliveryAgent = (req, res) => {
+const EditADeliveryAgent = async(req, res) => {
+try {
+  console.log(req.file);
   const deliveryagentid = req.params.deliveryagentid;
-  deliveryagentschema
-    .findByIdAndUpdate(deliveryagentid, {
-      agentname: req.body.agentname,
+
+  const updateData = {
+    name: req.body.name,
       email: req.body.email,
-      contact: req.body.contact,
+      contactNumber: req.body.contactNumber,
       password: req.body.password,
-      vehicletype: req.body.vehicletype,
-      lisenseNumber: req.body.lisenseNumber,
-      deliveryareas: req.body.deliveryareas,
-    })
-    .then((result) => {
-      res.json({
-        status: 200,
-        data: result,
-      });
-    })
-    .catch((err) => {
-      res.json({
-        status: 500,
-        message: "Failed to Update",
-      });
+      vehicleType: req.body.vehicleType,
+      vehicleNumber: req.body.vehicleNumber,
+      // drivingLicense: req.body.drivingLicense,
+      address: req.body.address,
+      district: req.body.district,
+      city: req.body.city,
+      pincode: req.body.pincode,
+  };
+
+  // If a file is uploaded, add it to the update data
+  if (req.file) {
+    updateData.drivingLicense = req.file; // assuming req.file.path contains the file path
+  }
+
+  const result = await deliveryagentschema.findByIdAndUpdate(
+    deliveryagentid,
+    updateData,
+    { new: true } // This option returns the updated document
+  );
+
+  if (!result) {
+    return res.status(404).json({
+      status: 404,
+      message: "deliveryagent dealer not found",
     });
+  }
+
+  res.status(200).json({
+    status: 200,
+    data: result,
+  });
+} catch (err) {
+  console.error(err);
+  res.status(500).json({
+    status: 500,
+    message: "Failed to update",
+  });
+}
 };
+
 
 const DeleteDeliveryAgent = (req, res) => {
   const deliveryagentid = req.params.deliveryagentid;
@@ -288,6 +326,7 @@ const getAllAcceptedDeliveryAgents = (req, res) => {
 };
 
 module.exports = {
+  upload,
   DeliveryAgentRegister,
   DeliveryagentLogin,
   getAllDeliveryAgents,
