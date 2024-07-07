@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaArrowLeftLong } from "react-icons/fa6";
 import tick from '../../images/tick.png'
 import wrong from '../../images/wrong.png'
+import axiosInstance from '../../APIS/axiosinstatnce';
 function ShopownerEditProduct() {
 
+    const navigate=useNavigate();
     const [count,setCount]=useState(1)
     const[profileImage,setProfileImage]=useState(null);
 
@@ -58,6 +60,18 @@ function ShopownerEditProduct() {
         }
     }
 
+    const productid = localStorage.getItem("shopowner")
+
+    useEffect(() => {
+        axiosInstance.post(`/edit_a_product/${productid}`)
+        .then((res) => {
+            setData(res.data.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    },[productid]);
+
     const handleSubmit = (e) => {
         console.log(data);
         e.preventDefault();
@@ -71,6 +85,25 @@ function ShopownerEditProduct() {
         errors.price =validateField("Price",data.price);
 
         setErrors(errors);
+
+        const formData=new FormData();
+
+        for (const key in data) {
+        formData.append(key, data[key]);
+        }
+
+        console.log(data);
+        e.preventDefault();
+
+        axiosInstance.post(`/edit_a_product ${productid}`,formData)
+        .then((res) => {
+            alert("Updated Successfully")
+            console.log("Updated Successfully");
+            navigate("")
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
   return (

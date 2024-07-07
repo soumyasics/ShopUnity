@@ -150,14 +150,14 @@ function ShopAddItem() {
 
   return (
     <div>
-      <div className="row">
-        <div className="col-2">
+      <div >
+        {/* <div className="col-2">
           <ShopOwnerSidebar />
-        </div>
-        <div className="col-10">
+        </div> */}
+        <div >
           <div>
             <div className="">
-              <Link className="text-dark ms-5 shopowner-additem-link" to="">
+              <Link className="text-dark  shopowner-additem-link" to="/shopownerdashboard">
                 <FaArrowLeftLong />
               </Link>
             </div>
@@ -245,7 +245,7 @@ function ShopAddItem() {
                           <img src={profileImage} alt="profile" className="rounded-circle" width="200" height="200" />
                         ) : (
                           <label className="upload-icon text-primary mt-5 pt-3">
-                            <b>Click To Upload</b>
+                            <b></b>
                           </label>
                         )}
                         <label className="upload-icon text-primary mt-5 pt-3">
@@ -269,7 +269,7 @@ function ShopAddItem() {
                     <label className="shopowner-additem-label">Quantity</label>
                     <div className="shopowner-additem-labelbox mt-2">
                       <div className="d-flex justify-content-between">
-                        <button onClick={decrement}>-</button>
+                        <button onClick={decrement} className='shopowner-additem-quantitybtn'>-</button>
                         <input
                           type="text"
                           name="quantity"
@@ -277,7 +277,7 @@ function ShopAddItem() {
                           readOnly
                           className="shopowner-additem-textbox ms-5 mt-4"
                         />
-                        <button onClick={increment}>+</button>
+                        <button onClick={increment} className='shopowner-additem-quantitybtn1'>+</button>
                       </div>
                       {errors.quantity && <span className="text-danger">{errors.quantity}</span>}
                     </div>

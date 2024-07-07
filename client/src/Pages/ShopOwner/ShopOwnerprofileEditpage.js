@@ -99,7 +99,7 @@ function ShopOwnerProfileEditPage() {
     axiosInstance
       .post(`/edit_a_shopowner/${shopownerid}`, formData)
       .then((res) => {
-        alert("Updated Successfully")
+        alert("Updated Successfully")   
         console.log("Updated Successfully");
         navigate("/shopownerprofile");
       })
