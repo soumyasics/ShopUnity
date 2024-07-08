@@ -155,7 +155,7 @@ function ShopAddItem() {
           <ShopOwnerSidebar />
         </div> */}
         <div >
-          <div>
+          <div className='me-5 shopowner-additem-margin'> 
             <div className="">
               <Link className="text-dark  shopowner-additem-link" to="/shopownerdashboard">
                 <FaArrowLeftLong />
