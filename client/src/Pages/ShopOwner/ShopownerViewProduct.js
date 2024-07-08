@@ -21,7 +21,7 @@ function ShopownerViewProduct({ url }) {
       })
       .catch((err) => {
         console.log(err);
-      });
+      });  
   }, []);
   const navigate=useNavigate()
   const handleViewproduct=(productid)=>{

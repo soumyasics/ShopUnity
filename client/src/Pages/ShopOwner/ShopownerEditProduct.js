@@ -63,14 +63,15 @@ function ShopownerEditProduct() {
     const productid = localStorage.getItem("shopowner")
 
     useEffect(() => {
-        axiosInstance.post(`/edit_a_product/${productid}`)
+        axiosInstance.post(`/view_a_product/${productid}`)
         .then((res) => {
-            setData(res.data.data);
+            setData(res.data.data)
+            console.log(res.data.data);
         })
         .catch((err) => {
             console.log(err);
-        });
-    },[productid]);
+        })
+    },[productid])
 
     const handleSubmit = (e) => {
         console.log(data);
@@ -136,7 +137,7 @@ function ShopownerEditProduct() {
                         <input type='text'
                         name='name'
                         value={data.name}
-                        placeholder='Name'
+                        placeholder={data.productname}
                         className='shopowner-additem-textbox ms-5 mt-4'
                         onChange={handleChange}
                         />
@@ -144,7 +145,7 @@ function ShopownerEditProduct() {
                     {errors.name && <span className='text-danger'>{errors.name}</span>}
                     <div className='shopowner-additem-labelbox mt-2'>
                         <input type='text' 
-                        placeholder='Brand' 
+                        placeholder={data.brand}
                         className='shopowner-additem-textbox ms-5 mt-4'
                         name='brand'
                         value={data.brand}
@@ -168,6 +169,7 @@ function ShopownerEditProduct() {
                         name='description'
                         value={data.description}
                         onChange={handleChange}
+                        placeholder={data.description}
                         />
                     </div>
                 </div>
@@ -196,8 +198,7 @@ function ShopownerEditProduct() {
                             </label>
                             {errors.image && <span className='text-danger'>{errors.image}</span>}
                         </div>
-                        <div className='mt-5 '>
-                            <button className='shopowner-additem-btn'>Remove</button>
+                        <div className='mt-5 text-center'>                          
                             <button className='shopowner-additem-btn ms-4'>Replace</button>
                         </div>
                     </div>
@@ -223,7 +224,7 @@ function ShopownerEditProduct() {
                     <div className='shopowner-additem-labelbox mt-2'>
                         <input type='text' 
                         className='shopowner-additem-textbox ms-5 mt-4' 
-                        placeholder=''
+                        placeholder={data.price}
                         name='price'
                         value={data.price}
                         onChange={handleChange}
