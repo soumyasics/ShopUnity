@@ -483,7 +483,7 @@ height: 25px;
   font-size: 21px;
   font-weight: bold;
 }
-.shopowner-viewproductdetails-imgdiv{
+.shopowner-viewproductdetails-imgdiv img{
   width: 320px;
   height: 320px;
   border-radius: 16px;
@@ -492,6 +492,7 @@ height: 25px;
   box-shadow: 0px 11.27px 11.27px 0px #00000040;
   margin-top: 150px;
 }
+
 .shopowner-viewproductdetails-editbtn{
     color: white;
     background-color: #459197;

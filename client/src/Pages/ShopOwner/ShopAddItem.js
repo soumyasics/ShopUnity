@@ -150,16 +150,14 @@ function ShopAddItem() {
 
   return (
     <div>
-      <div >
-        {/* <div className="col-2">
+      <div className='row ' >
+         <div className="col-2">
           <ShopOwnerSidebar />
-        </div> */}
-        <div >
+        </div> 
+        <div className='col-9 mt-5' >
           <div>
             <div className="">
-              <Link className="text-dark  shopowner-additem-link" to="/shopownerdashboard">
-                <FaArrowLeftLong />
-              </Link>
+              
             </div>
             <div className="shopowner-additem-box">
               <div className="text-center shopowner-additem-h1">
