@@ -310,6 +310,9 @@ height: 25px;
   border-radius: 43px ;
   border: 7px 0px 0px 0px;
 }
+.shopowner-additem-margin{
+  margin-left: -30px;
+}
 .shopowner-additem-h1{
   color: #74767B;
   text-decoration: underline;
@@ -399,7 +402,7 @@ height: 25px;
   padding-bottom: 10px;
   border: 1.41px solid #FFFFFF
 }
-.shopowner-additem-addbtn{
+.shopowner-additem-submit{
   height: 50px;
   width: 250px;
   color: white;

@@ -93,8 +93,8 @@ function App() {
     <Route path='/customerprofile' element={<CustomerProfile/>} />
     <Route path='/customereditprofile' element={<CustomerEditProfile/>} />
     <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
-    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage/>]} />
-    <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail/>} />
+    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage url={url}/>]} />
+    <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail url={url}/>} />
     
 {/* deliveryagent */}
 
@@ -120,7 +120,7 @@ function App() {
     <Route path='/shopowneradditem' element={ <ShopAddItem/>} />
     <Route path='/shopownerviewproduct' element={<ShopownerViewProduct url={url}/>}/>
     <Route path='/shopownerviewproductdetails/:productid' element={<ShopownerviewProductDetails url={url} />}/>
-    <Route path='/shopownereditproduct/:productid' element={<ShopownerEditProduct/>}/>
+    <Route path='/shopownereditproduct/:productid' element={<ShopownerEditProduct url={url}/>}/>
     <Route path='/shopownerdashboard' element={<ShopownerDashBoard/>}/>
     {/* /:productid */}
 {/* Admin */}

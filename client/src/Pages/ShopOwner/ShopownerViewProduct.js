@@ -21,7 +21,7 @@ function ShopownerViewProduct({ url }) {
       })
       .catch((err) => {
         console.log(err);
-      });
+      });  
   }, []);
   const navigate=useNavigate()
   const handleViewproduct=(productid)=>{
@@ -41,11 +41,11 @@ function ShopownerViewProduct({ url }) {
   };
   return (
     <div>
-    <div className="row">
-      <div className="col-2">
+    <div >
+      {/* <div className="col-2">
         <ShopOwnerSidebar/>
-      </div>
-      <div className="col-10">
+      </div> */}
+      <div className="me-5">
       <div>
       
       <div className="text-center">
