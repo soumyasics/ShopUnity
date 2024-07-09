@@ -107,12 +107,31 @@ function ShopownerEditProduct() {
         axiosInstance.post(`/edit_a_product/${productid}`,formData)
         .then((res) => {
             alert("Updated Successfully")
+            setInterval(()=>{
+                navigate("/shopownerviewproduct")
+
+            },1000)
+            navigate("/shopownerviewproduct")
+
         })
         .catch((err) => {
             console.log(err);
         })
     }
 
+    const DeleteAProduct=()=>{
+        axiosInstance.post(`/delete_a_product/${productid}`)
+        .then((res) => {
+            alert("product Deleted")
+            setInterval(()=>{
+                navigate("/shopownerviewproduct")
+
+            },1000)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
   return (
     <div>
         <div>
@@ -240,7 +259,7 @@ function ShopownerEditProduct() {
                 {errors.price && <span className='text-danger'>{errors.price}</span>}
                 <div className='text-center'>
                     <button className='shopowner-editproduct-tickbtn' onClick={handleSubmit}><img src={tick}></img>Update</button>
-                    <button className='shopowner-editproduct-wrongbtn ms-5'><img src={wrong} className='shopowner-wrongproduct-img' ></img>Delete</button>
+                    <button className='shopowner-editproduct-wrongbtn ms-5' onClick={DeleteAProduct}><img src={wrong} className='shopowner-wrongproduct-img' ></img>Delete</button>
                 </div>
             </div>
         </div>

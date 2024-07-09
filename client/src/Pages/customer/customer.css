@@ -363,7 +363,6 @@
   border: 1.86px 0px 0px 0px;
 }
 
-
 /* CustomerProductCardPage */
 
 .customerproduct-cardpage-divbox{
@@ -413,6 +412,11 @@
   border: none;
   height: 44px;
   width: 45%;
+  box-shadow: 0px 3.95px 3.95px 0px #00000040;}
+
+.customershoownerProductimg{
+  width: 190px;
+  height: 222px;
   box-shadow: 0px 3.95px 3.95px 0px #00000040;
 }
 .customershoownerProductimg{
