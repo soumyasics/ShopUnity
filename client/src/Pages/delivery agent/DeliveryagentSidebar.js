@@ -90,7 +90,7 @@ function DeliveryagentSidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
+                <Link to="/deliveryagentdeliveryupdate" className="nav-link sidebar-shop">
                   <BsBoxes /> Delivery Updates
                 </Link>
               </li>

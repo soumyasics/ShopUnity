@@ -20,7 +20,7 @@ function CustomerProductCardPage() {
   return (
     <div>
       <div>
-        <Link to=''>
+        <Link to='/customerhome'>
             <FaArrowLeftLong className='text-dark ms-5 mt-5' />
         </Link>
       </div>

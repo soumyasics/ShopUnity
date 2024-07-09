@@ -85,7 +85,9 @@ function CustomerHomePage() {
               <div className='col-3'>
                 <div className='row'>
                   <div className='col'>
-                    <FaCartShopping className='ms-5 customer-home-cart-icon mt-2' />
+                    <Link to='/customerproductcart'>
+                      <FaCartShopping className='ms-5 customer-home-cart-icon mt-2' />
+                    </Link>
                   </div>
                   <div className='col'>
                     <Link to='/customerprofile'>
