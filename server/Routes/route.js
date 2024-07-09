@@ -73,7 +73,7 @@ Route.post("/inactivateshopowner/:id",ShopeOwnerController.deActivateShopOwnerBy
 Route.post("/add_a_product",productController.upload,productController.addProduct)
 Route.post("/view_a_product/:productId",productController.viewProductById)
 Route.post("/view_all_product",productController.viewAllProducts)
-Route.post("/edit_a_product/:",productController.editProductById)
-Route.post("/delete_a_product",productController.deleteProductById)
+Route.post("/edit_a_product/:productId",productController.upload,productController.editProductById)
+Route.post("/delete_a_product/:productId",productController.deleteProductById)
 
 module.exports=Route

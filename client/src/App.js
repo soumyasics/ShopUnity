@@ -55,6 +55,10 @@ import DeliveryagentProfileEdit from './Pages/delivery agent/DeliveryagentProfil
 import ShopownerProfilepage from './Pages/ShopOwner/ShopownerProfilepage';
 import ShopOwnerProfileEditPage from './Pages/ShopOwner/ShopOwnerprofileEditpage';
 import ShopownerDashBoard from './Pages/ShopOwner/ShopownerDashBoard';
+import CustomerProductCardPage from './Pages/customer/CustomerProductCardPage';
+import ShopownerCustomerOrderRequest from './Pages/ShopOwner/ShopownerCustomerOrderRequest';
+import ShopownerCustomerOrderAccept from './Pages/ShopOwner/ShopownerCustomerOrderAccept';
+import DeliveryAgentDeliveryRequest from './Pages/delivery agent/DeliveryAgentDeliveryRequest';
 
 
 
@@ -95,7 +99,8 @@ function App() {
     <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
     <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage url={url}/>]} />
     <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail url={url}/>} />
-    
+    <Route path='/customerproductcardpage' element={<CustomerProductCardPage/>} />
+
 {/* deliveryagent */}
 
     <Route path='/deliveryagentregistration' element={[<MainNav/>,<DeliveryAgentRegistration/>,<Footer/>]} />
@@ -108,6 +113,7 @@ function App() {
     <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
     <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
     <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit url={url}/>} />
+    <Route path='/deliveryagentdeliveryrequest' element={<DeliveryAgentDeliveryRequest/>} />
 
 {/* shopowner */}
 
@@ -122,7 +128,10 @@ function App() {
     <Route path='/shopownerviewproductdetails/:productid' element={<ShopownerviewProductDetails url={url} />}/>
     <Route path='/shopownereditproduct/:productid' element={<ShopownerEditProduct url={url}/>}/>
     <Route path='/shopownerdashboard' element={<ShopownerDashBoard/>}/>
-    {/* /:productid */}
+    <Route path='/shopownercustomerorderrequest' element={<ShopownerCustomerOrderRequest/>} />
+    <Route path='/shopownercustomerorderaccept' element={<ShopownerCustomerOrderAccept/>} />
+
+    
 {/* Admin */}
 
     <Route path='/Admin' element={[<AdminMainNav/>,<AdminLogin/>,<Footer/>]} />
