@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("file");
 
 const WholesaleDealerRegister = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const wholesaledealer = new wholesaledealerschema({
     storeName: req.body.storename,
     dealername: req.body.dealername,
@@ -157,7 +157,7 @@ const getAWholesaledealer = async (req, res) => {
 
 const EditAWholesaledealer = async (req, res) => {
   try {
-    console.log(req.file);
+    // console.log(req.file);
     const wholesaledealerid = req.params.wholesaledealerid;
 
     const updateData = {

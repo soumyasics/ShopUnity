@@ -15,8 +15,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("files");
 
 const shopeOwnerRegister = (req, res) => {
-  console.log(req.body);
-  console.log(req.file, "n");
+  // console.log(req.body);
+  // console.log(req.file, "n");
 
   shopownerschema
     .findOne({ shopowneremail: req.body.shopowneremail })
@@ -161,7 +161,7 @@ const getAshopowner = (req, res) => {
 
 const EditAShopOwner = (req, res) => {
   const shopownerid = req.params.shopownerid;
-  console.log(req.files, "j");
+  // console.log(req.files, "j");
 
   // Check if there's a new file uploaded
   let updateData = {

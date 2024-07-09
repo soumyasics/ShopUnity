@@ -266,15 +266,7 @@
   margin-top: -8px;
   background-color: #EAEAEA;
 }
-.shopowner-viewproduct-cartbtn{
-  color: white;
-  background-color: black;
-  border: none;
-  border-radius: 10px;
-  height: 44px;
-  width: 180px;
-  font-size: 19px;
-}
+
 
 
 /* Customer View Product Details */
@@ -369,4 +361,8 @@
   padding: 6.59px 10.49px 27.38px 28.51px;
   border-radius: 11px;
   border: 1.86px 0px 0px 0px;
+}
+.customershoownerProductimg{
+  width: 190px;
+  height: 222px;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { BiImageAdd } from 'react-icons/bi';
 import { FaPlus } from 'react-icons/fa6';
@@ -30,6 +30,7 @@ function ShopAddItem() {
     quantity: '',
     expirydate: ''
   });
+  const navigate=useNavigate()
 
   const increment = () => {
     setCount(count + 1);
@@ -139,8 +140,11 @@ function ShopAddItem() {
       for (const key in data) {
         formData.append(key, data[key]);
       }
+      formData.append('shopOwner', localStorage.getItem('shopowner'));
+
       axiosInstance.post("/add_a_product",formData).then((res)=>{
         alert(res.data.message)
+        navigate('/shopownerviewproduct')
       })
       .catch((err)=>{
         alert("Add product Failed")
