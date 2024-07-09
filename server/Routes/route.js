@@ -76,8 +76,11 @@ Route.post("/view_a_product/:productId",productController.viewProductById)
 Route.post("/view_all_product",productController.viewAllProducts)
 Route.post("/edit_a_product/:productId",productController.upload,productController.editProductById)
 Route.post("/delete_a_product/:productId",productController.deleteProductById)
+<<<<<<< HEAD
+=======
 
 
 Route.post("/addtocart",cartController.addtocart)
+>>>>>>> bda3570d942f70b6e9814f45a96fcfdf4f5b022f
 
 module.exports=Route

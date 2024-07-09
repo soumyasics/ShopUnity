@@ -531,3 +531,74 @@ height: 25px;
     width: 150px;
     color: #FF1E1E;
 }
+
+
+/* Shopowner CustomerOrder Request */
+
+.shopowner-customerorder-request-h3{
+  color:#74767B ;
+  text-decoration: underline;
+}
+.shopowner-customerorder-request-divbox{
+  width: 105%;
+  height: 100vh;
+  border-radius: 36px;
+  box-shadow: 0px 3.36px 3.36px 0px #00000040;
+  background: #CCEDF4;
+  margin-left: -85px;
+}
+.shopowner-customerorder-request-cardbox{
+  border: 0.79px solid #D8D8D8;
+  width: 100%;
+  height: 58vh;
+  border-radius: 22px;
+}
+.hopowner-customerorder-request-h5{
+  color: #11B1C7;
+  margin-top: -20px;
+  font-weight: 600;
+}
+.hopowner-customerorder-request-label{
+  color: #74767B;
+  font-weight: 600;
+}
+.hopowner-customerorder-request-img{
+  width: 70%;
+  height: 60px;
+}
+.hopowner-customerorder-request-span{
+  color: #11B1C7;
+  font-weight: bold;
+}
+.hopowner-customerorder-request-labelsuccess{
+  color: #23A421A1;
+  font-weight: bold;
+}
+.hopowner-customerorder-request-tickbtn{
+  border: 1.93px solid #3CB657;
+  background-color: white;
+  box-shadow: 0px 1.93px 1.93px 0px #00000040;
+  border-radius: 19px;
+  color:#3CB657 ;
+}
+.hopowner-customerorder-request-wrongbtn{
+  background-color: white;
+  box-shadow: 0px 1.93px 1.93px 0px #00000040;
+  border-radius: 19px;
+  border: 1.93px solid #FF1E1E;
+  color: #FF1E1E;
+}
+.hopowner-customerorder-request-select{
+  width: 100%;
+  height: 34px;
+  border-radius: 6px;
+}
+.hopowner-customerorder-request-submitbtn{
+  color: white;
+  background-color: #459197;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+  height: 30px;
+  box-shadow: 0px 1.53px 1.53px 0px #00000040;
+}

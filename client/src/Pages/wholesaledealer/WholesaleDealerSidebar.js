@@ -31,7 +31,7 @@ function WholesaleDealerSidebar({url}) {
         setDropdownVisible(!dropdownVisible);
     };
     const toggleDropdown1 = () => {
-      setDropdownVisible1(!dropdownVisible);
+      setDropdownVisible1(!dropdownVisible1);
   };
   
     const handleLogout = (e) => {

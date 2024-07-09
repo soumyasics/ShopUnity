@@ -54,6 +54,10 @@ function ShopOwnerSidebar() {
   const toggleDropdown = () => {
       setDropdownVisible(!dropdownVisible);
   };
+  const [dropdownVisible1, setDropdownVisible1] = useState(false);
+  const toggleDropdown1 = () => {
+      setDropdownVisible(!dropdownVisible1);
+  };
 
 
   return (
@@ -88,16 +92,16 @@ function ShopOwnerSidebar() {
                   <MdDashboard /> Dashboard
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-4">
                 <Link to="/shopownerprofile" className="nav-link sidebar-shop">
-                  <FaUserAlt /> Profile
+                  <FaUserAlt className="ms-5" /> Profile
                 </Link>
               </li>
               <li className="nav-item">
-              <div className='admin_dash_div mt-4'>
+              <div className='admin_dash_div '>
               <label onClick={toggleDropdown}>
                 <div>
-                  <BsBoxes /><span> Products</span><FaAngleRight />    
+                <FaAngleRight/><BsBoxes className="ms-2"/><span> Products</span>
                 </div>
               </label>
               {dropdownVisible && (
@@ -111,13 +115,25 @@ function ShopOwnerSidebar() {
             </div>
               </li>
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <FaPeopleGroup /> Customer Orders
-                </Link>
+              <div className='admin_dash_div'>
+              <label onClick={toggleDropdown1}>
+                <div>
+                <FaAngleRight/><BsBoxSeam className="ms-2"/><span> Customer</span> 
+                </div>
+              </label>
+              {dropdownVisible && (
+                  <div className="dropdown_menu sidebar_dash_drop">
+                      <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                        <Link to="/shopownercustomerorderrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Order Request</label></Link>
+                        <Link to="/shopownercustomerorderaccept" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Accept Orders</label></Link>
+                      </div>
+                  </div>
+              )}
+            </div>
               </li>
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
-                  <BsBoxSeam /> Orders Products
+                  <FaPeopleGroup className="ms-5"/> Customer Orders
                 </Link>
               </li>
               <li className="nav-item">
@@ -125,23 +141,23 @@ function ShopOwnerSidebar() {
                   to="/wholesaledealerslist"
                   className="nav-link sidebar-shop"
                 >
-                  <FaBoxOpen /> Wholesale Dealers
+                  <FaBoxOpen className="ms-5"/> Wholesale Dealers
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="/shopownerslist" className="nav-link sidebar-shop">
-                  <GiInjustice /> Dealer Comparison
+                  <GiInjustice className="ms-5"/> Dealer Comparison
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
-                  <FaBell /> Notification
+                  <FaBell className="ms-5"/> Notification
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
-                  <GrCompliance /> Complaints
+                  <GrCompliance className="ms-5"/> Complaints
                 </Link>
               </li>
               <li className="nav-item mt-auto">
