@@ -156,7 +156,7 @@
 /* Deliveryagent Delivery Request */
 
 .deliveryagent-deliveryrequest-divbox{
-  height: 100vh;
+  height: 110vh;
   width: 110%;
   background-color: #CCEDF4;
   margin-left: -95px;
@@ -179,4 +179,22 @@
   border-radius: 19px;
   border: 1.93px solid #FF1E1E;
   color: #FF1E1E;
+}
+
+/* Deliveryagent Delivery Update */
+
+.deliveryagent-deliveryupdate-textbox{
+  width: 95%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #9C9C9C;
+}
+.deliveryagent-deliveryupdate-submitbtn{
+  color: white;
+  background-color:#459197;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 1.95px 1.95px 0px #00000040;
+  height: 34px;
+  width: 70%;
 }

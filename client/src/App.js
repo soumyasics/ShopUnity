@@ -23,9 +23,7 @@ import AdminMainNav from './Pages/Navs/AdminMainNav';
 import MainNav from './Pages/Navs/MainNav';
 import WholesaleDealerForgetpswd from './Pages/wholesaledealer/WholesaleDealerForgetpswd';
 import WholesaleAllDealerViewpage from './Pages/wholesaledealer/WholesaleAllDealerViewpage';
-
 import WholesaleDealerRequestList from './Pages/wholesaledealer/WholesaleDealerRequestList';
-
 import Deliveryagentforgetpswd from './Pages/delivery agent/Deliveryagentforgetpswd';
 import ForgetPswdCustomer from './Pages/customer/ForgetPswdCustomer';
 import AllDeliveryAgentViewPage from './Pages/delivery agent/AllDeliveryAgentViewPage';
@@ -59,6 +57,9 @@ import CustomerProductCardPage from './Pages/customer/CustomerProductCardPage';
 import ShopownerCustomerOrderRequest from './Pages/ShopOwner/ShopownerCustomerOrderRequest';
 import ShopownerCustomerOrderAccept from './Pages/ShopOwner/ShopownerCustomerOrderAccept';
 import DeliveryAgentDeliveryRequest from './Pages/delivery agent/DeliveryAgentDeliveryRequest';
+import DeliveryAgentDeliveryUpdate from "./Pages/delivery agent/DeliveryAgentDeliveryUpdate";
+import CustomerOrdersViewOrder from "./Pages/customer/CustomerOrdersViewOrder";
+
 
 function App() {
   // const url="http://hybrid.srishticampus.in:4028/"
@@ -123,6 +124,7 @@ function App() {
     <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage url={url}/>]} />
     <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail url={url}/>} />
     <Route path='/customerproductcardpage' element={<CustomerProductCardPage/>} />
+    <Route path='/customerordervieworder' element={<CustomerOrdersViewOrder/>} />
 
 {/* deliveryagent */}
 
@@ -137,6 +139,7 @@ function App() {
     <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
     <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit url={url}/>} />
     <Route path='/deliveryagentdeliveryrequest' element={<DeliveryAgentDeliveryRequest/>} />
+    <Route path='/deliveryagentdeliveryupdate' element={<DeliveryAgentDeliveryUpdate/>} />
 
         <Route
           path="/customerregistration"
@@ -169,6 +172,8 @@ function App() {
           path="/customerviewproductdetail/:productid"
           element={<CustomerViewProductDetail url={url} />}
         />
+
+        <Route path="/customerproductcart" element={<CustomerProductCardPage/>} />
 
         {/* deliveryagent */}
 

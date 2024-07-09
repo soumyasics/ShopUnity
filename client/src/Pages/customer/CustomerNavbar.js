@@ -41,7 +41,7 @@ function CustomerNavbar() {
                       <Link to='/customerhome' className='ms-2 mt-2 customer-home-link'><MdHome className='customer-home-icon ms-2' />Home</Link>
                       {/* <Nav.Link href="#link" className='ms-2'><MdOutlineRoundaboutRight className='customer-home-about-icon' />About</Nav.Link> */}
                       <Link to='/customerviewshop' className='ms-2 mt-2 customer-home-link'><FaShop className='customer-home- ms-2' />Shops</Link>
-                      <Link to='/customerviewshop' className='ms-2 mt-2 customer-home-link'><BsBoxes className='customer-home-icon ms-2' />Products</Link>
+                      <Link to='/customerviewproduct' className='ms-2 mt-2 customer-home-link'><BsBoxes className='customer-home-icon ms-2' />Products</Link>
                       <Link to='' className='ms-2 mt-2 customer-home-link'><BsBoxSeam className='customer-home-icon ms-2' />Orders</Link>
                       <Link to='' className='ms-2 mt-2 customer-home-link'><GrCompliance className='customer-home-icon ms-2' />Complaints</Link>
                     </Nav>
@@ -51,7 +51,9 @@ function CustomerNavbar() {
               <div className='col-3'>
                 <div className='row'>
                   <div className='col'>
-                    <FaCartShopping className='ms-5 customer-home-cart-icon mt-2' />
+                    <Link to='/customerproductcart'>
+                      <FaCartShopping className='ms-5 customer-home-cart-icon mt-2' />
+                    </Link>
                   </div>
                   <div className='col'>
                     <Link to='/customerprofile'>
