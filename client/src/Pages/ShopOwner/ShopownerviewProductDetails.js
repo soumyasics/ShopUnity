@@ -28,7 +28,7 @@ function ShopownerviewProductDetails({url}) {
   return (
     <div>
       <div>
-        <Link to='/shopownerviewproductdetails' className='ms-5 mt-2 text-dark shopowner-viewproductdetails-link'>
+        <Link to='/shopownerviewproduct' className='ms-5 mt-2 text-dark shopowner-viewproductdetails-link'>
             <FaArrowLeftLong />
         </Link>
       </div>

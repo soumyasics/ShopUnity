@@ -12,11 +12,18 @@ function ShopownerViewProduct({ url }) {
   const [data, setData] = useState([]);
   const [filteredData, setfilteredData] = useState([]);
   useEffect(() => {
+
     axiosInstance
       .post("/view_all_product")
       .then((res) => {
-        setData(res.data.data);
-        setfilteredData(res.data.data);
+        var arr1=[]
+        for(let i in res.data.data){
+          if( res.data.data[i].shopOwner == localStorage.getItem("shopowner")){
+            arr1.push(res.data.data[i])
+          }
+        }
+        setData(arr1);
+        setfilteredData(arr1);
         console.log(res.data.data);
       })
       .catch((err) => {
@@ -41,11 +48,11 @@ function ShopownerViewProduct({ url }) {
   };
   return (
     <div>
-    <div >
-      {/* <div className="col-2">
+    <div className="row" >
+      <div className="col-2">
         <ShopOwnerSidebar/>
-      </div> */}
-      <div className="me-5">
+      </div> 
+      <div className="col me-5">
       <div>
       
       <div className="text-center">

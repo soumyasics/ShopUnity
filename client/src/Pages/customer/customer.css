@@ -266,15 +266,7 @@
   margin-top: -8px;
   background-color: #EAEAEA;
 }
-.shopowner-viewproduct-cartbtn{
-  color: white;
-  background-color: black;
-  border: none;
-  border-radius: 10px;
-  height: 44px;
-  width: 180px;
-  font-size: 19px;
-}
+
 
 
 /* Customer View Product Details */
@@ -370,6 +362,7 @@
   border-radius: 11px;
   border: 1.86px 0px 0px 0px;
 }
+<<<<<<< HEAD
 
 /* CustomerProductCardPage */
 
@@ -421,4 +414,9 @@
   height: 44px;
   width: 45%;
   box-shadow: 0px 3.95px 3.95px 0px #00000040;
+=======
+.customershoownerProductimg{
+  width: 190px;
+  height: 222px;
+>>>>>>> bda3570d942f70b6e9814f45a96fcfdf4f5b022f
 }
