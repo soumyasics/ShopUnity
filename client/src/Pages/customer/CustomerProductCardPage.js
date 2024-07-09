@@ -132,6 +132,41 @@ function CustomerProductCardPage() {
                     </div>
                     <div className='text-center'>
                         <button className='customerproduct-cardpage-reqbtn'>Request Delivery</button>
+                        <button className='customerproduct-cardpage-reqbtn ms-5'>Reserved Product</button>
+                    </div>
+                    <div style={{display:'none'}}>
+                        <div className='mt-3'>
+                            <button className='customerproduct-cardpage-paymentbtn'>Payment</button>
+                        </div>
+                        <div className='mt-3 '>
+                            <div className='ms-3 mb-3'>
+                                <h6 className='customerproduct-cardpage-h6'>Cardholder Name</h6>
+                                <div className='customerproduct-cardpage-namebox mb-3'>
+                                    <input type='text' className='ms-3 mt-3 customerproduct-cardpage-textbox1'></input>
+                                </div>
+                            </div>
+                            <div className='ms-3 mb-3'>
+                                <h6 className='customerproduct-cardpage-h6'>Card Number</h6>
+                                <div className='customerproduct-cardpage-namebox mb-3'>
+                                    <input type='text' className='ms-3 mt-3 customerproduct-cardpage-textbox1'></input>
+                                </div>
+                            </div>
+                            <div className='ms-3 mb-3'>
+                                <h6 className='customerproduct-cardpage-h6'>Cvv</h6>
+                                <div className='customerproduct-cardpage-namebox mb-3'>
+                                    <input type='text' className='ms-3 mt-3 customerproduct-cardpage-textbox1'></input>
+                                </div>
+                            </div>
+                            <div className='ms-3 mb-3'>
+                                <h6 className='customerproduct-cardpage-h6'>Expiry Date</h6>
+                                <div className='customerproduct-cardpage-namebox mb-3'>
+                                    <input type='date' className='ms-3 mt-3 customerproduct-cardpage-textbox1'></input>
+                                </div>
+                            </div>
+                            <div className='text-center'>
+                                <button className='customerproduct-cardpage-submitbtn'>Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
