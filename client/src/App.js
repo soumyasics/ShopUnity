@@ -59,6 +59,9 @@ import ShopownerCustomerOrderAccept from './Pages/ShopOwner/ShopownerCustomerOrd
 import DeliveryAgentDeliveryRequest from './Pages/delivery agent/DeliveryAgentDeliveryRequest';
 import DeliveryAgentDeliveryUpdate from "./Pages/delivery agent/DeliveryAgentDeliveryUpdate";
 import CustomerOrdersViewOrder from "./Pages/customer/CustomerOrdersViewOrder";
+import WholesaleDealerAddProduct from "./Pages/wholesaledealer/WholesaleDealerAddProduct";
+import WholesaleDealerViewPoduct from "./Pages/wholesaledealer/WholesaleDealerViewPoduct";
+import WholesaleDealerViewProductDetails from "./Pages/wholesaledealer/WholesaleDealerViewProductDetails";
 
 
 function App() {
@@ -109,7 +112,9 @@ function App() {
           element={<WholesaleDealerEditProfile />}
         />
         <Route path="/wholesalermain" element={<WholesalerMain />} />
-
+        <Route path="/wholesaleraddproduct" element={<WholesaleDealerAddProduct/>} />
+        <Route path="/wholesalerviewproduct" element={<WholesaleDealerViewPoduct/>} />
+        <Route path="/wholesalerviewproductdetails" element={<WholesaleDealerViewProductDetails/>} />
         {/* Customer */}
 
 

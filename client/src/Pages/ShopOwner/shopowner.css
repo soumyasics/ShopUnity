@@ -388,7 +388,8 @@ height: 25px;
   color: white;
   background-color: #D5564F;
   font-size: 30px;
-  padding-bottom: 10px;
+  margin-top: 7px;
+  /* padding-bottom: 10px; */
   border: 1.41px solid #FFFFFF
 }
 .shopowner-additem-quantitybtn1{
@@ -398,9 +399,16 @@ height: 25px;
   border-radius: 10px;
   color: white;
   background-color: #0176D6;
-  font-size: 25px;
-  padding-bottom: 10px;
+  font-size: 30px;
+  /* padding-bottom: 10px; */
   border: 1.41px solid #FFFFFF
+}
+.shopowner-additem-textboxs{
+  height: 40px;
+  width: 60%;
+  border-radius: 5px;
+  border: 1.41px solid #9C9C9C;
+  margin-left: 10px;
 }
 .shopowner-additem-submit{
   height: 50px;
