@@ -10,6 +10,7 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 
 function CustomerViewProductPage({ url, customerId }) {
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
@@ -63,7 +64,6 @@ function CustomerViewProductPage({ url, customerId }) {
   };
 
   const addToCart = (item) => {
-    console.log("pp");
     axiosInstance
       .post(`/addtocart`, {
         customerId: localStorage.getItem("customer"),
@@ -78,6 +78,14 @@ function CustomerViewProductPage({ url, customerId }) {
         console.log(err);
       });
   };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredData = data.filter((product) =>
+    product.productname.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div>
@@ -100,23 +108,22 @@ function CustomerViewProductPage({ url, customerId }) {
             <div className="me-5" style={{ position: "relative" }}>
               <input
                 type="text"
-                className="shopowner-viewproduct-label ps-3 "
+                className="shopowner-viewproduct-label ps-3"
                 placeholder="Search Product"
+                value={searchQuery}
+                onChange={handleSearchChange}
               ></input>
               <button
-                className="shopowner-viewproduct-imgbtn1 ms-5 "
+                className="shopowner-viewproduct-imgbtn1 ms-5"
                 style={{ position: "absolute" }}
               >
-                <img
-                  src={search}
-                  className="shopowner-viewproduct-imgbtn "
-                ></img>
+                <img src={search} className="shopowner-viewproduct-imgbtn"></img>
               </button>
             </div>
           </div>
         </div>
         <div className="row mt-3 container ms-2">
-          {data.map((item, index) => (
+          {filteredData.map((item, index) => (
             <div key={item._id} className="col-md-2 mb-4">
               <Card className="">
                 <div className="ms-3 mt-3">
@@ -128,7 +135,8 @@ function CustomerViewProductPage({ url, customerId }) {
                   <Link to={`/customerviewproductdetail/${item._id}`}>
                     <img
                       src={`${url}${item.productimage.filename}`}
-                      alt={item.productname}  className="customershoownerProductimg"
+                      alt={item.productname}
+                      className="customershoownerProductimg"
                     ></img>
                   </Link>
                 </div>

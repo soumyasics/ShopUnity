@@ -41,7 +41,7 @@ function ShopAddItem() {
   };
 
   const decrement = () => {
-    if (count > 0) {
+    if (count > 1) {
       setCount(count - 1);
       setData((prevData) => ({
         ...prevData,
@@ -261,10 +261,7 @@ function ShopAddItem() {
                         </label>
                         {errors.productimage && <span className="text-danger">{errors.productimage}</span>}
                       </div>
-                      <div className="mt-5">
-                        <button className="shopowner-additem-btn">Remove</button>
-                        <button className="shopowner-additem-btn ms-4">Replace</button>
-                      </div>
+                      
                     </div>
                   </div>
                   <div className="mt-2">
