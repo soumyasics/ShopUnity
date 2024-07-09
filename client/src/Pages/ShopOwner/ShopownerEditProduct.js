@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeftLong } from "react-icons/fa6";
 import tick from '../../images/tick.png'
 import wrong from '../../images/wrong.png'
@@ -39,6 +39,8 @@ function ShopownerEditProduct() {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        console.log(name, value)
+
         setData((prevData) => ({
           ...prevData,
           [name]: value,
@@ -51,6 +53,7 @@ function ShopownerEditProduct() {
 
     const handleFileChange = (e) => {
         const { name, files } = e.target;
+        console.log(name, files)
         setData({ ...data, [name]: files[0] });
     };
 
@@ -60,18 +63,19 @@ function ShopownerEditProduct() {
         }
     }
 
-    const productid = localStorage.getItem("shopowner")
+    const {productid} = useParams();
 
     useEffect(() => {
         axiosInstance.post(`/view_a_product/${productid}`)
         .then((res) => {
             setData(res.data.data)
+            setCount(res.data.data.quantity)
             console.log(res.data.data);
         })
         .catch((err) => {
             console.log(err);
         })
-    },[productid])
+    },[])
 
     const handleSubmit = (e) => {
         console.log(data);
@@ -88,19 +92,21 @@ function ShopownerEditProduct() {
         setErrors(errors);
 
         const formData=new FormData();
-
-        for (const key in data) {
-        formData.append(key, data[key]);
-        }
+        formData.append('category', data.category);
+        formData.append('productname', data.name);
+        formData.append('expirydate', data.expirydate);
+        formData.append('description', data.description);
+        formData.append('productimage', data.image);
+        formData.append('quantity', count);
+        formData.append('price', data.price);
+        formData.append('brand', data.brand);
 
         console.log(data);
         e.preventDefault();
 
-        axiosInstance.post(`/edit_a_product ${productid}`,formData)
+        axiosInstance.post(`/edit_a_product/${productid}`,formData)
         .then((res) => {
             alert("Updated Successfully")
-            console.log("Updated Successfully");
-            navigate("")
         })
         .catch((err) => {
             console.log(err);
@@ -123,7 +129,7 @@ function ShopownerEditProduct() {
                 <div>
                     <label className='shopowner-additem-label'>Select Category</label>
                     <div className='shopowner-additem-labelbox mt-2'>
-                        <select className='shopowner-additem-select ms-5 mt-4'>
+                        <select className='shopowner-additem-select ms-5 mt-4' name='category' onChange={handleChange} value={data.category}>
                             <option>Category</option>
                             <option>Cookies</option>
                             <option>Fruits</option>
@@ -158,7 +164,7 @@ function ShopownerEditProduct() {
                 <div className='mt-3'>
                     <label className='shopowner-additem-label'>Expiry</label>
                     <div className='shopowner-additem-labelbox mt-2'>
-                        <input type='date' className='shopowner-additem-textbox ms-5 mt-4'></input>
+                        <input type='date' className='shopowner-additem-textbox ms-5 mt-4' name='expirydate' onChange={handleChange}  value={data.expirydate}></input>
                     </div>
                 </div>
                 <div className='mt-3'>
@@ -192,14 +198,14 @@ function ShopownerEditProduct() {
                                 type='file'
                                 style={{display:'none'}}
                                 name='image'
-                                value={data.image}
+                                id='img'
                                 onChange={handleFileChange}
                                 />
                             </label>
                             {errors.image && <span className='text-danger'>{errors.image}</span>}
                         </div>
                         <div className='mt-5 text-center'>                          
-                            <button className='shopowner-additem-btn ms-4'>Replace</button>
+                            <button className='shopowner-additem-btn ms-4' onClick={(e)=>{e.preventDefault();document.getElementById('img').click()}}>Replace Image</button>
                         </div>
                     </div>
                 </div>
@@ -208,7 +214,7 @@ function ShopownerEditProduct() {
                     <div className='shopowner-additem-labelbox mt-2'>
                         <div className='row'>
                             <div className='col-8'>
-                                <input type='text' placeholder='Quantity' className='shopowner-additem-textbox ms-5 mt-4' value={count}/>
+                                <input type='text' placeholder='Quantity' className='shopowner-additem-textbox ms-5 mt-4' name='quantity' disabled  onChange={handleFileChange} value={count}/>
                             </div>
                             <div className='col-2  mt-4'>
                                 <button className='shopowner-additem-quantitybtn' onClick={decrement}>-</button>

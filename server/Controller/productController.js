@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("productimage");
 
 const addProduct = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const productData = {
     category: req.body.category,
     productname: req.body.productname,
@@ -22,7 +22,8 @@ const addProduct = (req, res) => {
     description: req.body.description,
     quantity: req.body.quantity,
     price: req.body.price,
-    productimage: req.file 
+    productimage: req.file,
+    shopOwner: req.body.shopOwner
   };
 
   const newProduct = new Product(productData);
@@ -47,7 +48,16 @@ const addProduct = (req, res) => {
 // Edit product by ID
 const editProductById = (req, res) => {
   const productId = req.params.productId;
-  const update = req.body;
+  const data = req.body;
+  data.quantity = parseInt(data.quantity)
+  var update={};
+  for (key in data) {
+    if (data[key] && data[key] != 'undefined') {
+      update[key] = data[key]
+    }
+  }
+  // console.log(update)
+  // console.log(req.file)
 
   if (req.file) {
     update.productimage = req.file.path; // Save new file path if file exists
