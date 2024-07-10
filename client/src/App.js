@@ -67,6 +67,7 @@ import WholesaleDealerViewProductDetails from "./Pages/wholesaledealer/Wholesale
 import WholesaleDealerEditProduct from "./Pages/wholesaledealer/WholesaleDealerEditProduct";
 import ShopownerViewWholesaleDealer from "./Pages/ShopOwner/ShopownerViewWholesaleDealer";
 import WholesaleDealerViewShops from "./Pages/wholesaledealer/WholesaleDealerViewShops";
+import ShopownerViewWDProductView from "./Pages/ShopOwner/ShopownerViewWDProductView";
 
 
 function App() {
@@ -242,7 +243,7 @@ function App() {
     <Route path='/shopownercustomerorderrequest' element={<ShopownerCustomerOrderRequest/>} />
     <Route path='/shopownercustomerorderaccept' element={<ShopownerCustomerOrderAccept/>} />
     <Route path='/shopownerviewwholesaledealer' element={<ShopownerViewWholesaleDealer/>} />
-    
+    <Route path='/shopownerviewwdproductview' element={<ShopownerViewWDProductView/>} />
 {/* Admin */}
         {/* shopowner */}
 
