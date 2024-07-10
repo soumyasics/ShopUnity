@@ -12,20 +12,21 @@ function ShopownerViewWholesaleDealer() {
 
     const handleClose = () => setShow(false);
     
-    useEffect(() => {
-        axiosInstance.get('/get_all_wholesaledealer')
-        .then((res) => {
-            if(res.data.data === 200){
-                setData(res.data.data || [])
-            }
-            else{
-                setData([]);
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    })
+    // useEffect(() => {
+    //     axiosInstance.get('/get_all_accepted_wholesaledealer')
+    //     .then((res) => {
+    //         if(res.data.data === 200){
+    //             setData(res.data.data)
+    //             console.log(data);
+    //         }
+    //         else{
+    //             setData([]);
+    //         }
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     })
+    // })
 
   return (
     <div>
@@ -35,12 +36,12 @@ function ShopownerViewWholesaleDealer() {
         </div>
         <div className='col-9'>
         <div className="wholesale-alldealer-viewpage-div1 mt-2">
-        {data?.length === 0 && (
+        {/* {data?.length === 0 && ( */}
           <div className="pt-3">
             <h1 className="text-center "> No Wholesale Dealer Found</h1>
           </div>
-        )}
-        {data?.length > 0 && (
+        {/* )} */}
+        {/* {data?.length > 0 && ( */}
           <div>
             <h3 className="text-center pt-4 wholesale-alldealer-viewpage-h3">
               Wholesale Dealer List
@@ -65,17 +66,17 @@ function ShopownerViewWholesaleDealer() {
                 <b> </b>
               </div>
             </div>
-            {data.map((wholesaledealer, index) => (
-              <div className="row bg-light rounded-pill m-5 p-2" key={wholesaledealer._id}>
+            {/* {data.map((wholesaledealer, index) => ( */}
+              <div className="row bg-light rounded-pill m-5 p-2">
                 <div className="col-1">
-                  <b>{ index + 1}.</b>
+                  {/* <b>{ index + 1}.</b> */}
                 </div>
-                <div className="col-2">{wholesaledealer.dealername}</div>
-                <div className="col-2">{wholesaledealer.storeName}</div>
-                <div className="col-2">{wholesaledealer.email}</div>
-                <div className="col-2 ms-5">{wholesaledealer.contact}</div>
+                <div className="col-2">dvsbvb</div>
+                <div className="col-2">svgc</div>
+                <div className="col-2">svghcv</div>
+                <div className="col-2 ms-5">sdhvc</div>
                 <div className="col-1">
-                    <Link to=''>
+                    <Link to='/shopownerviewwdproductview'>
                         <button
                             className="rounded-pill px-3 border-none ms-5"
                             id="wholesale-alldealer-viewpage-viewbtn"
@@ -85,9 +86,9 @@ function ShopownerViewWholesaleDealer() {
                   </Link>
                 </div>
               </div>
-            ))}
+            {/* ))} */}
           </div>
-        )} 
+         {/* )}  */}
       </div>
         </div>
       </div>
