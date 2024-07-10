@@ -8,29 +8,22 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 
-function CustomerViewProductPage({ url, customerId }) {
+function CustomerViewallproduct({ url }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const navigate = useNavigate();
-
-  const { shopownerid } = useParams();
+  const { shopownerid } = useParams(); // For future use if needed
 
   useEffect(() => {
     axiosInstance
-      .post(`/view_all_product`)
+      .post("/view_all_product")
       .then((res) => {
-        const arra2 = [];
         const productsWithQuantity = res.data.data.map((product) => ({
           ...product,
           quantity: 1,
+          Tprice: product.price,
         }));
-        for (let i in productsWithQuantity) {
-          if (productsWithQuantity[i].shopOwner == shopownerid) {
-            arra2.push(productsWithQuantity[i]);
-          }
-        }
-        setData(arra2);
+        setData(productsWithQuantity);
       })
       .catch((err) => {
         console.log(err);
@@ -38,9 +31,7 @@ function CustomerViewProductPage({ url, customerId }) {
   }, []);
 
   const increment = (item) => {
-    console.log(item,"l");
     const updatedData = data.map((product) =>
-
       product._id === item._id
         ? {
             ...product,
@@ -73,7 +64,7 @@ function CustomerViewProductPage({ url, customerId }) {
         quantity: item.quantity,
       })
       .then((res) => {
-       alert(res.data.message)
+        alert(res.data.message);
         console.log("Product added to cart:", res.data);
       })
       .catch((err) => {
@@ -125,7 +116,7 @@ function CustomerViewProductPage({ url, customerId }) {
           </div>
         </div>
         <div className="row mt-3 container ms-2">
-          {filteredData.map((item, index) => (
+          {filteredData.map((item) => (
             <div key={item._id} className="col-md-2 mb-4">
               <Card className="">
                 <div className="ms-3 mt-3">
@@ -149,7 +140,7 @@ function CustomerViewProductPage({ url, customerId }) {
                   </label>
                   <br></br>
                   <label className="shopowner-viewproduct-b">
-                    <b>&#8377; {item.Tprice ? item.Tprice : item.price}</b>
+                    <b>&#8377; {item.Tprice}</b>
                   </label>
                 </div>
                 <div className="ms-4 mb-3">
@@ -197,4 +188,4 @@ function CustomerViewProductPage({ url, customerId }) {
   );
 }
 
-export default CustomerViewProductPage;
+export default CustomerViewallproduct;

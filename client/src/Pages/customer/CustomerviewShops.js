@@ -23,11 +23,11 @@ function CustomerviewShops() {
     <div className='text-center'>
         <h2 className='customer-view-shop-h1 ms-2'><FaShop/>Shops</h2>
     </div>
-    <div className='customer-view-shop-divbox container-fluid'>
+    <div className='customer-view-shop-divbox container-fluid' >
         <div className='row pt-5'>
             {data.map((item, index) => (
                 <div key={index} className='col-md-4 mb-4'>
-                    <Card style={{ width: "100%", borderRadius: "25px" }}>
+                    <Card style={{ width: "100%", borderRadius: "25px", height:"450px", padding:"2%" }}>
                         <table className='container ms-1 mt-3 mb-3'>
                             <tbody>
                                 <tr>

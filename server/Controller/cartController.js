@@ -1,40 +1,56 @@
 const Cart = require("../Model/CartSchema");
+const Product = require("../Model/ProductSchema");
 
-const addtocart = async (req, res) => {
+const addtocart = async (req, response) => {
   const cart = {
     product: req.body.productId,
     customer: req.body.customerId,
   };
+  var productData = await Product.findById(cart.product);
+  console.log(productData)
 
-  var res;
+  var res = {
+    message:'success'
+  };
 
   const exobj = await Cart.find(cart);
   //   console.log(exobj)
   if (exobj.length > 0) {
     cart.quantity = req.body.quantity + exobj[0].quantity;
-
-    Cart.findByIdAndUpdate(exobj[0]._id, cart, {
-      new: true,
-      runValidators: true,
-    })
-      .then((c) => {
-        res = {
-          status: 200,
-          data: c,
-          message: "Product added to cart",
-        };
+    if (cart.quantity > productData.quantity){
+      res = {
+        status: 200,
+        message: `Out of stock, only ${productData.quantity} left`,
+      }
+    } else {
+      Cart.findByIdAndUpdate(exobj[0]._id, cart, {
+        new: true,
+        runValidators: true,
       })
-      .catch((err) => {
-        res = {
-          status: 500,
-          message: "Failed to retrieve product",
-          error: err.message,
-        };
-      });
+        .then((c) => {
+          res = {
+            status: 200,
+            data: c,
+            message: "Product added to cart",
+          };
+        })
+        .catch((err) => {
+          res = {
+            status: 500,
+            message: "Failed to retrieve product",
+            error: err.message,
+          };
+        });
+    }
   } else {
     cart.quantity = req.body.quantity;
-
-    const cartobj = new Cart(cart);
+    if (cart.quantity > productData.quantity){
+      res = {
+        status: 200,
+        message: `Out of stock, only ${productData.quantity} left`,
+      }
+    } else {
+      const cartobj = new Cart(cart);
 
     cartobj
       .save()
@@ -52,8 +68,30 @@ const addtocart = async (req, res) => {
           error: err.message,
         };
       });
+    }
   }
-  res.json(cart);
+  response.json(res);
+};
+
+
+const viewCartItems = async (req, res) => {
+  const customerId = req.params.customerId;
+
+  try {
+    const cartItems = await Cart.find({ customer: customerId }).populate('product');
+
+    res.status(200).json({
+      status: 200,
+      data: cartItems,
+      message: "Cart items retrieved successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      message: "Failed to retrieve cart items",
+      error: err.message,
+    });
+  }
 };
 
 const deleteFromCart = async (req, res) => {
@@ -85,5 +123,5 @@ const deleteFromCart = async (req, res) => {
 };
 
 module.exports = {
-  addtocart,deleteFromCart
+  addtocart,deleteFromCart,viewCartItems
 };

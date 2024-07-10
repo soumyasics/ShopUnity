@@ -54,11 +54,13 @@ import ShopownerProfilepage from './Pages/ShopOwner/ShopownerProfilepage';
 import ShopOwnerProfileEditPage from './Pages/ShopOwner/ShopOwnerprofileEditpage';
 import ShopownerDashBoard from './Pages/ShopOwner/ShopownerDashBoard';
 import CustomerProductCardPage from './Pages/customer/CustomerProductCardPage';
+import OrderConfirmation from './Pages/customer/OrderConfirmation';
 import ShopownerCustomerOrderRequest from './Pages/ShopOwner/ShopownerCustomerOrderRequest';
 import ShopownerCustomerOrderAccept from './Pages/ShopOwner/ShopownerCustomerOrderAccept';
 import DeliveryAgentDeliveryRequest from './Pages/delivery agent/DeliveryAgentDeliveryRequest';
 import DeliveryAgentDeliveryUpdate from "./Pages/delivery agent/DeliveryAgentDeliveryUpdate";
 import CustomerOrdersViewOrder from "./Pages/customer/CustomerOrdersViewOrder";
+import CustomerViewallproduct from "./Pages/customer/CustomerViewallproduct";
 
 
 function App() {
@@ -121,7 +123,7 @@ function App() {
     <Route path='/customerprofile' element={<CustomerProfile/>} />
     <Route path='/customereditprofile' element={<CustomerEditProfile/>} />
     <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
-    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewProductPage url={url}/>]} />
+    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewallproduct url={url}/>]} />
     <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail url={url}/>} />
     <Route path='/customerproductcardpage' element={<CustomerProductCardPage/>} />
     <Route path='/customerordervieworder' element={<CustomerOrdersViewOrder/>} />
@@ -173,7 +175,8 @@ function App() {
           element={<CustomerViewProductDetail url={url} />}
         />
 
-        <Route path="/customerproductcart" element={<CustomerProductCardPage/>} />
+        <Route path="/customerproductcart" element={<CustomerProductCardPage url={url}/>} />
+        <Route path="/orderConfirmation" element={<OrderConfirmation />} />
 
         {/* deliveryagent */}
 
