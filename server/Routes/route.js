@@ -7,6 +7,7 @@ const DeliveryAgentController=require("../Controller/DeliverAgentController")
 const ShopeOwnerController=require('../Controller/shopOwnerController')
 const productController=require("../Controller/productController")
 const cartController=require("../Controller/cartController")
+const orderController=require("../Controller/OrderController")
 
 // wholesale
 Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.WholesaleDealerRegister)
@@ -70,14 +71,19 @@ Route.post("/activateShopowner/:id",ShopeOwnerController.activateShopownerById)
 Route.post("/inactivateshopowner/:id",ShopeOwnerController.deActivateShopOwnerById)
 
 
-
+// product
 Route.post("/add_a_product",productController.upload,productController.addProduct)
 Route.post("/view_a_product/:productId",productController.viewProductById)
 Route.post("/view_all_product",productController.viewAllProducts)
 Route.post("/edit_a_product/:productId",productController.upload,productController.editProductById)
 Route.post("/delete_a_product/:productId",productController.deleteProductById)
 
-
+// cart
 Route.post("/addtocart",cartController.addtocart)
+Route.post("/viewCustomercart/:customerId",cartController.viewCartItems)
+Route.post("/deleteitemfromcart",cartController.deleteFromCart)
+
+// order
+Route.post("/placeorder",orderController.placeOrder)
 
 module.exports=Route
