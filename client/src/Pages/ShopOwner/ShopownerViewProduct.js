@@ -67,7 +67,17 @@ function ShopownerViewProduct({ url }) {
             <option value=""> Choose Category</option>
             <option value="Cookies">Cookies</option>
             <option value="Fruits">Fruits</option>
+            <option value="Milk Products">Milk Products</option><option value="">Category</option>
+            <option value="Cookies">Cookies</option>
+            <option value="Fruits">Fruits</option>
+            <option value="Egg">Egg</option>
+            <option value="Vegtables">Vegtables</option>
+            <option value="Sea Foods">Sea Foods</option>
+            <option value="Cheese">Cheese</option>
             <option value="Milk Products">Milk Products</option>
+            <option value="Meat">Meat</option>
+            <option value="Food Grains & Oils">Food Grains & Oils</option>
+            <option value="Cleaning & Household">Cleaning & Household</option>
           </select>
         </div>
         <div className="row mt-4">

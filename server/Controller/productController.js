@@ -60,7 +60,7 @@ const editProductById = (req, res) => {
   // console.log(req.file)
 
   if (req.file) {
-    update.productimage = req.file.path; // Save new file path if file exists
+    update.productimage = req.file; // Save new file path if file exists
   }
 
   Product.findByIdAndUpdate(productId, update, { new: true, runValidators: true })

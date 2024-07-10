@@ -18,7 +18,7 @@ function CustomerViewProductPage({ url, customerId }) {
 
   useEffect(() => {
     axiosInstance
-      .post(`/view_all_product/`)
+      .post(`/view_all_product`)
       .then((res) => {
         const arra2 = [];
         const productsWithQuantity = res.data.data.map((product) => ({
@@ -38,7 +38,9 @@ function CustomerViewProductPage({ url, customerId }) {
   }, []);
 
   const increment = (item) => {
+    console.log(item,"l");
     const updatedData = data.map((product) =>
+
       product._id === item._id
         ? {
             ...product,
@@ -71,7 +73,7 @@ function CustomerViewProductPage({ url, customerId }) {
         quantity: item.quantity,
       })
       .then((res) => {
-        alert("Product Added On Cart");
+       alert(res.data.message)
         console.log("Product added to cart:", res.data);
       })
       .catch((err) => {
@@ -84,7 +86,9 @@ function CustomerViewProductPage({ url, customerId }) {
   };
 
   const filteredData = data.filter((product) =>
-    product.productname.toLowerCase().includes(searchQuery.toLowerCase())
+    product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  product.category.toLowerCase().includes(searchQuery.toLowerCase())
+
   );
 
   return (
@@ -95,12 +99,7 @@ function CustomerViewProductPage({ url, customerId }) {
         </div>
         <div className="row">
           <div className="col">
-            <select className="ms-5 shopowner-viewproduct-select">
-              <option>Select Category</option>
-              <option>Cookies</option>
-              <option>Fruits</option>
-              <option>Milk Products</option>
-            </select>
+           
           </div>
           <div className="col"></div>
           <div className="col"></div>
