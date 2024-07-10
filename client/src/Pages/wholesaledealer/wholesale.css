@@ -114,9 +114,6 @@
 .wholesale-dealer-forgetpswd-box{
   width:80%;
   height: 80vh;
-  top: 191px;
-  left: 900px;
-  gap: 0px;
   border-radius: 18px ;
   background-color: #CAFAE2;
   margin-top: 180px;
@@ -153,13 +150,11 @@
 
 .wholesale-alldealer-viewpage-div1{
   background-color: #CCEDF4;
-  width: 1365px;
-  height: 90vh;
-  top: 10px;
-  left: -40px;
-  gap: 0px;
-  border-radius: 43px ;
+  width:109%;
+  min-height: 100vh;
+  border-radius: 43px;
   margin-bottom: 50px;
+  margin-left: 15px;
 }
 .wholesale-alldealer-viewpage-h3{
   color: #74767B;
@@ -168,6 +163,8 @@
 #wholesale-alldealer-viewpage-viewbtn{
   border: none;
   background-color: #DFDFDF;
+  width: 150px;
+  height: 35px;
 }
 .wholesale-alldealer-viewpage-icon{
   font-size: 30px;

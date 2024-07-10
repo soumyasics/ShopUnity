@@ -109,7 +109,9 @@ function WholesaleDealerViewProductDetails() {
             
         </div>
         <div className='text-center'>
-            <button className='shopowner-viewproductdetails-editbtn'  >Edit</button>
+            <Link to='/wholesalereditproduct'>
+                <button className='shopowner-viewproductdetails-editbtn'  >Edit</button>
+            </Link>
         </div>
       </div>
     </div>
