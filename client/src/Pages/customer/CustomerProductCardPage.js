@@ -105,7 +105,7 @@ function CustomerProductCardPage({ url }) {
       .post("/placeorder", orderData)
       .then((res) => {
         alert(res.data.message);
-        navigate('/orderConfirmation');
+        navigate('/customerordervieworder');
         // Optionally, you can update the UI or redirect the user after placing the order
       })
       .catch((err) => {
@@ -180,7 +180,7 @@ function CustomerProductCardPage({ url }) {
         .post("/placeorder", orderData)
         .then((res) => {
           alert(res.data.message);
-          navigate('/orderConfirmation');
+          navigate('/customerordervieworder');
           // Optionally, you can update the UI or redirect the user after placing the order
         })
         .catch((err) => {
@@ -233,7 +233,19 @@ function CustomerProductCardPage({ url }) {
               >
 
 
-              <div className="col-3">
+              
+
+
+                <div>
+                  <div className="row">
+                    <div className="col mt-2">
+                      <img
+                        src={`${url}/${item.product?.productimage?.filename}`}
+                        className="ms-2"
+                        style={{ width: "255px", height: "275px" }}
+                      />
+                      <div className="row p-4">
+                      <div className="col-3">
                       <button
                         className="shopowner-viewproduct-minusbtn"
                         onClick={() => updateQ(item,'dec')}
@@ -251,17 +263,7 @@ function CustomerProductCardPage({ url }) {
                       >
                         <img src={plus} alt="plus"></img>
                       </button>
-                    </div>
-
-
-                <div>
-                  <div className="row">
-                    <div className="col mt-2">
-                      <img
-                        src={`${url}/${item.product?.productimage?.filename}`}
-                        className="ms-2"
-                        style={{ width: "255px", height: "275px" }}
-                      />
+                    </div></div>
                     </div>
                     <div className="col mt-3">
                       <div>
@@ -282,6 +284,7 @@ function CustomerProductCardPage({ url }) {
                         <b className="customerproduct-cardpage-h6">
                           &#8377; {item.product?.price}
                         </b>
+                        
                       </div>
                       <div className="text-end me-5 pt-5 mt-5">
                         <h4
