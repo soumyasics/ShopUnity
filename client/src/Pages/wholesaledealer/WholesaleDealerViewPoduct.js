@@ -3,7 +3,7 @@ import sprite from '../../images/sprite.png'
 import WholesaleDealerSidebar from './WholesaleDealerSidebar'
 import { Card } from 'react-bootstrap';
 import '../ShopOwner/shopowner.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function WholesaleDealerViewPoduct() {
 
     const [data, setData] = useState([]);
@@ -21,10 +21,6 @@ function WholesaleDealerViewPoduct() {
           setfilteredData(data);
         }
     };
-
-    const handleViewproduct=(productid)=>{
-      navigate("/wholesalerviewproductdetails/"+productid)
-    }
 
   return (
     <div>
@@ -60,13 +56,14 @@ function WholesaleDealerViewPoduct() {
                   src={sprite}
                 />
                 <div className="shopowner-viewproduct-button">
-                  <button className="shopowner-viewproduct-viewbtn me-4 mt-2 mb-3" onClick={()=>handleViewproduct}>
-                    View
-                  </button>
+                  <Link to='/wholesalerviewproductdetails'>
+                    <button className="shopowner-viewproduct-viewbtn me-4 mt-2 mb-3">
+                      View
+                    </button>
+                  </Link>
                 </div>
               </Card>
             </div>
-        
         </div>
       </div>
     </div>

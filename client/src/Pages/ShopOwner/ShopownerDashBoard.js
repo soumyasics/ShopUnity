@@ -20,7 +20,7 @@ function ShopownerDashBoard({data}) {
             ):data === 'shopownerviewproduct' ? (
                 <ShopownerViewProduct/>
             ):(
-                <ShopOwnerLogin/>
+                <ShopownerDashBoard/>
             )}
         </div>
       </div>

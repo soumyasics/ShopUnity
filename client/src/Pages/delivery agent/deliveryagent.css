@@ -136,7 +136,7 @@
 }
 .alldeliveryagent-viewpage-div1{
   background-color: #CCEDF4;
-  width: 1365px;
+  width:100%;
   height: 90vh;
   top: 10px;
   left: -40px;
@@ -156,7 +156,7 @@
 /* Deliveryagent Delivery Request */
 
 .deliveryagent-deliveryrequest-divbox{
-  height: 110vh;
+  min-height: 100vh;
   width: 110%;
   background-color: #CCEDF4;
   margin-left: -95px;

@@ -98,7 +98,7 @@ function WholesaleDealerSidebar({url}) {
                 </div>
               </li>
               <li className="nav-item mt-3">
-                <Link to="" className="nav-link sidebar-shop">
+                <Link to="/wholesalerviewshops" className="nav-link sidebar-shop">
                    <BsShop className="wholesaler-dash-icon ms-3"/><span className="wholesaler-dash-iconspan ms-2"> Shops</span>
                 </Link>
               </li>

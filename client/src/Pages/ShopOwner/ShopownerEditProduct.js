@@ -4,6 +4,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import tick from '../../images/tick.png'
 import wrong from '../../images/wrong.png'
 import axiosInstance from '../../APIS/axiosinstatnce';
+import ShopOwnerSidebar from './ShopOwnerSidebar';
 function ShopownerEditProduct() {
 
     const navigate=useNavigate();
@@ -133,7 +134,11 @@ function ShopownerEditProduct() {
         })
     }
   return (
-    <div>
+    <div className='row'>
+        <div className='col-2'>
+            <ShopOwnerSidebar/>
+        </div>
+        <div className='col-9'>
         <div>
             <Link to='/shopownerviewproduct' className='ms-5 mt-2 text-dark shopowner-editproduct-details-link'>
                 <FaArrowLeftLong />
@@ -264,7 +269,7 @@ function ShopownerEditProduct() {
             </div>
         </div>
       </div>
-      
+      </div>
     </div>
   )
 }
