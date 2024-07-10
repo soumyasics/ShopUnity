@@ -61,6 +61,12 @@ import DeliveryAgentDeliveryRequest from './Pages/delivery agent/DeliveryAgentDe
 import DeliveryAgentDeliveryUpdate from "./Pages/delivery agent/DeliveryAgentDeliveryUpdate";
 import CustomerOrdersViewOrder from "./Pages/customer/CustomerOrdersViewOrder";
 import CustomerViewallproduct from "./Pages/customer/CustomerViewallproduct";
+import WholesaleDealerAddProduct from "./Pages/wholesaledealer/WholesaleDealerAddProduct";
+import WholesaleDealerViewPoduct from "./Pages/wholesaledealer/WholesaleDealerViewPoduct";
+import WholesaleDealerViewProductDetails from "./Pages/wholesaledealer/WholesaleDealerViewProductDetails";
+import WholesaleDealerEditProduct from "./Pages/wholesaledealer/WholesaleDealerEditProduct";
+import ShopownerViewWholesaleDealer from "./Pages/ShopOwner/ShopownerViewWholesaleDealer";
+import WholesaleDealerViewShops from "./Pages/wholesaledealer/WholesaleDealerViewShops";
 
 
 function App() {
@@ -111,6 +117,11 @@ function App() {
           element={<WholesaleDealerEditProfile />}
         />
         <Route path="/wholesalermain" element={<WholesalerMain />} />
+        <Route path="/wholesaleraddproduct" element={<WholesaleDealerAddProduct/>} />
+        <Route path="/wholesalerviewproduct" element={<WholesaleDealerViewPoduct/>} />
+        <Route path="/wholesalerviewproductdetails" element={<WholesaleDealerViewProductDetails/>} />
+        <Route path="/wholesalereditproduct" element={<WholesaleDealerEditProduct/>} />
+        <Route path="/wholesalerviewshops" element={<WholesaleDealerViewShops/>} />
 
         {/* Customer */}
 
@@ -231,7 +242,7 @@ function App() {
     <Route path='/shopownerdashboard' element={<ShopownerDashBoard/>}/>
     <Route path='/shopownercustomerorderrequest' element={<ShopownerCustomerOrderRequest/>} />
     <Route path='/shopownercustomerorderaccept' element={<ShopownerCustomerOrderAccept/>} />
-
+    <Route path='/shopownerviewwholesaledealer' element={<ShopownerViewWholesaleDealer/>} />
     
 {/* Admin */}
         {/* shopowner */}

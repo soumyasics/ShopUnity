@@ -178,7 +178,7 @@
 }
 .customer-view-shop-divbox{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   border-radius: 46px;
   background: #CCEDF4;
   box-shadow: 0px 4.29px 4.29px 0px #00000040;
@@ -215,7 +215,7 @@
 
 .customer-viewproduct-back{
   background-color: #CCEDF4;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
 .customer-viewproduct-h2{
@@ -273,7 +273,7 @@
 
 .customer-viewproduct-details-divbox{
   width: 100%;
-  height: 140vh;
+  min-height: 100vh;
   border-radius: 41px;
   border: 7px;
   background: #FFFFFF;
@@ -395,7 +395,7 @@
 .customerproduct-cardpage-2columndiv{
   border: 1.06px solid #9C9C9C;
   width:100%;
-  height: 130vh;
+  min-height: 100vh;
   border-radius: 6px;
 }
 .customerproduct-cardpage-h61{
@@ -461,7 +461,7 @@
 .customerorder-vieworder-divbox{
   box-shadow: 0px 4.29px 4.29px 0px #00000040;
   width: 99%;
-  height: 150vh;
+  min-height: 100vh;
   border-radius: 46px;
   border:9.06px solid #CCEDF4;
 }

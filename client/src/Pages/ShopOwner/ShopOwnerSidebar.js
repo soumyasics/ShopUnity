@@ -5,6 +5,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { GrCompliance } from "react-icons/gr";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
+import { FaCartShopping } from "react-icons/fa6";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import sidebarimg from "../../images/sidebarimg.png";
@@ -118,7 +119,24 @@ function ShopOwnerSidebar() {
               <div className='admin_dash_div'>
               <label onClick={toggleDropdown1}>
                 <div>
-                <FaAngleRight/><BsBoxSeam className="ms-2"/><span> Customer</span> 
+                <FaAngleRight/><FaPeopleGroup className="ms-2"/><span> Customer Orders</span> 
+                </div>
+              </label>
+              {dropdownVisible && (
+                  <div className="dropdown_menu sidebar_dash_drop">
+                      <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                        <Link to="/shopownercustomerorderrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label">View Product</label></Link>
+                        <Link to="/shopownercustomerorderaccept" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Accept Orders</label></Link>
+                      </div>
+                  </div>
+              )}
+            </div>
+              </li>
+              <li className="nav-item">
+              <div className='admin_dash_div'>
+              <label onClick={toggleDropdown1}>
+                <div>
+                <FaAngleRight/><BsBoxSeam className="ms-2"/><span> Order Products</span> 
                 </div>
               </label>
               {dropdownVisible && (
@@ -131,21 +149,22 @@ function ShopOwnerSidebar() {
               )}
             </div>
               </li>
-              <li className="nav-item">
+              
+              {/* <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
                   <FaPeopleGroup className="ms-5"/> Customer Orders
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link
-                  to="/wholesaledealerslist"
+                  to="/shopownerviewwholesaledealer"
                   className="nav-link sidebar-shop"
                 >
                   <FaBoxOpen className="ms-5"/> Wholesale Dealers
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/shopownerslist" className="nav-link sidebar-shop">
+                <Link to="" className="nav-link sidebar-shop">
                   <GiInjustice className="ms-5"/> Dealer Comparison
                 </Link>
               </li>
@@ -158,6 +177,11 @@ function ShopOwnerSidebar() {
               <li className="nav-item">
                 <Link to="" className="nav-link sidebar-shop">
                   <GrCompliance className="ms-5"/> Complaints
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/customerproductcart" className="nav-link sidebar-shop">
+                  <FaCartShopping className="ms-5"/> Cart
                 </Link>
               </li>
               <li className="nav-item mt-auto">

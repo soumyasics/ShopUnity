@@ -1,162 +1,124 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaArrowLeftLong } from 'react-icons/fa6';
-import { BiImageAdd } from 'react-icons/bi';
-import { FaPlus } from 'react-icons/fa6';
-import ShopOwnerSidebar from './ShopOwnerSidebar';
-import axiosInstance from '../../APIS/axiosinstatnce';
+import React, { useState } from 'react'
+import '../ShopOwner/shopowner.css'
+import WholesaleDealerSidebar from './WholesaleDealerSidebar';
 
-function ShopAddItem() {
-  const [profileImage, setProfileImage] = useState(null);
-  const [count, setCount] = useState(1);
-  const [data, setData] = useState({
-    category: '',
-    productname: '',
-    brand: '',
-    description: '',
-    productimage: '',
-    price: '',
-    quantity: 1,
-    expirydate: ''
-  });
+function WholesaleDealerAddProduct() {
 
-  const [errors, setErrors] = useState({
-    category: '',
-    productname: '',
-    brand: '',
-    description: '',
-    productimage: '',
-    price: '',
-    quantity: '',
-    expirydate: ''
-  });
-  const navigate=useNavigate()
-
-  const increment = () => {
-    setCount(count + 1);
-    setData((prevData) => ({
-      ...prevData,
-      quantity: count + 1
-    }));
-  };
-
-  const decrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
-      setData((prevData) => ({
-        ...prevData,
-        quantity: count - 1
-      }));
-    }
-  };
-
-  const validateField = (name, value) => {
-    let error = '';
-    if (name === 'category' && !value.trim()) {
-      error = 'Category is required';
-    } else if (name === 'productname' && !value.trim()) {
-      error = 'Product name is required';
-    } else if (name === 'brand' && !value.trim()) {
-      error = 'Brand is required';
-    } else if (name === 'description' && !value.trim()) {
-      error = 'Description is required';
-    } else if (name === 'price') {
-      if (!value) {
-        error = 'Price is required';
-      } else if (isNaN(value) || value <= 0) {
-        error = 'Price must be a positive number';
-      }
-    } else if (name === 'quantity') {
-      if (!value) {
-        error = 'Quantity is required';
-      } else if (isNaN(value) || value <= 0) {
-        error = 'Quantity must be a positive number';
-      }
-    } else if (name === 'expirydate') {
-      if (!value) {
-        error = 'Expiry date is required';
-      } else if (new Date(value) <= new Date()) {
-        error = 'Expiry date must be a future date';
-      }
-    } else if (name === 'productimage' && !value) {
-      error = 'Product image is required';
-    }
-    return error;
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: validateField(name, value)
-    }));
-  };
-
-  const handleFileChange = (event) => {
-    const { name, files } = event.target;
-    const file = files[0];
-    setData((prevData) => ({
-      ...prevData,
-      [name]: file
-    }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: validateField(name, file ? file.name : '')
-    }));
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onloadend = () => {
-    //     setProfileImage(reader.result);
-    //   };
-    //   reader.readAsDataURL(file);
-    // } else {
-    //   setProfileImage(null);
-    // }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newErrors = {};
-    let formIsValid = true;
-
-    Object.keys(data).forEach((key) => {
-      const error = validateField(key, data[key]);
-      if (error) {
-        formIsValid = false;
-        newErrors[key] = error;
-      }
+    const [profileImage, setProfileImage] = useState(null);
+    const [count, setCount] = useState(1);
+    const [data, setData] = useState({
+        category: '',
+        productname: '',
+        brand: '',
+        description: '',
+        productimage: '',
+        price: '',
+        quantity: 1,
+        expirydate: ''
     });
 
-    setErrors(newErrors);
+    const [errors, setErrors] = useState({
+        category: '',
+        productname: '',
+        brand: '',
+        description: '',
+        productimage: '',
+        price: '',
+        quantity: '',
+        expirydate: ''
+    });
 
-    if (formIsValid) {
-      console.log(data);
-      const formData=new FormData();
-
-      for (const key in data) {
-        formData.append(key, data[key]);
-      }
-      formData.append('shopOwner', localStorage.getItem('shopowner'));
-
-      axiosInstance.post("/add_a_product",formData).then((res)=>{
-        alert(res.data.message)
-        navigate('/shopownerviewproduct')
-      })
-      .catch((err)=>{
-        alert("Add product Failed")
-      })
+    const increment = () => {
+        setCount(count + 1);
+    };
+    const decrement = () => {
+        if (count > 1) {
+          setCount(count - 1);
+      };
     }
-  };
 
+    const validateField = (name, value) => {
+        let error = '';
+        if (name === 'category' && !value.trim()) {
+          error = 'Category is required';
+        } else if (name === 'productname' && !value.trim()) {
+          error = 'Product name is required';
+        } else if (name === 'brand' && !value.trim()) {
+          error = 'Brand is required';
+        } else if (name === 'description' && !value.trim()) {
+          error = 'Description is required';
+        } else if (name === 'price') {
+          if (!value) {
+            error = 'Price is required';
+          } else if (isNaN(value) || value <= 0) {
+            error = 'Price must be a positive number';
+          }
+        } else if (name === 'quantity') {
+          if (!value) {
+            error = 'Quantity is required';
+          } else if (isNaN(value) || value <= 0) {
+            error = 'Quantity must be a positive number';
+          }
+        } else if (name === 'expirydate') {
+          if (!value) {
+            error = 'Expiry date is required';
+          } else if (new Date(value) <= new Date()) {
+            error = 'Expiry date must be a future date';
+          }
+        } else if (name === 'productimage' && !value) {
+          error = 'Product image is required';
+        }
+        return error;
+      };
+
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setData((prevData) => ({
+          ...prevData,
+          [name]: value
+        }));
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: validateField(name, value)
+        }));
+      };
+    
+
+      const handleFileChange = (event) => {
+        const { name, files } = event.target;
+        const file = files[0];
+        setData((prevData) => ({
+          ...prevData,
+          [name]: file
+        }));
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: validateField(name, file ? file.name : '')
+        }));
+      }
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        const newErrors = {};
+        let formIsValid = true;
+    
+        errors.category = validateField("Category", data.category);
+        errors.productname = validateField("Productname", data.productname);
+        errors.brand = validateField("Brand", data.brand);
+        errors.description = validateField("Description", data.description);
+        errors.productimage = validateField("Productimage", data.productimage);
+        errors.price = validateField("Price", data.price);
+        errors.quantity = validateField("Quantity", data.quantity);
+        errors.expirydate = validateField("Expirydate", data.expirydate);
+    
+        setErrors(errors);
+    
+    }
   return (
     <div>
       <div className='row ' >
          <div className="col-2">
-          <ShopOwnerSidebar />
+          <WholesaleDealerSidebar />
         </div> 
         <div className='col-9 mt-5' >
           <div>
@@ -309,7 +271,7 @@ function ShopAddItem() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ShopAddItem;
+export default WholesaleDealerAddProduct

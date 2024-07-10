@@ -90,15 +90,15 @@ function WholesaleDealerSidebar({url}) {
                   {dropdownVisible && (
                       <div className="dropdown_menu sidebar_dash_drop">
                           <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
-                            <Link className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Add Product</label></Link>
-                            <Link className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View Product</label></Link>
+                            <Link to='/wholesaleraddproduct' className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Add Product</label></Link>
+                            <Link to='/wholesalerviewproduct' className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View Product</label></Link>
                           </div>
                       </div>
                   )}
                 </div>
               </li>
               <li className="nav-item mt-3">
-                <Link to="" className="nav-link sidebar-shop">
+                <Link to="/wholesalerviewshops" className="nav-link sidebar-shop">
                    <BsShop className="wholesaler-dash-icon ms-3"/><span className="wholesaler-dash-iconspan ms-2"> Shops</span>
                 </Link>
               </li>
