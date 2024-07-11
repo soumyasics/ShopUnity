@@ -3,6 +3,7 @@ import '../ShopOwner/shopowner.css'
 import { Link, useNavigate } from 'react-router-dom';
 import sprite from '../../images/sprite.png'
 import { FaArrowLeftLong } from "react-icons/fa6";
+import WholesaleDealerSidebar from './WholesaleDealerSidebar';
 function WholesaleDealerViewProductDetails() {
 
     const [data, setData] = useState({});
@@ -11,13 +12,12 @@ function WholesaleDealerViewProductDetails() {
     const navigate=useNavigate()
     
   return (
-    <div>
-      <div>
-        <Link to='/wholesalerviewproduct' className='ms-5 mt-2 text-dark shopowner-viewproductdetails-link'>
-            <FaArrowLeftLong />
-        </Link>
-      </div>
-      <div className='shopowner-viewproductdetails-boxdiv container'>
+    <div className='row'>
+        <div className='col-2'>
+            <WholesaleDealerSidebar/>
+        </div>
+        <div className='col-9 pt-5'>
+      <div className='shopowner-viewproductdetails-boxdiv container ms-5 '>
         <div className='row'>
             <div className='col-8'>
                 <div className='text-center mt-5'>
@@ -110,9 +110,10 @@ function WholesaleDealerViewProductDetails() {
         </div>
         <div className='text-center'>
             <Link to='/wholesalereditproduct'>
-                <button className='shopowner-viewproductdetails-editbtn'  >Edit</button>
+                <button className='shopowner-viewproductdetails-editbtn'>Edit</button>
             </Link>
         </div>
+      </div>
       </div>
     </div>
   )

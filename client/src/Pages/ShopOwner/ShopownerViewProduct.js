@@ -58,7 +58,7 @@ function ShopownerViewProduct({ url }) {
       <div className="text-center">
         <h2 className="shopowner-viewproduct-h2">View Products</h2>
       </div>
-      <div className="shopowner-viewproduct-divbox container">
+      <div className="shopowner-viewproduct-divbox container ms-4">
         <div>
           <select
             className="ms-3 mt-5 shopowner-viewproduct-select"

@@ -1,65 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { FaArrowLeftLong } from "react-icons/fa6";
-import { HiOutlineShoppingCart } from "react-icons/hi";
-import axiosInstance from "../../APIS/axiosinstatnce";
-import axiosMultipartInstance from "../../APIS/axiosMultipartInstance";
+import React, { useState } from 'react'
+import { HiOutlineShoppingCart } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
+import chocolate from '../../images/chocolate.png'
 import plus from "../../images/plus.png";
 import minus from "../../images/minus.png";
+import { FaArrowLeftLong } from 'react-icons/fa6';
+function Shopownerwdviewproduct() {
 
-function CustomerViewProductDetail({ url }) {
-  const [data, setData] = useState({});
-  const { productid } = useParams();
+    const[count,setCount]=useState(1)
 
-  const increment = () => {
-    setData((prevData) => ({
-      ...prevData,
-      quantity: (prevData.quantity || 1) + 1,
-      Tprice: ((prevData.quantity || 1) + 1) * prevData.price,
-    }));
-  };
-
-  const decrement = () => {
-    setData((prevData) => ({
-      ...prevData,
-      quantity: prevData.quantity > 1 ? prevData.quantity - 1 : 1,
-      Tprice: (prevData.quantity > 1 ? prevData.quantity - 1 : 1) * prevData.price,
-    }));
-  };
-
-  const addToCart = () => {
-    axiosInstance
-      .post(`/addtocart`, {
-        customerId: localStorage.getItem("customer"),
-        productId: data._id,
-        quantity: data.quantity || 1,
-      })
-      .then((res) => {
-        alert("Product Added On Cart");
-        console.log("Product added to cart:", res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    axiosMultipartInstance
-      .post(`/view_a_product/${productid}`)
-      .then((res) => {
-        setData({ ...res.data.data, quantity: 1 });
-        console.log(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [productid]);  
-
-  console.log(data);
+    const increment = () => {
+        setCount(count+1)
+    }
+    const decrement = () => {
+        if(count > 0){
+            setCount(count-1)
+        }
+    }
   return (
     <div>
       <div>
-        <Link to="/customerviewshop">
+        <Link to="/shopownerviewwdproductview">
           <FaArrowLeftLong className="text-dark ms-5 mt-5" />
         </Link>
       </div>
@@ -68,13 +29,14 @@ function CustomerViewProductDetail({ url }) {
           <div className="col">
             <div className="mt-3 customer-viewproduct-details-imgbox ">
               <img
+                src={chocolate}
                 className="customer-viewproduct-details-img"
-                src={`${url}${data.productimage?.filename}`}
-                alt={data.productname}
+                // src={`${url}${data.productimage?.filename}`}
+                // alt={data.productname}
               ></img>
             </div>
             <div className="text-center">
-              <button onClick={addToCart} className="customer-viewproduct-details-cartbtn">
+              <button  className="customer-viewproduct-details-cartbtn">
                 <HiOutlineShoppingCart /> Add to Cart
               </button>
             </div>
@@ -84,19 +46,22 @@ function CustomerViewProductDetail({ url }) {
               <h5 className="customer-viewproduct-details-h5">
                 Product Brand :
                 <span className="ms-2 customer-viewproduct-details-span">
-                  {data.brand}
+                    Amul
+                  {/* {data.brand} */}
                 </span>
               </h5>
             </div>
             <div className="mt-4">
               <h2 className="customer-viewproduct-details-h2">
-                {data.productname}
+                chocolate
+                {/* {data.productname} */}
               </h2>
               <p className="customer-viewproduct-details-p">(150kg)</p>
             </div>
             <div className="mt-4">
               <h2 className="customer-viewproduct-details-h2">
-                <b>&#8377; {data.Tprice ? data.Tprice : data.price}</b>
+                {/* <b>&#8377; {data.Tprice ? data.Tprice : data.price}</b> */}
+                <b>&#8377; 200</b>
               </h2>
             </div>
             <div className="row mt-5">
@@ -113,7 +78,8 @@ function CustomerViewProductDetail({ url }) {
               </div>
               <div className="col">
                 <label className="mt-3 customer-viewproduct-details-h2label">
-                  {data.quantity}
+                    {count}
+                  {/* {data.quantity} */}
                 </label>
               </div>
               <div className="col">
@@ -129,7 +95,8 @@ function CustomerViewProductDetail({ url }) {
               <h5 className="customer-viewproduct-details-h2">Expiry :</h5>
               <div className="customer-viewproduct-details-expirybox mt-3">
                 <div className="customer-viewproduct-details-secondbox">
-                  <label>{data.expirydate}</label>
+                    <label>12/09/2026</label>
+                  {/* <label>{data.expirydate}</label> */}
                 </div>
               </div>
             </div>
@@ -137,7 +104,10 @@ function CustomerViewProductDetail({ url }) {
               <div className="customer-viewproduct-details-desbox2">
                 <h5 className="customer-viewproduct-details-h2">Description</h5>
                 <p className="customer-viewproduct-details-h2 mt-3">
-                  {data.description}
+                With orange extracts from the Netherlands infused in intense dark 
+                chocolate made from the finest cocoa beans, Amul Tropical Orange 
+                surprise with a taste that's absolutely unforgettable.
+                  {/* {data.description} */}
                 </p>
               </div>
             </div>
@@ -145,7 +115,7 @@ function CustomerViewProductDetail({ url }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default CustomerViewProductDetail;
+export default Shopownerwdviewproduct
