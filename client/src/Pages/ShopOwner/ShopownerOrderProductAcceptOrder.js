@@ -1,16 +1,14 @@
 import React from 'react'
-import { FaArrowLeftLong } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
+import ShopOwnerSidebar from './ShopOwnerSidebar'
 import chocolate from '../../images/chocolate.png'
-function CustomerOrdersViewOrder() {
+function ShopownerOrderProductAcceptOrder() {
   return (
-    <div>
-      <div>
-        <Link to='/customerhome'>
-            <FaArrowLeftLong className='text-dark ms-5 mt-5' />
-        </Link>
-      </div>
-      <div className='text-center'>
+    <div className='row'>
+        <div className='col-3'>
+            <ShopOwnerSidebar/>
+        </div>
+        <div className='col-9'>
+        <div className='text-center'>
         <h3 className='customerorder-vieworder-h2'>View Orders</h3>
       </div>
       <div className='customerorder-vieworder-divbox ms-2 me-2'>
@@ -113,8 +111,9 @@ function CustomerOrdersViewOrder() {
             </div>
         </div>       
       </div>
+        </div>
     </div>
   )
 }
-  
-export default CustomerOrdersViewOrder
+
+export default ShopownerOrderProductAcceptOrder

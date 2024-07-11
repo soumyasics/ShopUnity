@@ -107,11 +107,11 @@ function WholesaleDealerSidebar({url}) {
                   <label onClick={toggleDropdown1} >
                     <BsBoxSeam className="wholesaler-dash-icon"/> <span className="wholesaler-dash-iconspan ms-1"> Shop Orders</span><FaAngleRight className="ms-3"/>    
                   </label>
-                  {dropdownVisible && (
+                  {dropdownVisible1 && (
                       <div className="dropdown_menu sidebar_dash_drop">
                           <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
-                            <Link className="wholesaler-dash-link"><label className="wholesaler-dash-label"> New Requests</label></Link>
-                            <Link className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Accept orders</label></Link>
+                            <Link className="wholesaler-dash-link" to='/wholesalershopownernewrequest'><label className="wholesaler-dash-label"> New Requests</label></Link>
+                            <Link className="wholesaler-dash-link" to='/wholesalershopowneracceptorders'><label className="wholesaler-dash-label ms-2">Accept orders</label></Link>
                           </div>
                       </div>
                   )}
