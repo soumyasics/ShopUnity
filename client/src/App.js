@@ -70,8 +70,9 @@ import WholesaleDealerViewShops from "./Pages/wholesaledealer/WholesaleDealerVie
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url = "http://localhost:4028/";
+  // const url="http://hybrid.srishticampus.in:4028/"
+  
+  const url = "http://localhost:4028/";
 
   return (
     <BrowserRouter basename="/shopunity">
