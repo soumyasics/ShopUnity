@@ -85,5 +85,5 @@ Route.post("/deleteitemfromcart",cartController.deleteFromCart)
 
 // order
 Route.post("/placeorder",orderController.placeOrder)
-
+Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByShopOwner)
 module.exports=Route

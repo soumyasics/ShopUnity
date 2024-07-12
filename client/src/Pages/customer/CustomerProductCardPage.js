@@ -190,7 +190,7 @@ function CustomerProductCardPage({ url }) {
   };
 
   const updateQ = (item,action)=> {
-    if (item.quantity > 1){
+    if (item.quantity >= 1){
     axiosInstance
     .post(`/addtocart`, {
       customerId: localStorage.getItem("customer"),
@@ -198,7 +198,7 @@ function CustomerProductCardPage({ url }) {
       quantity:action=='dec'? -1 : 1,
     })
     .then((res) => {
-     alert(res.data.message)
+    //  alert(res.data.message)
      viewData();
       console.log("Product added to cart:", res.data);
     })
@@ -245,10 +245,10 @@ function CustomerProductCardPage({ url }) {
                         style={{ width: "255px", height: "275px" }}
                       />
                       <div className="row p-4">
-                      <div className="col-3">
+                      <div className="col-3" onClick={() => updateQ(item,'dec')}>
                       <button
                         className="shopowner-viewproduct-minusbtn"
-                        onClick={() => updateQ(item,'dec')}
+                        
                       >
                         <img src={minus} alt="minus"></img>
                       </button>
@@ -256,10 +256,10 @@ function CustomerProductCardPage({ url }) {
                     <div className="col-1">
                       <label>{item.quantity}</label>
                     </div>
-                    <div className="col-2">
+                    <div className="col-2" onClick={() => updateQ(item,'inc')}>
                       <button
                         className="shopowner-viewproduct-plusbtn"
-                        onClick={() => updateQ(item,'inc')}
+                        
                       >
                         <img src={plus} alt="plus"></img>
                       </button>
