@@ -65,37 +65,6 @@ const viewOrdersByShopOwner = async (req, res) => {
 
     res.json({ data: shopOwnerOrders });
 
-    //   // Find products by shop owner
-    //   const products = await Product.find({ shopOwner: shopOwnerId });
-
-    //   if (products.length === 0) {
-    //     return res.status(404).json({
-    //       message: "No products found for this shop owner",
-    //     });
-    //   }
-
-    //   // Extract product IDs
-    //   const productIds = products.map((product) => product._id);
-
-    //   // Find orders for these products
-    //   const orders = await Order.find({ 'products.product': { $in: productIds } })
-    //     .populate({
-    //       path: 'products.product',
-    //       select: 'productname price', // Specify fields to populate from Product schema
-    //     })
-    //     .populate('customer', 'name email') // Populate customer details
-
-    //   if (orders.length === 0) {
-    //     return res.status(404).json({
-    //       message: "No orders found for these products",
-    //     });
-    //   }
-
-    //   res.status(200).json({
-    //     status: 200,
-    //     data: orders,
-    //     message: "Orders retrieved successfully",
-    //   });
   } catch (err) {
     console.log("Error retrieving orders:", err.message);
     res.status(500).json({
@@ -105,7 +74,41 @@ const viewOrdersByShopOwner = async (req, res) => {
     });
   }
 };
+
+const acceptOrderRequest = async (req, res) => {
+  try {
+    const id = req.params.orderid;
+    if (!id) {
+      return res.status(400).json({ message: "Order ID is required" });
+    }
+
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    // Check if the order is already accepted or not
+    if (order.orderStatus === "accepted") {
+      return res.status(400).json({ message: "Order is already accepted" });
+    }
+
+    order.orderStatus = "accepted";
+    await order.save();
+
+    return res.status(200).json({
+      message: "Order accepted",
+      data: order,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Server error on updating order status",
+      error: error.message,
+    });
+  }
+};
+
+
 module.exports = {
   placeOrder,
-  viewOrdersByShopOwner,
+  viewOrdersByShopOwner,acceptOrderRequest
 };

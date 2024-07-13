@@ -1,4 +1,5 @@
 const shopownerschema = require("../Model/ShopOwnerSchema");
+const DeliveryRequestSchema = require("../Model/DeliveryRequestSchema");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 
@@ -301,6 +302,26 @@ const rejectshopowner = async (req, res) => {
   }
 };
 
+const assignDeliveryAgent = async (req, res) => {
+  try {
+    let request = new DeliveryRequestSchema({
+      order: req.body.orderID,
+      agent: req.body.agentId
+    });
+
+    const result = await request.save();
+    return res.json({
+      status: 200,
+      message: "success",
+      data: result,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "server error", error });
+  }
+};
+
 // const InactivateShopOwner = async (req, res) => {
 //   try {
 //     const id = req.params.id;
@@ -379,4 +400,5 @@ module.exports = {
   getAllPendingShopOwners,
   deActivateShopOwnerById,
   activateShopownerById,
+  assignDeliveryAgent
 };

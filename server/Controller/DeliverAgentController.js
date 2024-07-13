@@ -307,6 +307,7 @@ const activateDeliveryagentById = (req, res) => {
 };
 
 const getAllAcceptedDeliveryAgents = (req, res) => {
+  console.log('pp')
   deliveryagentschema
     .find({ status: "accepted" })
     .then((result) => {

@@ -108,10 +108,6 @@ function ShopownerEditProduct() {
         axiosInstance.post(`/edit_a_product/${productid}`,formData)
         .then((res) => {
             alert("Updated Successfully")
-            setInterval(()=>{
-                navigate("/shopownerviewproduct")
-
-            },1000)
             navigate("/shopownerviewproduct")
 
         })
@@ -124,10 +120,7 @@ function ShopownerEditProduct() {
         axiosInstance.post(`/delete_a_product/${productid}`)
         .then((res) => {
             alert("product Deleted")
-            setInterval(()=>{
-                navigate("/shopownerviewproduct")
-
-            },1000)
+            navigate("/shopownerviewproduct")
         })
         .catch((err) => {
             console.log(err);

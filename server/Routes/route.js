@@ -66,6 +66,7 @@ Route.post('/delete_a_shopowner/:shopownerid',ShopeOwnerController.DeleteAShopOw
 Route.post('/shopowner_forgot',ShopeOwnerController.Shopownerforgot)
 Route.post("/acceptshopowner/:id",ShopeOwnerController.acceptShopOwner)
 Route.post("/rejectshopowner/:id",ShopeOwnerController.rejectshopowner)
+Route.post("/assignDeliveryAgent",ShopeOwnerController.assignDeliveryAgent)
 
 Route.post("/activateShopowner/:id",ShopeOwnerController.activateShopownerById)
 Route.post("/inactivateshopowner/:id",ShopeOwnerController.deActivateShopOwnerById)
@@ -86,4 +87,5 @@ Route.post("/deleteitemfromcart",cartController.deleteFromCart)
 // order
 Route.post("/placeorder",orderController.placeOrder)
 Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByShopOwner)
+Route.post("/acceptOrderRequest/:orderid",orderController.acceptOrderRequest)
 module.exports=Route
