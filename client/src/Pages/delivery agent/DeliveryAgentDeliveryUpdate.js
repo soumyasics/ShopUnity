@@ -11,7 +11,7 @@ function DeliveryAgentDeliveryUpdate() {
       <div className='col-3'>
           <DeliveryagentSidebar/>
       </div>
-      <div className='col-9'>
+      <div className='col-9 p-5'>
           <div className='deliveryagent-deliveryrequest-divbox'>
               <h3 className='deliveryagent-deliveryrequest-h3 pt-4 text-center'>Delivery Updates</h3>
               <div>

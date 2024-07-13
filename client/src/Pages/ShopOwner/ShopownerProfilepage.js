@@ -24,11 +24,11 @@ function ShopownerProfilepage({ url }) {
       });
   }, []);
 
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const gotoEdit = (e) => {
     e.preventDefault();
-    Navigate("/shopownerprofileedit");
+    navigate("/shopownerprofileedit");
   };
   console.log(`${url}${data.shoplicence}`,"kk");
   return (

@@ -248,14 +248,14 @@ function App() {
     <Route path='/shopownerviewproductdetails/:productid' element={<ShopownerviewProductDetails url={url} />}/>
     <Route path='/shopownereditproduct/:productid' element={<ShopownerEditProduct url={url}/>}/>
     <Route path='/shopownerdashboard' element={<ShopownerDashBoard/>}/>
-    <Route path='/shopownercustomerorderrequest' element={<ShopownerCustomerOrderRequest/>} />
-    <Route path='/shopownercustomerorderaccept' element={<ShopownerCustomerOrderAccept/>} />
+    <Route path='/shopownercustomerorderrequest' element={<ShopownerCustomerOrderRequest url={url}/>} />
+    <Route path='/shopownercustomerorderaccept' element={<ShopownerCustomerOrderAccept url={url} />} />
     <Route path='/shopownerviewwholesaledealer' element={<ShopownerViewWholesaleDealer/>} />
     <Route path='/shopownerviewwdproductview' element={<ShopownerViewWDProductView/>} />
     <Route path='/shopownerorderproductviewproduct' element={<Shopownerorderproductviewproduct/>} />
     <Route path='/shopownerwdviewproduct' element={<Shopownerwdviewproduct/>} />
     <Route path='/shopownerorderproductcart' element={<ShopownerOrderProductCart/>} />
-    <Route path='/shopownerorderproductacceptorder' element={<ShopownerOrderProductAcceptOrder/>} />
+    <Route path='/shopownerorderproductacceptorder' element={<ShopownerOrderProductAcceptOrder url={url} />} />
 
 
 {/* Admin */}

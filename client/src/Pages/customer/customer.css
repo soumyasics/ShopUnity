@@ -468,7 +468,7 @@
 .customerorder-vieworder-orderbox{
   border: 2.04px solid #D8D8D8;
   width:100%;
-  height: 100vh;
+  /* height: 100vh; */
   border-radius: 59px;
 }
 .customerorder-vieworder-label{
