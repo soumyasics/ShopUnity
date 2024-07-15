@@ -240,7 +240,7 @@ function CustomerProductCardPage({ url }) {
                   <div className="row">
                     <div className="col mt-2">
                       <img
-                        src={`${url}/${item.product?.productimage?.filename}`}
+                        src={`${url}${item.product?.productimage?.filename}`}
                         className="ms-2"
                         style={{ width: "255px", height: "275px" }}
                       />

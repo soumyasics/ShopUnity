@@ -306,7 +306,8 @@ const assignDeliveryAgent = async (req, res) => {
   try {
     let request = new DeliveryRequestSchema({
       order: req.body.orderID,
-      agent: req.body.agentId
+      agent: req.body.agentId,
+      shopOwner:req.body.shopownerid
     });
 
     const result = await request.save();

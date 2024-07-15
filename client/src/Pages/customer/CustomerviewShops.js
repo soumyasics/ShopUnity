@@ -12,34 +12,29 @@ function CustomerviewShops() {
   const customer = localStorage.getItem("customer");
 
   useEffect(() => {
-    // Fetch the customer district
-    axiosInstance
-      .get(`/get_a_customer/${customer}`)
-      .then((res) => {
-        setSelectDistrict(res.data.data.district);
-        console.log("Customer Data:", res.data.data);
+    const fetchData = async () => {
+      try {
+        // Fetch the customer district
+        const customerResponse = await axiosInstance.get(`/get_a_customer/${customer}`);
+        const customerDistrict = customerResponse.data.data.district;
+        setSelectDistrict(customerDistrict);
+        console.log("Customer Data:", customerDistrict);
 
         // Fetch all shop owners and filter based on district
-        axiosInstance
-          .get("/get_all_shopowners")
-          .then((res) => {
-            var arra1 = [];
-            for (let i in res.data.data) {
-              console.log(res.data.data[i].shopownerdistrict);
-              if (res.data.data[i].shopownerdistrict == selectDistrict) {
-                arra1.push(res.data.data[i]);
-              }
-            }
-            setData(arra1);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
+        const shopOwnersResponse = await axiosInstance.get("/get_all_shopowners");
+        const filteredShopOwners = shopOwnersResponse.data.data.filter(
+          (shopOwner) => shopOwner.shopownerdistrict === customerDistrict
+        );
+        setData(filteredShopOwners);
+      } catch (err) {
         console.log(err);
-      });
+      }
+    };
+
+    fetchData();
   }, [customer]);
+
+  console.log(data);
 
   return (
     <div>

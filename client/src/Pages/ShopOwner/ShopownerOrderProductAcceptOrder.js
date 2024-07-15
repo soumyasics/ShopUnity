@@ -14,7 +14,7 @@ function ShopownerOrderProductAcceptOrder({ url }) {
       .then((res) => {
         // Filter out only the orders with status 'accepted'
         const acceptedOrders = res.data.data.filter(
-          (order) => order.order.orderStatus === "accepted"
+          (order) => order.order.orderStatus == "accepted"
         );
         setData(acceptedOrders);
       })
@@ -176,7 +176,7 @@ function ShopownerOrderProductAcceptOrder({ url }) {
                         </div>
                         <div className="col">
                           <h5 className="customerorder-vieworder-pending">
-                            {order.order.deliveryStatus || "Pending"}
+                            {order.order.orderStatus}
                           </h5>
                         </div>
                         <div className="col"></div>

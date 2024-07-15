@@ -9,6 +9,7 @@ function ShopownerCustomerOrderAccept({ url }) {
   const [dagent, setDagent] = useState([]);
   const [district, setDistrict] = useState("");
   const [assignDAgent, setAssignDAgent] = useState({});
+  const [dreq, setDreq] = useState({});
 
   const shopownerid = localStorage.getItem("shopowner");
 
@@ -16,9 +17,13 @@ function ShopownerCustomerOrderAccept({ url }) {
     axiosInstance
       .post(`/viewordersshopownerbyId/${shopownerid}`)
       .then((res) => {
-        // Filter out only the orders with status 'accepted'
+        // Filter out only the orders with payment status 'completed' and delivery status 'pending' or 'rejected'
         const acceptedOrders = res.data.data.filter(
-          (order) => order.order.orderStatus === "accepted"
+          (order) =>
+            order.order.orderStatus === "accepted" &&
+            order.order.paymentStatus === "completed" &&
+            (order.order.deliveryStatus === "pending" ||
+              order.order.deliveryStatus === "rejected")
         );
         setData(acceptedOrders);
       })
@@ -38,8 +43,26 @@ function ShopownerCustomerOrderAccept({ url }) {
       });
   };
 
+  const getDagentRequest = () => {
+    axiosInstance
+      .get(`/deliveryRequestsbyshopowner/${shopownerid}`)
+      .then((res) => {
+        var temp = {}
+        for (var i in res.data) {
+          var key = res.data[i].order;
+          console.log(key);
+          temp[key] = res.data[i];
+        }
+        setDreq(temp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     viewData();
+    getDagentRequest();
   }, [shopownerid]);
 
   useEffect(() => {
@@ -57,25 +80,28 @@ function ShopownerCustomerOrderAccept({ url }) {
 
   const handleAssignDeliveryAgent = (orderId, agentId) => {
     setAssignDAgent((prevErrors) => ({
-        ...prevErrors,
-        [orderId]: agentId,
-      }));
+      ...prevErrors,
+      [orderId]: agentId,
+    }));
   };
 
   const SubmitAssignDeliveryAgent = (orderID) => {
-    axiosInstance
-      .post(`/assignDeliveryAgent`, {
-        orderID: orderID,
-        agentId: assignDAgent[orderID],
-      })
-      .then((res) => {
-        alert(res.data.message);
-        viewData(); // Refresh data after assigning the agent
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+    console.log(dreq,'bbbbb')
+    // axiosInstance
+    //   .post(`/assignDeliveryAgent`, {
+    //     orderID: orderID,
+    //     agentId: assignDAgent[orderID],
+    //     shopownerid: localStorage.getItem("shopowner"),
+    //     deliveryStatus:"pending"
+    //   })
+    //   .then((res) => {
+    //     alert(res.data.message);
+    //     viewData(); // Refresh data after assigning the agent
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
 
   return (
     <div>
@@ -177,13 +203,29 @@ function ShopownerCustomerOrderAccept({ url }) {
                             Total Amount{" "}
                           </label>
                           <label className="hopowner-customerorder-request-label">
-                            Payment Status
+                            Payment
+                          </label>
+                          <label className="hopowner-customerorder-request-label">
+                            Order Status
+                          </label>
+                          <label className="hopowner-customerorder-request-label">
+                            Delivery Status
                           </label>
                           <label className="hopowner-customerorder-request-label">
                             Assign Delivery Agent
                           </label>
                         </div>
                         <div className="col-1">
+                          <div>
+                            <label className="hopowner-customerorder-request-label">
+                              :
+                            </label>
+                          </div>
+                          <div>
+                            <label className="hopowner-customerorder-request-label">
+                              :
+                            </label>
+                          </div>
                           <div>
                             <label className="hopowner-customerorder-request-label">
                               :
@@ -214,42 +256,58 @@ function ShopownerCustomerOrderAccept({ url }) {
                             </label>
                           </div>
                           <label className="hopowner-customerorder-request-labelsuccess">
-                            {order.order.paymentStatus || "Pending"}
+                            {order.order.paymentStatus }
+                          </label><br></br>
+                          <label className="hopowner-customerorder-request-label">
+                            {order.order.orderStatus}
                           </label>
-                          <div>
-                            <select
-                              className="hopowner-customerorder-request-select"
-                              onChange={(e) =>
-                                handleAssignDeliveryAgent(
-                                  order.order._id,
-                                  e.target.value
-                                )
-                              }
-                            >
-                              <option value="">Select Delivery Agent</option>
-                              {/* Populate with actual delivery agents */}
-                              {dagent.map((deliveryAgent) => {
-                                return district == deliveryAgent.district ? (
-                                  <option value={deliveryAgent._id}>
-                                    {deliveryAgent.name}
-                                  </option>
-                                ) : (
-                                  ""
-                                );
-                              })}
-                            </select>
-                          </div>
+                          <br></br>
+                          <label className="hopowner-customerorder-request-label">
+                            {order.order.deliveryStatus}
+                          </label>
+                          {order.order.deliveryStatus === "pending" ||
+                          order.order.deliveryStatus === "rejected" ? (
+                            <div>
+                              <select
+                                className="hopowner-customerorder-request-select"
+                                onChange={(e) =>
+                                  handleAssignDeliveryAgent(
+                                    order.order._id,
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <option value="">Select Delivery Agent</option>
+                                {dagent.map((deliveryAgent) => {
+                                  return district === deliveryAgent.district ? (
+                                    <option
+                                      key={deliveryAgent._id}
+                                      value={deliveryAgent._id}
+                                    >
+                                      {deliveryAgent.name}
+                                    </option>
+                                  ) : (
+                                    ""
+                                  );
+                                })}
+                              </select>
+                              <div className="text-center my-3">
+                                <button
+                                  className="hopowner-customerorder-request-submitbtn"
+                                  onClick={() =>
+                                    SubmitAssignDeliveryAgent(order.order._id)
+                                  }
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <label className="hopowner-customerorder-request-labelsuccess">
+                              Delivery Status: {order.order.deliveryStatus}
+                            </label>
+                          )}
                         </div>
-                      </div>
-                      <div className="text-center mt-3">
-                        <button
-                          className="hopowner-customerorder-request-submitbtn"
-                          onClick={() =>
-                            SubmitAssignDeliveryAgent(order.order._id)
-                          }
-                        >
-                          Submit
-                        </button>
                       </div>
                     </div>
                   </Card>
