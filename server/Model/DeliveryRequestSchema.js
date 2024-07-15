@@ -10,6 +10,16 @@ const DeliveryRequestSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "DeliveryAgent",
     required: true,
+  },
+  shopOwner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ShopOwner",
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["pending", "accepted", "rejected"],
+    default: "accepted",
   }
 });
 

@@ -8,6 +8,7 @@ const ShopeOwnerController=require('../Controller/shopOwnerController')
 const productController=require("../Controller/productController")
 const cartController=require("../Controller/cartController")
 const orderController=require("../Controller/OrderController")
+const deliveryRequestController = require("../Controller/deliveryRequestController");
 
 // wholesale
 Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.WholesaleDealerRegister)
@@ -88,4 +89,12 @@ Route.post("/deleteitemfromcart",cartController.deleteFromCart)
 Route.post("/placeorder",orderController.placeOrder)
 Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByShopOwner)
 Route.post("/acceptOrderRequest/:orderid",orderController.acceptOrderRequest)
+
+// delivery requests
+
+Route.get("/deliveryRequests/:agentId", deliveryRequestController.getDeliveryRequests);
+Route.get("/deliveryRequestsbyshopowner/:shopid", deliveryRequestController.deliveryRequestsbyshopowner);
+Route.post("/deliveryRequests/:requestId/status", deliveryRequestController.updateRequestStatus);
+Route.post("/deliveryRequests/:requestId/deliveryStatus", deliveryRequestController.updateDeliveryStatus);
+
 module.exports=Route
