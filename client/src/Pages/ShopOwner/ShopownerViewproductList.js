@@ -9,30 +9,25 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import ShopOwnerSidebar from "./ShopOwnerSidebar";
 
-function ShopownerViewWDProductView({ url }) {
+function ShopownerViewproductList({ url }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const navigate = useNavigate();
-  const { whosaleid } = useParams();
-
   useEffect(() => {
     axiosInstance
-      .post(`/view_all_product_bywholesale`)
+      .post("/view_all_product_bywholesale")
       .then((res) => {
         const productsWithQuantity = res.data.data.map((product) => ({
           ...product,
           quantity: 1,
+          Tprice: product.price,
         }));
-        const filteredProducts = productsWithQuantity.filter(
-          (product) => product.wholesaledealer === whosaleid
-        );
-        setData(filteredProducts);
+        setData(productsWithQuantity);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [whosaleid]);
+  }, []);
 
   const increment = (item) => {
     const updatedData = data.map((product) =>
@@ -80,10 +75,9 @@ function ShopownerViewWDProductView({ url }) {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = data.filter(
-    (product) =>
-      product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = data.filter((product) =>
+    product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -194,4 +188,4 @@ function ShopownerViewWDProductView({ url }) {
   );
 }
 
-export default ShopownerViewWDProductView;
+export default ShopownerViewproductList;

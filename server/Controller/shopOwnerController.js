@@ -2,6 +2,8 @@ const shopownerschema = require("../Model/ShopOwnerSchema");
 const DeliveryRequestSchema = require("../Model/DeliveryRequestSchema");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const Order = require("../Model/OrderSchema");
+
 
 // Multer setup for file upload (optional)
 const storage = multer.diskStorage({
@@ -311,6 +313,13 @@ const assignDeliveryAgent = async (req, res) => {
     });
 
     const result = await request.save();
+    if (result) {
+      const deliveryRequest = await Order.findByIdAndUpdate(
+        req.body.orderID,
+        { deliveryStatus:'assigned' },
+        { new: true }
+      );
+    }
     return res.json({
       status: 200,
       message: "success",

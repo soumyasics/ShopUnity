@@ -99,7 +99,8 @@ function CustomerProductCardPage({ url }) {
       orderType: "reserved",
       totalAmount: total,
       paymentStatus: "pending",
-      cid:cid
+      cid:cid,
+      deliveryStatus:"pending"
     };
     axiosInstance
       .post("/placeorder", orderData)
@@ -174,8 +175,10 @@ function CustomerProductCardPage({ url }) {
         orderType: "delivery request",
         totalAmount: total,
         paymentStatus: "completed",
-        cid:cid
+        cid:cid,
+        deliveryStatus:"pending"
       };
+      console.log(orderData,"k");
       axiosInstance
         .post("/placeorder", orderData)
         .then((res) => {

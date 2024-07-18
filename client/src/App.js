@@ -74,11 +74,13 @@ import ShopownerOrderProductCart from "./Pages/ShopOwner/ShopownerOrderProductCa
 import WholesalerShopownerNewRequest from "./Pages/wholesaledealer/WholesalerShopownerNewRequest";
 import WholesalerShopownerAcceptorders from "./Pages/wholesaledealer/WholesalerShopownerAcceptorders";
 import ShopownerOrderProductAcceptOrder from "./Pages/ShopOwner/ShopownerOrderProductAcceptOrder";
+import ShopownerViewproductList from "./Pages/ShopOwner/ShopownerViewproductList";
+import ViewWholesalerdeliveryrequest from "./Pages/delivery agent/ViewWholesalerdeliveryrequest";
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url = "http://localhost:4028/";
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url = "http://localhost:4028/";
 
   return (
     <BrowserRouter basename="/shopunity">
@@ -125,12 +127,12 @@ function App() {
         />
         <Route path="/wholesalermain" element={<WholesalerMain />} />
         <Route path="/wholesaleraddproduct" element={<WholesaleDealerAddProduct/>} />
-        <Route path="/wholesalerviewproduct" element={<WholesaleDealerViewPoduct/>} />
-        <Route path="/wholesalerviewproductdetails" element={<WholesaleDealerViewProductDetails/>} />
-        <Route path="/wholesalereditproduct" element={<WholesaleDealerEditProduct/>} />
+        <Route path="/wholesalerviewproduct" element={<WholesaleDealerViewPoduct url={url} />} />
+        <Route path="/wholesalerviewproductdetails/:productid" element={<WholesaleDealerViewProductDetails url={url} />} />
+        <Route path="/wholesalereditproduct/:productid" element={<WholesaleDealerEditProduct/>} />
         <Route path="/wholesalerviewshops" element={<WholesaleDealerViewShops/>} />
-        <Route path="/wholesalershopownernewrequest" element={<WholesalerShopownerNewRequest/>} />
-        <Route path="/wholesalershopowneracceptorders" element={<WholesalerShopownerAcceptorders/>} />
+        <Route path="/wholesalershopownernewrequest" element={<WholesalerShopownerNewRequest url={url} />} />
+        <Route path="/wholesalershopowneracceptorders" element={<WholesalerShopownerAcceptorders url={url} />} />
 
         {/* Customer */}
 
@@ -146,7 +148,7 @@ function App() {
     <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewallproduct url={url}/>]} />
     <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail url={url}/>} />
     <Route path='/customerproductcardpage' element={<CustomerProductCardPage/>} />
-    <Route path='/customerordervieworder' element={<CustomerOrdersViewOrder/>} />
+    <Route path='/customerordervieworder' element={<CustomerOrdersViewOrder url={url} />} />
 
 {/* deliveryagent */}
 
@@ -160,9 +162,12 @@ function App() {
     <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
     <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
     <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit url={url}/>} />
+
     <Route path='/deliveryagentdeliveryrequest' element={<DeliveryAgentDeliveryRequest/>} />
     <Route path='/deliveryagentdeliveryupdate' element={<DeliveryAgentDeliveryUpdate/>} />
 
+    <Route path='/viewWholesalerdeliveryrequest' element={<ViewWholesalerdeliveryrequest/>} />
+    <Route path='/updatewholesalerdeliveryrequest' element={<DeliveryAgentDeliveryUpdate/>} />
         <Route
           path="/customerregistration"
           element={[<MainNav />, <CustomerRegistration />, <Footer />]}
@@ -251,12 +256,12 @@ function App() {
     <Route path='/shopownercustomerorderrequest' element={<ShopownerCustomerOrderRequest url={url}/>} />
     <Route path='/shopownercustomerorderaccept' element={<ShopownerCustomerOrderAccept url={url} />} />
     <Route path='/shopownerviewwholesaledealer' element={<ShopownerViewWholesaleDealer/>} />
-    <Route path='/shopownerviewwdproductview' element={<ShopownerViewWDProductView/>} />
+    <Route path='/shopownerviewwdproductview/:whosaleid' element={<ShopownerViewWDProductView url={url} />} />
     <Route path='/shopownerorderproductviewproduct' element={<Shopownerorderproductviewproduct/>} />
-    <Route path='/shopownerwdviewproduct' element={<Shopownerwdviewproduct/>} />
-    <Route path='/shopownerorderproductcart' element={<ShopownerOrderProductCart/>} />
+    <Route path='/shopownerwdviewproduct/:productid' element={<Shopownerwdviewproduct url={url} />} />
+    <Route path='/shopownerorderproductcart' element={<ShopownerOrderProductCart url={url} />} />
     <Route path='/shopownerorderproductacceptorder' element={<ShopownerOrderProductAcceptOrder url={url} />} />
-
+    <Route path='/shopownerviewwdproductslist' element={<ShopownerViewproductList url={url} />} />
 
 {/* Admin */}
         {/* shopowner */}

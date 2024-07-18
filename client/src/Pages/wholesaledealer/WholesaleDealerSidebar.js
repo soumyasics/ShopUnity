@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { FaBoxOpen } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
@@ -19,6 +19,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { BsShop } from "react-icons/bs";
 import '../Admin/Admin.css'
 import { FaUserAlt } from "react-icons/fa";
+import axiosInstance from "../../APIS/axiosinstatnce";
 
 function WholesaleDealerSidebar({url}) {
     const [open, setOpen] = useState(false);
@@ -27,6 +28,22 @@ function WholesaleDealerSidebar({url}) {
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [dropdownVisible1, setDropdownVisible1] = useState(false);
+
+    const[data,setData]=useState({})
+    const Navigate=useNavigate();
+
+    const wholesaledealerid = localStorage.getItem("wholesaledealer")
+     console.log(wholesaledealerid);
+   useEffect(() => {
+    axiosInstance.get("/get_a_wholesaledealer/" + wholesaledealerid)
+    .then((res) => {
+      setData(res.data.data);
+      console.log(res,"gg");
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+   },[])
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
     };
@@ -62,7 +79,7 @@ function WholesaleDealerSidebar({url}) {
                   </Link>
                 </Col>
                 <Col xs={9} md={10}>
-                  <p to="" className="sidebar-para mb-1 ms-3">{open.storeName}</p>
+                  <p to="" className="sidebar-para mb-1 ms-3">{data.storeName}</p>
                 </Col>
               </Row>
           </div>

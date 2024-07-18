@@ -4,14 +4,14 @@ import DeliveryagentSidebar from "./DeliveryagentSidebar";
 import { Card, Col, Row } from "react-bootstrap";
 import axiosInstance from "../../APIS/axiosinstatnce";
 
-function DeliveryAgentDeliveryUpdate() {
+function Updatewholesalerdeliveryrequest() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
   const [deliveryStatuses, setDeliveryStatuses] = useState({});
 
   const getDeliveryRequests = async () => {
     try {
       const agentId = localStorage.getItem("deliveryagent");
-      const response = await axiosInstance.get(`/deliveryRequests/${agentId}`);
+      const response = await axiosInstance.get(`/getAllwholesalerdeliveryRequestsbyagentid/${agentId}`);
       const assignedRequests = response.data.filter(
         (request) => request.deliveryStatus === "accepted"
       );
@@ -36,7 +36,7 @@ function DeliveryAgentDeliveryUpdate() {
   const handleUpdateDelivery = async (id) => {
     try {
       if (deliveryStatuses[id] === "delivered") {
-        await axiosInstance.post(`/deliverDeliveryRequest/${id}`);
+        await axiosInstance.post(`/deliverDeliveryRequestofwholesaledealer/${id}`);
         getDeliveryRequests(); // Refresh the delivery requests after updating
       }
     } catch (error) {
@@ -72,16 +72,16 @@ function DeliveryAgentDeliveryUpdate() {
                     <Card>
                       <Card.Body>
                         <div className="mt-2">
-                          <label>Shop Name : </label>
+                          <label>Wholesale Dealer: </label>
                           <span className="mt-2">{request.shopOwner.shopname}</span>
                         </div>
                         <div className="mt-2">
-                          <label>Customer Name : </label>
+                          <label>Shop Name : </label>
                           <span className="mt-2">{request.customer.name}</span>
                         </div>
                         <div className="mt-2">
                           <label>Delivery Address : </label>
-                          <span className="mt-2">{request.customer.address}</span>
+                          <span className="mt-2">{request.shopOwner.shopowneraddress}</span>
                         </div>
                         <div className="mt-2">
                           <label>Delivery Status : </label>
@@ -155,4 +155,4 @@ function DeliveryAgentDeliveryUpdate() {
   );
 }
 
-export default DeliveryAgentDeliveryUpdate;
+export default Updatewholesalerdeliveryrequest;

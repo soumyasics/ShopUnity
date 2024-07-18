@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const DeliveryRequestSchema = new mongoose.Schema({
+const WholesalerDeliveryRequestsSchema = new mongoose.Schema({
   order: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "wholesaleOrder",
@@ -11,11 +11,11 @@ const DeliveryRequestSchema = new mongoose.Schema({
     ref: "DeliveryAgent",
     required: true,
   },
-  shopOwner: {
+  wholesaledealer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ShopOwner",
+    ref: "wholesaledealer",
     required: true,
   }
 });
 
-module.exports = mongoose.model("DeliveryRequest", DeliveryRequestSchema);
+module.exports = mongoose.model("wholesalerDeliveryRequest", WholesalerDeliveryRequestsSchema);

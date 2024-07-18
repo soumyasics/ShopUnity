@@ -1,36 +1,37 @@
-const DeliveryRequest = require('../Model/DeliveryRequestSchema');
-const Order = require('../Model/OrderSchema');
-const Product = require('../Model/ProductSchema');
-const Customer = require('../Model/CustomerSchema');
+const wholesalerDeliveryRequest = require('../Model/WholesalerDeliveryRequestsSchema');
+const Order = require('../Model/Wholesaleorderschema');
+const Product = require('../Model/WholesaleProductSchema');
+const wholeSaleDealerSchema = require('../Model/WholesaleSchema');
 const ShopOwner = require('../Model/ShopOwnerSchema');
 
-const getDeliveryRequests = async (req, res) => {
+const getWholesalerDeliveryRequests = async (req, res) => {
+  console.log(req.body);
   try {
     const { agentId } = req.params;
-    const deliveryRequests = await DeliveryRequest.find({ agent: agentId }).populate('order');
+    const deliveryRequests = await wholesalerDeliveryRequest.find({ agent: agentId }).populate('order');
     let response = [];
     for (let i in deliveryRequests) {
       let order = deliveryRequests[i].order;
-      let shopOwnerID = deliveryRequests[i].shopOwner;
+      let wholesaledealer = deliveryRequests[i].wholesaledealer;
       let products = order.products;
       let orderProducts = [];
       for (let j in products) {
         let product = await Product.findById(products[j].pid);
-        if (product && String(product.shopOwner) === String(shopOwnerID)) {
+        if (product && String(product.wholesaledealer) === String(wholesaledealer)) {
           orderProducts.push({
             purchasedQuantity: products[j].quantity,
             productData: product,
           });
         }
       }
-      let customer = await Customer.findById(order.customer);
-      let shopOwner = await ShopOwner.findById(shopOwnerID);
+      let shopOwner = await ShopOwner.findById(order.shopownerid);
+      let wholesaler = await wholeSaleDealerSchema.findById(wholesaledealer);
       response.push({
         _id: deliveryRequests[i]._id,
         orderProducts: orderProducts,
-        customer: customer,
+        wholesaledealer: wholesaler,
         shopOwner: shopOwner,
-        deliveryStatus: order.deliveryStatus
+        deliveryStatus:order.deliveryStatus
       });
     }
     res.status(200).json(response);
@@ -39,11 +40,11 @@ const getDeliveryRequests = async (req, res) => {
   }
 };
 
-const acceptDeliveryRequest = async (req, res) => {
+const acceptwholesaledealerDeliveryRequest = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const deliveryRequest = await DeliveryRequest.findById(requestId).populate('order');
+    const deliveryRequest = await wholesalerDeliveryRequest.findById(requestId).populate('order');
 
     if (!deliveryRequest) {
       return res.status(404).json({ message: "Delivery request not found" });
@@ -68,11 +69,11 @@ const acceptDeliveryRequest = async (req, res) => {
   }
 };
 
-const rejectDeliveryRequest = async (req, res) => {
+const rejectwholesaledealerDeliveryRequest = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const deliveryRequest = await DeliveryRequest.findById(requestId).populate('order');
+    const deliveryRequest = await wholesalerDeliveryRequest.findById(requestId).populate('order');
 
     if (!deliveryRequest) {
       return res.status(404).json({ message: "Delivery request not found" });
@@ -96,10 +97,10 @@ const rejectDeliveryRequest = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-const deliveryRequestsbyshopowner = async (req, res) => {
+const deliveryRequestsbywholesaledealer = async (req, res) => {
   try {
-    const { shopid } = req.params;
-    const deliveryRequests = await DeliveryRequest.find({ shopOwner: shopid });
+    const { wholesaledealerid } = req.params;
+    const deliveryRequests = await wholesalerDeliveryRequest.find({ wholesaledealer: wholesaledealerid });
     
 
     res.status(200).json(deliveryRequests);
@@ -108,11 +109,11 @@ const deliveryRequestsbyshopowner = async (req, res) => {
   }
 };
 
-const deliverDeliveryRequest = async (req, res) => {
+const deliverDeliveryRequestofwholesaledealer = async (req, res) => {
   try {
     const { requestId } = req.params;
 
-    const deliveryRequest = await DeliveryRequest.findById(requestId).populate('order');
+    const deliveryRequest = await wholesalerDeliveryRequest.findById(requestId).populate('order');
 
     if (!deliveryRequest) {
       return res.status(404).json({ message: "Delivery request not found" });
@@ -136,4 +137,4 @@ const deliverDeliveryRequest = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-module.exports = { getDeliveryRequests, acceptDeliveryRequest, rejectDeliveryRequest ,deliveryRequestsbyshopowner, deliverDeliveryRequest};
+module.exports = { getWholesalerDeliveryRequests, acceptwholesaledealerDeliveryRequest, rejectwholesaledealerDeliveryRequest ,deliveryRequestsbywholesaledealer, deliverDeliveryRequestofwholesaledealer};

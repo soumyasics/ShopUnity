@@ -607,3 +607,7 @@ height: 25px;
   height: 30px;
   box-shadow: 0px 1.53px 1.53px 0px #00000040;
 }
+.custom-card-col {
+  flex: 0 0 20%; /* 100% / 5 cards per row = 20% */
+  max-width: 20%;
+}

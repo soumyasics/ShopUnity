@@ -17,13 +17,10 @@ function ShopownerCustomerOrderAccept({ url }) {
     axiosInstance
       .post(`/viewordersshopownerbyId/${shopownerid}`)
       .then((res) => {
-        // Filter out only the orders with payment status 'completed' and delivery status 'pending' or 'rejected'
         const acceptedOrders = res.data.data.filter(
           (order) =>
             order.order.orderStatus === "accepted" &&
-            order.order.paymentStatus === "completed" &&
-            (order.order.deliveryStatus === "pending" ||
-              order.order.deliveryStatus === "rejected")
+            order.order.paymentStatus === "completed" 
         );
         setData(acceptedOrders);
       })
@@ -47,10 +44,9 @@ function ShopownerCustomerOrderAccept({ url }) {
     axiosInstance
       .get(`/deliveryRequestsbyshopowner/${shopownerid}`)
       .then((res) => {
-        var temp = {}
-        for (var i in res.data) {
-          var key = res.data[i].order;
-          console.log(key);
+        const temp = {};
+        for (const i in res.data) {
+          const key = res.data[i].order;
           temp[key] = res.data[i];
         }
         setDreq(temp);
@@ -69,7 +65,6 @@ function ShopownerCustomerOrderAccept({ url }) {
     axiosInstance
       .get(`/get_a_shopowner/${shopownerid}`)
       .then((res) => {
-        console.log(res.data.data.shopownerdistrict);
         setDistrict(res.data.data.shopownerdistrict);
       })
       .catch((err) => {
@@ -86,21 +81,19 @@ function ShopownerCustomerOrderAccept({ url }) {
   };
 
   const SubmitAssignDeliveryAgent = (orderID) => {
-    console.log(dreq,'bbbbb')
-    // axiosInstance
-    //   .post(`/assignDeliveryAgent`, {
-    //     orderID: orderID,
-    //     agentId: assignDAgent[orderID],
-    //     shopownerid: localStorage.getItem("shopowner"),
-    //     deliveryStatus:"pending"
-    //   })
-    //   .then((res) => {
-    //     alert(res.data.message);
-    //     viewData(); // Refresh data after assigning the agent
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axiosInstance
+      .post(`/assignDeliveryAgent`, {
+        orderID: orderID,
+        agentId: assignDAgent[orderID],
+        shopownerid: localStorage.getItem("shopowner")
+      })
+      .then((res) => {
+        alert(res.data.message);
+        viewData(); // Refresh data after assigning the agent
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -237,9 +230,7 @@ function ShopownerCustomerOrderAccept({ url }) {
                             </label>
                           </div>
                           <div>
-                            <label className="hopowner-customerorder-request-label">
-                              :
-                            </label>
+                           
                           </div>
                         </div>
                         <div className="col-6">
@@ -256,7 +247,7 @@ function ShopownerCustomerOrderAccept({ url }) {
                             </label>
                           </div>
                           <label className="hopowner-customerorder-request-labelsuccess">
-                            {order.order.paymentStatus }
+                            {order.order.paymentStatus}
                           </label><br></br>
                           <label className="hopowner-customerorder-request-label">
                             {order.order.orderStatus}
@@ -265,8 +256,7 @@ function ShopownerCustomerOrderAccept({ url }) {
                           <label className="hopowner-customerorder-request-label">
                             {order.order.deliveryStatus}
                           </label>
-                          {order.order.deliveryStatus === "pending" ||
-                          order.order.deliveryStatus === "rejected" ? (
+                          {order.order.deliveryStatus === "pending" ? (
                             <div>
                               <select
                                 className="hopowner-customerorder-request-select"
@@ -302,11 +292,7 @@ function ShopownerCustomerOrderAccept({ url }) {
                                 </button>
                               </div>
                             </div>
-                          ) : (
-                            <label className="hopowner-customerorder-request-labelsuccess">
-                              Delivery Status: {order.order.deliveryStatus}
-                            </label>
-                          )}
+                          ) : ''}
                         </div>
                       </div>
                     </div>
