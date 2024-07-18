@@ -1,5 +1,6 @@
 const wholesaledealerschema = require("../Model/WholesaleSchema");
-
+const DeliveryRequestSchema=require("../Model/WholesalerDeliveryRequestsSchema")
+const Order=require("../Model/Wholesaleorderschema")
 const multer = require("multer");
 const jwt = require("jsonwebtoken");
 
@@ -343,6 +344,37 @@ const activatewholesaleById = (req, res) => {
     });
 };
 
+
+const wholesalerassignDeliveryAgent = async (req, res) => {
+  console.log(req.body,"o");
+  try {
+    let request = new DeliveryRequestSchema({
+      order: req.body.orderID,
+      agent: req.body.agentId,
+      wholesaledealer:req.body.wholesaledealerid
+    });
+
+    const result = await request.save();
+    if (result) {
+      const deliveryRequest = await Order.findByIdAndUpdate(
+        req.body.orderID,
+        { deliveryStatus:'assigned' },
+        { new: true }
+      );
+    }
+    return res.json({
+      status: 200,
+      message: "success",
+      data: result,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "server error", error });
+  }
+};
+
+
 module.exports = {
   WholesaleDealerRegister,
   WholesaleDealerLogin,
@@ -357,4 +389,5 @@ module.exports = {
   deActivatewholesaleById,
   activatewholesaleById,
   getAllAcceptedWholesaleDealer,
+  wholesalerassignDeliveryAgent
 };

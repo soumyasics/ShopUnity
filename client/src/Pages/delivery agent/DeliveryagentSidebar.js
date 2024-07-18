@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { GrCompliance } from "react-icons/gr";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +10,15 @@ import { BsBoxes } from "react-icons/bs";
 import Collapse from "react-bootstrap/Collapse";
 import { FaUserAlt } from "react-icons/fa";
 import { FiAlignJustify } from "react-icons/fi";
+import { FaAngleRight } from "react-icons/fa6";
+
 import "../Admin/Admin.css";
 import axiosInstance from "../../APIS/axiosinstatnce";
 function DeliveryagentSidebar() {
   const [open, setOpen] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [dropdownVisible1, setDropdownVisible1] = useState(false);
+
   const navigate = useNavigate();
   let shopname = localStorage.getItem("shopname");
 
@@ -41,6 +46,13 @@ function DeliveryagentSidebar() {
         console.log(err);
       });
   }, []);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+  const toggleDropdown1 = () => {
+    setDropdownVisible1(!dropdownVisible1);
+  };
 
   return (
     <div className={`shopownersidebar ${open ? "open" : ""}`}>
@@ -85,33 +97,45 @@ function DeliveryagentSidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/deliveryagentdeliveryrequest" className="nav-link sidebar-shop">
-                  <FaUserAlt /> Delivery Requests
-                </Link>
+              <div className='admin_dash_div '>
+              <label onClick={toggleDropdown}>
+                <div>
+                <FaAngleRight/><BsBoxes className="ms-2"/><span> Delivery requests</span>
+                </div>
+              </label>
+              {dropdownVisible && (
+                  <div className="dropdown_menu sidebar_dash_drop">
+                      <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                        <Link to="/deliveryagentdeliveryrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label">Shop Owner</label></Link>
+                        <Link to="/viewWholesalerdeliveryrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Wholesale Dealer</label></Link>
+                      </div>
+                  </div>
+              )}
+            </div>
               </li>
               <li className="nav-item">
-                <Link to="/deliveryagentdeliveryupdate" className="nav-link sidebar-shop">
-                  <BsBoxes /> Delivery Updates
-                </Link>
+              <div className='admin_dash_div '>
+              <label onClick={toggleDropdown1}>
+                <div>
+                <FaAngleRight/><BsBoxes className="ms-2"/><span> Delivery updates</span>
+                </div>
+              </label>
+              {dropdownVisible1 && (
+                  <div className="dropdown_menu sidebar_dash_drop">
+                      <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                        <Link to="/deliveryagentdeliveryupdate" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Shop Owner</label></Link>
+                        <Link to="/updatewholesalerdeliveryrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Wholesale dealer</label></Link>
+                      </div>
+                  </div>
+              )}
+            </div>
               </li>
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <GrCompliance /> Complaints
-                </Link>
-              </li>
-              <li className="nav-item mt-auto">
                 <Link
-                  to=""
-                  className="nav-link sidebar-logout"
-                  onClick={handleLogout}
-                  style={{
-                    background:
-                      "linear-gradient(90deg, #FF0000 0%, #990000 100%)",
-                    margin: "25%",
-                    borderRadius: "25px",
-                  }}
+                  to="/deliveryagentprofile"
+                  className="nav-link sidebar-shop"
                 >
-                  <RiLogoutCircleLine /> Logout
+                  <BsBoxes /> complaints
                 </Link>
               </li>
             </ul>

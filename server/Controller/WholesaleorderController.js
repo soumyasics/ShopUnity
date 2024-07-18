@@ -1,28 +1,36 @@
-const Order = require("../Model/OrderSchema");
-const Product = require("../Model/ProductSchema");
-const Customer = require("../Model/CustomerSchema");
-const Cart = require("../Model/CartSchema");
+const wholesaleOrderModel = require("../Model/Wholesaleorderschema");
+const wholesaleProduct = require("../Model/WholesaleProductSchema");
+const ShopOwner = require("../Model/ShopOwnerSchema");
+const wholesaleCart = require("../Model/WholesaleCartSchema");
 
-const placeOrder = async (req, res) => {
-  const { productId, customerId, paymentStatus, totalAmount, orderType, cid ,deliveryStatus} =
-    req.body;
+const shopownerplaceOrder = async (req, res) => {
+  console.log(req.body);
+  const {
+    productId,
+    shopownerid,
+    paymentStatus,
+    totalAmount,
+    orderType,
+    sid,
+    deliveryStatus,
+  } = req.body;
 
   try {
     // Create order
-    const order = new Order({
+    const newWholesaleOrder = new wholesaleOrderModel({
       products: productId,
-      customer: customerId,
+      shopownerid: shopownerid,
       paymentStatus,
       totalAmount,
       orderType,
-      deliveryStatus
+      deliveryStatus,
     });
 
-    const savedOrder = await order.save();
+    const savedOrder = await newWholesaleOrder.save();
 
-    for (var i in cid) {
-      var cartid = cid[i];
-      const deletedCart = await Cart.findByIdAndDelete(cartid);
+    for (let i in sid) {
+      let cartid = sid[i];
+      await wholesaleCart.findByIdAndDelete(cartid);
     }
 
     res.status(201).json({
@@ -37,19 +45,20 @@ const placeOrder = async (req, res) => {
   }
 };
 
-const viewOrdersByShopOwner = async (req, res) => {
-  const shopOwnerId = req.params.shopOwnerId;
+const viewOrdersBywholesaledealer = async (req, res) => {
+  console.log(req.params.wholesaledealerid,"viewOrdersBywholesaledealer");
+  const wholesaleDealer = req.params.wholesaledealerid;
 
   try {
-    var shopOwnerOrders = [];
-    const orders = await Order.find().populate("customer");
-    for (var i in orders) {
-      var order = orders[i];
-      var products = order.products;
-      var orderProducts = [];
-      for (var j in products) {
-        var product = await Product.findById(products[j].pid);
-        if (product && product.shopOwner == shopOwnerId) {
+    let wholesaleOrders = [];
+    const orders = await wholesaleOrderModel.find().populate("shopownerid");
+    for (let i in orders) {
+      let order = orders[i];
+      let products = order.products;
+      let orderProducts = [];
+      for (let j in products) {
+        let product = await wholesaleProduct.findById(products[j].pid);
+        if (product && product.wholesaledealer == wholesaleDealer) {
           orderProducts.push({
             purchasedQuantity: products[j].quantity,
             productData: product,
@@ -57,15 +66,15 @@ const viewOrdersByShopOwner = async (req, res) => {
         }
       }
       if (orderProducts.length > 0) {
-        shopOwnerOrders.push({
+        wholesaleOrders.push({
           orderProducts: orderProducts,
           order: order,
+          shopowner:order.shopownerid
         });
       }
     }
 
-    res.json({ data: shopOwnerOrders });
-
+    res.json({ data: wholesaleOrders });
   } catch (err) {
     console.log("Error retrieving orders:", err.message);
     res.status(500).json({
@@ -76,14 +85,14 @@ const viewOrdersByShopOwner = async (req, res) => {
   }
 };
 
-const acceptOrderRequest = async (req, res) => {
+const wholesaleacceptOrderRequest = async (req, res) => {
   try {
     const id = req.params.orderid;
     if (!id) {
       return res.status(400).json({ message: "Order ID is required" });
     }
 
-    const order = await Order.findById(id);
+    const order = await wholesaleOrderModel.findById(id);
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }
@@ -108,21 +117,25 @@ const acceptOrderRequest = async (req, res) => {
   }
 };
 
-const viewOrdersByCustomerId = async (req, res) => {
-  const customerId = req.params.customerId;
+const viewOrdersByshopowner = async (req, res) => {
+  const shopowner = req.params.shopowner;
 
   try {
-    const orders = await Order.find({ customer: customerId }).populate({
-      path: 'products.pid',
-      model: 'Product',
-    });
+    const orders = await wholesaleOrderModel
+      .find({ shopownerid: shopowner })
+      .populate({
+        path: "products.pid",
+        model: "WholesaleProduct",
+      });
 
     if (!orders || orders.length === 0) {
-      return res.status(404).json({ message: "No orders found for this customer" });
+      return res
+        .status(404)
+        .json({ message: "No orders found for this shopowner" });
     }
 
-    const customerOrders = orders.map(order => {
-      const orderProducts = order.products.map(product => ({
+    const customerOrders = orders.map((order) => {
+      const orderProducts = order.products.map((product) => ({
         purchasedQuantity: product.quantity,
         productData: product.pid, // This should be the populated Product object
       }));
@@ -146,8 +159,9 @@ const viewOrdersByCustomerId = async (req, res) => {
   }
 };
 
-
 module.exports = {
-  placeOrder,
-  viewOrdersByShopOwner,acceptOrderRequest,viewOrdersByCustomerId
+  shopownerplaceOrder,
+  viewOrdersBywholesaledealer,
+  wholesaleacceptOrderRequest,
+  viewOrdersByshopowner,
 };

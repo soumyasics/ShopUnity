@@ -9,6 +9,10 @@ const productController=require("../Controller/productController")
 const cartController=require("../Controller/cartController")
 const orderController=require("../Controller/OrderController")
 const deliveryRequestController = require("../Controller/deliveryRequestController");
+const wholesaledealerproductcontroller=require("../Controller/WholesaleProductController")
+const wholesaledealerCartcontroller =require("../Controller/WholesaledealerCartController")
+const wholesaledealerordercontroller =require("../Controller/WholesaleorderController")
+const wholesaledealerorderRequestcontroller =require("../Controller/WholesaledealerDeliveryRequestController")
 
 // wholesale
 Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.WholesaleDealerRegister)
@@ -89,12 +93,41 @@ Route.post("/deleteitemfromcart",cartController.deleteFromCart)
 Route.post("/placeorder",orderController.placeOrder)
 Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByShopOwner)
 Route.post("/acceptOrderRequest/:orderid",orderController.acceptOrderRequest)
+Route.post("/viewOrdersByCustomerId/:customerId",orderController.viewOrdersByCustomerId)
 
 // delivery requests
 
 Route.get("/deliveryRequests/:agentId", deliveryRequestController.getDeliveryRequests);
 Route.get("/deliveryRequestsbyshopowner/:shopid", deliveryRequestController.deliveryRequestsbyshopowner);
-Route.post("/deliveryRequests/:requestId/status", deliveryRequestController.updateRequestStatus);
-Route.post("/deliveryRequests/:requestId/deliveryStatus", deliveryRequestController.updateDeliveryStatus);
+Route.post("/rejectdeliveryRequests/:requestId", deliveryRequestController.rejectDeliveryRequest);
+Route.post("/acceptdeliveryRequests/:requestId", deliveryRequestController.acceptDeliveryRequest);
+Route.post("/deliverDeliveryRequest/:requestId", deliveryRequestController.deliverDeliveryRequest);
+
+Route.get("/getAllwholesalerdeliveryRequestsbyagentid/:agentId", wholesaledealerorderRequestcontroller.getWholesalerDeliveryRequests);
+Route.get("/deliveryRequestsbywholesaledealer/:wholesaledealerid", wholesaledealerorderRequestcontroller.deliveryRequestsbywholesaledealer);
+Route.post("/rejectwholesaledealerdeliveryRequests/:requestId", wholesaledealerorderRequestcontroller.rejectwholesaledealerDeliveryRequest);
+Route.post("/acceptwholesaledealerdeliveryRequests/:requestId", wholesaledealerorderRequestcontroller.acceptwholesaledealerDeliveryRequest);
+Route.post("/deliverDeliveryRequestofwholesaledealer/:requestId", wholesaledealerorderRequestcontroller.deliverDeliveryRequestofwholesaledealer);
+
+// wholesale product
+
+Route.post("/add_product_bywholesale",wholesaledealerproductcontroller.upload,wholesaledealerproductcontroller.addProductByWholesaler)
+Route.post("/view_a_product_bywholesale/:productId",wholesaledealerproductcontroller.viewProductBywholesalerId)
+Route.post("/view_all_product_bywholesale",wholesaledealerproductcontroller.viewAllwholesaleProducts)
+Route.post("/edit_a_product_bywholesale/:wholesaleproductId",wholesaledealerproductcontroller.upload,wholesaledealerproductcontroller.editProductBywholesalerId)
+Route.post("/delete_a_product_bywholesale/:productId",wholesaledealerproductcontroller.deleteProductBywholesalerId)
+
+//  wholesale cart
+
+Route.post("/shopowneraddtocart",wholesaledealerCartcontroller.productaddtocart)
+Route.post("/viewshopownercart/:shopowner",wholesaledealerCartcontroller.viewproductCartItems)
+Route.post("/deleteitemfromshopownercart",wholesaledealerCartcontroller.productdeleteFromCart)
+
+// wholesale  order
+Route.post("/shopownerplaceorder",wholesaledealerordercontroller.shopownerplaceOrder)
+Route.post("/vieworderswholesaledealerId/:wholesaledealerid",wholesaledealerordercontroller.viewOrdersBywholesaledealer)
+Route.post("/acceptOrderRequestbywholesaler/:orderid",wholesaledealerordercontroller.wholesaleacceptOrderRequest)
+Route.post("/viewOrdersByCustomerId/:customerId",wholesaledealerordercontroller.viewOrdersByshopowner)
+Route.post("/wholesalerassignDeliveryAgent",WholesaleController.wholesalerassignDeliveryAgent)
 
 module.exports=Route

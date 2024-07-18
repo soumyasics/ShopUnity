@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const ProductSchema = require("./ProductSchema");
+const wholesaleproduct = require("./WholesaleProductSchema");
 
-const OrderSchema = new mongoose.Schema({
+const WholesaleOrderSchema = new mongoose.Schema({
   products: {
     type: [],
     required: true,
   },
-  customer: {
+  shopownerid: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Customer",
+    ref: "ShopOwner",
     required: true,
   },
   paymentStatus: {
@@ -41,6 +41,6 @@ const OrderSchema = new mongoose.Schema({
   },
 });
 
-const Order = mongoose.model("Order", OrderSchema);
+const Order = mongoose.model("wholesaleOrder", WholesaleOrderSchema);
 
 module.exports = Order;
