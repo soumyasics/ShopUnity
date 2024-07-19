@@ -9,6 +9,8 @@ const getDeliveryRequests = async (req, res) => {
     const { agentId } = req.params;
     const deliveryRequests = await DeliveryRequest.find({ agent: agentId }).populate('order');
     let response = [];
+    console.log(deliveryRequests)
+
     for (let i in deliveryRequests) {
       let order = deliveryRequests[i].order;
       let shopOwnerID = deliveryRequests[i].shopOwner;
@@ -35,6 +37,7 @@ const getDeliveryRequests = async (req, res) => {
     }
     res.status(200).json(response);
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: err.message });
   }
 };
