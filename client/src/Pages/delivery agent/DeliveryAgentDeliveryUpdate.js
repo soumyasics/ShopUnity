@@ -11,7 +11,7 @@ function DeliveryAgentDeliveryUpdate() {
   const getDeliveryRequests = async () => {
     try {
       const agentId = localStorage.getItem("deliveryagent");
-      const response = await axiosInstance.get(`/deliveryRequests/${agentId}`);
+      const response = await axiosInstance.get(`/getAllwholesalerdeliveryRequestsbyagentid/${agentId}`);
       const assignedRequests = response.data.filter(
         (request) => request.deliveryStatus === "accepted"
       );
@@ -36,7 +36,7 @@ function DeliveryAgentDeliveryUpdate() {
   const handleUpdateDelivery = async (id) => {
     try {
       if (deliveryStatuses[id] === "delivered") {
-        await axiosInstance.post(`/deliverDeliveryRequest/${id}`);
+        await axiosInstance.post(`/deliverDeliveryRequestofwholesaledealer/${id}`);
         getDeliveryRequests(); // Refresh the delivery requests after updating
       }
     } catch (error) {
@@ -67,22 +67,35 @@ function DeliveryAgentDeliveryUpdate() {
                 ShopOwner Orders
               </h5>
               <Row>
-                {deliveryRequests.map((request) => (
+                {deliveryRequests ? deliveryRequests.map((request) => (
                   <Col xs={12} md={6} lg={4} key={request._id} className="mb-3">
                     <Card>
                       <Card.Body>
                         <div className="mt-2">
+                          <label>Whole Sale Shop Name : </label>
+                          <span className="mt-2">{request.wholesaledealer.storeName}</span>
+                        </div>
+                        <div className="mt-2">
+                          <label>Whole Sale Dealer Name : </label>
+                          <span className="mt-2">{request.wholesaledealer.dealername}</span>
+                        </div>
+                        <div className="mt-2">
+                          <label>Whole Sale Shop Address : </label>
+                          <span className="mt-2">{request.wholesaledealer.address}</span>
+                        </div>
+                        <div className="mt-2">
                           <label>Shop Name : </label>
-                          <span className="mt-2">{request.shopOwner.shopname}</span>
+                          <span className="mt-2">{request.wholesaledealer.shopname}</span>
                         </div>
                         <div className="mt-2">
-                          <label>Customer Name : </label>
-                          <span className="mt-2">{request.customer.name}</span>
+                          <label>Shop Owner Name : </label>
+                          <span className="mt-2">{request.shopOwner.shopownername}</span>
                         </div>
                         <div className="mt-2">
-                          <label>Delivery Address : </label>
-                          <span className="mt-2">{request.customer.address}</span>
+                          <label>Shop/Delivery Address : </label>
+                          <span className="mt-2">{request.shopOwner.shopowneraddress}</span>
                         </div>
+                        
                         <div className="mt-2">
                           <label>Delivery Status : </label>
                           <select
@@ -105,10 +118,11 @@ function DeliveryAgentDeliveryUpdate() {
                       </Card.Body>
                     </Card>
                   </Col>
-                ))}
+                )):''}
               </Row>
             </div>
             <div>
+            {/*
               <h5 className="deliveryagent-deliveryrequest-h3 ms-3 pt-2">
                 WholeSale Dealer Orders
               </h5>
@@ -146,7 +160,7 @@ function DeliveryAgentDeliveryUpdate() {
                     </Card>
                   </Col>
                 ))}
-              </Row>
+              </Row>*/}
             </div>
           </div>
         </div>
