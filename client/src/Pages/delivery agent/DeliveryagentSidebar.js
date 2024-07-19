@@ -11,6 +11,8 @@ import Collapse from "react-bootstrap/Collapse";
 import { FaUserAlt } from "react-icons/fa";
 import { FiAlignJustify } from "react-icons/fi";
 import { FaAngleRight } from "react-icons/fa6";
+import { TbTrolley } from "react-icons/tb";
+import { FaBoxOpen } from "react-icons/fa";
 
 import "../Admin/Admin.css";
 import axiosInstance from "../../APIS/axiosinstatnce";
@@ -78,9 +80,9 @@ function DeliveryagentSidebar() {
               </Col>
             </Row>
           </div>
-          <div className="sidebar-div2-color flex-grow-1">
+          <div className="sidebar-div2-color flex-grow-1 ">
             <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
-              <li className="nav-item" style={{ marginTop: "55%" }}>
+              <li className="nav-item " style={{ marginTop: "55%" }}>
                 <Link
                   to=""
                   className="shopownersidebar-dashboard rounded-end-5 "
@@ -88,19 +90,19 @@ function DeliveryagentSidebar() {
                   <MdDashboard /> Dashboard
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ps-3 mt-4">
                 <Link
                   to="/deliveryagentprofile"
                   className="nav-link sidebar-shop"
                 >
-                  <BsBoxes /> Profile
+                  <FaUserAlt className="ms-4" /> Profile
                 </Link>
               </li>
               <li className="nav-item">
               <div className='admin_dash_div '>
               <label onClick={toggleDropdown}>
                 <div>
-                <FaAngleRight/><BsBoxes className="ms-2"/><span> Delivery requests</span>
+                <FaAngleRight/><TbTrolley className="ms-2"/><span> Delivery requests</span>
                 </div>
               </label>
               {dropdownVisible && (
@@ -117,7 +119,7 @@ function DeliveryagentSidebar() {
               <div className='admin_dash_div '>
               <label onClick={toggleDropdown1}>
                 <div>
-                <FaAngleRight/><BsBoxes className="ms-2"/><span> Delivery updates</span>
+                <FaAngleRight/><FaBoxOpen className="ms-2"/><span> Delivery updates</span>
                 </div>
               </label>
               {dropdownVisible1 && (
@@ -130,12 +132,12 @@ function DeliveryagentSidebar() {
               )}
             </div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ps-3">
                 <Link
-                  to="/deliveryagentprofile"
+                  to="/deliveryagentcomplaint"
                   className="nav-link sidebar-shop"
                 >
-                  <BsBoxes /> complaints
+                  <GrCompliance  className="ms-4"/> Complaints
                 </Link>
               </li>
             </ul>

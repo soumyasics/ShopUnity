@@ -76,6 +76,8 @@ import WholesalerShopownerAcceptorders from "./Pages/wholesaledealer/WholesalerS
 import ShopownerOrderProductAcceptOrder from "./Pages/ShopOwner/ShopownerOrderProductAcceptOrder";
 import ShopownerViewproductList from "./Pages/ShopOwner/ShopownerViewproductList";
 import ViewWholesalerdeliveryrequest from "./Pages/delivery agent/ViewWholesalerdeliveryrequest";
+import DeliveryagentComplaint from "./Pages/delivery agent/DeliveryagentComplaint";
+import WholesaleDealerComplaint from "./Pages/wholesaledealer/WholesaleDealerComplaint";
 
 
 function App() {
@@ -133,6 +135,7 @@ function App() {
         <Route path="/wholesalerviewshops" element={<WholesaleDealerViewShops/>} />
         <Route path="/wholesalershopownernewrequest" element={<WholesalerShopownerNewRequest url={url} />} />
         <Route path="/wholesalershopowneracceptorders" element={<WholesalerShopownerAcceptorders url={url} />} />
+        <Route path="/wholesaledealercomplaints" element={<WholesaleDealerComplaint/>} />
 
         {/* Customer */}
 
@@ -162,12 +165,13 @@ function App() {
     <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
     <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
     <Route path='/deliveryagentprofileedit' element={<DeliveryagentProfileEdit url={url}/>} />
-
     <Route path='/deliveryagentdeliveryrequest' element={<DeliveryAgentDeliveryRequest/>} />
     <Route path='/deliveryagentdeliveryupdate' element={<DeliveryAgentDeliveryUpdate/>} />
-
+    <Route path='/deliveryagentcomplaint' element={<DeliveryagentComplaint/>} />
     <Route path='/viewWholesalerdeliveryrequest' element={<ViewWholesalerdeliveryrequest/>} />
     <Route path='/updatewholesalerdeliveryrequest' element={<DeliveryAgentDeliveryUpdate/>} />
+
+
         <Route
           path="/customerregistration"
           element={[<MainNav />, <CustomerRegistration />, <Footer />]}
