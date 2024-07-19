@@ -95,7 +95,7 @@ function DeliveryagentSidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
+                <Link to="/deliveryagentcomplaint" className="nav-link sidebar-shop">
                   <GrCompliance /> Complaints
                 </Link>
               </li>

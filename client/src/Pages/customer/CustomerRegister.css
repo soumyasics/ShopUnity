@@ -21,7 +21,14 @@
     border-radius: 23px;
     background: #CAFAE2;
     box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
+    /* background: #459197; */
+    color: white;
+}
 
+#CustomerRegistration-button{
+    background: #459197;
+    color: white;
+    border: none;
 }
 
 .CustomerRegistration-input-div-h1 {
@@ -94,7 +101,7 @@
 
     margin-top: 0px;    
     margin-left: 15px;
-
+    color: black;
 }
 
 .CustomerRegistration-input-radio {
