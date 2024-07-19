@@ -186,7 +186,7 @@ function CustomerRegistration() {
               </div>
             </div>
 
-            <Button type="submit" className="CustomerRegistration-input-div-button">Register</Button>
+            <button type="submit" className="CustomerRegistration-input-div-button" id="CustomerRegistration-button">Register</button>
             <p className="CustomerRegistration-input-div-p">Already have an account? <Link to="/customerlogin">Log in</Link></p>
           </Form>
         </div>

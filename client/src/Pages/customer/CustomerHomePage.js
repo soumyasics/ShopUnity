@@ -77,7 +77,7 @@ function CustomerHomePage() {
                       <Link to='/customerviewshop' className='ms-2 mt-2 customer-home-link'><FaShop className='customer-home- ms-2' />Shops</Link>
                       <Link to='/customerviewproduct' className='ms-2 mt-2 customer-home-link'><BsBoxes className='customer-home-icon ms-2' />Products</Link>
                       <Link to='/customerordervieworder' className='ms-2 mt-2 customer-home-link'><BsBoxSeam className='customer-home-icon ms-2' />Orders</Link>
-                      <Link to='' className='ms-2 mt-2 customer-home-link'><GrCompliance className='customer-home-icon ms-2' />Complaints</Link>
+                      <Link to='/customercomplaints' className='ms-2 mt-2 customer-home-link'><GrCompliance className='customer-home-icon ms-2' />Complaints</Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Navbar>
