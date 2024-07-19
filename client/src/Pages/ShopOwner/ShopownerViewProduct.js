@@ -11,6 +11,7 @@ import ShopOwnerSidebar from "./ShopOwnerSidebar";
 function ShopownerViewProduct({ url }) {
   const [data, setData] = useState([]);
   const [filteredData, setfilteredData] = useState([]);
+
   useEffect(() => {
 
     axiosInstance
@@ -30,6 +31,7 @@ function ShopownerViewProduct({ url }) {
         console.log(err);
       });  
   }, []);
+  
   const navigate=useNavigate()
   const handleViewproduct=(productid)=>{
     navigate("/shopownerviewproductdetails/"+productid)
@@ -53,7 +55,7 @@ function ShopownerViewProduct({ url }) {
         <ShopOwnerSidebar/>
       </div> 
       <div className="col me-5">
-      <div>
+      <div className="container">
       
       <div className="text-center">
         <h2 className="shopowner-viewproduct-h2">View Products</h2>

@@ -216,7 +216,7 @@
 .customer-viewproduct-back{
   background-color: #CCEDF4;
   min-height: 100vh;
-  width: 112%;
+ 
 }
 .customer-viewproduct-h2{
   color: #74767B;
@@ -468,7 +468,7 @@
 .customerorder-vieworder-orderbox{
   border: 2.04px solid #D8D8D8;
   width:100%;
-  height: 100vh;
+  /* height: 100vh; */
   border-radius: 59px;
 }
 .customerorder-vieworder-label{

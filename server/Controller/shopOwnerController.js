@@ -1,6 +1,9 @@
 const shopownerschema = require("../Model/ShopOwnerSchema");
+const DeliveryRequestSchema = require("../Model/DeliveryRequestSchema");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const Order = require("../Model/OrderSchema");
+
 
 // Multer setup for file upload (optional)
 const storage = multer.diskStorage({
@@ -301,6 +304,34 @@ const rejectshopowner = async (req, res) => {
   }
 };
 
+const assignDeliveryAgent = async (req, res) => {
+  try {
+    let request = new DeliveryRequestSchema({
+      order: req.body.orderID,
+      agent: req.body.agentId,
+      shopOwner:req.body.shopownerid
+    });
+
+    const result = await request.save();
+    if (result) {
+      const deliveryRequest = await Order.findByIdAndUpdate(
+        req.body.orderID,
+        { deliveryStatus:'assigned' },
+        { new: true }
+      );
+    }
+    return res.json({
+      status: 200,
+      message: "success",
+      data: result,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "server error", error });
+  }
+};
+
 // const InactivateShopOwner = async (req, res) => {
 //   try {
 //     const id = req.params.id;
@@ -379,4 +410,5 @@ module.exports = {
   getAllPendingShopOwners,
   deActivateShopOwnerById,
   activateShopownerById,
+  assignDeliveryAgent
 };

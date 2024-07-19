@@ -57,7 +57,7 @@
    display: block;
    text-decoration: none;
    color: white; 
-   font-weight: bold;
+   /* font-weight: bold; */
 }
 
 .sidebar-nav li a:hover {

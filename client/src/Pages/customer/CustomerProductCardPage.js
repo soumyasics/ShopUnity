@@ -99,7 +99,8 @@ function CustomerProductCardPage({ url }) {
       orderType: "reserved",
       totalAmount: total,
       paymentStatus: "pending",
-      cid:cid
+      cid:cid,
+      deliveryStatus:"pending"
     };
     axiosInstance
       .post("/placeorder", orderData)
@@ -174,8 +175,10 @@ function CustomerProductCardPage({ url }) {
         orderType: "delivery request",
         totalAmount: total,
         paymentStatus: "completed",
-        cid:cid
+        cid:cid,
+        deliveryStatus:"pending"
       };
+      console.log(orderData,"k");
       axiosInstance
         .post("/placeorder", orderData)
         .then((res) => {
@@ -240,7 +243,7 @@ function CustomerProductCardPage({ url }) {
                   <div className="row">
                     <div className="col mt-2">
                       <img
-                        src={`${url}/${item.product?.productimage?.filename}`}
+                        src={`${url}${item.product?.productimage?.filename}`}
                         className="ms-2"
                         style={{ width: "255px", height: "275px" }}
                       />

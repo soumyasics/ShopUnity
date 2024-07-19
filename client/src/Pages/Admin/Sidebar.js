@@ -5,7 +5,7 @@ import sidebarimg from "../../images/sidebarimg.png";
 import { MdDashboard } from "react-icons/md";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { FaPeopleGroup } from "react-icons/fa6";
+import { FaAngleRight, FaPeopleGroup } from "react-icons/fa6";
 import { FaBoxOpen } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import { GrDeliver } from "react-icons/gr";
@@ -26,6 +26,23 @@ function Sidebar() {
     e.preventDefault();
     localStorage.removeItem("admin");
     navigate("/admin");
+  };
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const toggleDropdown = () => {
+      setDropdownVisible(!dropdownVisible);
+  };
+  const [dropdownVisible2, setDropdownVisible2] = useState(false);
+  const toggleDropdown2 = () => {
+      setDropdownVisible2(!dropdownVisible2);
+  };
+  const [dropdownVisible3, setDropdownVisible3] = useState(false);
+  const toggleDropdown3 = () => {
+      setDropdownVisible3(!dropdownVisible3);
+  };
+  const [dropdownVisible4, setDropdownVisible4] = useState(false);
+  const toggleDropdown4 = () => {
+      setDropdownVisible4(!dropdownVisible4);
   };
 
   return (
@@ -60,31 +77,86 @@ function Sidebar() {
                   <MdDashboard /> Dashboard
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ms-4 ps-3 mt-4">
                 <Link to="/customerlistpage" className="sidebar-shop">
                   <FaPeopleGroup /> Customers
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/wholesalealldealerviewpage" className="sidebar-shop">
-                  <FaBoxOpen /> Wholesale Dealers
-                </Link>
+                <div className='admin_dash_div '>
+                  <label onClick={toggleDropdown}>
+                    <div>
+                    <FaAngleRight/><FaBoxOpen className="ms-2"/><span> Wholesale Dealer</span>
+                    </div>
+                  </label>
+                  {dropdownVisible && (
+                      <div className="dropdown_menu sidebar_dash_drop">
+                          <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                            <Link to="/wholesaledealerrequests" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> View All Request</label></Link>
+                            <Link to="/wholesalealldealerviewpage" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View All Wholesaler</label></Link>
+                          </div>
+                      </div>
+                    )}
+                </div>
               </li>
               <li className="nav-item">
-                <Link to="/wholesaledealerrequests" className="sidebar-shop">
-                  <FaBoxOpen /> Wholesale Dealers Pending
-                </Link>
+                <div className='admin_dash_div '>
+                  <label onClick={toggleDropdown2}>
+                    <div>
+                    <FaAngleRight/><BsPeopleFill className="ms-2"/><span> Shop Owners</span>
+                    </div>
+                  </label>
+                  {dropdownVisible2 && (
+                      <div className="dropdown_menu sidebar_dash_drop">
+                          <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                            <Link to="/shopownerspendinglist" className="wholesaler-dash-link"><label className="wholesaler-dash-label">View All Request</label></Link>
+                            <Link to="/shopownerslist" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View All Shop Owners</label></Link>
+                          </div>
+                      </div>
+                    )}
+                </div>
               </li>
               <li className="nav-item">
-                <Link to="/shopownerspendinglist" className="sidebar-shop">
-                  <FaUserClock /> Shop Owners Pending
-                </Link>
+                <div className='admin_dash_div '>
+                  <label onClick={toggleDropdown3}>
+                    <div>
+                    <FaAngleRight/><GrDeliver className="ms-2"/><span> Delivery Agents</span>
+                    </div>
+                  </label>
+                  {dropdownVisible3 && (
+                      <div className="dropdown_menu sidebar_dash_drop">
+                          <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                            <Link to="" className="wholesaler-dash-link"><label className="wholesaler-dash-label">View All Request</label></Link>
+                            <Link to="" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View All Delivery Agents</label></Link>
+                          </div>
+                      </div>
+                    )}
+                </div>
               </li>
               <li className="nav-item">
-                <Link to="/shopownerslist" className="sidebar-shop">
-                  <BsPeopleFill /> Shop Owners
+                <div className='admin_dash_div '>
+                  <label onClick={toggleDropdown4}>
+                    <div>
+                    <FaAngleRight/><BsBoxSeam className="ms-2"/><span> Orders</span>
+                    </div>
+                  </label>
+                  {dropdownVisible4 && (
+                      <div className="dropdown_menu sidebar_dash_drop">
+                          <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                            <Link to="" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Customer Orders</label></Link>
+                            <Link to="" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Shop Orders</label></Link>
+                          </div>
+                      </div>
+                    )}
+                </div>
+              </li>
+              <li className="nav-item ms-4 ps-3">
+                <Link to="" className="sidebar-shop">
+                  <GrCompliance /> Complaints
                 </Link>
               </li>
+              {/* 
+             
               <li className="nav-item">
                 <Link to="/alldeliveryagentviewpage" className="sidebar-shop">
                   <GrDeliver /> Delivery Agents
@@ -97,14 +169,10 @@ function Sidebar() {
             </li>
               <li className="nav-item">
                 <Link to="" className="sidebar-shop">
-                  <BsBoxSeam /> Customers Orders
+                  < /> Customers Orders
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="" className="sidebar-shop">
-                  <GrCompliance /> Complaints
-                </Link>
-              </li>
+              */}
               <li className="nav-item mt-auto">
                 <Link
                   to=""

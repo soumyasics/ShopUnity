@@ -304,7 +304,9 @@ height: 25px;
 }
 .shopowner-additem-box{
   width: 100%;
-  height: 135vh;
+  min-height: 100vh;
+  margin-bottom: 5%;
+  padding-bottom: 5%;
   margin-left: 70px;
   border: 7px solid #CCEDF4;
   border-radius: 43px ;
@@ -554,12 +556,11 @@ height: 25px;
 .shopowner-customerorder-request-cardbox{
   border: 0.79px solid #D8D8D8;
   width: 100%;
-  height: 58vh;
+  /* height: 58vh; */
   border-radius: 22px;
 }
 .hopowner-customerorder-request-h5{
   color: #11B1C7;
-  margin-top: -20px;
   font-weight: 600;
 }
 .hopowner-customerorder-request-label{
@@ -605,4 +606,8 @@ height: 25px;
   width: 100px;
   height: 30px;
   box-shadow: 0px 1.53px 1.53px 0px #00000040;
+}
+.custom-card-col {
+  flex: 0 0 20%; /* 100% / 5 cards per row = 20% */
+  max-width: 20%;
 }

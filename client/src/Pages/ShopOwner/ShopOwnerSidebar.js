@@ -104,20 +104,20 @@ function ShopOwnerSidebar() {
               </li>
               <li className="nav-item">
               <div className='admin_dash_div '>
-              <label onClick={toggleDropdown}>
-                <div>
-                <FaAngleRight/><BsBoxes className="ms-2"/><span> Products</span>
-                </div>
-              </label>
-              {dropdownVisible && (
-                  <div className="dropdown_menu sidebar_dash_drop">
-                      <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
-                        <Link to="/shopowneradditem" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Add Products</label></Link>
-                        <Link to="/shopownerviewproduct" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View Products</label></Link>
-                      </div>
+                <label onClick={toggleDropdown}>
+                  <div>
+                  <FaAngleRight/><BsBoxes className="ms-2"/><span> Products</span>
                   </div>
-              )}
-            </div>
+                </label>
+                {dropdownVisible && (
+                    <div className="dropdown_menu sidebar_dash_drop">
+                        <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
+                          <Link to="/shopowneradditem" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Add Products</label></Link>
+                          <Link to="/shopownerviewproduct" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View Products</label></Link>
+                        </div>
+                    </div>
+                  )}
+                </div>
               </li>
               <li className="nav-item">
               <div className='admin_dash_div'>
@@ -146,7 +146,7 @@ function ShopOwnerSidebar() {
               {dropdownVisible2 && (
                   <div className="dropdown_menu sidebar_dash_drop">
                       <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
-                        <Link to="/shopownerorderproductviewproduct" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> View Products</label></Link>
+                        <Link to="/shopownerviewwdproductslist" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> View Products</label></Link>
                         <Link to="/shopownerorderproductacceptorder" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Accept Orders</label></Link>
                       </div>
                   </div>

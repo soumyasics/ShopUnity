@@ -4,10 +4,10 @@ import DeliveryagentSidebar from './DeliveryagentSidebar'
 function DeliveryagentComplaint() {
   return (
     <div className='row'>
-        <div className='col-3'>
+        <div className='col-2'>
             <DeliveryagentSidebar/>
         </div>
-        <div className='col-9'>
+        <div className='col-9 ms-5'>
             <div className=''>
                 <div className='customer-complaint-divbox mt-5 me-5'>
                     <div className='text-center'>
