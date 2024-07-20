@@ -143,15 +143,15 @@ function Sidebar() {
                   {dropdownVisible4 && (
                       <div className="dropdown_menu sidebar_dash_drop">
                           <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
-                            <Link to="" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Customer Orders</label></Link>
-                            <Link to="" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Shop Orders</label></Link>
+                            <Link to="/adminviewcustomerorderlist" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Customer Orders</label></Link>
+                            <Link to="/adminviewshoporderlist" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Shop Orders</label></Link>
                           </div>
                       </div>
                     )}
                 </div>
               </li>
               <li className="nav-item ms-4 ps-3">
-                <Link to="" className="sidebar-shop">
+                <Link to="/adminviewcomplaint" className="sidebar-shop">
                   <GrCompliance /> Complaints
                 </Link>
               </li>
