@@ -1,8 +1,13 @@
 import React from 'react'
+import { FaArrowLeftLong } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
 
 function CustomerComplaint() {
   return (
     <div className='container '>
+        <Link className="customer-profile-link" to="/customerhome">
+          <FaArrowLeftLong />
+        </Link>
         <div className='customer-complaint-divbox mt-5 me-5'>
             <div className='text-center'>
                 <h2 className='customer-complaint-h2'>Complaints</h2>
@@ -19,7 +24,7 @@ function CustomerComplaint() {
             <div className='text-center mt-5'>
                 <button className='customer-complaint-submitbtn'>Submit</button>
             </div>          
-        </div>
+        </div>     
     </div>
   )
 }

@@ -78,11 +78,16 @@ import ShopownerViewproductList from "./Pages/ShopOwner/ShopownerViewproductList
 import ViewWholesalerdeliveryrequest from "./Pages/delivery agent/ViewWholesalerdeliveryrequest";
 import DeliveryagentComplaint from "./Pages/delivery agent/DeliveryagentComplaint";
 import WholesaleDealerComplaint from "./Pages/wholesaledealer/WholesaleDealerComplaint";
+import Complaints from "./Pages/Admin/Complaints";
+import ShopownerComplaint from "./Pages/ShopOwner/ShopownerComplaint";
+import CustomerComplaint from "./Pages/customer/CustomerComplaint";
+import CustomerOrderlist from "./Pages/Admin/CustomerOrderlist";
+import ShoporderList from "./Pages/Admin/ShoporderList";
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url = "http://localhost:4028/";
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url = "http://localhost:4028/";
 
   return (
     <BrowserRouter basename="/shopunity">
@@ -152,6 +157,8 @@ function App() {
     <Route path='/customerviewproductdetail' element={<CustomerViewProductDetail url={url}/>} />
     <Route path='/customerproductcardpage' element={<CustomerProductCardPage/>} />
     <Route path='/customerordervieworder' element={<CustomerOrdersViewOrder url={url} />} />
+    <Route path='/customercomplaints' element={<CustomerComplaint />} />
+
 
 {/* deliveryagent */}
 
@@ -170,6 +177,8 @@ function App() {
     <Route path='/deliveryagentcomplaint' element={<DeliveryagentComplaint/>} />
     <Route path='/viewWholesalerdeliveryrequest' element={<ViewWholesalerdeliveryrequest/>} />
     <Route path='/updatewholesalerdeliveryrequest' element={<DeliveryAgentDeliveryUpdate/>} />
+    <Route path='/deliveryagentcomplaint' element={<DeliveryagentComplaint />} />
+
 
 
         <Route
@@ -266,6 +275,7 @@ function App() {
     <Route path='/shopownerorderproductcart' element={<ShopownerOrderProductCart url={url} />} />
     <Route path='/shopownerorderproductacceptorder' element={<ShopownerOrderProductAcceptOrder url={url} />} />
     <Route path='/shopownerviewwdproductslist' element={<ShopownerViewproductList url={url} />} />
+    <Route path='/shopownercomplaint' element={<ShopownerComplaint />} />
 
 {/* Admin */}
         {/* shopowner */}
@@ -322,6 +332,12 @@ function App() {
           path="/shopownerslist"
           element={<ShopOwnerList url={url} />}
         ></Route>
+
+        <Route path="/adminviewcomplaint" element={<Complaints/>} />
+        <Route path="/adminviewcustomerorderlist" element={<CustomerOrderlist/>} />
+        <Route path="/adminviewshoporderlist" element={<ShoporderList/>} />
+
+
       </Routes>
     </BrowserRouter>
   );
