@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import WholesaleDealerSidebar from './WholesaleDealerSidebar'
 import axiosInstance from '../../APIS/axiosinstatnce';
 import { Card, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function WholesaleDealerViewShops() {
 
     const [ShopOwner, SetShopOwner] = useState([]);
     const [Ashopownerdata, setAshopownerdata] = useState({});
     const [show, setShow] = useState(false);
-
+    const navigate = useNavigate();
+    
     const handleClose = () => setShow(false);
     const handleShow = (shopownerid) => {
         setShow(true);
@@ -21,6 +23,15 @@ function WholesaleDealerViewShops() {
             console.log("err", err);
         });
     };
+
+    useEffect(() => {
+      if (
+        localStorage.getItem("token") == null &&
+        localStorage.getItem("wholesaledealer") == null
+      ) {
+        navigate("/wholesaledealerlogin");
+      }
+    }, [navigate]);
 
     useEffect(() => {
         getData();

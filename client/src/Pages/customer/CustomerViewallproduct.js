@@ -11,7 +11,7 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 function CustomerViewallproduct({ url }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const navigate = useNavigate
   const { shopownerid } = useParams(); // For future use if needed
 
   useEffect(() => {
@@ -29,6 +29,15 @@ function CustomerViewallproduct({ url }) {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const increment = (item) => {
     const updatedData = data.map((product) =>

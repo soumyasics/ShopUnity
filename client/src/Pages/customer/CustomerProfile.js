@@ -10,7 +10,7 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 
 function CustomerProfile() {
   const [data, setData] = useState({});
-
+  const navigate = useNavigate();
   const customer = localStorage.getItem("customer");
 
   useEffect(() => {
@@ -24,6 +24,15 @@ function CustomerProfile() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const Navigate = useNavigate();
 

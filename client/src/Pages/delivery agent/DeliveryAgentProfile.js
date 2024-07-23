@@ -8,7 +8,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 
 function DeliveryAgentProfile({url}) {
   const [data, setData] = useState({});
-
+  const navigate = useNavigate();
   const deliveryagent = localStorage.getItem("deliveryagent");
 
   useEffect(() => {
@@ -22,6 +22,15 @@ function DeliveryAgentProfile({url}) {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const Navigate = useNavigate();
 

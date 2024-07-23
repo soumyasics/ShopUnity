@@ -12,6 +12,17 @@ function WholesaleDealerViewPoduct({ url }) {
   const [data, setData] = useState([]);
   const [filteredData, setfilteredData] = useState([]);
 
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, [navigate]);
+
+  
   useEffect(() => {
 
     axiosInstance

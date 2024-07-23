@@ -6,6 +6,16 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 
 function CustomerProductCardPage({ url }) {
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   return (
     <div>
     <h1>Congratzzz Your order is confirmed</h1>

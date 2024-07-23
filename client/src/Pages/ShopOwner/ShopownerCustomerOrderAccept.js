@@ -3,6 +3,7 @@ import "./shopowner.css";
 import ShopOwnerSidebar from "./ShopOwnerSidebar";
 import { Card, Col, Row } from "react-bootstrap";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { useNavigate } from "react-router-dom";
 
 function ShopownerCustomerOrderAccept({ url }) {
   const [data, setData] = useState([]);
@@ -10,6 +11,7 @@ function ShopownerCustomerOrderAccept({ url }) {
   const [district, setDistrict] = useState("");
   const [assignDAgent, setAssignDAgent] = useState({});
   const [dreq, setDreq] = useState({});
+  const navigate = useNavigate();
 
   const shopownerid = localStorage.getItem("shopowner");
 
@@ -28,6 +30,15 @@ function ShopownerCustomerOrderAccept({ url }) {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   const getDagent = () => {
     axiosInstance

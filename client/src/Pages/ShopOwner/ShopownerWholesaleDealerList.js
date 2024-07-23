@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ShopOwnerSidebar from '../ShopOwner/ShopOwnerSidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function ShopownerWholesaleDealerList() {
+
+    const navigate=useNavigate();
+
+    useEffect(() => {
+        if (
+          localStorage.getItem("shopownertoken") == null &&
+          localStorage.getItem("shopowner") == null
+        ) {
+          navigate("/shopownerlogin");
+        }
+      }, [navigate]);
   return (
     <div>
         <div className='row'>

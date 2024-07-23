@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import ShopOwnerSidebar from "./ShopOwnerSidebar";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import chocolate from "../../images/chocolate.png"; // Placeholder image
+import { useNavigate } from "react-router-dom";
 
 function ShopownerOrderProductAcceptOrder({ url }) {
   const [data, setData] = useState([]);
-
+  const navigate=useNavigate()
   const shopownerid = localStorage.getItem("shopowner");
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   const viewData = () => {
     axiosInstance

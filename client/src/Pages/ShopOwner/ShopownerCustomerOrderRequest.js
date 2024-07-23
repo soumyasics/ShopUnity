@@ -4,12 +4,14 @@ import ShopOwnerSidebar from "./ShopOwnerSidebar";
 import { Card, Col, Row } from "react-bootstrap";
 import tick from "../../images/tick.png";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { useNavigate } from "react-router-dom";
 
 function ShopownerCustomerOrderRequest({ url }) {
   const [data, setData] = useState([]);
 
   const shopownerid = localStorage.getItem("shopowner");
-
+  const navigate = useNavigate();
+  
   const viewData=()=>{
     axiosInstance
       .post(`/viewordersshopownerbyId/${shopownerid}`)
@@ -22,6 +24,15 @@ function ShopownerCustomerOrderRequest({ url }) {
         console.log(err);
       });
   }
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     viewData()

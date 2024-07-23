@@ -51,6 +51,15 @@ function DeliveryagentProfileEdit({url}) {
     "Wayanad"
   ];
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     

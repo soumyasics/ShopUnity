@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeftLong } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../APIS/axiosinstatnce';
 import chocolate from '../../images/chocolate.png';
 
 function CustomerOrdersViewOrder({ url }) {
   const customerId = localStorage.getItem("customer");
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -20,6 +21,15 @@ function CustomerOrdersViewOrder({ url }) {
 
     fetchOrders();
   }, [customerId]);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <div>

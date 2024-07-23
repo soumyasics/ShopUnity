@@ -3,11 +3,13 @@ import "./deliveryagent.css";
 import DeliveryagentSidebar from "./DeliveryagentSidebar";
 import { Card, Col, Row } from "react-bootstrap";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { useNavigate } from "react-router-dom";
 
 function Updatewholesalerdeliveryrequest() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
   const [deliveryStatuses, setDeliveryStatuses] = useState({});
-
+  const navigate = useNavigate();
+  
   const getDeliveryRequests = async () => {
     try {
       const agentId = localStorage.getItem("deliveryagent");
@@ -32,6 +34,15 @@ function Updatewholesalerdeliveryrequest() {
   useEffect(() => {
     getDeliveryRequests();
   }, []);
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleUpdateDelivery = async (id) => {
     try {

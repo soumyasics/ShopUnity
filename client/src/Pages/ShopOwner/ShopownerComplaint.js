@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ShopOwnerSidebar from './ShopOwnerSidebar'
 import '../customer/customer.css'
+import { useNavigate } from 'react-router-dom';
 function ShopownerComplaint() {
+
+    const navigate=useNavigate();
+    
+    useEffect(() => {
+        if (
+          localStorage.getItem("shopownertoken") == null &&
+          localStorage.getItem("shopowner") == null
+        ) {
+          navigate("/shopownerlogin");
+        }
+      }, [navigate]);
+
   return (
     <div className='row'>
         <div className='col-2'>

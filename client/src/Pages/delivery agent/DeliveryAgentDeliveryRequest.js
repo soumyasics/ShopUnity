@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import tick from "../../images/tick.png";
 import wrong from "../../images/wrong.png";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { useNavigate } from "react-router-dom";
 
 function DeliveryAgentDeliveryRequest() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
@@ -23,6 +24,17 @@ function DeliveryAgentDeliveryRequest() {
       console.error("Error fetching delivery requests:", error);
     }
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     getDeliveryRequests();

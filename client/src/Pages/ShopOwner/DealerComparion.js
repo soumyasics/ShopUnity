@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import search from "../../images/search.png";
 import chocolate from '../../images/chocolate.png'
 import ShopOwnerSidebar from './ShopOwnerSidebar';
 function DealerComparion() {
 
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate=useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);

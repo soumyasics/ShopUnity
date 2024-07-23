@@ -22,6 +22,14 @@ function ShopownerEditProduct() {
         console.log(count);
     }
 
+    useEffect(() => {
+        if (
+          localStorage.getItem("shopownertoken") == null &&
+          localStorage.getItem("shopowner") == null
+        ) {
+          navigate("/shopownerlogin");
+        }
+      }, [navigate]);
     const[data,setData]=useState({
         name:"",
         brand:"",

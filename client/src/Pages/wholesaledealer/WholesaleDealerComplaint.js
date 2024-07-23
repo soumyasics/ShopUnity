@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import WholesaleDealerSidebar from './WholesaleDealerSidebar'
+import { useNavigate } from 'react-router-dom';
 
 function WholesaleDealerComplaint() {
+
+    const navigate=useNavigate();
+    
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("wholesaledealer") == null
+        ) {
+          navigate("/wholesaledealerlogin");
+        }
+    }, [navigate]);
+
   return (
     <div className='row'>
         <div className='col-2'>

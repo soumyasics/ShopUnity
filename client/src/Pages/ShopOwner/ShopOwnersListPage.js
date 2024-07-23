@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../APIS/axiosinstatnce";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -10,7 +10,8 @@ function ShopOwnersListPage({ url }) {
   const [ShopOwner, SetShopOwner] = useState([]);
   const [Ashopownerdata, setAshopownerdata] = useState({});
   const [show, setShow] = useState(false);
-
+  const navigate=useNavigate()
+  
   const handleClose = () => setShow(false);
   const handleShow = (shopownerid) => {
     setShow(true);
@@ -23,6 +24,15 @@ function ShopOwnersListPage({ url }) {
         console.log("err", err);
       });
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     getData();
