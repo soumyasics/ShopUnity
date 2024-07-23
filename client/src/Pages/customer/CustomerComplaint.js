@@ -19,6 +19,7 @@ function CustomerComplaint() {
                 <input type='text' 
                 className='customer-complaint-divbox2  ms-4 mt-4'
                 placeholder='Enter Your Complaint Here...'
+                required
                 />
             </div> 
             <div className='text-center mt-5'>
