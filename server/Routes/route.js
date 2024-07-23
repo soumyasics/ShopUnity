@@ -13,6 +13,7 @@ const wholesaledealerproductcontroller=require("../Controller/WholesaleProductCo
 const wholesaledealerCartcontroller =require("../Controller/WholesaledealerCartController")
 const wholesaledealerordercontroller =require("../Controller/WholesaleorderController")
 const wholesaledealerorderRequestcontroller =require("../Controller/WholesaledealerDeliveryRequestController")
+const complaintController=require("../Controller/ComplaintController")
 
 // wholesale
 Route.post('/wholesale_register',WholesaleController.upload,WholesaleController.WholesaleDealerRegister)
@@ -129,5 +130,18 @@ Route.post("/vieworderswholesaledealerId/:wholesaledealerid",wholesaledealerorde
 Route.post("/acceptOrderRequestbywholesaler/:orderid",wholesaledealerordercontroller.wholesaleacceptOrderRequest)
 Route.post("/viewOrdersByCustomerId/:customerId",wholesaledealerordercontroller.viewOrdersByshopowner)
 Route.post("/wholesalerassignDeliveryAgent",WholesaleController.wholesalerassignDeliveryAgent)
+
+
+// All Complaints
+Route.post("/customercomplaints/:customerid", complaintController.CustomerAddComplaints);
+Route.post("/shopownercomplaints/:shopownerid", complaintController.ShopownerAddComplaints);
+Route.post("/wholesalercomplaints/:wholesalerid", complaintController.WholesaledealerAddComplaints);
+Route.post("/deliveryagentcomplaints/:agentid", complaintController.deliveryAgentAddComplaints);
+
+Route.post("/customercomplaints", complaintController.viewCustomerAllComplaint);
+Route.post("/shopownercomplaints", complaintController.viewShopownerAllComplaint);
+Route.post("/wholesalercomplaints", complaintController.viewWholesaledealerAllComplaint);
+Route.post("/deliveryagentcomplaints", complaintController.viewDeliveryAgentComplaint);
+
 
 module.exports=Route
