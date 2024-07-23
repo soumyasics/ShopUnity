@@ -26,6 +26,15 @@ function ShopownerProfilepage({ url }) {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
+
   const gotoEdit = (e) => {
     e.preventDefault();
     navigate("/shopownerprofileedit");

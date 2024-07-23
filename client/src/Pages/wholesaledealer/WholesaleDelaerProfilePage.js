@@ -27,6 +27,17 @@ function WholesaleDelaerProfilePage({url}) {
     })
    },[])
 
+   const navigate = useNavigate();
+   
+   useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, [navigate]);
+
     const gotoEdit = (e) =>{
         e.preventDefault();
         Navigate("/wholesaledealereditprofile")

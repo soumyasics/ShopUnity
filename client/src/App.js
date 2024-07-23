@@ -78,7 +78,7 @@ import ShopownerViewproductList from "./Pages/ShopOwner/ShopownerViewproductList
 import ViewWholesalerdeliveryrequest from "./Pages/delivery agent/ViewWholesalerdeliveryrequest";
 import DeliveryagentComplaint from "./Pages/delivery agent/DeliveryagentComplaint";
 import WholesaleDealerComplaint from "./Pages/wholesaledealer/WholesaleDealerComplaint";
-import Complaints from "./Pages/Admin/Complaints";
+import Complaints from "./Pages/Admin/AdminCustomerComplaints";
 import ShopownerComplaint from "./Pages/ShopOwner/ShopownerComplaint";
 import CustomerComplaint from "./Pages/customer/CustomerComplaint";
 import CustomerOrderlist from "./Pages/Admin/CustomerOrderlist";
@@ -86,6 +86,10 @@ import ShoporderList from "./Pages/Admin/ShoporderList";
 import ShopownerWholesaleDealerList from "./Pages/ShopOwner/ShopownerWholesaleDealerList";
 import DealerComparion from "./Pages/ShopOwner/DealerComparion";
 import ShopownerNotification from "./Pages/ShopOwner/ShopownerNotification";
+import AdminCustomerComplaints from "./Pages/Admin/AdminCustomerComplaints";
+import AdminviewShopownerComplaint from "./Pages/Admin/AdminviewShopownerComplaint";
+import AdminviewDeliveryAgentComplaints from "./Pages/Admin/AdminviewDeliveryAgentComplaints";
+import AdminviewWholesalerComplaints from "./Pages/Admin/AdminviewWholesalerComplaints";
 
 
 function App() {
@@ -340,9 +344,13 @@ function App() {
           element={<ShopOwnerList url={url} />}
         ></Route>
 
-        <Route path="/adminviewcomplaint" element={<Complaints/>} />
+        <Route path="/admincustomercomplaints" element={<AdminCustomerComplaints/>} />
         <Route path="/adminviewcustomerorderlist" element={<CustomerOrderlist/>} />
         <Route path="/adminviewshoporderlist" element={<ShoporderList/>} />
+        <Route path="/adminviewshopownercomplaint" element={<AdminviewShopownerComplaint/>} />
+        <Route path="/adminviewdeliveryagentcomplaint" element={<AdminviewDeliveryAgentComplaints/>} />
+        <Route path="/adminviewwholesalercomplaint" element={<AdminviewWholesalerComplaints/>} />
+
 
 
       </Routes>

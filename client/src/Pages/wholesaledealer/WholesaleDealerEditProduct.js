@@ -52,6 +52,15 @@ function WholesaleDealerEditProduct() {
         }));
     };
 
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("wholesaledealer") == null
+        ) {
+          navigate("/wholesaledealerlogin");
+        }
+      }, [navigate]);
+      
     const handleFileChange = (e) => {
         const { name, files } = e.target;
         console.log(name, files)

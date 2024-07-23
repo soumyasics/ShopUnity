@@ -51,6 +51,15 @@ function CustomerEditProfile() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
   const customer = localStorage.getItem("customer");
 
   useEffect(() => {

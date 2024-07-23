@@ -8,6 +8,16 @@ function ShopownerviewProductDetails({url}) {
 
   const {productid}=useParams()
 
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
+  
     useEffect(() => {
       axiosInstance
         .post("/view_a_product/" + productid)

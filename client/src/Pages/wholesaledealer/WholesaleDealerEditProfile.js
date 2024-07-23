@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../APIS/axiosinstatnce';
 
 function WholesaleDealerEditProfile() {
+
+    const navigate = useNavigate();
     const [data, setData] = useState({
         storeName: "",
         dealername: "",
@@ -37,6 +39,15 @@ function WholesaleDealerEditProfile() {
         'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
         'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
     ];
+
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("wholesaledealer") == null
+        ) {
+          navigate("/wholesaledealerlogin");
+        }
+      }, [navigate]);
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;

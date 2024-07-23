@@ -40,6 +40,15 @@ function ShopOwnerProfileEditPage() {
     'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
   ];
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
+  
   const handleChange = (e) => {    
     const { name, value} = e.target;
 

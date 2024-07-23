@@ -3,6 +3,7 @@ import "./wholesale.css";
 import { Card, Col, Row } from "react-bootstrap";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import WholesaleDealerSidebar from "./WholesaleDealerSidebar";
+import { useNavigate } from "react-router-dom";
 
 function WholesalerShopownerAcceptorders({ url }) {
   const [data, setData] = useState([]);
@@ -10,8 +11,18 @@ function WholesalerShopownerAcceptorders({ url }) {
   const [district, setDistrict] = useState("");
   const [assignDAgent, setAssignDAgent] = useState({});
   const [dreq, setDreq] = useState({});
+  const navigate = useNavigate();
 
   const wholesaledealerid = localStorage.getItem("wholesaledealer");
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, [navigate]);
 
   const viewData = () => {
     axiosInstance

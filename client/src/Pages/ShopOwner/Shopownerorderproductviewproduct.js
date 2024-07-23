@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import search from "../../images/search.png";
 import Card from "react-bootstrap/Card";
 import minus from "../../images/minus.png";
 import plus from "../../images/plus.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import ShopOwnerSidebar from './ShopOwnerSidebar';
 import chocolate from '../../images/chocolate.png'
@@ -22,6 +22,17 @@ function Shopownerorderproductviewproduct() {
         setCount(count-1)
         }
     }
+
+    const navigate =useNavigate()
+    useEffect(() => {
+      if (
+        localStorage.getItem("shopownertoken") == null &&
+        localStorage.getItem("shopowner") == null
+      ) {
+        navigate("/shopownerlogin");
+      }
+    }, [navigate]);
+
   return (
     <div className='row'>
         <div className='col-2'>

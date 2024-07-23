@@ -12,6 +12,17 @@ function ShopownerViewProduct({ url }) {
   const [data, setData] = useState([]);
   const [filteredData, setfilteredData] = useState([]);
 
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
+
+  
   useEffect(() => {
 
     axiosInstance

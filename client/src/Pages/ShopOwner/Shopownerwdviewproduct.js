@@ -19,6 +19,16 @@ function Shopownerwdviewproduct({ url }) {
     }));
   };
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
+  
+
   const decrement = () => {
     if (data.quantity > 1) {
       setData((prevData) => ({
