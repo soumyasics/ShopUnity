@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ShopOwnerSidebar from './ShopOwnerSidebar'
 import { IoIosNotifications } from 'react-icons/io'
+import { useNavigate } from 'react-router-dom';
 
 function ShopownerNotification() {
+
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (
+          localStorage.getItem("shopownertoken") == null &&
+          localStorage.getItem("shopowner") == null
+        ) {
+          navigate("/shopownerlogin");
+        }
+      }, [navigate]);
+
   return (
     <div >
         <div className='row'>

@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DeliveryagentSidebar from './DeliveryagentSidebar'
+import { useNavigate } from 'react-router-dom';
 
 function DeliveryagentComplaint() {
+
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("deliveryagent") == null
+        ) {
+          navigate("/login");
+        }
+      }, [navigate]);
   return (
     <div className='row'>
         <div className='col-2'>

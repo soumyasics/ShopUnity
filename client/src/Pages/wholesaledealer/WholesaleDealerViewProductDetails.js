@@ -20,6 +20,15 @@ function WholesaleDealerViewProductDetails({url}) {
         });
     }, []);
 
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("wholesaledealer") == null
+        ) {
+          navigate("/wholesaledealerlogin");
+        }
+      }, [navigate]);
+
     const navigate=useNavigate()
     const GotoEditproduct=()=>{
         navigate("/wholesalereditproduct/"+productid)

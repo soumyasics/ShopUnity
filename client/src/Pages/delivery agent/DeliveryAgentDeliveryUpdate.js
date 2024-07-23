@@ -3,11 +3,12 @@ import "./deliveryagent.css";
 import DeliveryagentSidebar from "./DeliveryagentSidebar";
 import { Card, Col, Row } from "react-bootstrap";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { useNavigate } from "react-router-dom";
 
 function DeliveryAgentDeliveryUpdate() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
   const [deliveryStatuses, setDeliveryStatuses] = useState({});
-
+  const navigate = useNavigate();
   const getDeliveryRequests = async () => {
     try {
       const agentId = localStorage.getItem("deliveryagent");
@@ -15,6 +16,8 @@ function DeliveryAgentDeliveryUpdate() {
       const assignedRequests = response.data.filter(
         (request) => request.deliveryStatus === "accepted"
       );
+
+      
 
       // Initialize deliveryStatuses state
       const statuses = {};
@@ -28,6 +31,15 @@ function DeliveryAgentDeliveryUpdate() {
       console.error("Error fetching delivery requests:", error);
     }
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     getDeliveryRequests();

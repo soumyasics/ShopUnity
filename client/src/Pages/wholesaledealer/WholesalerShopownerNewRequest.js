@@ -4,6 +4,7 @@ import tick from "../../images/tick.png";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import WholesaleDealerSidebar from "./WholesaleDealerSidebar";
 import "./wholesale.css";
+import { useNavigate } from "react-router-dom";
 
 function WholesalerShopownerNewRequest({ url }) {
   const [data, setData] = useState([]);
@@ -23,6 +24,17 @@ function WholesalerShopownerNewRequest({ url }) {
         console.log(err);
       });
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     viewData();

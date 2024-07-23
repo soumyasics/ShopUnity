@@ -25,6 +25,15 @@ function ShopownerOrderProductCart({ url }) {
     NameonCard: "",
   });
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setCardData((prevData) => ({

@@ -12,6 +12,15 @@ import ShopOwnerSidebar from "./ShopOwnerSidebar";
 function ShopownerViewproductList({ url }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+const navigate=useNavigate()
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     axiosInstance

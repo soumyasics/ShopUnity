@@ -31,6 +31,16 @@ function WholesaleDealerRequestList({ url }) {
         console.log("err", err);
       });
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, [navigate]);
+  
   useEffect(() => {
     getData();
   }, []);

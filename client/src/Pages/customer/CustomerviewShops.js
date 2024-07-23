@@ -3,13 +3,22 @@ import { FaShop } from "react-icons/fa6";
 import { Card } from "react-bootstrap";
 import { PiHandTapBold } from "react-icons/pi";
 import axiosInstance from "../../APIS/axiosinstatnce";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CustomerviewShops() {
   const [data, setData] = useState([]);
   const [selectDistrict, setSelectDistrict] = useState("");
-
+  const navigate = useNavigate();
   const customer = localStorage.getItem("customer");
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchData = async () => {

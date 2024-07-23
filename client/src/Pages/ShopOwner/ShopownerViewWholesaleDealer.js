@@ -3,13 +3,22 @@ import "./shopowner.css";
 import ShopOwnerSidebar from "./ShopOwnerSidebar";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import { PiHandTapBold } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ShopownerViewWholesaleDealer() {
   const [data, setData] = useState([]);
   const [selectDistrict, setSelectDistrict] = useState("");
-
+  const navigate=useNavigate()
   const shopowner = localStorage.getItem("shopowner");
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchData = async () => {

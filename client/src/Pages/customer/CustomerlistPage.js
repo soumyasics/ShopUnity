@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Modal from "react-bootstrap/Modal";
 import { Card } from "react-bootstrap";
@@ -22,6 +22,16 @@ function CustomerlistPage({ url }) {
         console.log("err", err);
       });
   };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     getData();

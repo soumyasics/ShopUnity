@@ -5,10 +5,11 @@ import { Card } from "react-bootstrap";
 import tick from "../../images/tick.png";
 import wrong from "../../images/wrong.png";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { useNavigate } from "react-router-dom";
 
 function ViewWholesalerdeliveryrequest() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
-
+  const navigate = useNavigate();
   const getDeliveryRequests = async () => {
     try {
       const agentId = localStorage.getItem("deliveryagent");

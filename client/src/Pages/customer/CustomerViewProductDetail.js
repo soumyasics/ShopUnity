@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import axiosInstance from "../../APIS/axiosinstatnce";
@@ -26,6 +26,17 @@ function CustomerViewProductDetail({ url }) {
       Tprice: (prevData.quantity > 1 ? prevData.quantity - 1 : 1) * prevData.price,
     }));
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("customer") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const addToCart = () => {
     axiosInstance

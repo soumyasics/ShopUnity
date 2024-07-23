@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import { FaArrowLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { Card } from "react-bootstrap";
 
@@ -9,6 +9,7 @@ function WholesaleAllDealerViewpage({ url }) {
   const [data, setData] = useState([]);
   const [Awholesalerdata, setAwholesalerdata] = useState({});
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = (wholesaledealerid) => {
@@ -22,6 +23,15 @@ function WholesaleAllDealerViewpage({ url }) {
         console.log("Error fetching wholesale dealer data:", err);
       });
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     getData();

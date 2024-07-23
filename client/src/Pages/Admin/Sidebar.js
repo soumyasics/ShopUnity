@@ -44,6 +44,10 @@ function Sidebar() {
   const toggleDropdown4 = () => {
       setDropdownVisible4(!dropdownVisible4);
   };
+  const [dropdownVisible5, setDropdownVisible5] = useState(false);
+  const toggleDropdown5 = () => {
+      setDropdownVisible5(!dropdownVisible5);
+  };
 
   return (
     <div className={`shopownersidebar ${open ? "open" : ""}`}>
@@ -150,29 +154,25 @@ function Sidebar() {
                     )}
                 </div>
               </li>
-              <li className="nav-item ms-4 ps-3">
-                <Link to="/adminviewcomplaint" className="sidebar-shop">
-                  <GrCompliance /> Complaints
-                </Link>
-              </li>
-              {/* 
-             
               <li className="nav-item">
-                <Link to="/alldeliveryagentviewpage" className="sidebar-shop">
-                  <GrDeliver /> Delivery Agents
-                </Link>
+                <div className='admin_dash_div '>
+                  <label onClick={toggleDropdown5}>
+                    <div>
+                    <FaAngleRight/><GrCompliance className="ms-2"/><span> Complaints</span>
+                    </div>
+                  </label>
+                  {dropdownVisible5 && (
+                      <div className="dropdown_menu sidebar_dash_drop">
+                          <div className="wholesaler-dash-backgroundcolor1 ms-3 me-3">
+                            <Link to="/admincustomercomplaints" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Customer</label></Link><br></br>
+                            <Link to="/adminviewshopownercomplaint" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Shop Owner</label></Link>
+                            <Link to="/adminviewwholesalercomplaint" className="wholesaler-dash-link"><label className="wholesaler-dash-label"> Wholesale Dealer</label></Link>
+                            <Link to="/adminviewdeliveryagentcomplaint" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">Delivery Agent</label></Link>
+                          </div>
+                      </div>
+                    )}
+                </div>
               </li>
-              <li className="nav-item">
-              <Link to="/deliveryagentrequest" className="sidebar-shop">
-                <GrDeliver /> Delivery Agents pending
-              </Link>
-            </li>
-              <li className="nav-item">
-                <Link to="" className="sidebar-shop">
-                  < /> Customers Orders
-                </Link>
-              </li>
-              */}
               <li className="nav-item mt-auto">
                 <Link
                   to=""

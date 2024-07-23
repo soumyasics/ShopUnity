@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './deliveryagent.css'
 import { FaArrowLeft } from "react-icons/fa";
 import axiosInstance from '../../APIS/axiosinstatnce';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 import { Card } from "react-bootstrap";
 
@@ -12,6 +12,7 @@ function AllDeliveryAgentViewPage({url}) {
     const[data,setData]=useState([])
     const [Ashopownerdata, setAshopownerdata] = useState({});
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleShow = (deliveryagentid) => {
@@ -25,6 +26,15 @@ function AllDeliveryAgentViewPage({url}) {
         console.log("err", err);
       });
   };
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     getData();
