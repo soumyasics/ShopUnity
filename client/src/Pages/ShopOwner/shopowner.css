@@ -611,3 +611,27 @@ height: 25px;
   flex: 0 0 20%; /* 100% / 5 cards per row = 20% */
   max-width: 20%;
 }
+
+/* Shopowner Notification */
+
+.shopowner-notification-divbox{
+  width: 100%;
+  min-height: 30vh;
+  border: 1.5px solid #9C9C9C;
+  border-radius: 20px;
+  box-shadow: 0px 1.5px 6.01px 0px #00000040;
+}
+.shopowner-notification-divbox2{
+  width: 97%;
+  min-height: 25vh;
+  border: 1.5px solid #9C9C9C;
+  border-radius: 20px;
+  box-shadow: 0px 1.5px 6.01px 0px #00000040;
+}
+.shopowner-notification-icon{
+  color: #FFA800;
+  font-size: 20px;
+}
+.shopowner-notification-label{
+  color: #9C9C9C;
+}

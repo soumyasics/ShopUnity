@@ -153,12 +153,6 @@ function ShopOwnerSidebar() {
               )}
             </div>
               </li>
-              
-              {/* <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
-                  <FaPeopleGroup className="ms-5"/> Customer Orders
-                </Link>
-              </li> */}
               <li className="nav-item">
                 <Link
                   to="/shopownerviewwholesaledealer"
@@ -168,13 +162,13 @@ function ShopOwnerSidebar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
+                <Link to="/shopownerdealercomparison" className="nav-link sidebar-shop">
                   <GiInjustice className="ms-5"/> Dealer Comparison
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link to="" className="nav-link sidebar-shop">
+                <Link to="/shopownernotification" className="nav-link sidebar-shop">
                   <FaBell className="ms-5"/> Notification
                 </Link>
               </li>
