@@ -83,6 +83,9 @@ import ShopownerComplaint from "./Pages/ShopOwner/ShopownerComplaint";
 import CustomerComplaint from "./Pages/customer/CustomerComplaint";
 import CustomerOrderlist from "./Pages/Admin/CustomerOrderlist";
 import ShoporderList from "./Pages/Admin/ShoporderList";
+import ShopownerWholesaleDealerList from "./Pages/ShopOwner/ShopownerWholesaleDealerList";
+import DealerComparion from "./Pages/ShopOwner/DealerComparion";
+import ShopownerNotification from "./Pages/ShopOwner/ShopownerNotification";
 
 
 function App() {
@@ -276,6 +279,10 @@ function App() {
     <Route path='/shopownerorderproductacceptorder' element={<ShopownerOrderProductAcceptOrder url={url} />} />
     <Route path='/shopownerviewwdproductslist' element={<ShopownerViewproductList url={url} />} />
     <Route path='/shopownercomplaint' element={<ShopownerComplaint />} />
+    <Route path='/shopownerWDlist' element={<ShopownerWholesaleDealerList />} />
+    <Route path='/shopownerdealercomparison' element={<DealerComparion />} />
+    <Route path='/shopownernotification' element={<ShopownerNotification />} />
+
 
 {/* Admin */}
         {/* shopowner */}
