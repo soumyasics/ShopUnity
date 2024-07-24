@@ -95,7 +95,7 @@ Route.post("/placeorder",orderController.placeOrder)
 Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByShopOwner)
 Route.post("/acceptOrderRequest/:orderid",orderController.acceptOrderRequest)
 Route.post("/viewOrdersByCustomerId/:customerId",orderController.viewOrdersByCustomerId)
-
+Route.post("/viewAllCustomerorder",orderController.viewAllCustomerorder)
 // delivery requests
 
 Route.get("/deliveryRequests/:agentId", deliveryRequestController.getDeliveryRequests);
@@ -130,7 +130,7 @@ Route.post("/vieworderswholesaledealerId/:wholesaledealerid",wholesaledealerorde
 Route.post("/acceptOrderRequestbywholesaler/:orderid",wholesaledealerordercontroller.wholesaleacceptOrderRequest)
 Route.post("/viewOrdersByCustomerId/:customerId",wholesaledealerordercontroller.viewOrdersByshopowner)
 Route.post("/wholesalerassignDeliveryAgent",WholesaleController.wholesalerassignDeliveryAgent)
-
+Route.post("/viewAllShopownerOrders",wholesaledealerordercontroller.viewAllShopownerOrders)
 
 // All Complaints
 Route.post("/customercomplaints/:customerid", complaintController.CustomerAddComplaints);
