@@ -1,14 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
+import axiosInstance from '../../APIS/axiosinstatnce';
 
 function CustomerOrderlist() {
 
     const [show,setShow]=useState(false);
-
+    const[data,setData]=useState([]);
+    const[customerData,setCustomerData]=useState({})
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
+    const handleShow = () => {
+        setShow(true);
+        const customerid=localStorage.getItem("customer")
+        axiosInstance.get(`get_a_customer/${customerid}`,data)
+        .then((res) => {
+            console.log(res);
+            setCustomerData(res.data.data)
+        })
+        .catch((err) => {
+            console.log("err",err);
+        })
+    }
+
+    useEffect(() => {
+        axiosInstance.post(`/viewAllCustomerorder`,data)
+        .then((res) => {
+            console.log(res);
+            if(res.status === 200){
+                setData(res.data.data)
+            }
+        })
+        .catch((err) => {
+            console.log("Error",err);
+        })
+    },[]);
+
+
   return (
     <div>
         <div className='row'>
@@ -48,29 +77,30 @@ function CustomerOrderlist() {
                                 <b className='admin-customer-order-list-list1'> </b>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="row bg-light rounded-pill m-5 p-2 ps-3">
-                        <div className="col-1">
-                            <b className='admin-customer-order-list-list '>1.</b>
-                        {/* <b>{index + 1}.</b> */}
+                    </div>  
+                    {data.map((item,index) => (
+                        <div className="row bg-light rounded-pill m-5 p-2 ps-3" >
+                            <div className="col-1">
+                                {/* <b className='admin-customer-order-list-list '>1.</b> */}
+                                <b className='admin-customer-order-list-list '>{index + 1}.</b>
+                            </div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">{item.customer.name}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">{item.shopname}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">&#8377; {item.totalAmount}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">{item.deliveryStatus}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5 ">
+                            <Link to=''>
+                                <button
+                                className="rounded-pill px-3 border-none"
+                                id="wholesale-alldealer-viewpage-viewbtn"
+                                onClick={() => handleShow(item._id)}
+                                >
+                                View 
+                                </button>
+                            </Link>
+                            </div>
                         </div>
-                        <div className="col-2 admin-customer-order-list-list ps-5">Sharik Non</div>
-                        <div className="col-2 admin-customer-order-list-list ps-5">Joy Shop</div>
-                        <div className="col-2 admin-customer-order-list-list ps-5">&#8377; 150</div>
-                        <div className="col-2 admin-customer-order-list-list ps-5">Pending</div>
-                        <div className="col-2 admin-customer-order-list-list ps-5 ">
-                        <Link to=''>
-                            <button
-                            className="rounded-pill px-3 border-none"
-                            id="wholesale-alldealer-viewpage-viewbtn"
-                            onClick={handleShow}
-                            >
-                            View 
-                            </button>
-                        </Link>
-                    </div>
-                  </div>
+                    ))}  
                 </div>
             </div>
         </div>
@@ -87,9 +117,6 @@ function CustomerOrderlist() {
                             <div>
                                 <label className='admin-customer-complaint-label12'>Shop Name</label>
                             </div>
-                            {/* <div>
-                                <label className='admin-customer-complaint-label12'>Delivery Agent Name</label>
-                            </div>     */}
                         </div>
                         <div className='col-1'>
                             <div>
@@ -98,20 +125,14 @@ function CustomerOrderlist() {
                             <div>
                                 <label className='admin-customer-complaint-label12'>:</label>
                             </div>
-                            {/* <div>
-                                <label className='admin-customer-complaint-label12'>:</label>
-                            </div>    */}
                         </div>
                         <div className='col-6'>
                             <div>
-                                <label className='admin-customer-complaint-label12'>Sharik</label>
+                                <label className='admin-customer-complaint-label12'>{customerData.customer}</label>
                             </div>
                             <div>
-                                <label className='admin-customer-complaint-label12'>Joy Shop</label>
+                                <label className='admin-customer-complaint-label12'>{customerData.shopname}</label>
                             </div>
-                            {/* <div>
-                                <label className='admin-customer-complaint-label12'>Shashan</label>
-                            </div>     */}
                         </div>
                     </div>
                     <div className='text-center'>
@@ -142,13 +163,13 @@ function CustomerOrderlist() {
                         </div>
                         <div className='col-6'>
                             <div>
-                                <label className='admin-customer-complaint-label12'>&#8377; 150</label>
+                                <label className='admin-customer-complaint-label12'>&#8377; {customerData.totalAmount}</label>
                             </div>
                             <div>
-                                <label className='admin-customer-complaint-success'>Success</label>
+                                <label className='admin-customer-complaint-success'>{customerData.paymentStatus}</label>
                             </div>
                             <div>
-                                <label className='admin-customer-complaint-pending'>Pending</label>
+                                <label className='admin-customer-complaint-pending'>{customerData.orderStatus}</label>
                             </div>    
                         </div>
                     </div>

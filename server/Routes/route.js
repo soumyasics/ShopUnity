@@ -96,6 +96,7 @@ Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByS
 Route.post("/acceptOrderRequest/:orderid",orderController.acceptOrderRequest)
 Route.post("/viewOrdersByCustomerId/:customerId",orderController.viewOrdersByCustomerId)
 Route.post("/viewAllCustomerorder",orderController.viewAllCustomerorder)
+
 // delivery requests
 
 Route.get("/deliveryRequests/:agentId", deliveryRequestController.getDeliveryRequests);
