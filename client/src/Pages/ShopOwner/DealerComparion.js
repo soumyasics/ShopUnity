@@ -8,33 +8,26 @@ import { HiOutlineShoppingCart } from 'react-icons/hi';
 import plus from '../../images/plus.png'
 import minus from '../../images/minus.png'
 import axiosInstance from '../../APIS/axiosinstatnce';
-function DealerComparion(url) {
+function DealerComparion({url}) {
 
   const [searchQuery, setSearchQuery] = useState("");
-  const[count,setCount]=useState(1);
-  const[data,setData]=useState()
+  const[data,setData]=useState([])
   const navigate=useNavigate();
-
-  const increment = () =>{
-    setCount(count+1)
-    console.log(count);
-  }
-  const decrement = () =>{
-      if(count > 0){
-          setCount(count-1)
-      }
-      console.log(count);
-  }
-
 
   useEffect(() => {
     axiosInstance.post(`/view_all_product_bywholesale`)
     .then((res) => {
-      if(res.data.status === 200){
-
+      if(res.status === 200){
+        setData(res.data.data)
+        console.log(res.data.data);
       }
     })
-  })
+    .catch((err) => {
+      console.log(err);
+    })
+    console.log(data);
+  },[])
+
   // useEffect(() => {
   //   if (
   //     localStorage.getItem("shopownertoken") == null &&
@@ -84,20 +77,20 @@ function DealerComparion(url) {
           </div>
         </div>
         <div className="row mt-3">
-          {/* {filteredData.map((item, index) => ( */}
-            <div  className="col-md-3 mb-4">
+          {data.map((item) => (
+            <div  className="col-md-4 mb-4">
               <Card>
                 <div className="ms-3 mt-3">
                   <label className="shopowner-viewproduct-labelcard ps-3">
-                    {/* {item.productname} */}
+                    {item.productname}
                   </label>
                 </div>
                 <div>
                   <Link>
                   {/* <Link to={`/shopownerwdviewproduct/${item._id}`}> */}
                     <img
-                      // src={`${url}${item.productimage.filename}`}
-                      // alt={item.productname}
+                      src={`${url}${item.productimage.filename}`}
+                      alt={item.productname}
                       className="customershoownerProductimg"
                     ></img>
                   </Link>
@@ -109,43 +102,50 @@ function DealerComparion(url) {
                   </label>
                   <br></br>
                   <label className="shopowner-viewproduct-b">
-                    <b>&#8377;</b>
+                    <b>&#8377;{item.price}</b>
                   </label>
                 </div>
-                <div className="ms-4 mb-3">
-                  <div className="row">
-                    <div className="col-2">
-                      <label className="shopowner-viewproduct-b">
-                        <b>Qty</b>
-                      </label>
+                <div className='row'>
+                  <div className='col-5'>
+                    <div>
+                      <label>Store Name</label>
                     </div>
-                    <div className="col-3">
-                      <button
-                        className="shopowner-viewproduct-minusbtn"
-                        onClick={() => decrement()}
-                      >
-                        <img src={minus} alt="minus"></img>
-                      </button>
+                    <div>
+                      <label>District</label>
                     </div>
-                    <div className="col-1">
-                      <label>{count}</label>
-                      {/* <label>{item.quantity}</label> */}
-                    </div>
-                    <div className="col-2">
-                      <button
-                        className="shopowner-viewproduct-plusbtn"
-                        onClick={() => increment()}
-                      >
-                        <img src={plus} alt="plus"></img>
-                      </button>
+                    <div>
+                      <label>Dealer Name</label>
                     </div>
                   </div>
-                  
+                  <div className='col-1'>
+                    <div>
+                      <label>:</label>
+                    </div>
+                    <div>
+                      <label>:</label>
+                    </div>
+                    <div>
+                      <label>:</label>
+                    </div>
+                  </div>
+                  <div className='col-6'>
+                    <div>
+                        <label>{item?.wholesaledealer?.storeName}</label>
+                      </div>
+                      <div>
+                        <label>{item?.wholesaledealer?.districts}</label>
+                      </div>
+                      <div>
+                        <label>{item?.wholesaledealer?.dealername}</label>
+                      </div>
+                    </div>
+                  <div>
+                  </div>
                 </div>
               </Card>
             </div>
-          {/* ))} */}
-        </div>
+           ))} 
+       </div>
       </div>
       </div>
     

@@ -292,7 +292,7 @@ function App() {
     <Route path='/shopownerviewwdproductslist' element={<ShopownerViewproductList url={url} />} />
     <Route path='/shopownercomplaint' element={<ShopownerComplaint />} />
     <Route path='/shopownerWDlist' element={<ShopownerWholesaleDealerList />} />
-    <Route path='/shopownerdealercomparison' element={<DealerComparion />} />
+    <Route path='/shopownerdealercomparison' element={<DealerComparion url={url}/>} />
     <Route path='/shopownernotification' element={<ShopownerNotification />} />
 
 
