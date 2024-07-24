@@ -193,6 +193,10 @@ function App() {
           element={[<MainNav />, <CustomerRegistration />, <Footer />]}
         />
         <Route
+          path="/customercomplaints"
+          element={[<MainNav />, <CustomerComplaint />, <Footer />]}
+        />
+        <Route
           path="/customerlogin"
           element={[<MainNav />, <CustomerLogin />, <Footer />]}
         />
