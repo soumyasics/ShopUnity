@@ -5,23 +5,46 @@ import axios from 'axios';
 import axiosInstance from '../../APIS/axiosinstatnce';
 
 function DeliveryagentComplaint() {
-    const [complaint, setComplaint] = useState("");
+
+    const[complaint,setComplaint]=useState({
+        complaintmsg:""
+    });
+
+    const[errors,setErrors]=useState({
+        complaintmsg:""
+    });
+
     const navigate = useNavigate();
     
-    useEffect(() => {
-        if (
-          localStorage.getItem("token") == null &&
-          localStorage.getItem("deliveryagent") == null
-        ) {
-          navigate("/login");
-        }
-      }, [navigate]);
+    // useEffect(() => {
+    //     if (
+    //       localStorage.getItem("token") == null &&
+    //       localStorage.getItem("deliveryagent") == null
+    //     ) {
+    //       navigate("/deliveryagentlogin");
+    //     }
+    //   }, [navigate]);
 
     const handleChange = (e) => {
-        setComplaint(e.target.value);
+        setComplaint(e.target.value)
     }
 
-    const handleSubmit = () => {
+    function validateField (fieldName,value) {
+        if (typeof value === 'string' && !value.trim()) {
+            return `${fieldName} is required`;
+        }
+    }
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+        let errors={}
+        let formIsValid=true;
+
+        errors.complaintmsg=validateField("Complaint",complaint.complaintmsg);
+
+        setErrors(errors);
+
         const agentId = localStorage.getItem("deliveryagent");
         axiosInstance.post(`/deliveryagentcomplaints/${agentId}`, { description: complaint })
             .then(response => {
@@ -51,15 +74,17 @@ function DeliveryagentComplaint() {
                         <div className='pt-3 ms-5'>
                             <h5 className='customer-complaint-h2 mt-5 pt-5'>Issue</h5>
                         </div>
-                        <div className='customer-complaint-divbox1 ms-5 mt-3 '>
+                        <div className='customer-complaint-divbox1 ms-5 mt-3 me-5 '>
                             <input 
                                 type='text' 
-                                className='customer-complaint-divbox2 ms-4 mt-4'
+                                className='customer-complaint-divbox2 me-5 ms-4 mt-4'
                                 placeholder='Enter Your Complaint Here...'
-                                value={complaint}
+                                value={complaint.complaintmsg}
+                                name='complaintmsg'
                                 onChange={handleChange}
                             />
                         </div> 
+                        {errors.complaintmsg && <span className='text-danger ms-5 '>{errors.complaintmsg}</span>}
                         <div className='text-center mt-5'>
                             <button className='customer-complaint-submitbtn' onClick={handleSubmit}>Submit</button>
                         </div>          

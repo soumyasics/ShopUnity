@@ -5,9 +5,11 @@ const Complaint = require("../Model/ComplaintSchema");
 const CustomerAddComplaints = async (req, res) => {
   try {
     const { description } = req.body;
+    console.log("req",req.body);
     const newComplaint = new Complaint.customercomplaintSchema({
-      description,
+      description:description,
       customerid: req.params.customerid,
+      date:new Date()
     });
     await newComplaint
       .save()

@@ -26,6 +26,15 @@ function DeliveryAgentRequest({url}) {
       });
   };
 
+  //  useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("deliveryagent") == null
+  //   ) {
+  //     navigate("/deliveryagentlogin");
+  //   }
+  // }, [navigate]);
+
   
   useEffect(() => {
     getData();

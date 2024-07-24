@@ -30,14 +30,14 @@ function CustomerViewallproduct({ url }) {
       });
   }, []);
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("customer") == null
-    ) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("customer") == null
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
 
   const increment = (item) => {
     const updatedData = data.map((product) =>

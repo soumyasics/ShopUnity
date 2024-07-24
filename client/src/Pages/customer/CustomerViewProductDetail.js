@@ -29,14 +29,14 @@ function CustomerViewProductDetail({ url }) {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("customer") == null
-    ) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("customer") == null
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
 
   const addToCart = () => {
     axiosInstance

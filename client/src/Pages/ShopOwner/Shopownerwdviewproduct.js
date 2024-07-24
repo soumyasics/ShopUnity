@@ -10,6 +10,8 @@ import ShopOwnerSidebar from "./ShopOwnerSidebar";
 function Shopownerwdviewproduct({ url }) {
   const [data, setData] = useState({});
   const { productid } = useParams();
+  const navigate=useNavigate()
+
 
   const increment = () => {
     setData((prevData) => ({
@@ -26,7 +28,7 @@ function Shopownerwdviewproduct({ url }) {
     ) {
       navigate("/shopownerlogin");
     }
-  }, [navigate]);
+  }, []);
   
 
   const decrement = () => {
@@ -39,7 +41,6 @@ function Shopownerwdviewproduct({ url }) {
     }
   };
 
-  const navigate=useNavigate()
   
   const addToCart = () => {
     axiosInstance

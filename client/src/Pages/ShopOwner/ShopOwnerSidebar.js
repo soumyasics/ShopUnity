@@ -86,7 +86,7 @@ function ShopOwnerSidebar() {
                   <p to="" className="sidebar-para mb-1 ms-3">{data.shopname}</p>
                 </Col>
               </Row>
-          </div>
+          </div> 
           <div className="sidebar-div2-color flex-grow-1">
             <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
               <li className="nav-item" style={{ marginTop: "55%" }}>

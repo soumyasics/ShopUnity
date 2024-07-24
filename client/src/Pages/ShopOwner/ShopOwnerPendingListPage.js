@@ -18,14 +18,14 @@ function ShopOwnerPendingListPage({ url }) {
   const [isDisabled, setisDisabled] = useState(false);
   const handleClose = () => setShow(false);
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("shopownertoken") == null &&
-      localStorage.getItem("shopowner") == null
-    ) {
-      navigate("/shopownerlogin");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("shopownertoken") == null &&
+  //     localStorage.getItem("shopowner") == null
+  //   ) {
+  //     navigate("/shopownerlogin");
+  //   }
+  // }, [navigate]);
 
   const handleShow = (shopownerid) => {
     setShow(true);
