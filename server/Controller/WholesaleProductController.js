@@ -88,7 +88,7 @@ const editProductBywholesalerId = (req, res) => {
 
 // Other functions remain unchanged
 const viewAllwholesaleProducts = (req, res) => {
-    wholesaleProduct.find()
+    wholesaleProduct.find().populate("wholesaledealer")
     .then(products => {
       res.status(200).json({
         status: 200,

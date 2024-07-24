@@ -7,10 +7,12 @@ import ShopOwnerSidebar from './ShopOwnerSidebar';
 import { HiOutlineShoppingCart } from 'react-icons/hi';
 import plus from '../../images/plus.png'
 import minus from '../../images/minus.png'
+import axiosInstance from '../../APIS/axiosinstatnce';
 function DealerComparion(url) {
 
   const [searchQuery, setSearchQuery] = useState("");
   const[count,setCount]=useState(1);
+  const[data,setData]=useState()
   const navigate=useNavigate();
 
   const increment = () =>{
@@ -25,6 +27,14 @@ function DealerComparion(url) {
   }
 
 
+  useEffect(() => {
+    axiosInstance.post(`/view_all_product_bywholesale`)
+    .then((res) => {
+      if(res.data.status === 200){
+
+      }
+    })
+  })
   // useEffect(() => {
   //   if (
   //     localStorage.getItem("shopownertoken") == null &&
