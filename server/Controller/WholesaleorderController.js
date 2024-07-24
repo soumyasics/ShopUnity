@@ -160,8 +160,7 @@ const viewOrdersByshopowner = async (req, res) => {
 };
 
 const viewAllShopownerOrders = (req, res) => {
-  wholesaleOrderModel.find()
-  .populate("c")
+  wholesaleOrderModel.find().populate("shopownerid")
     .then(orders => {
       res.status(200).json({
         status: 200,

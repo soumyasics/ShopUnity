@@ -148,7 +148,7 @@ const viewOrdersByCustomerId = async (req, res) => {
 
 
 const viewAllCustomerorder = (req, res) => {
-  Order.find()
+  Order.find().populate("customer")
     .then(orders => {
       res.status(200).json({
         status: 200,
