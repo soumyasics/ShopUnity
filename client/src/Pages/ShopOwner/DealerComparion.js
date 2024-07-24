@@ -4,10 +4,26 @@ import { Link, useNavigate } from 'react-router-dom'
 import search from "../../images/search.png";
 import chocolate from '../../images/chocolate.png'
 import ShopOwnerSidebar from './ShopOwnerSidebar';
-function DealerComparion() {
+import { HiOutlineShoppingCart } from 'react-icons/hi';
+import plus from '../../images/plus.png'
+import minus from '../../images/minus.png'
+function DealerComparion(url) {
 
   const [searchQuery, setSearchQuery] = useState("");
+  const[count,setCount]=useState(1);
   const navigate=useNavigate();
+
+  const increment = () =>{
+    setCount(count+1)
+    console.log(count);
+  }
+  const decrement = () =>{
+      if(count > 0){
+          setCount(count-1)
+      }
+      console.log(count);
+  }
+
 
   // useEffect(() => {
   //   if (
@@ -27,22 +43,19 @@ function DealerComparion() {
       <div className='col-2 ms-5'>
         <ShopOwnerSidebar/>
       </div>
-      <div className='col-9'>
-      <div className="customer-viewproduct-back">
-        <div className="text-center pt-2">
+      <div className="col-9 ms-5 mt-1 customer-viewproduct-back p-5">
+        <div className="text-center ">
           <h2 className="customer-viewproduct-h2">Products</h2>
         </div>
         <div className="row">
-          <div className="col">
-            
-          </div>
+          <div className="col"></div>
           <div className="col"></div>
           <div className="col"></div>
           <div className="col">
-            <div className="me-5" style={{ position: "relative" }}>
+            <div className="" style={{ position: "relative" }}>
               <input
                 type="text"
-                className="shopowner-viewproduct-label ps-3"
+                className="shopowner-viewproduct-label ps-1"
                 placeholder="Search Product"
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -51,35 +64,73 @@ function DealerComparion() {
                 className="shopowner-viewproduct-imgbtn1 ms-5"
                 style={{ position: "absolute" }}
               >
-                <img src={search} className="shopowner-viewproduct-imgbtn"></img>
+                <img
+                  src={search}
+                  className="shopowner-viewproduct-imgbtn"
+                  alt="search"
+                ></img>
               </button>
             </div>
           </div>
         </div>
-        <div className="row mt-3 container ms-2">
-          {/* {filteredData.map((item) => ( */}
-            {/* <div key={item._id} className="col-md-2 mb-4"> */}
-              <Card className="">
+        <div className="row mt-3">
+          {/* {filteredData.map((item, index) => ( */}
+            <div  className="col-md-3 mb-4">
+              <Card>
                 <div className="ms-3 mt-3">
                   <label className="shopowner-viewproduct-labelcard ps-3">
                     {/* {item.productname} */}
-                    Amul
                   </label>
                 </div>
                 <div>
-                    <Link to='/shopownerWDlist'>
-                  {/* <Link to={`/customerviewproductdetail/${item._id}`}> */}
+                  <Link>
+                  {/* <Link to={`/shopownerwdviewproduct/${item._id}`}> */}
                     <img
-                    src={chocolate}
-                    //   src={`${url}${item.productimage.filename}`}
+                      // src={`${url}${item.productimage.filename}`}
                       // alt={item.productname}
                       className="customershoownerProductimg"
                     ></img>
                   </Link>
-                  <label>
-                    Amul Dark chocolate<br></br>
-                    <b>(150kg)</b>
+                </div>
+                <div className="ms-4">
+                  <label className="shopowner-viewproduct-b">
+                    <b></b>
+                    <br></br>
                   </label>
+                  <br></br>
+                  <label className="shopowner-viewproduct-b">
+                    <b>&#8377;</b>
+                  </label>
+                </div>
+                <div className="ms-4 mb-3">
+                  <div className="row">
+                    <div className="col-2">
+                      <label className="shopowner-viewproduct-b">
+                        <b>Qty</b>
+                      </label>
+                    </div>
+                    <div className="col-3">
+                      <button
+                        className="shopowner-viewproduct-minusbtn"
+                        onClick={() => decrement()}
+                      >
+                        <img src={minus} alt="minus"></img>
+                      </button>
+                    </div>
+                    <div className="col-1">
+                      <label>{count}</label>
+                      {/* <label>{item.quantity}</label> */}
+                    </div>
+                    <div className="col-2">
+                      <button
+                        className="shopowner-viewproduct-plusbtn"
+                        onClick={() => increment()}
+                      >
+                        <img src={plus} alt="plus"></img>
+                      </button>
+                    </div>
+                  </div>
+                  
                 </div>
               </Card>
             </div>
