@@ -159,9 +159,27 @@ const viewOrdersByshopowner = async (req, res) => {
   }
 };
 
+const viewAllShopownerOrders = (req, res) => {
+  wholesaleOrderModel.find()
+    .then(orders => {
+      res.status(200).json({
+        status: 200,
+        data: orders
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to retrieve orders",
+        error: err.message
+      });
+    });
+};
+
+
 module.exports = {
   shopownerplaceOrder,
   viewOrdersBywholesaledealer,
   wholesaleacceptOrderRequest,
-  viewOrdersByshopowner,
+  viewOrdersByshopowner,viewAllShopownerOrders
 };
