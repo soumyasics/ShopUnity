@@ -11,14 +11,14 @@ function CustomerviewShops() {
   const navigate = useNavigate();
   const customer = localStorage.getItem("customer");
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("customer") == null
-    ) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("customer") == null
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
 
   useEffect(() => {
     const fetchData = async () => {

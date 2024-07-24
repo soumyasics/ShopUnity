@@ -140,6 +140,21 @@ function DeliveryagentSidebar() {
                   <GrCompliance  className="ms-4"/> Complaints
                 </Link>
               </li>
+              <li className="nav-item mt-auto">
+                <Link
+                  to=""
+                  className="nav-link sidebar-logout"
+                  onClick={handleLogout}
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #FF0000 0%, #990000 100%)",
+                    margin: "25%",
+                    borderRadius: "25px",
+                  }}
+                >
+                  <RiLogoutCircleLine /> Logout
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

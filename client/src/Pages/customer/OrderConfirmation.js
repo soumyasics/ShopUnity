@@ -7,14 +7,14 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 function CustomerProductCardPage({ url }) {
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("customer") == null
-    ) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("customer") == null
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
 
   return (
     <div>

@@ -173,7 +173,7 @@ function App() {
     <Route path='/deliveryagentlogin' element={[<MainNav/>,<DeliveryagentLogin/>,<Footer/>]} />
     <Route path='/deliveryagenthome' element={[<CommonNav/>,<DeliveryagentHomepage/>]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
-    <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage url={url}/>]}/>
+    {/* <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage url={url}/>]}/> */}
     <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>]}/>
     <Route path='/deliveryagentsidebar' element={<DeliveryagentSidebar/>}/>
     <Route path='/deliveryagentmain' element={<DeliveryagentMain/>} />
@@ -264,6 +264,10 @@ function App() {
         <Route
           path="/deliveryagentprofileedit"
           element={<DeliveryagentProfileEdit url={url} />}
+        />
+        <Route
+          path="/deliveryagentcomplaint"
+          element={<DeliveryagentComplaint url={url} />}
         />
 
     <Route path='/shopownerregistration' element={[<MainNav/>,<ShopOwnerRegistration/>,<Footer/>]} />

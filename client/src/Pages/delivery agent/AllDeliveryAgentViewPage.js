@@ -27,14 +27,14 @@ function AllDeliveryAgentViewPage({url}) {
       });
   };
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("deliveryagent") == null
-    ) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("deliveryagent") == null
+  //   ) {
+  //     navigate("/deliveryagentlogin");
+  //   }
+  // }, [navigate]);
 
   useEffect(() => {
     getData();

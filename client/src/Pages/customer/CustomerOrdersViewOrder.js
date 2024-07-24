@@ -22,14 +22,14 @@ function CustomerOrdersViewOrder({ url }) {
     fetchOrders();
   }, [customerId]);
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("customer") == null
-    ) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("customer") == null
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
 
   return (
     <div>

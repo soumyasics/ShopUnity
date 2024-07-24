@@ -1,19 +1,62 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import WholesaleDealerSidebar from './WholesaleDealerSidebar'
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../APIS/axiosinstatnce';
 
 function WholesaleDealerComplaint() {
 
+    const[complaint,setComplaint]=useState({
+        complaintmsg:""
+    })
+    const[errors,setErrors]=useState({
+        complaintmsg:""
+    })
     const navigate=useNavigate();
     
-    useEffect(() => {
-        if (
-          localStorage.getItem("token") == null &&
-          localStorage.getItem("wholesaledealer") == null
-        ) {
-          navigate("/wholesaledealerlogin");
+    // useEffect(() => {
+    //     if (
+    //       localStorage.getItem("token") == null &&
+    //       localStorage.getItem("wholesaledealer") == null
+    //     ) {
+    //       navigate("/wholesaledealerlogin");
+    //     }
+    // }, [navigate]);
+    
+    const handleChange = (e) => {
+        setComplaint(e.target.value)
+    }
+
+    function validateField (fieldName,value) {
+        if (typeof value === 'string' && !value.trim()) {
+            return `${fieldName} is required`;
         }
-    }, [navigate]);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let errors={}
+        let formIsValid=true;
+
+        errors.complaintmsg=validateField("Complaint",complaint.complaintmsg);
+
+        setErrors(errors);
+
+        const wholesalerid = localStorage.getItem("wholesaledealer")
+        axiosInstance.post(`/wholesalercomplaints/${wholesalerid}`, {description : complaint})
+        .then((res) => {
+            if(res.status === 200){
+                alert("Complaint Added Successfully")
+                setComplaint("")
+            }
+            else{
+                alert("Failed to Send")
+            }
+        })
+        .catch((err) => {
+            console.error('There was an error sending the complaint!',err);
+        })
+        
+    }
 
   return (
     <div className='row'>
@@ -33,10 +76,14 @@ function WholesaleDealerComplaint() {
                         <input type='text' 
                         className='customer-complaint-divbox2  ms-4 mt-4'
                         placeholder='Enter Your Complaint Here...'
+                        onChange={handleChange}
+                        value={complaint.complaintmsg}
+                        name='complaintmsg'
                         />
                     </div> 
+                    {errors.complaintmsg && <span className='text-danger ms-5 '>{errors.complaintmsg}</span>}
                     <div className='text-center mt-5'>
-                        <button className='customer-complaint-submitbtn'>Submit</button>
+                        <button className='customer-complaint-submitbtn' onClick={handleSubmit}>Submit</button>
                     </div>          
                 </div>
             </div>
