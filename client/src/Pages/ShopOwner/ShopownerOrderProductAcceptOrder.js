@@ -9,14 +9,14 @@ function ShopownerOrderProductAcceptOrder({ url }) {
   const navigate=useNavigate()
   const shopownerid = localStorage.getItem("shopowner");
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("shopownertoken") == null &&
-      localStorage.getItem("shopowner") == null
-    ) {
-      navigate("/shopownerlogin");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("shopownertoken") == null &&
+  //     localStorage.getItem("shopowner") == null
+  //   ) {
+  //     navigate("/shopownerlogin");
+  //   }
+  // }, [navigate]);
 
   const viewData = () => {
     axiosInstance

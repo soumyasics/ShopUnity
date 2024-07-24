@@ -20,7 +20,7 @@ function ShopownerHomepage() {
         setProducts([])
     });
 
-  })
+  },[])
   return (
     <div className="container">
       <div className="shop-dash-color mt-5">

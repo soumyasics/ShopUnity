@@ -26,6 +26,15 @@ function ViewWholesalerdeliveryrequest() {
     }
   };
 
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("deliveryagent") == null
+  //   ) {
+  //     navigate("/deliveryagentlogin");
+  //   }
+  // }, [navigate]);
+
   useEffect(() => {
     getDeliveryRequests();
   }, []);

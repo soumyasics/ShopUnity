@@ -9,14 +9,14 @@ function DealerComparion() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate=useNavigate();
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("shopownertoken") == null &&
-      localStorage.getItem("shopowner") == null
-    ) {
-      navigate("/shopownerlogin");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("shopownertoken") == null &&
+  //     localStorage.getItem("shopowner") == null
+  //   ) {
+  //     navigate("/shopownerlogin");
+  //   }
+  // }, [navigate]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
