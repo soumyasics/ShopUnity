@@ -51,14 +51,14 @@ function DeliveryagentProfileEdit({url}) {
     "Wayanad"
   ];
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("deliveryagent") == null
-  //   ) {
-  //     navigate("/deliveryagentlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/deliveryagentlogin");
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;

@@ -27,14 +27,14 @@ function WholesalerShopownerNewRequest({ url }) {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("wholesaledealer") == null
-  //   ) {
-  //     navigate("/wholesaledealerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, []);
 
   useEffect(() => {
     viewData();

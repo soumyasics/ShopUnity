@@ -25,14 +25,13 @@ function ShopOwnersListPage({ url }) {
       });
   };
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("shopownertoken") == null &&
-  //     localStorage.getItem("shopowner") == null
-  //   ) {
-  //     navigate("/shopownerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("admin") == null
+    ) {
+      navigate("/admin");
+    }
+  }, []);
 
   useEffect(() => {
     getData();

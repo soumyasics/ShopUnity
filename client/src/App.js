@@ -268,6 +268,7 @@ function App() {
         <Route
           path="/deliveryagentcomplaint"
           element={<DeliveryagentComplaint url={url} />}
+          
         />
 
     <Route path='/shopownerregistration' element={[<MainNav/>,<ShopOwnerRegistration/>,<Footer/>]} />
