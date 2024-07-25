@@ -25,14 +25,14 @@ function ShopownerOrderProductCart({ url }) {
     NameonCard: "",
   });
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("shopownertoken") == null &&
-  //     localStorage.getItem("shopowner") == null
-  //   ) {
-  //     navigate("/shopownerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, []);
   
   const handleChange = (event) => {
     const { name, value } = event.target;

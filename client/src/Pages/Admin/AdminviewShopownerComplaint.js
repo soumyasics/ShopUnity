@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { GrCompliance } from 'react-icons/gr'
 import Sidebar from './Sidebar'
 import axiosInstance from '../../APIS/axiosinstatnce';
+import { useNavigate } from 'react-router-dom';
 
 function AdminviewShopownerComplaint() {
 
     const [data,setData]=useState([]);
+    const navigate=useNavigate();
 
     useEffect(() => {
         axiosInstance.post(`shopownercomplaints`,data)
@@ -22,6 +24,14 @@ function AdminviewShopownerComplaint() {
         })
     },[])
     console.log(data);
+
+    useEffect(() => {
+        if (
+          localStorage.getItem("admin") == null
+        ) {
+          navigate("/admin");
+        }
+      }, []);
 
   return (
     <div>

@@ -3,9 +3,11 @@ import Sidebar from './Sidebar'
 import '../customer/customer.css'
 import { GrCompliance } from 'react-icons/gr'
 import axiosInstance from '../../APIS/axiosinstatnce'
+import { useNavigate } from 'react-router-dom'
 function AdminCustomerComplaints() {
 
     const [data,setData]=useState([]);
+    const navigate=useNavigate();
 
     useEffect(() => {
         axiosInstance.post(`customercomplaints`,data)
@@ -22,6 +24,14 @@ function AdminCustomerComplaints() {
         })
     },[])
     console.log(data);
+
+    useEffect(() => {
+        if (
+          localStorage.getItem("admin") == null
+        ) {
+          navigate("/admin");
+        }
+      }, []);
 
   return (
     <div>

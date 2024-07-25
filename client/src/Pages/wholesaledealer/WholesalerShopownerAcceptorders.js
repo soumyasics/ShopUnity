@@ -15,14 +15,14 @@ function WholesalerShopownerAcceptorders({ url }) {
 
   const wholesaledealerid = localStorage.getItem("wholesaledealer");
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("wholesaledealer") == null
-  //   ) {
-  //     navigate("/wholesaledealerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, []);
 
   const viewData = () => {
     axiosInstance

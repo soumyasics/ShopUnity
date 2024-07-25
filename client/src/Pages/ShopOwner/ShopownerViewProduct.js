@@ -13,14 +13,14 @@ function ShopownerViewProduct({ url }) {
   const [filteredData, setfilteredData] = useState([]);
 
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("shopownertoken") == null &&
-  //     localStorage.getItem("shopowner") == null
-  //   ) {
-  //     navigate("/shopownerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, []);
 
   
   useEffect(() => {

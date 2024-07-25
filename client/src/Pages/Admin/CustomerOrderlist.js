@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
 import axiosInstance from '../../APIS/axiosinstatnce';
 
@@ -8,6 +8,7 @@ function CustomerOrderlist() {
 
     const [show,setShow]=useState(false);
     const[data,setData]=useState([]);
+    const navigate=useNavigate();
     const[customerData,setCustomerData]=useState({})
     const handleClose = () => setShow(false);
 
@@ -37,6 +38,13 @@ function CustomerOrderlist() {
         })
     },[]);
 
+    useEffect(() => {
+        if (
+          localStorage.getItem("admin") == null
+        ) {
+          navigate("/admin");
+        }
+      }, []);
 
   return (
     <div>
@@ -108,73 +116,74 @@ function CustomerOrderlist() {
             <Modal show={show} onHide={handleClose} closeButton>
                 <Modal.Header closeButton>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className='row'>
-                        <div className='col-5'>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>Customer Name</label>
+                {data.map ((item) => (
+                    <Modal.Body>
+                        <div className='row'>
+                            <div className='col-5'>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>Customer Name</label>
+                                </div>
+                                {/* <div>
+                                    <label className='admin-customer-complaint-label12'>Shop Name</label>
+                                </div> */}
                             </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>Shop Name</label>
+                            <div className='col-1'>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>:</label>
+                                </div>
+                                {/* <div>
+                                    <label className='admin-customer-complaint-label12'>:</label>
+                                </div> */}
+                            </div>
+                            <div className='col-6'>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>{item?.customer?.name}</label>
+                                </div>
+                                {/* <div>
+                                    <label className='admin-customer-complaint-label12'></label>
+                                </div> */}
                             </div>
                         </div>
-                        <div className='col-1'>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>:</label>
+                        <div className='text-center'>
+                            <h5 className='admin-customer-order-list-h5'>Order Details</h5>
+                        </div>
+                        <div className='row'>
+                            <div className='col-5'>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>Total Amount</label>
+                                </div>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>Payment Status</label>
+                                </div>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>Track Delivery Status</label>
+                                </div>    
                             </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>:</label>
+                            <div className='col-1'>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>:</label>
+                                </div>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>:</label>
+                                </div>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>:</label>
+                                </div>   
+                            </div>
+                            <div className='col-6'>
+                                <div>
+                                    <label className='admin-customer-complaint-label12'>&#8377; {item.totalAmount}</label>
+                                </div>
+                                <div>
+                                    <label className='admin-customer-complaint-success'>{item.paymentStatus}</label>
+                                </div>
+                                <div>
+                                    <label className='admin-customer-complaint-pending'>{item.orderStatus}</label>
+                                </div>    
                             </div>
                         </div>
-                        <div className='col-6'>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>{customerData.customer}</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>{customerData.shopname}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='text-center'>
-                        <h5 className='admin-customer-order-list-h5'>Order Details</h5>
-                    </div>
-                    <div className='row'>
-                        <div className='col-5'>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>Total Amount</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>Payment Status</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>Track Delivery Status</label>
-                            </div>    
-                        </div>
-                        <div className='col-1'>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>:</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>:</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>:</label>
-                            </div>   
-                        </div>
-                        <div className='col-6'>
-                            <div>
-                                <label className='admin-customer-complaint-label12'>&#8377; {customerData.totalAmount}</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-success'>{customerData.paymentStatus}</label>
-                            </div>
-                            <div>
-                                <label className='admin-customer-complaint-pending'>{customerData.orderStatus}</label>
-                            </div>    
-                        </div>
-                    </div>
-                </Modal.Body>
-                
+                    </Modal.Body>
+                ))}
             </Modal>
         </>
     </div>

@@ -32,14 +32,14 @@ function DeliveryAgentDeliveryUpdate() {
     }
   };
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("deliveryagent") == null
-  //   ) {
-  //     navigate("/deliveryagentlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("deliveryagent") == null
+    ) {
+      navigate("/deliveryagentlogin");
+    }
+  }, []);
 
   useEffect(() => {
     getDeliveryRequests();

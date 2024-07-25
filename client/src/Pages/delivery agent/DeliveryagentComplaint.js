@@ -16,14 +16,14 @@ function DeliveryagentComplaint() {
 
     const navigate = useNavigate();
     
-    // useEffect(() => {
-    //     if (
-    //       localStorage.getItem("token") == null &&
-    //       localStorage.getItem("deliveryagent") == null
-    //     ) {
-    //       navigate("/deliveryagentlogin");
-    //     }
-    //   }, [navigate]);
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("deliveryagent") == null
+        ) {
+          navigate("/deliveryagentlogin");
+        }
+      }, []);
 
     const handleChange = (e) => {
         setComplaint(e.target.value)

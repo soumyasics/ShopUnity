@@ -11,14 +11,14 @@ function ShopownerViewWholesaleDealer() {
   const navigate=useNavigate()
   const shopowner = localStorage.getItem("shopowner");
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("shopownertoken") == null &&
-  //     localStorage.getItem("shopowner") == null
-  //   ) {
-  //     navigate("/shopownerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

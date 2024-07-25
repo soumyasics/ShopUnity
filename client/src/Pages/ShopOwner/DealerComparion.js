@@ -28,14 +28,14 @@ function DealerComparion({url}) {
     console.log(data);
   },[])
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("shopownertoken") == null &&
-  //     localStorage.getItem("shopowner") == null
-  //   ) {
-  //     navigate("/shopownerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("shopownertoken") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);

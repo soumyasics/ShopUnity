@@ -13,14 +13,14 @@ function WholesaleDealerComplaint() {
     })
     const navigate=useNavigate();
     
-    // useEffect(() => {
-    //     if (
-    //       localStorage.getItem("token") == null &&
-    //       localStorage.getItem("wholesaledealer") == null
-    //     ) {
-    //       navigate("/wholesaledealerlogin");
-    //     }
-    // }, [navigate]);
+    useEffect(() => {
+        if (
+          localStorage.getItem("token") == null &&
+          localStorage.getItem("wholesaledealer") == null
+        ) {
+          navigate("/wholesaledealerlogin");
+        }
+    }, []);
     
     const handleChange = (e) => {
         setComplaint(e.target.value)

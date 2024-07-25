@@ -50,14 +50,14 @@ function WholesaleDealerAddProduct() {
     }
   };
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("wholesaledealer") == null
-  //   ) {
-  //     navigate("/wholesaledealerlogin");
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("wholesaledealer") == null
+    ) {
+      navigate("/wholesaledealerlogin");
+    }
+  }, []);
 
   const validateField = (name, value) => {
     let error = '';
