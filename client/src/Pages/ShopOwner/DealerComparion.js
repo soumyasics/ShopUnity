@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Card } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import search from "../../images/search.png";
-import chocolate from '../../images/chocolate.png'
 import ShopOwnerSidebar from './ShopOwnerSidebar';
-import { HiOutlineShoppingCart } from 'react-icons/hi';
-import plus from '../../images/plus.png'
-import minus from '../../images/minus.png'
 import axiosInstance from '../../APIS/axiosinstatnce';
-function DealerComparion({url}) {
 
+function DealerComparion({ url }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const[data,setData]=useState([])
-  const navigate=useNavigate();
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance.post(`/view_all_product_bywholesale`)
-    .then((res) => {
-      if(res.status === 200){
-        setData(res.data.data)
-        console.log(res.data.data);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    console.log(data);
-  },[])
+      .then((res) => {
+        if (res.status === 200) {
+          setData(res.data.data);
+          console.log(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     if (
@@ -35,20 +30,25 @@ function DealerComparion({url}) {
     ) {
       navigate("/shopownerlogin");
     }
-  }, []);
+  }, [navigate]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  const filteredData = data.filter((item) =>
+    item.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.brandname?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className='row'>
       <div className='col-2 ms-5'>
-        <ShopOwnerSidebar/>
+        <ShopOwnerSidebar />
       </div>
       <div className="col-9 ms-5 mt-1 customer-viewproduct-back p-5">
         <div className="text-center ">
-          <h2 className="customer-viewproduct-h2">Products</h2>
+          <h2 className="customer-viewproduct-h2">Products Comparison</h2>
         </div>
         <div className="row">
           <div className="col"></div>
@@ -62,7 +62,7 @@ function DealerComparion({url}) {
                 placeholder="Search Product"
                 value={searchQuery}
                 onChange={handleSearchChange}
-              ></input>
+              />
               <button
                 className="shopowner-viewproduct-imgbtn1 ms-5"
                 style={{ position: "absolute" }}
@@ -71,14 +71,14 @@ function DealerComparion({url}) {
                   src={search}
                   className="shopowner-viewproduct-imgbtn"
                   alt="search"
-                ></img>
+                />
               </button>
             </div>
           </div>
         </div>
         <div className="row mt-3">
-          {data.map((item) => (
-            <div  className="col-md-4 mb-4">
+          {filteredData.map((item) => (
+            <div className="col-md-4 mb-4" key={item._id}>
               <Card>
                 <div className="ms-3 mt-3">
                   <label className="shopowner-viewproduct-labelcard ps-3">
@@ -86,21 +86,20 @@ function DealerComparion({url}) {
                   </label>
                 </div>
                 <div>
-                  <Link>
-                  {/* <Link to={`/shopownerwdviewproduct/${item._id}`}> */}
+                  <Link to={`/shopownerwdviewproduct/${item._id}`}>
                     <img
                       src={`${url}${item.productimage.filename}`}
                       alt={item.productname}
                       className="customershoownerProductimg"
-                    ></img>
+                    />
                   </Link>
                 </div>
                 <div className="ms-4">
                   <label className="shopowner-viewproduct-b">
-                    <b></b>
-                    <br></br>
+                    <b>{item.brandname}</b>
+                    <br />
                   </label>
-                  <br></br>
+                  <br />
                   <label className="shopowner-viewproduct-b">
                     <b>&#8377;{item.price}</b>
                   </label>
@@ -130,26 +129,23 @@ function DealerComparion({url}) {
                   </div>
                   <div className='col-6'>
                     <div>
-                        <label>{item?.wholesaledealer?.storeName}</label>
-                      </div>
-                      <div>
-                        <label>{item?.wholesaledealer?.districts}</label>
-                      </div>
-                      <div>
-                        <label>{item?.wholesaledealer?.dealername}</label>
-                      </div>
+                      <label>{item?.wholesaledealer?.storeName}</label>
                     </div>
-                  <div>
+                    <div>
+                      <label>{item?.wholesaledealer?.districts}</label>
+                    </div>
+                    <div>
+                      <label>{item?.wholesaledealer?.dealername}</label>
+                    </div>
                   </div>
                 </div>
               </Card>
             </div>
-           ))} 
-       </div>
+          ))}
+        </div>
       </div>
-      </div>
-    
-  )
+    </div>
+  );
 }
 
-export default DealerComparion
+export default DealerComparion;

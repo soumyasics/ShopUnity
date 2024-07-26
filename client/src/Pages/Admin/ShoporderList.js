@@ -9,9 +9,24 @@ function ShoporderList() {
     const[show,setShow]=useState(false)
     const navigate=useNavigate();
     const[data,setData]=useState([])
+    const[oneData,setOneData]=useState({})
+
     const[shopownerData,setShopownerData]=useState({})
     const handleClose = () => setShow(false);
-    const handleShow = () => {
+
+    const handleShow = (id) => {
+
+        axiosInstance.post(`/viewAllShopownerorderbyorderid/`+id)
+        .then((res) => {
+            console.log(res);
+            if(res.status === 200){
+                setOneData(res.data.data)
+            }
+        })
+        .catch((err) => {
+            console.log("Error",err);
+        })
+
         setShow(true);
         const shopownerid = localStorage.getItem("shopowner")
         axiosInstance.get(`/get_a_shopowner/${shopownerid}`,shopownerData)
@@ -94,7 +109,7 @@ function ShoporderList() {
                                     <button
                                     className="rounded-pill px-3 border-none"
                                     id="wholesale-alldealer-viewpage-viewbtn"
-                                    onClick={handleShow}
+                                    onClick={()=>handleShow(item._id)}
                                     >
                                     View 
                                     </button>
@@ -109,7 +124,6 @@ function ShoporderList() {
             <Modal show={show} onHide={handleClose} closeButton>
                 <Modal.Header closeButton>
                 </Modal.Header>
-                {data.map((item) => (
                     <Modal.Body>
                         <div className='row'>
                             <div className='col-5'>
@@ -124,7 +138,7 @@ function ShoporderList() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>{item.shopownerid?.shopname}</label>
+                                    <label className='admin-customer-complaint-label12'>{oneData.shopownerid?.shopname}</label>
                                 </div>
                             </div>
                         </div>
@@ -156,20 +170,17 @@ function ShoporderList() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>&#8377; {item.totalAmount}</label>
+                                    <label className='admin-customer-complaint-label12'>&#8377; {oneData.totalAmount}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-success'>{item.paymentStatus}</label>
+                                    <label className='admin-customer-complaint-success'>{oneData.paymentStatus}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-pending'>{item.deliveryStatus}</label>
+                                    <label className='admin-customer-complaint-pending'>{oneData.deliveryStatus}</label>
                                 </div>    
                             </div>
                         </div>
-                    </Modal.Body>
-
-                ))}
-                
+                    </Modal.Body>                
                 
             </Modal>
         </>

@@ -29,13 +29,17 @@ function ShopownerViewWDProductView({ url }) {
     axiosInstance
       .post(`/view_all_product_bywholesale`)
       .then((res) => {
+        console.log(res.data.data,"p");
         const productsWithQuantity = res.data.data.map((product) => ({
           ...product,
           quantity: 1,
         }));
+        
+        console.log(productsWithQuantity,"l");
         const filteredProducts = productsWithQuantity.filter(
-          (product) => product.wholesaledealer === whosaleid
+          (product) => product.wholesaledealer._id === whosaleid
         );
+        console.log(filteredProducts,"k");
         setData(filteredProducts);
       })
       .catch((err) => {
