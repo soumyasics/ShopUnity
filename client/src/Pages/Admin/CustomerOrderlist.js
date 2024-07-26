@@ -8,12 +8,28 @@ function CustomerOrderlist() {
 
     const [show,setShow]=useState(false);
     const[data,setData]=useState([]);
+    const[oneData,setOneData]=useState({})
+
     const navigate=useNavigate();
     const[customerData,setCustomerData]=useState({})
     const handleClose = () => setShow(false);
 
-    const handleShow = () => {
+    const handleShow = (id) => {
+
         setShow(true);
+
+        axiosInstance.post(`/viewAllCustomerorderbyorderid/`+id)
+        .then((res) => {
+            console.log(res);
+            if(res.status === 200){
+                setOneData(res.data.data)
+            }
+        })
+        .catch((err) => {
+            console.log("Error",err);
+        })
+
+
         const customerid=localStorage.getItem("customer")
         axiosInstance.get(`get_a_customer/${customerid}`,data)
         .then((res) => {
@@ -36,6 +52,9 @@ function CustomerOrderlist() {
         .catch((err) => {
             console.log("Error",err);
         })
+
+        
+
     },[]);
 
     useEffect(() => {
@@ -45,6 +64,8 @@ function CustomerOrderlist() {
           navigate("/admin");
         }
       }, []);
+
+      
 
   return (
     <div>
@@ -116,7 +137,7 @@ function CustomerOrderlist() {
             <Modal show={show} onHide={handleClose} closeButton>
                 <Modal.Header closeButton>
                 </Modal.Header>
-                {data.map ((item) => (
+              
                     <Modal.Body>
                         <div className='row'>
                             <div className='col-5'>
@@ -137,7 +158,7 @@ function CustomerOrderlist() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>{item?.customer?.name}</label>
+                                    <label className='admin-customer-complaint-label12'>{oneData?.customer?.name}</label>
                                 </div>
                                 {/* <div>
                                     <label className='admin-customer-complaint-label12'></label>
@@ -172,18 +193,17 @@ function CustomerOrderlist() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>&#8377; {item.totalAmount}</label>
+                                    <label className='admin-customer-complaint-label12'>&#8377; {oneData.totalAmount}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-success'>{item.paymentStatus}</label>
+                                    <label className='admin-customer-complaint-success'>{oneData.paymentStatus}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-pending'>{item.orderStatus}</label>
+                                    <label className='admin-customer-complaint-pending'>{oneData.orderStatus}</label>
                                 </div>    
                             </div>
                         </div>
                     </Modal.Body>
-                ))}
             </Modal>
         </>
     </div>
