@@ -285,7 +285,7 @@ function App() {
     <Route path='/shopownercustomerorderrequest' element={[<ShopownerCustomerOrderRequest url={url}/>]} />
     <Route path='/shopownercustomerorderaccept' element={[<ShopownerCustomerOrderAccept url={url} />]} />
     <Route path='/shopownerviewwholesaledealer' element={[<ShopownerViewWholesaleDealer/>]} />
-    <Route path='/shopownerviewwdproductview/:whosaleid' element={[<ShopownerViewWDProductView url={url} />,<Footer />]} />
+    <Route path='/shopownerviewwdproductview/:whosaleid' element={[<ShopownerViewWDProductView url={url} />]} />
     <Route path='/shopownerorderproductviewproduct' element={[<Shopownerorderproductviewproduct/>,<Footer />]} />
     <Route path='/shopownerwdviewproduct/:productid' element={[<Shopownerwdviewproduct url={url} />,<Footer />]} />
     <Route path='/shopownerorderproductcart' element={[<ShopownerOrderProductCart url={url} />]} />
