@@ -69,7 +69,7 @@ function ShopownerHomepage() {
           </div>
         </section>
       </div>
-      <Footer/>
+      
     </div>
   );
 }
