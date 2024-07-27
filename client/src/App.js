@@ -354,8 +354,6 @@ function App() {
         <Route path="/adminviewdeliveryagentcomplaint" element={[<AdminviewDeliveryAgentComplaints/>,<Footer />]} />
         <Route path="/adminviewwholesalercomplaint" element={[<AdminviewWholesalerComplaints/>,<Footer />]} />
 
-
-
       </Routes>
     </BrowserRouter>
   );
