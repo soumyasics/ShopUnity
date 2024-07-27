@@ -5,6 +5,7 @@ import { BiImageAdd } from 'react-icons/bi';
 import { FaPlus } from 'react-icons/fa6';
 import ShopOwnerSidebar from './ShopOwnerSidebar';
 import axiosInstance from '../../APIS/axiosinstatnce';
+import Footer from '../Footer';
 
 function ShopAddItem() {
   const [profileImage, setProfileImage] = useState(null);
@@ -322,8 +323,11 @@ function ShopAddItem() {
               </div>
             </div>
           </div>
+          
         </div>
+       
       </div>
+      
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { BsBoxes } from "react-icons/bs";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { MdNoSim } from "react-icons/md";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import Footer from "../Footer";
 function ShopownerHomepage() {
   const[products,setProducts]=useState([])
   const[added,setAdded]=useState([])
@@ -22,7 +23,7 @@ function ShopownerHomepage() {
 
   },[])
   return (
-    <div className="container">
+    <div>
       <div className="shop-dash-color mt-5">
         <section className="pt-5">
           <div className="row container-fluid">
@@ -68,6 +69,7 @@ function ShopownerHomepage() {
           </div>
         </section>
       </div>
+      
     </div>
   );
 }

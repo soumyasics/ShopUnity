@@ -6,6 +6,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { FaBoxOpen } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import { GrDeliver } from "react-icons/gr";
+import Footer from "../Footer";
 function AdminHome() {
   const [customers, setCustomers] = useState([]);
   const [shopOwners, setShopOwners] = useState([]);
@@ -130,6 +131,7 @@ function AdminHome() {
           </div>
         </section>
       </div>
+      <Footer/>
     </div>
   );
 }
