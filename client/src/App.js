@@ -359,7 +359,7 @@ function App() {
         <Route path="/adminviewshopownercomplaint" element={<AdminviewShopownerComplaint/>} />
         <Route path="/adminviewdeliveryagentcomplaint" element={<AdminviewDeliveryAgentComplaints/>} />
         <Route path="/adminviewwholesalercomplaint" element={<AdminviewWholesalerComplaints/>} />
-
+        <Route path="/adminviewwholesalercomplaint" element={<AdminviewWholesalerComplaints/>} />
 
 
       </Routes>
