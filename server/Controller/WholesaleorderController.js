@@ -118,14 +118,14 @@ const wholesaleacceptOrderRequest = async (req, res) => {
 };
 
 const viewOrdersByshopowner = async (req, res) => {
-  const shopowner = req.params.shopowner;
+  const shopowner = req.params.shopownerid;
 
   try {
     const orders = await wholesaleOrderModel
       .find({ shopownerid: shopowner })
       .populate({
         path: "products.pid",
-        model: "WholesaleProduct",
+        model: "wholesaleProduct",
       });
 
     if (!orders || orders.length === 0) {
