@@ -93,8 +93,8 @@ import AdminviewWholesalerComplaints from "./Pages/Admin/AdminviewWholesalerComp
 
 
 function App() {
-  // const url="http://hybrid.srishticampus.in:4028/"
-  const url = "http://localhost:4028/";
+  const url="http://hybrid.srishticampus.in:4028/"
+  // const url = "http://localhost:4028/";
 
   return (
     <BrowserRouter basename="/shopunity">
@@ -347,12 +347,14 @@ function App() {
           element={[<ShopOwnerList url={url} />,<Footer />]}
         ></Route>
 
-        <Route path="/admincustomercomplaints" element={[<AdminCustomerComplaints/>,<Footer />]} />
-        <Route path="/adminviewcustomerorderlist" element={[<CustomerOrderlist/>,<Footer />]} />
-        <Route path="/adminviewshoporderlist" element={[<ShoporderList/>,<Footer />]} />
-        <Route path="/adminviewshopownercomplaint" element={[<AdminviewShopownerComplaint/>]} />
-        <Route path="/adminviewdeliveryagentcomplaint" element={[<AdminviewDeliveryAgentComplaints/>,<Footer />]} />
-        <Route path="/adminviewwholesalercomplaint" element={[<AdminviewWholesalerComplaints/>,<Footer />]} />
+        <Route path="/admincustomercomplaints" element={<AdminCustomerComplaints/>} />
+        <Route path="/adminviewcustomerorderlist" element={<CustomerOrderlist/>} />
+        <Route path="/adminviewshoporderlist" element={<ShoporderList/>} />
+        <Route path="/adminviewshopownercomplaint" element={<AdminviewShopownerComplaint/>} />
+        <Route path="/adminviewdeliveryagentcomplaint" element={<AdminviewDeliveryAgentComplaints/>} />
+        <Route path="/adminviewwholesalercomplaint" element={<AdminviewWholesalerComplaints/>} />
+        <Route path='/shopownerorderproductacceptorder' element={<ShopownerOrderProductAcceptOrder url={url} />} />
+
 
       </Routes>
     </BrowserRouter>

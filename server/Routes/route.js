@@ -129,7 +129,7 @@ Route.post("/deleteitemfromshopownercart",wholesaledealerCartcontroller.productd
 Route.post("/shopownerplaceorder",wholesaledealerordercontroller.shopownerplaceOrder)
 Route.post("/vieworderswholesaledealerId/:wholesaledealerid",wholesaledealerordercontroller.viewOrdersBywholesaledealer)
 Route.post("/acceptOrderRequestbywholesaler/:orderid",wholesaledealerordercontroller.wholesaleacceptOrderRequest)
-Route.post("/viewOrdersByCustomerId/:customerId",wholesaledealerordercontroller.viewOrdersByshopowner)
+Route.post("/viewOrdersByShopowner/:shopownerid",wholesaledealerordercontroller.viewOrdersByshopowner)
 Route.post("/wholesalerassignDeliveryAgent",WholesaleController.wholesalerassignDeliveryAgent)
 Route.post("/viewAllShopownerOrders",wholesaledealerordercontroller.viewAllShopownerOrders)
 
