@@ -154,7 +154,7 @@ function App() {
 
     <Route path='/customerregistration' element={ [<MainNav/>,<CustomerRegistration/>,<Footer/>]} />
     <Route path='/customerlogin' element={[<MainNav/>,<CustomerLogin/>,<Footer/>]} />
-    <Route path='/customerhome' element={[<CustomerHomePage/>,<Footer />]} />
+    <Route path='/customerhome' element={[<CustomerHomePage/>]} />
     <Route path='/customerforget' element={[<MainNav/>,<ForgetPswdCustomer/>,<Footer/>]} />
     <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>,<Footer />]} />
     <Route path='/customerprofile' element={[<CustomerProfile/>,<Footer />]} />
@@ -294,7 +294,8 @@ function App() {
     <Route path='/shopownercomplaint' element={[<ShopownerComplaint />]} />
     <Route path='/shopownerWDlist' element={[<ShopownerWholesaleDealerList />,<Footer />]} />
     <Route path='/shopownerdealercomparison' element={[<DealerComparion url={url}/>]} />
-    <Route path='/shopownernotification' element={[<ShopownerNotification />]} />
+
+   {/* <Route path='/shopownernotification' element={[<ShopownerNotification />]} /> */} 
 
 
 {/* Admin */}

@@ -10,42 +10,43 @@ function ShopownerOrderProductAcceptOrder({ url }) {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       const response = await axiosInstance.post(`/viewOrdersByCustomerId/${customerId}`);
-  //       setOrders(response.data.data);
-  //     } catch (error) {
-  //       console.error('Error fetching orders:', error);
-  //     }
-  //   };
-
-  //   fetchOrders();
-  // }, [customerId]);
-
   useEffect(() => {
-    axiosInstance.post(`/viewOrdersByShopowner/${shopownerid}`,orders)
-    .then((res) => {
-      console.log(res);
-      if(res.data.status === 200){
-        
-        setOrders(res.status.message)
-        console.log("View Successfully");
+    const fetchOrders = async () => {
+      try {
+        const response = await axiosInstance.post(`/viewOrdersByShopowner/${shopownerid}`);
+        setOrders(response.data.data);
+        console.log(response,"oo");
+      } catch (error) {
+        console.error('Error fetching orders:', error);
       }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  })
+    };
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") == null &&
-      localStorage.getItem("shopownerid") == null
-    ) {
-      navigate("/shopownerlogin");
-    }
-  }, []);
+    fetchOrders();
+  }, [shopownerid]);
+
+  // useEffect(() => {
+  //   axiosInstance.post(`/viewOrdersByShopowner/${shopownerid}`)
+  //   .then((res) => {
+  //     console.log(res);
+  //     if(res.data.status === 200){
+        
+  //       setOrders(res.status.message)
+  //       console.log("View Successfully");
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // })
+
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem("token") == null &&
+  //     localStorage.getItem("shopowner") == null
+  //   ) {
+  //     navigate("/shopownerlogin");
+  //   }
+  // }, []);
 
   return (
     <>
