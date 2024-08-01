@@ -67,14 +67,21 @@ function WholesaleDealerLogin() {
         .then((res) => {
           console.log("Response:", res); // Log the entire response
           if (res.status === 200) {
-            const { data: responseData } = res;
-            console.log("Login Successfully", responseData);
-            alert("Login Successfully");
-            Navigate("/wholesalermain");
-            localStorage.setItem("wholesaledealer", responseData.id);
-            localStorage.setItem("storeName", responseData.storeName);
-            localStorage.setItem("token", responseData.token);
-
+            if(res.data.ActiveStatus === false){
+              alert(
+                "Profile inactivated. Please contact admin for further information"
+              );
+            }
+            else{
+              const { data: responseData } = res;
+              console.log("Login Successfully", responseData);
+              alert("Login Successfully");
+              Navigate("/wholesalermain");
+              localStorage.setItem("wholesaledealer", responseData.id);
+              localStorage.setItem("storeName", responseData.storeName);
+              localStorage.setItem("token", responseData.token);  
+            }
+            
           } else {
             alert("Logged in Failed", res);
             console.log("Error", res);

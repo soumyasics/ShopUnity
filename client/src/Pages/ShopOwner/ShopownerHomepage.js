@@ -8,7 +8,7 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 import Footer from "../Footer";
 function ShopownerHomepage() {
   const[products,setProducts]=useState([])
-  const[added,setAdded]=useState([])
+  const[added,setAdded]=useState([])  
   const[unsold,setUnsold]=useState([])
 
   useEffect (() => {
