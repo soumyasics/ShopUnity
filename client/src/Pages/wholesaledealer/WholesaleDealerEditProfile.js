@@ -215,20 +215,19 @@ function WholesaleDealerEditProfile() {
                             </div>
                             <div>
                                 <label className="container-fluid font" id="font">District</label>
-                                <select
-                                    className="form-control m-2"
-                                    id="shopprofile-editpage-text2"
-                                    name="districts"
-                                    value={data.districts}
-                                    onChange={handleChange}
-                                >
-                                    <option>Select District</option>
-                                    {districts.map((district, index) => (
-                                        <option key={index} value={district}>{districts}</option>
-                                    ))}
-                                </select>
-                                {errors.districts && <div className="text-danger color">{errors.districts}</div>}
-                            </div>
+                                <select className="form-control m-2" 
+                                                    id="shopprofile-editpage-text2"
+                                                    
+                                                        name="shopownerdistrict" 
+                                                        
+                                                        onChange={handleChange}
+                                                        >
+                                                            <option >Select District</option>
+                                                            {districts.map((district, index) => (
+                                                                <option key={index}  placeholde={data.shopownerdistrict}>{district}</option>
+                                                            ))}
+                                    </select>
+                                </div>
                             <div>
                                 <label className="container-fluid font" id="font">City</label>
                                 <input

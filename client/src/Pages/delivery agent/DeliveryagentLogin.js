@@ -66,12 +66,21 @@ function DeliveryagentLogin() {
         if (response.data && response.data.token) {
           if (response.data.status === "pending") {
             alert("Your account is pending admin approval.");
-          } else if (response.data.status === "accepted") {
-            alert("Login successful!"); // Successful login alert
-            localStorage.setItem("deliveryagent", response.data.id);
-            localStorage.setItem("token", response.data.token);
-            navigate("/deliveryagentmain"); // Adjust path based on your routing setup
+          } 
+          else if(response.data.status === "accepted") {
+            if(response.data.ActiveStatus === false){
+              alert(
+                "Profile inactivated. Please contact admin for further information"
+              );
+            }
+            else if (response.data.status === "accepted") {
+              alert("Login successful!"); // Successful login alert
+              localStorage.setItem("deliveryagent", response.data.id);
+              localStorage.setItem("token", response.data.token);
+              navigate("/deliveryagentmain"); // Adjust path based on your routing setup
+            }
           }
+          
         } else {
           setErrors({
             email: "Login failed. Please try again.",

@@ -72,7 +72,7 @@ function ShopOwnerLogin() {
             result.data;
 
           if (status === "pending") {
-            alert("Waiting for admin approval");
+            alert("Waiting for admin approval");  
           } else if (status === "accepted") {
             if (ActiveStatus === false) {
               alert(
