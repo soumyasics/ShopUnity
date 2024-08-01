@@ -167,11 +167,12 @@ function ShopOwnerSidebar() {
                 </Link>
               </li>
 
-              <li className="nav-item">
+              {/*<li className="nav-item">
                 <Link to="/shopownernotification" className="nav-link sidebar-shop">
                   <FaBell className="ms-5"/> Notification
                 </Link>
-              </li>
+              </li>*/} 
+              
               <li className="nav-item">
                 <Link to="/shopownercomplaint" className="nav-link sidebar-shop">
                   <GrCompliance className="ms-5"/> Complaints

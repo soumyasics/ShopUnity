@@ -294,7 +294,8 @@ function App() {
     <Route path='/shopownercomplaint' element={[<ShopownerComplaint />]} />
     <Route path='/shopownerWDlist' element={[<ShopownerWholesaleDealerList />,<Footer />]} />
     <Route path='/shopownerdealercomparison' element={[<DealerComparion url={url}/>]} />
-    <Route path='/shopownernotification' element={[<ShopownerNotification />]} />
+
+   {/* <Route path='/shopownernotification' element={[<ShopownerNotification />]} /> */} 
 
 
 {/* Admin */}
