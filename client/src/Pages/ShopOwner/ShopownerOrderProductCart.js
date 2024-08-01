@@ -160,7 +160,7 @@ function ShopownerOrderProductCart({ url }) {
         .post("/shopownerplaceorder", orderData)
         .then((res) => {
           alert(res.data.message);
-          navigate('/shopownerorderproductviewproduct');
+          navigate('/shopownerviewwdproductslist');
           // Optionally, you can update the UI or redirect the user after placing the order
         })
         .catch((err) => {

@@ -78,7 +78,7 @@ import ShopownerViewproductList from "./Pages/ShopOwner/ShopownerViewproductList
 import ViewWholesalerdeliveryrequest from "./Pages/delivery agent/ViewWholesalerdeliveryrequest";
 import DeliveryagentComplaint from "./Pages/delivery agent/DeliveryagentComplaint";
 import WholesaleDealerComplaint from "./Pages/wholesaledealer/WholesaleDealerComplaint";
-import Complaints from "./Pages/Admin/AdminCustomerComplaints";
+// import Complaints from "./Pages/Admin/AdminCustomerComplaints";
 import ShopownerComplaint from "./Pages/ShopOwner/ShopownerComplaint";
 import CustomerComplaint from "./Pages/customer/CustomerComplaint";
 import CustomerOrderlist from "./Pages/Admin/CustomerOrderlist";
@@ -93,8 +93,8 @@ import AdminviewWholesalerComplaints from "./Pages/Admin/AdminviewWholesalerComp
 
 
 function App() {
-  const url="http://hybrid.srishticampus.in:4028/"
-  // const url = "http://localhost:4028/";
+  // const url="http://hybrid.srishticampus.in:4028/"
+  const url = "http://localhost:4028/";
 
   return (
     <BrowserRouter basename="/shopunity">
@@ -159,12 +159,12 @@ function App() {
     <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>,<Footer />]} />
     <Route path='/customerprofile' element={[<CustomerProfile/>,<Footer />]} />
     <Route path='/customereditprofile' element={[<CustomerEditProfile/>,<Footer />]} />
-    <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>,<Footer />]} />
-    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewallproduct url={url}/>,<Footer />]} />
+    <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
+    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewallproduct url={url}/>]} />
     <Route path='/customerviewproductdetail' element={[<CustomerViewProductDetail url={url}/>,<Footer />]} />
     <Route path='/customerproductcardpage' element={[<CustomerProductCardPage/>,<Footer />]} />
     <Route path='/customerordervieworder' element={[<CustomerOrdersViewOrder url={url} />,<Footer />]} />
-    <Route path='/customercomplaints' element={[<CustomerComplaint />,<Footer />]} />
+    {/* <Route path='/customercomplaints' element={[<CustomerComplaint />,<Footer />]} /> */}
 
 
 {/* deliveryagent */}
@@ -286,7 +286,7 @@ function App() {
     <Route path='/shopownercustomerorderaccept' element={[<ShopownerCustomerOrderAccept url={url} />]} />
     <Route path='/shopownerviewwholesaledealer' element={[<ShopownerViewWholesaleDealer/>]} />
     <Route path='/shopownerviewwdproductview/:whosaleid' element={[<ShopownerViewWDProductView url={url} />]} />
-    <Route path='/shopownerorderproductviewproduct' element={[<Shopownerorderproductviewproduct/>,<Footer />]} />
+    {/* <Route path='/shopownerorderproductviewproduct' element={[<Shopownerorderproductviewproduct/>,<Footer />]} /> */}
     <Route path='/shopownerwdviewproduct/:productid' element={[<Shopownerwdviewproduct url={url} />,<Footer />]} />
     <Route path='/shopownerorderproductcart' element={[<ShopownerOrderProductCart url={url} />]} />
     <Route path='/shopownerorderproductacceptorder' element={[<ShopownerOrderProductAcceptOrder url={url} />]} />
