@@ -41,7 +41,7 @@ function ShopownerOrderProductAcceptOrder({ url }) {
   useEffect(() => {
     if (
       localStorage.getItem("token") == null &&
-      localStorage.getItem("shopownerid") == null
+      localStorage.getItem("shopowner") == null
     ) {
       navigate("/shopownerlogin");
     }

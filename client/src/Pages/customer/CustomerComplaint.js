@@ -38,9 +38,9 @@ function CustomerComplaint() {
     }
 
   return (
-    <div className='container '>
-        <Link className="customer-profile-link" to="/customerhome">
-          <FaArrowLeftLong />
+    <div className='container mt-5 pt-5'>
+        <Link className="customer-profile-link " to="/customerhome">
+          <FaArrowLeftLong className='mt-5' />
         </Link>
         <div className='customer-complaint-divbox mt-5 me-5'>
             <div className='text-center'>
