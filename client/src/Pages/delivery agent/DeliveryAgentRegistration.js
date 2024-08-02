@@ -6,9 +6,11 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import "./DeliveryAgentRegistration.css";
-import { useNavigate ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import img from "../../images/image 72.png";
 import axiosMultipartInstance from "../../APIS/axiosMultipartInstance";
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 function DeliveryAgentRegistration() {
   const [data, setData] = useState({
     name: "",
@@ -38,7 +40,7 @@ function DeliveryAgentRegistration() {
     email: "",
     password: "",
     confirmPassword: "",
-    });
+  });
   const district = [
     "Alappuzha",
     "Ernakulam",
@@ -56,7 +58,15 @@ function DeliveryAgentRegistration() {
     "Wayanad",
   ];
 
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
 
   const Navigate = useNavigate();
 
@@ -74,13 +84,13 @@ function DeliveryAgentRegistration() {
 
 
   const handleFileChange = (e) => {
-    console.log(data,"mmm");
+    console.log(data, "mmm");
     const { name, files } = e.target;
     setData({ ...data, [name]: files[0] });
   };
 
 
-const validateField = (fieldName, value) => {
+  const validateField = (fieldName, value) => {
     if (!value.trim()) {
       return `${fieldName} is Required`;
     }
@@ -115,7 +125,7 @@ const validateField = (fieldName, value) => {
     let formIsValid = true;
 
     errors.name = validateField("name", data.name);
-    errors.vehicleType= validateField("vehicle Type", data.vehicleType);
+    errors.vehicleType = validateField("vehicle Type", data.vehicleType);
     errors.address = validateField("Address", data.address);
     errors.district = validateField("District", data.district);
     errors.city = validateField("City", data.city);
@@ -403,30 +413,36 @@ const validateField = (fieldName, value) => {
                     Password
                   </h1>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="AgentRegistration-input-div-leftdiv-inp"
                     placeholder="Password"
                     name="password"
                     value={data.password}
                     onChange={handleChange}
                   />
+                  <div className="deliveryreg-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                    {showPassword ? <FiEyeOff /> : <FaEye />}
+                  </div>
                   {errors.password && (
                     <span className="text-danger">{errors.password}</span>
                   )}
                 </div>
 
-                <div>
+                <div className="mt-3">
                   <h1 className="AgentRegistration-input-div-leftdiv-h1">
                     Confirm Password
                   </h1>
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     className="AgentRegistration-input-div-leftdiv-inp"
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     value={data.confirmPassword}
                     onChange={handleChange}
                   />
+                  <div className="deliveryreg-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                    {showConfirmPassword ? <FiEyeOff /> : <FaEye />}
+                  </div>
                   {errors.confirmPassword && (
                     <span className="text-danger">
                       {errors.confirmPassword}

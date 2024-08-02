@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import wholesaledealerlogin from "../../images/wholesaledealerlogin.png";
 import axios from "axios";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 
 function WholesaleDealerLogin() {
   const [data, setData] = useState({
@@ -19,6 +21,11 @@ function WholesaleDealerLogin() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  
   const Navigate = useNavigate();
 
   const formValidating = (fieldName, value) => {
@@ -50,38 +57,38 @@ function WholesaleDealerLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     let formIsValid = true;
     let errors = {};
-  
+
     errors.email = formValidating("Email", data.email);
     if (errors.email) formIsValid = false;
     errors.password = formValidating("Password", data.password);
     if (errors.password) formIsValid = false;
-  
+
     setErrors(errors);
-  
+
     if (formIsValid) {
       axiosInstance
         .post("/wholesaledealer_login", data)
         .then((res) => {
           console.log("Response:", res); // Log the entire response
           if (res.status === 200) {
-            if(res.data.ActiveStatus === false){
+            if (res.data.ActiveStatus === false) {
               alert(
                 "Profile inactivated. Please contact admin for further information"
               );
             }
-            else{
+            else {
               const { data: responseData } = res;
               console.log("Login Successfully", responseData);
               alert("Login Successfully");
               Navigate("/wholesalermain");
               localStorage.setItem("wholesaledealer", responseData.id);
               localStorage.setItem("storeName", responseData.storeName);
-              localStorage.setItem("token", responseData.token);  
+              localStorage.setItem("token", responseData.token);
             }
-            
+
           } else {
             alert("Logged in Failed", res);
             console.log("Error", res);
@@ -98,7 +105,7 @@ function WholesaleDealerLogin() {
         });
     }
   };
-      return (
+  return (
     <div>
       <Row className="container">
         <Col className="container">
@@ -143,18 +150,21 @@ function WholesaleDealerLogin() {
                     <br></br>
                     <input
                       className="form-control wholesale-dealer-login-textbox mt-2 "
-                      type="Password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="Passowrd"
                       name="password"
                       value={data.password}
                       onChange={handleInputChange}
                     ></input>
+                    <div className="wholesaler-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye />}
+                    </div>
                     {errors.password && (
                       <span className="text-danger">{errors.password}</span>
                     )}
                   </div>
                   {/* Forget Password */}
-                  <div className="mt-2 ">
+                  <div className="mt-3 ">
                     <Link
                       to="/wholesaledealerforgetpswd"
                       className="wholesale-dealer-login-forgetpswd"

@@ -3,6 +3,8 @@ import "./wholesale.css";
 import wholesaledealerforgetpswd from "../../images/wholesaledealerforgetpswd.png";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { FaEye } from "react-icons/fa6";
+import { FiEyeOff } from "react-icons/fi";
 function WholesaleDealerForgetpswd() {
   const [data, setData] = useState({
     email: "",
@@ -15,6 +17,16 @@ function WholesaleDealerForgetpswd() {
     password: "",
     confirmpassword: "",
   });
+ 
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
 
   const Navigate = useNavigate();
 
@@ -119,7 +131,7 @@ function WholesaleDealerForgetpswd() {
                     Password
                   </label>{" "}
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="form-control form-input container mt-2"
                     id="wholesale-dealer-forgetpswd-textbox"
                     placeholder=" Password"
@@ -127,6 +139,9 @@ function WholesaleDealerForgetpswd() {
                     value={data.password}
                     onChange={handleInputChange}
                   />
+                  <div className="wholesaler-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye/>}
+                </div>
                   {errors.password && (
                     <span className="text-danger text-center container">
                       {errors.password}
@@ -141,7 +156,7 @@ function WholesaleDealerForgetpswd() {
                     Confirm Password
                   </label>{" "}
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     className="form-control form-input container mt-2"
                     id="wholesale-dealer-forgetpswd-textbox"
                     placeholder="Confirm Password"
@@ -149,6 +164,9 @@ function WholesaleDealerForgetpswd() {
                     value={data.confirmpassword}
                     onChange={handleInputChange}
                   />
+                   <div className="wholesaler-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                      {showConfirmPassword ? <FiEyeOff /> : <FaEye/>}
+                </div>
                   {errors.confirmpassword && (
                     <span className="text-danger container">
                       {errors.confirmpassword}
