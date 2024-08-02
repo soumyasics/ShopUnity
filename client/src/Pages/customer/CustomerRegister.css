@@ -1,30 +1,32 @@
 .CustomerRegistration {
 
     padding-top: 169px;
-    padding-left: 137px;
-    padding-bottom: 156px;
-
+    padding-right: 50px;
 }
-
-.CustomerRegistration-contain {
-
-    display: flex;
-    flex-direction: row;
-
+.CustomerRegistration-img{
+    height: 70vh;
+    width: 100%;
 }
-
-.CustomerRegistration-input-div {
-
+.customerreg-wholediv{
     background-color: #CAFAE2;
-    width: 695px;
+    width: 100%;
     height: max-content;
     border-radius: 23px;
     background: #CAFAE2;
     box-shadow: 0px 5px 13px 0px rgba(0, 0, 0, 0.25);
-    /* background: #459197; */
     color: white;
 }
-
+.Customerreg-pswd-eyeicon{
+    position: static;
+    z-index: 1;
+    background-color: #00000000;
+    margin-left: 300px;
+    height: 20px;
+    width: 20px;
+    margin-top: -65px;
+    border: none;
+    color: rgba(49, 47, 47, 0.821);  
+}
 #CustomerRegistration-button{
     background: #459197;
     color: white;
@@ -77,15 +79,16 @@
     font-weight: 800;
     line-height: normal;
     text-transform: capitalize;
-    margin-bottom: 0px;
-    margin-top: 27.5px;
+    /* margin-bottom: 0px;
+    margin-top: 27.5px; */
 
 }
+
 
 .CustomerRegistration-input-div-leftdiv-inp {
 
     display: flex;
-    width: 314.005px;
+    width: 100%;
     height: 44.511px;
     padding: 3.237px 31.562px;
     align-items: center;

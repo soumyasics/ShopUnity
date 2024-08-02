@@ -5,6 +5,8 @@ import Col from "react-bootstrap/Col";
 import wholesaledealerreg from "../../images/wholesaledealerreg.png";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axiosMultipartInstance from "../../APIS/axiosMultipartInstance";
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 
 function WholesaleDealerRegistration() {
   const [data, setData] = useState({
@@ -54,6 +56,18 @@ function WholesaleDealerRegistration() {
     "Wayanad",
   ];
 
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
+
+
   const Navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -69,7 +83,7 @@ function WholesaleDealerRegistration() {
   };
 
   const handleFileChange = (e) => {
-    console.log(data,"mmm");
+    console.log(data, "mmm");
     const { name, files } = e.target;
     setData({ ...data, [name]: files[0] });
   };
@@ -398,30 +412,36 @@ function WholesaleDealerRegistration() {
                       Password
                     </label>{" "}
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="Password"
                       className="form-control m-2 wholesale-dealer-register-textbox"
                       name="password"
                       value={data.password}
                       onChange={handleChange}
                     />
+                    <div className="wholesaler-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye />}
+                    </div>
                     {errors.password && (
                       <span className="text-danger">{errors.password}</span>
                     )}
                   </div>
-                  <div className="input-box mt-3">
+                  <div className="input-box mt-3 pt-3">
                     {" "}
                     <label className="wholesale-dealer-register-label ms-2">
                       Confirm Password
                     </label>{" "}
                     <input
-                      type="password"
+                      type={showConfirmPassword ? "text" : "password"}
                       placeholder=" Confirm Password"
                       className="form-control m-2 wholesale-dealer-register-textbox"
                       name="confirmPassword"
                       value={data.confirmPassword}
                       onChange={handleChange}
                     />
+                    <div className="wholesaler-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                      {showConfirmPassword ? <FiEyeOff /> : <FaEye />}
+                    </div>
                     {errors.confirmPassword && (
                       <span className="text-danger">
                         {errors.confirmPassword}

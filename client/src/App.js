@@ -174,8 +174,7 @@ function App() {
     <Route path='/deliveryagenthome' element={[<CommonNav/>,<DeliveryagentHomepage/>,<Footer />]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
     {/* <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage url={url}/>]}/> */}
-    <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>,<Footer />]}/>
-    <Route path='/deliveryagentsidebar' element={[<DeliveryagentSidebar/>,<Footer />]}/>
+    {/* <Route path='/deliveryagentsidebar' element={[<DeliveryagentSidebar/>,<Footer />]}/> */}
     <Route path='/deliveryagentmain' element={[<DeliveryagentMain/>]} />
     <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
   <Route path='/deliveryagentprofileedit' element={[<DeliveryagentProfileEdit url={url}/>,<Footer />]} />

@@ -3,6 +3,8 @@ import deliveryagentforgetpswd from '../../images/deliveryagentforgetpswd.png'
 import './deliveryagent.css'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../../APIS/axiosinstatnce'
+import { FiEyeOff } from 'react-icons/fi'
+import { FaEye } from 'react-icons/fa6'
 function Deliveryagentforgetpswd() {
 
   const[data,setData]=useState({
@@ -12,10 +14,20 @@ function Deliveryagentforgetpswd() {
   })
 
   const[errors,setErrors]=useState({
-    email:"",
+    email:"", 
     password:"",
     confirmpassword:""
   })
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
   
   const Navigate=useNavigate();
   const handleInputChange = (event) => {
@@ -115,7 +127,7 @@ function Deliveryagentforgetpswd() {
                           </div>
                             
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 className="form-control form-input container mt-2"
                                 id="delivery-agent-forgetpswd-textbox"
                                 placeholder=" Password" 
@@ -123,6 +135,9 @@ function Deliveryagentforgetpswd() {
                                 value={data.password}
                                 onChange={handleInputChange} 
                             />
+                            <div className="Customerforget-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                                  {showPassword ? <FiEyeOff /> : <FaEye/>}
+                            </div>
                             {errors.password && <span  className='text-danger text-center container ms-5'>{errors.password}</span>}
                         </div>
                         <div className=" container mb-3">
@@ -133,7 +148,7 @@ function Deliveryagentforgetpswd() {
                           </div>
                             
                             <input
-                                type="password"
+                                type={showConfirmPassword ? "text" : "password"}
                                 className="form-control form-input container mt-2"
                                 id="delivery-agent-forgetpswd-textbox"
                                 placeholder="Confirm Password"
@@ -141,6 +156,9 @@ function Deliveryagentforgetpswd() {
                                 value={data.confirmpassword}
                                 onChange={handleInputChange}  
                             />
+                            <div className="Customerforget-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                                  {showConfirmPassword ? <FiEyeOff /> : <FaEye/>}
+                            </div>
                             {errors.confirmpassword && <span  className='text-danger container ms-5'>{errors.confirmpassword}</span>}
                         </div>
                         <div className='container'>

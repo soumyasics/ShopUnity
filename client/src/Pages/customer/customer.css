@@ -11,6 +11,17 @@
   padding-top: 30px;
   color: #89B7BA;
 }
+.Customerforget-pswd-eyeicon{
+  position: static;
+    z-index: 1;
+    background-color: #00000000;
+    margin-left: 460px;
+    height: 20px;
+    width: 20px;
+    margin-top: -35px;
+    border: none;
+    color: rgba(49, 47, 47, 0.821);
+}
 .customer-forgetpswd-box{
   width:90%;
   height: 80vh;

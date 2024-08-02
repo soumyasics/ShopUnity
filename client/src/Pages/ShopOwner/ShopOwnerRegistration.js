@@ -5,6 +5,8 @@ import "./shopowner.css";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import shopownerimg from "../../images/shopownerreg.png";
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 
 function ShopOwnerRegistration() {
   const [data, setData] = useState({
@@ -29,7 +31,7 @@ function ShopOwnerRegistration() {
     shopownerdistrict: "",
     shopownercity: "",
     shopownerpincode: "",
-    shopownercontact: "",
+    shopownercontact: "", 
     shopowneremail: "",
     shopregistrationnumber: "",
     shoplicence: "",
@@ -54,6 +56,18 @@ function ShopOwnerRegistration() {
     "Thrissur",
     "Wayanad",
   ];
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -456,7 +470,7 @@ function ShopOwnerRegistration() {
                         </label>{" "}
                       </div>
                       <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={data.shopownerpassword}
                         placeholder="Password"
                         name="shopownerpassword"
@@ -464,6 +478,9 @@ function ShopOwnerRegistration() {
                         id="text1"
                         onChange={handleChange}
                       />
+                      <div className="shopownerreg-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                          {showPassword ? <FiEyeOff /> : <FaEye />}
+                        </div>
                       {errors.shopownerpassword && (
                         <div className="container text-danger">
                           {errors.shopownerpassword}
@@ -472,15 +489,15 @@ function ShopOwnerRegistration() {
                     </div>
                     <br></br>
 
-                    <div className="input-box">
-                      <div className="label">
+                    <div className="input-box mt-4">
+                      <div className="label"> 
                         {" "}
                         <label className="container-fluid font" id="font">
                           Confirm Password
                         </label>{" "}
                       </div>
                       <input
-                        type="password"
+                        type={showConfirmPassword ? "text" : "password"}
                         value={data.shopownerconfirmpassword}
                         placeholder="Confirm Password"
                         name="shopownerconfirmpassword"
@@ -488,6 +505,9 @@ function ShopOwnerRegistration() {
                         className="form-control m-2"
                         onChange={handleChange}
                       />
+                      <div className="shopownerreg-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                        {showConfirmPassword ? <FiEyeOff /> : <FaEye/>}
+                      </div>
                       {errors.shopownerconfirmpassword && (
                         <div className="container text-danger">
                           {errors.shopownerconfirmpassword}

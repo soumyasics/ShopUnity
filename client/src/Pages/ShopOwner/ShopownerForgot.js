@@ -6,9 +6,11 @@ import "./shopowner.css";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import forgot from '../../images/shopownerforgetpswd.png';
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 function ShopownerForgot() {
   const [data, setData] = useState({
-    email: "",
+    email: "",  
     password: "",
     confirmpassword: "",
   });
@@ -18,6 +20,16 @@ function ShopownerForgot() {
     password: "",
     confirmpassword: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
 
   const Navigate = useNavigate();
 
@@ -121,7 +133,7 @@ function ShopownerForgot() {
                    New Password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="form-control txthei"
                     id="form-controler-email"
                     placeholder="New Password"
@@ -130,18 +142,21 @@ function ShopownerForgot() {
                     onChange={handleInputChange}
                     value={data.password}
                   />
+                  <div className="shopownerforget-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye/>}
+                </div>
                   {errors.password && (
                     <div className="text-danger">{errors.password}</div>
                   )}
                   <span className="glyphicon form-control-feedback" />
                 </div>
 
-                <div className="form-group has-feedback" id="form-group">
+                <div className="form-group has-feedback mt-4"  id="form-group">
                   <label className="forgotlabel mt-3" htmlFor="form-controler-password">
                     Confirm Password
                   </label>
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"}
                     className="form-control txthei"
                     id="form-controler-email textbox"
                     placeholder="Confirm Password"
@@ -150,13 +165,16 @@ function ShopownerForgot() {
                     onChange={handleInputChange}
                     value={data.confirmpassword}
                   />
+                  <div className="shopownerforget-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                      {showConfirmPassword ? <FiEyeOff /> : <FaEye/>}
+                </div>
                   {errors.confirmpassword && (
                     <div className="text-danger">{errors.confirmpassword}</div>
                   )}
                   <span className="glyphicon form-control-feedback" />
                 </div>
 
-                <div >
+                <div className="mt-4">
                   <button type="submit" className="btn container shopownerlogbtn" id='submitbtn'>
                     Submit
                   </button><br></br>

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../APIS/axiosinstatnce';
 import './customer.css';
 import customerforget from '../../images/customerforget.png';
+import { FiEyeOff } from 'react-icons/fi';
+import { FaEye } from 'react-icons/fa6';
 
 function ForgetPswdCustomer() {
   const [data, setData] = useState({
@@ -11,7 +13,7 @@ function ForgetPswdCustomer() {
     confirmpassword: '',
   });
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState({ 
     email: '',
     password: '',
     confirmpassword: '',
@@ -19,6 +21,17 @@ function ForgetPswdCustomer() {
 
   const [serverError, setServerError] = useState('');
 
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  const toggleConfirmPasswordVisibility = () => {
+    setshowConfirmPassword(!showConfirmPassword);
+  };
+  
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -121,7 +134,7 @@ function ForgetPswdCustomer() {
                   </label>
                 </div>
                 <input
-                  type='password'
+                  type={showPassword ? "text" : "password"}
                   className='form-control form-input container mt-2'
                   id='customer-forgetpswd-textbox'
                   placeholder='Password'
@@ -129,6 +142,9 @@ function ForgetPswdCustomer() {
                   value={data.password}
                   onChange={handleInputChange}
                 />
+                <div className="Customerforget-pswd-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye/>}
+                </div>
                 {errors.password && <span className='text-danger text-center container ms-5'>{errors.password}</span>}
               </div>
               <div className='container mb-3'>
@@ -136,9 +152,9 @@ function ForgetPswdCustomer() {
                   <label className='container customer-forgetpswd-label mt-2 ms-4' htmlFor='form-controler-confirmpassword'>
                     Confirm Password
                   </label>
-                </div>
+                </div> 
                 <input
-                  type='password'
+                  type={showConfirmPassword ? "text" : "password"}
                   className='form-control form-input container mt-2'
                   id='customer-forgetpswd-textbox'
                   placeholder='Confirm Password'
@@ -146,6 +162,9 @@ function ForgetPswdCustomer() {
                   value={data.confirmpassword}
                   onChange={handleInputChange}
                 />
+                <div className="Customerforget-pswd-eyeicon" onClick={toggleConfirmPasswordVisibility}>
+                      {showConfirmPassword ? <FiEyeOff /> : <FaEye/>}
+                </div>
                 {errors.confirmpassword && <span className='text-danger container ms-5'>{errors.confirmpassword}</span>}
               </div>
               {serverError && <div className='text-danger text-center'>{serverError}</div>}
