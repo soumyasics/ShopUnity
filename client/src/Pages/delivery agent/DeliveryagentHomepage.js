@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../ShopOwner/shopowner.css";
 import { Link } from "react-router-dom";
 import { BsBoxes } from "react-icons/bs";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { MdNoSim } from "react-icons/md";
+import axiosInstance from "../../APIS/axiosinstatnce";
 
 function DeliveryagentHomepage() {
   const[products,setProducts]=useState([])
   const[added,setAdded]=useState([])
   const[unsold,setUnsold]=useState([])
+
+  useEffect (() => {
+    axiosInstance.post("/view_all_product")
+    .then((res) => {
+      console.log(res);
+      if(res.data.data!=null)
+        setProducts(res.data.data);
+      else
+        setProducts([])
+    });
+
+  },[])
+
   return (
 
 
@@ -24,7 +38,10 @@ function DeliveryagentHomepage() {
               <div className="revenue__box">
               <BsBoxes className="shop-dash-icon"/>
               <br></br><br></br>
-                <span>{products.length}<p className="shop-dash-para">Items</p></span>
+                <span>
+                  {(products.length) > 0 ? products.length:0}
+                  <p className="shop-dash-para">Items</p>
+                </span>
               </div>
             </Link>
           </div>

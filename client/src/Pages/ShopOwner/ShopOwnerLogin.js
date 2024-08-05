@@ -6,6 +6,8 @@ import "./shopowner.css";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import shopownerlogin from "../../images/shopownerlogin.png";
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 
 function ShopOwnerLogin() {
   const [data, setData] = useState({
@@ -19,6 +21,11 @@ function ShopOwnerLogin() {
   });
 
   const Navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const formValidating = (fieldName, value) => {
     if (!value.trim()) {
@@ -72,7 +79,7 @@ function ShopOwnerLogin() {
             result.data;
 
           if (status === "pending") {
-            alert("Waiting for admin approval");
+            alert("Waiting for admin approval");  
           } else if (status === "accepted") {
             if (ActiveStatus === false) {
               alert(
@@ -142,7 +149,7 @@ function ShopOwnerLogin() {
                       Password
                     </label>
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       className="form-control form-input txthei "
                       id="form-controler-password m-3"
                       placeholder="Password"
@@ -151,6 +158,9 @@ function ShopOwnerLogin() {
                       onChange={handleInputChange}
                       value={data.password}
                     />
+                    <div className="wholesaler-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye/>}
+                    </div>
                     {errors.password && (
                       <span className="span-required">{errors.password}</span>
                     )}

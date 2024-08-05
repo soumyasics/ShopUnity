@@ -131,7 +131,7 @@ function AdminHome() {
           </div>
         </section>
       </div>
-      <Footer/>
+    
     </div>
   );
 }

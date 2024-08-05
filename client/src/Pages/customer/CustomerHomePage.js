@@ -52,6 +52,7 @@ function CustomerHomePage() {
   };
 
   return (
+    <div>
     <div className='mb-5'>
       <div className='mb-5'>
         <Navbar collapseOnSelect expand="lg" className="fixed-top" id="navfixed">
@@ -354,6 +355,8 @@ function CustomerHomePage() {
 
         <div className='mb-5'></div>
       </div>
+    </div>
+    
     </div>
   );
 }

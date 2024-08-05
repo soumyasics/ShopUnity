@@ -78,7 +78,7 @@ import ShopownerViewproductList from "./Pages/ShopOwner/ShopownerViewproductList
 import ViewWholesalerdeliveryrequest from "./Pages/delivery agent/ViewWholesalerdeliveryrequest";
 import DeliveryagentComplaint from "./Pages/delivery agent/DeliveryagentComplaint";
 import WholesaleDealerComplaint from "./Pages/wholesaledealer/WholesaleDealerComplaint";
-import Complaints from "./Pages/Admin/AdminCustomerComplaints";
+// import Complaints from "./Pages/Admin/AdminCustomerComplaints";
 import ShopownerComplaint from "./Pages/ShopOwner/ShopownerComplaint";
 import CustomerComplaint from "./Pages/customer/CustomerComplaint";
 import CustomerOrderlist from "./Pages/Admin/CustomerOrderlist";
@@ -159,12 +159,12 @@ function App() {
     <Route path='/customerlistpage' element={[<CustomerlistPage url={url}/>,<Footer />]} />
     <Route path='/customerprofile' element={[<CustomerProfile/>,<Footer />]} />
     <Route path='/customereditprofile' element={[<CustomerEditProfile/>,<Footer />]} />
-    <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>,<Footer />]} />
-    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewallproduct url={url}/>,<Footer />]} />
+    <Route path='/customerviewshop' element={[<CustomerNavbar/>,<CustomerviewShops/>]} />
+    <Route path='/customerviewproduct' element={[<CustomerNavbar/>,<CustomerViewallproduct url={url}/>]} />
     <Route path='/customerviewproductdetail' element={[<CustomerViewProductDetail url={url}/>,<Footer />]} />
     <Route path='/customerproductcardpage' element={[<CustomerProductCardPage/>,<Footer />]} />
     <Route path='/customerordervieworder' element={[<CustomerOrdersViewOrder url={url} />,<Footer />]} />
-    <Route path='/customercomplaints' element={[<CustomerComplaint />,<Footer />]} />
+    {/* <Route path='/customercomplaints' element={[<CustomerComplaint />,<Footer />]} /> */}
 
 
 {/* deliveryagent */}
@@ -174,8 +174,7 @@ function App() {
     <Route path='/deliveryagenthome' element={[<CommonNav/>,<DeliveryagentHomepage/>,<Footer />]} />
     <Route path='/deliveryagentforgetpswd' element={[<MainNav/>,<Deliveryagentforgetpswd/>,<Footer/>]} />
     {/* <Route path='/alldeliveryagentviewpage' element={[<AllDeliveryAgentViewPage url={url}/>]}/> */}
-    <Route path='/deliveryagentrequest' element={[<DeliveryAgentRequest url={url}/>,<Footer />]}/>
-    <Route path='/deliveryagentsidebar' element={[<DeliveryagentSidebar/>,<Footer />]}/>
+    {/* <Route path='/deliveryagentsidebar' element={[<DeliveryagentSidebar/>,<Footer />]}/> */}
     <Route path='/deliveryagentmain' element={[<DeliveryagentMain/>]} />
     <Route path='/deliveryagentprofile' element={<DeliveryAgentProfile url={url}/>} />
   <Route path='/deliveryagentprofileedit' element={[<DeliveryagentProfileEdit url={url}/>,<Footer />]} />
@@ -286,7 +285,7 @@ function App() {
     <Route path='/shopownercustomerorderaccept' element={[<ShopownerCustomerOrderAccept url={url} />]} />
     <Route path='/shopownerviewwholesaledealer' element={[<ShopownerViewWholesaleDealer/>]} />
     <Route path='/shopownerviewwdproductview/:whosaleid' element={[<ShopownerViewWDProductView url={url} />]} />
-    <Route path='/shopownerorderproductviewproduct' element={[<Shopownerorderproductviewproduct/>,<Footer />]} />
+    {/* <Route path='/shopownerorderproductviewproduct' element={[<Shopownerorderproductviewproduct/>,<Footer />]} /> */}
     <Route path='/shopownerwdviewproduct/:productid' element={[<Shopownerwdviewproduct url={url} />,<Footer />]} />
     <Route path='/shopownerorderproductcart' element={[<ShopownerOrderProductCart url={url} />]} />
     <Route path='/shopownerorderproductacceptorder' element={[<ShopownerOrderProductAcceptOrder url={url} />]} />

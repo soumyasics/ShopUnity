@@ -5,12 +5,21 @@ import './CustomerLogin.css';
 import img from '../../images/image 77.png';
 import img2 from '../../images/Component 5.svg';
 import axiosInstance from "../../APIS/axiosinstatnce";
+import { FiEdit2, FiEye, FiEyeOff } from "react-icons/fi";
+import { FaEye } from 'react-icons/fa6';
 
 function CustomerLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -22,9 +31,13 @@ function CustomerLogin() {
       const response = await axiosInstance.post('/customer_login', {
         username,
         password,
-      });
-
-      if (response.data.message === 'Login successful') {
+      })
+      if (response.data.ActiveStatus === false) {
+        alert(
+          "Profile inactivated. Please contact admin for further information"
+        );
+      } 
+      else if (response.data.message === 'Login successful') {
         localStorage.setItem("customer", response.data.id);
         localStorage.setItem("token", response.data.token);
 
@@ -60,18 +73,25 @@ function CustomerLogin() {
             />
             <p className="CustomerLogin-inputcontain-div-p">Password</p>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               id="pword"
               className='CustomerLogin-inputcontain-div-inp'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="CustomerLogin-inputcontain-div-pwordbutton"><img src={img2} alt="" /></button>
-            <Link to="/customerforget" alt=" " className="CustomerLogin-inputcontain-div-a">Forgot Password?</Link>
-            <button className="CustomerLogin-inputcontain-div-button" onClick={handleLogin}>Login</button>
+            <div className="CustomerLogin-inputcontain-div-pwordbutton" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye/>}
+            </div>
+
+            {/* <FaEye className="CustomerLogin-inputcontain-div-pwordbutton"/> */}
+            {/* <button className="CustomerLogin-inputcontain-div-pwordbutton"><img src={img2} alt="" /></button> */}
+            <div className='mt-4'>
+              <Link to="/customerforget" alt=" " className="CustomerLogin-inputcontain-div-a ">Forgot Password?</Link>
+            </div>
+            <button className="CustomerLogin-inputcontain-div-button mt-4" onClick={handleLogin}>Login</button>
             {error && <p className="CustomerLogin-inputcontain-div-error">{error}</p>}
-            <p className='CustomerLogin-inputcontain-div-p-2'>Not a member?<Link to="/customerregistration" alt=" "> Sign up now</Link></p>
+            <p className='CustomerLogin-inputcontain-div-p-2 mt-4'>Not a member?<Link to="/customerregistration" alt=" "> Sign up now</Link></p>
           </div>
         </div>
       </div>

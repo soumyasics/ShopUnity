@@ -39,14 +39,14 @@ function ShopownerOrderProductAcceptOrder({ url }) {
   //   })
   // })
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("shopowner") == null
-  //   ) {
-  //     navigate("/shopownerlogin");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") == null &&
+      localStorage.getItem("shopowner") == null
+    ) {
+      navigate("/shopownerlogin");
+    }
+  }, []);
 
   return (
     <>

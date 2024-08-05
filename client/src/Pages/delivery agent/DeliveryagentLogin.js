@@ -4,17 +4,24 @@ import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import deliveryagentlogin from "../../images/deliveryagentlogin.png";
 import axiosInstance from "../../APIS/axiosinstatnce"; // Adjust this import based on your actual axios instance setup
+import { FiEyeOff } from "react-icons/fi";
+import { FaEye } from "react-icons/fa6";
 
 function DeliveryagentLogin() {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState({ 
     email: "",
     password: "",
   });
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const formValidating = (fieldName, value) => {
     if (!value.trim()) {
@@ -66,12 +73,21 @@ function DeliveryagentLogin() {
         if (response.data && response.data.token) {
           if (response.data.status === "pending") {
             alert("Your account is pending admin approval.");
-          } else if (response.data.status === "accepted") {
-            alert("Login successful!"); // Successful login alert
-            localStorage.setItem("deliveryagent", response.data.id);
-            localStorage.setItem("token", response.data.token);
-            navigate("/deliveryagentmain"); // Adjust path based on your routing setup
+          } 
+          else if(response.data.status === "accepted") {
+            if(response.data.ActiveStatus === false){
+              alert(
+                "Profile inactivated. Please contact admin for further information"
+              );
+            }
+            else if (response.data.status === "accepted") {
+              alert("Login successful!"); // Successful login alert
+              localStorage.setItem("deliveryagent", response.data.id);
+              localStorage.setItem("token", response.data.token);
+              navigate("/deliveryagentmain"); // Adjust path based on your routing setup
+            }
           }
+          
         } else {
           setErrors({
             email: "Login failed. Please try again.",
@@ -126,17 +142,20 @@ function DeliveryagentLogin() {
                       <br />
                       <input
                         className="form-control delivery-agent-login-textbox mt-2"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Password"
                         name="password"
                         value={data.password}
                         onChange={handleInputChange}
                       />
+                      <div className="deliveryLogin-eyeicon" onClick={togglePasswordVisibility}>
+                      {showPassword ? <FiEyeOff /> : <FaEye/>}
+                    </div>
                       {errors.password && (
                         <span className="text-danger">{errors.password}</span>
                       )}
                     </div>
-                    <div className="mt-2 delivery-agent-login-forgetpswdlink">
+                    <div className="mt-2 delivery-agent-login-forgetpswdlink pt-3">
                       <Link to="/deliveryagentforgetpswd" className="delivery-agent-login-forgetpswd">
                         Forgot Password?
                       </Link>

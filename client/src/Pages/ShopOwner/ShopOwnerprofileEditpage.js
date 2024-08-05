@@ -16,7 +16,7 @@ function ShopOwnerProfileEditPage() {
     shopownerpincode:"",
     shopownercontact:"",
     shopowneremail:"",
-    shopownerregistration:"",
+    shopownerregistration:"",  
     // files:""
   })
 

@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../ShopOwner/shopowner.css";
 import { Link } from "react-router-dom";
 import { BsBoxes } from "react-icons/bs";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { MdNoSim } from "react-icons/md";
+import axiosInstance from "../../APIS/axiosinstatnce";
 function WholesaleHome() {
     const[products,setProducts]=useState([])
     const[added,setAdded]=useState([])
     const[unsold,setUnsold]=useState([])
+
+    useEffect (() => {
+      axiosInstance.post("/view_all_product")
+      .then((res) => {
+        console.log(res);
+        if(res.data.data!=null)
+          setProducts(res.data.data);
+        else
+          setProducts([])
+      });
+  
+    },[])
   
   return (
     <div className="mt-5 pt-3 me-5">
-    <div className="container">
+    <div className="container"> 
     <div className="shop-dash-color mt-5">
       <section className="pt-5">
         <div className="row container-fluid">
@@ -23,7 +36,11 @@ function WholesaleHome() {
               <div className="revenue__box">
               <BsBoxes className="shop-dash-icon"/>
               <br></br><br></br>
-                <span>{products.length}<p className="shop-dash-para">Items</p></span>
+                <span>
+                {(products.length) > 0 ? products.length:0}
+                  <p className="shop-dash-para">Items
+                  </p>
+                </span>
               </div>
             </Link>
           </div>
