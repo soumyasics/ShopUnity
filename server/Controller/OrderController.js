@@ -4,7 +4,9 @@ const Customer = require("../Model/CustomerSchema");
 const Cart = require("../Model/CartSchema");
 
 const placeOrder = async (req, res) => {
-  const { productId, customerId, paymentStatus, totalAmount, orderType, cid ,deliveryStatus} =
+  console.log( req.body,"pp");
+  
+  const { productId, customerId, paymentStatus, totalAmount, orderType, cid ,deliveryStatus, shopownerid} =
     req.body;
 
   try {
@@ -15,7 +17,8 @@ const placeOrder = async (req, res) => {
       paymentStatus,
       totalAmount,
       orderType,
-      deliveryStatus
+      deliveryStatus,
+      shopowner: shopownerid[0]
     });
 
     const savedOrder = await order.save();
@@ -42,7 +45,7 @@ const viewOrdersByShopOwner = async (req, res) => {
 
   try {
     var shopOwnerOrders = [];
-    const orders = await Order.find().populate("customer");
+    const orders = await Order.find().populate("customer shopowner");
     for (var i in orders) {
       var order = orders[i];
       var products = order.products;
@@ -148,7 +151,7 @@ const viewOrdersByCustomerId = async (req, res) => {
 
 
 const viewAllCustomerorder = (req, res) => {
-  Order.find().populate("customer")
+  Order.find().populate("customer shopowner")
     .then(orders => {
       res.status(200).json({
         status: 200,
@@ -164,8 +167,25 @@ const viewAllCustomerorder = (req, res) => {
     });
 };
 
+const viewAllCustomerorderbyorderid = async(req, res) => 
+  {
+    try {
+      const orderId = req.params.orderid;
+      const order = await Order.findById(orderId).populate("customer shopowner");
+      
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+      
+      res.json(order);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+};
+
 module.exports = {
   placeOrder,
-  viewOrdersByShopOwner,acceptOrderRequest,viewOrdersByCustomerId,viewAllCustomerorder
+  viewOrdersByShopOwner,acceptOrderRequest,viewOrdersByCustomerId,viewAllCustomerorder,viewAllCustomerorderbyorderid
 };
                                                         

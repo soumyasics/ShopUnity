@@ -9,6 +9,10 @@ const WholesaleOrderSchema = new mongoose.Schema({
   shopownerid: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ShopOwner",
+  },
+  wholesaledealers: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "wholesaledealers",
     required: true,
   },
   paymentStatus: {

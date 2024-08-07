@@ -13,6 +13,7 @@ const shopownerplaceOrder = async (req, res) => {
     orderType,
     sid,
     deliveryStatus,
+    wholesaledealers
   } = req.body;
 
   try {
@@ -24,6 +25,7 @@ const shopownerplaceOrder = async (req, res) => {
       totalAmount,
       orderType,
       deliveryStatus,
+      wholesaledealers:wholesaledealers[0]
     });
 
     const savedOrder = await newWholesaleOrder.save();
@@ -51,7 +53,7 @@ const viewOrdersBywholesaledealer = async (req, res) => {
 
   try {
     let wholesaleOrders = [];
-    const orders = await wholesaleOrderModel.find().populate("shopownerid");
+    const orders = await wholesaleOrderModel.find().populate("shopownerid wholesaledealers");
     for (let i in orders) {
       let order = orders[i];
       let products = order.products;
@@ -159,8 +161,25 @@ const viewOrdersByshopowner = async (req, res) => {
   }
 };
 
+const viewAllShopownerorderbyorderid = async(req, res) => 
+  {
+    try {
+      const orderId = req.params.orderid;
+      const order = await wholesaleOrderModel.findById(orderId).populate("shopownerid wholesaledealers");
+      
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+      
+      res.json(order);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+};
+
 const viewAllShopownerOrders = (req, res) => {
-  wholesaleOrderModel.find().populate("shopownerid")
+  wholesaleOrderModel.find().populate("shopownerid wholesaledealers")
     .then(orders => {
       res.status(200).json({
         status: 200,
@@ -181,5 +200,5 @@ module.exports = {
   shopownerplaceOrder,
   viewOrdersBywholesaledealer,
   wholesaleacceptOrderRequest,
-  viewOrdersByshopowner,viewAllShopownerOrders
+  viewOrdersByshopowner,viewAllShopownerOrders,viewAllShopownerorderbyorderid
 };

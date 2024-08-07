@@ -96,6 +96,7 @@ Route.post("/viewordersshopownerbyId/:shopOwnerId",orderController.viewOrdersByS
 Route.post("/acceptOrderRequest/:orderid",orderController.acceptOrderRequest)
 Route.post("/viewOrdersByCustomerId/:customerId",orderController.viewOrdersByCustomerId)
 Route.post("/viewAllCustomerorder",orderController.viewAllCustomerorder)
+Route.post("/viewAllCustomerorderbyorderid/:orderid",orderController.viewAllCustomerorderbyorderid)
 
 // delivery requests
 
@@ -132,12 +133,15 @@ Route.post("/acceptOrderRequestbywholesaler/:orderid",wholesaledealerordercontro
 Route.post("/viewOrdersByShopowner/:shopownerid",wholesaledealerordercontroller.viewOrdersByshopowner)
 Route.post("/wholesalerassignDeliveryAgent",WholesaleController.wholesalerassignDeliveryAgent)
 Route.post("/viewAllShopownerOrders",wholesaledealerordercontroller.viewAllShopownerOrders)
+Route.post("/viewAllShopownerorderbyorderid/:orderid",wholesaledealerordercontroller.viewAllShopownerorderbyorderid)
+
 
 // All Complaints
 Route.post("/customercomplaints/:customerid", complaintController.CustomerAddComplaints);
 Route.post("/shopownercomplaints/:shopownerid", complaintController.ShopownerAddComplaints);
 Route.post("/wholesalercomplaints/:wholesalerid", complaintController.WholesaledealerAddComplaints);
 Route.post("/deliveryagentcomplaints/:agentid", complaintController.deliveryAgentAddComplaints);
+
 
 Route.post("/customercomplaints", complaintController.viewCustomerAllComplaint);
 Route.post("/shopownercomplaints", complaintController.viewShopownerAllComplaint);

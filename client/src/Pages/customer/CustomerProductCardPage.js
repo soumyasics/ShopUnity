@@ -44,7 +44,7 @@ function CustomerProductCardPage({ url }) {
   //     navigate("/login");
   //   }
   // }, [navigate]);
-  
+
   const viewData = () => {
     axiosInstance
       .post(`/viewCustomercart/` + localStorage.getItem("customer"))
@@ -91,16 +91,21 @@ function CustomerProductCardPage({ url }) {
 
   const ReservedProduct = () => {
     alert("Product Reserved");
-    var total=0;
+    var total = 0;
     var pid = [];
     var cid = [];
+    var shopownerdetails = [];
     data.forEach((item) => {
+      console.log(item, "ll");
+
       total = total + item.product?.price * item.quantity;
       var temp = {};
       temp.pid = item.product?._id;
       temp.quantity = item.quantity;
+      temp.shopowner = item.product.shopOwner;
       pid.push(temp);
-      cid.push(item._id)
+      cid.push(item._id);
+      shopownerdetails.push(item.product.shopOwner);
     });
     const orderData = {
       customerId: localStorage.getItem("customer"),
@@ -108,14 +113,15 @@ function CustomerProductCardPage({ url }) {
       orderType: "reserved",
       totalAmount: total,
       paymentStatus: "pending",
-      cid:cid,
-      deliveryStatus:"pending"
+      cid: cid,
+      shopownerid: shopownerdetails,
+      deliveryStatus: "pending",
     };
     axiosInstance
       .post("/placeorder", orderData)
       .then((res) => {
         alert(res.data.message);
-        navigate('/customerordervieworder');
+        navigate("/customerordervieworder");
         // Optionally, you can update the UI or redirect the user after placing the order
       })
       .catch((err) => {
@@ -166,16 +172,18 @@ function CustomerProductCardPage({ url }) {
     }
 
     if (valid) {
-      var total=0;
+      var total = 0;
       var pid = [];
       var cid = [];
+      var shopownerdetails = [];
       data.forEach((item) => {
         total = total + item.product?.price * item.quantity;
         var temp = {};
         temp.pid = item.product._id;
         temp.quantity = item.quantity;
-        cid.push(item._id)
+        cid.push(item._id);
         pid.push(temp);
+        shopownerdetails.push(item.product.shopOwner);
       });
 
       const orderData = {
@@ -184,15 +192,16 @@ function CustomerProductCardPage({ url }) {
         orderType: "delivery request",
         totalAmount: total,
         paymentStatus: "completed",
-        cid:cid,
-        deliveryStatus:"pending"
+        cid: cid,
+        deliveryStatus: "pending",
+        shopownerid: shopownerdetails,
       };
-      console.log(orderData,"k");
+      console.log(orderData, "k");
       axiosInstance
         .post("/placeorder", orderData)
         .then((res) => {
           alert(res.data.message);
-          navigate('/customerordervieworder');
+          navigate("/customerordervieworder");
           // Optionally, you can update the UI or redirect the user after placing the order
         })
         .catch((err) => {
@@ -201,23 +210,24 @@ function CustomerProductCardPage({ url }) {
     }
   };
 
-  const updateQ = (item,action)=> {
-    if (item.quantity >= 1){
-    axiosInstance
-    .post(`/addtocart`, {
-      customerId: localStorage.getItem("customer"),
-      productId: item.product._id,
-      quantity:action=='dec'? -1 : 1,
-    })
-    .then((res) => {
-    //  alert(res.data.message)
-     viewData();
-      console.log("Product added to cart:", res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });}
-  }
+  const updateQ = (item, action) => {
+    if (item.quantity >= 1) {
+      axiosInstance
+        .post(`/addtocart`, {
+          customerId: localStorage.getItem("customer"),
+          productId: item.product._id,
+          quantity: action == "dec" ? -1 : 1,
+        })
+        .then((res) => {
+          //  alert(res.data.message)
+          viewData();
+          console.log("Product added to cart:", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <div>
@@ -238,16 +248,10 @@ function CustomerProductCardPage({ url }) {
             </div>
 
             {data.map((item) => (
-              
               <div
                 key={item.product?._id}
                 className="customerproduct-cardpage-2productview my-5"
               >
-
-
-              
-
-
                 <div>
                   <div className="row">
                     <div className="col mt-2">
@@ -257,25 +261,26 @@ function CustomerProductCardPage({ url }) {
                         style={{ width: "255px", height: "275px" }}
                       />
                       <div className="row p-4">
-                      <div className="col-3" onClick={() => updateQ(item,'dec')}>
-                      <button
-                        className="shopowner-viewproduct-minusbtn"
-                        
-                      >
-                        <img src={minus} alt="minus"></img>
-                      </button>
-                    </div>
-                    <div className="col-1">
-                      <label>{item.quantity}</label>
-                    </div>
-                    <div className="col-2" onClick={() => updateQ(item,'inc')}>
-                      <button
-                        className="shopowner-viewproduct-plusbtn"
-                        
-                      >
-                        <img src={plus} alt="plus"></img>
-                      </button>
-                    </div></div>
+                        <div
+                          className="col-3"
+                          onClick={() => updateQ(item, "dec")}
+                        >
+                          <button className="shopowner-viewproduct-minusbtn">
+                            <img src={minus} alt="minus"></img>
+                          </button>
+                        </div>
+                        <div className="col-1">
+                          <label>{item.quantity}</label>
+                        </div>
+                        <div
+                          className="col-2"
+                          onClick={() => updateQ(item, "inc")}
+                        >
+                          <button className="shopowner-viewproduct-plusbtn">
+                            <img src={plus} alt="plus"></img>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                     <div className="col mt-3">
                       <div>
@@ -296,7 +301,6 @@ function CustomerProductCardPage({ url }) {
                         <b className="customerproduct-cardpage-h6">
                           &#8377; {item.product?.price}
                         </b>
-                        
                       </div>
                       <div className="text-end me-5 pt-5 mt-5">
                         <h4

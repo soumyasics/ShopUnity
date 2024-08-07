@@ -130,8 +130,8 @@ function Sidebar() {
                   {dropdownVisible3 && (
                       <div className="dropdown_menu sidebar_dash_drop">
                           <div className="wholesaler-dash-backgroundcolor ms-3 me-3">
-                            <Link to="/alldeliveryagentviewpage" className="wholesaler-dash-link"><label className="wholesaler-dash-label">View All Request</label></Link>
-                            <Link to="/deliveryagentrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View All Delivery Agents</label></Link>
+                            <Link to="/deliveryagentrequest" className="wholesaler-dash-link"><label className="wholesaler-dash-label">View All Request</label></Link>
+                            <Link to="/alldeliveryagentviewpage" className="wholesaler-dash-link"><label className="wholesaler-dash-label ms-2">View All Delivery Agents</label></Link>
                           </div>
                       </div>
                     )}
