@@ -18,10 +18,9 @@ function ShoporderList() {
 
         axiosInstance.post(`/viewAllShopownerorderbyorderid/`+id)
         .then((res) => {
-            console.log(res);
-            if(res.status === 200){
-                setOneData(res.data.data)
-            }
+            console.log(res,"pp");
+            setOneData(res.data)
+            
         })
         .catch((err) => {
             console.log("Error",err);
@@ -51,7 +50,6 @@ function ShoporderList() {
         })
        
     },[])
-    console.log(data);
 
     useEffect(() => {
         if (
@@ -80,9 +78,9 @@ function ShoporderList() {
                             <div className="col-2">
                                 <b className='admin-customer-order-list-list1'>Shop Name</b>
                             </div>
-                            {/* <div className="col-2">
+                             <div className="col-2">
                                 <b className='admin-customer-order-list-list1'>Wholesale Store </b>
-                            </div> */}
+                            </div>
                             <div className="col-2">
                                 <b className='admin-customer-order-list-list1'>Total Amount</b>
                             </div>
@@ -100,10 +98,10 @@ function ShoporderList() {
                             <div className="col-2">
                             <b className='admin-customer-order-list-list '>{index + 1}.</b>
                             </div>
-                            <div className="col-2 admin-customer-order-list-list ps-5">{item.shopownerid?.shopname}</div>
-                            {/* <div className="col-2 admin-customer-order-list-list ps-5">{item.storename}</div> */}
-                            <div className="col-2 admin-customer-order-list-list ps-5">&#8377; {item.totalAmount}</div>
-                            <div className="col-2 admin-customer-order-list-list ps-5">{item.deliveryStatus}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">{item?.shopownerid?.shopname}</div>
+                             <div className="col-2 admin-customer-order-list-list ps-5">{item?.wholesaledealers?.storeName}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">&#8377; {item?.totalAmount}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">{item?.deliveryStatus}</div>
                             <div className="col-2 admin-customer-order-list-list ps-5 ">
                                 <Link to=''>
                                     <button
@@ -138,7 +136,7 @@ function ShoporderList() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>{oneData.shopownerid?.shopname}</label>
+                                    <label className='admin-customer-complaint-label12'>{oneData?.shopownerid?.shopname}</label>
                                 </div>
                             </div>
                         </div>
@@ -170,13 +168,13 @@ function ShoporderList() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>&#8377; {oneData.totalAmount}</label>
+                                    <label className='admin-customer-complaint-label12'>&#8377; {oneData?.totalAmount}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-success'>{oneData.paymentStatus}</label>
+                                    <label className='admin-customer-complaint-success'>{oneData?.paymentStatus}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-pending'>{oneData.deliveryStatus}</label>
+                                    <label className='admin-customer-complaint-pending'>{oneData?.deliveryStatus}</label>
                                 </div>    
                             </div>
                         </div>

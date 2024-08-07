@@ -95,12 +95,12 @@ function ShopownerOrderProductCart({ url }) {
 
   const handleSubmit = () => {
     const { CardNumber, Expirydate, CVV, NameonCard } = cardData;
-
+  
     const enteredDateObj = new Date(Expirydate);
     const currentDate = new Date();
-
+  
     let valid = true;
-
+  
     if (NameonCard.length <= 3) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -108,7 +108,7 @@ function ShopownerOrderProductCart({ url }) {
       }));
       valid = false;
     }
-
+  
     if (CardNumber.length !== 16 || !/^\d{16}$/.test(CardNumber)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -116,7 +116,7 @@ function ShopownerOrderProductCart({ url }) {
       }));
       valid = false;
     }
-
+  
     if (enteredDateObj <= currentDate) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -124,7 +124,7 @@ function ShopownerOrderProductCart({ url }) {
       }));
       valid = false;
     }
-
+  
     if (CVV.length !== 3 || !/^\d{3}$/.test(CVV)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -132,36 +132,44 @@ function ShopownerOrderProductCart({ url }) {
       }));
       valid = false;
     }
-
+  
     if (valid) {
-      var total=0;
-      var pid = [];
-      var sid = [];
+      let total = 0;
+      let pid = [];
+      let sid = [];
+      let wholesaledealers = [];
+  
       data.forEach((item) => {
-        total = total + item.product?.price * item.quantity;
-        var temp = {};
-        temp.pid = item.product._id;
-        temp.quantity = item.quantity;
-        sid.push(item._id)
+        total += item.product?.price * item.quantity;
+        let temp = {
+          pid: item.product._id,
+          quantity: item.quantity,
+        };
+        sid.push(item._id);
         pid.push(temp);
+        if (item.product?.wholesaledealer) {
+          wholesaledealers.push(item.product.wholesaledealer);
+        }
       });
-
+  
       const orderData = {
         shopownerid: localStorage.getItem("shopowner"),
         productId: pid,
         orderType: "delivery request",
         totalAmount: total,
         paymentStatus: "completed",
-        sid:sid,
-        deliveryStatus:"pending"
+        sid: sid,
+        deliveryStatus: "pending",
+        wholesaledealers: wholesaledealers
       };
-      console.log(orderData,"k");
+  
+      console.log(orderData, "k");
+  
       axiosInstance
         .post("/shopownerplaceorder", orderData)
         .then((res) => {
           alert(res.data.message);
           navigate('/shopownerviewwdproductslist');
-          // Optionally, you can update the UI or redirect the user after placing the order
         })
         .catch((err) => {
           console.log(err);

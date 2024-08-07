@@ -21,8 +21,11 @@ function CustomerOrderlist() {
         axiosInstance.post(`/viewAllCustomerorderbyorderid/`+id)
         .then((res) => {
             console.log(res);
+            console.log(res.data,"pp");
+                
+            setOneData(res.data)
             if(res.status === 200){
-                setOneData(res.data.data)
+               
             }
         })
         .catch((err) => {
@@ -94,8 +97,9 @@ function CustomerOrderlist() {
                                 <b className='admin-customer-order-list-list1'>Customer Name</b>
                             </div>
                             <div className="col-2">
-                                <b className='admin-customer-order-list-list1'>Shop Name</b>
+                                <b className='admin-customer-order-list-list1'>Shopowner Name</b>
                             </div>
+                           
                             <div className="col-2">
                                 <b className='admin-customer-order-list-list1'>Total Amount</b>
                             </div>
@@ -114,7 +118,7 @@ function CustomerOrderlist() {
                                 <b className='admin-customer-order-list-list '>{index + 1}.</b>
                             </div>
                             <div className="col-2 admin-customer-order-list-list ps-5">{item.customer.name}</div>
-                            <div className="col-2 admin-customer-order-list-list ps-5">{item.shopname}</div>
+                            <div className="col-2 admin-customer-order-list-list ps-5">{item.shopowner.shopname}</div>
                             <div className="col-2 admin-customer-order-list-list ps-5">&#8377; {item.totalAmount}</div>
                             <div className="col-2 admin-customer-order-list-list ps-5">{item.deliveryStatus}</div>
                             <div className="col-2 admin-customer-order-list-list ps-5 ">
@@ -193,13 +197,13 @@ function CustomerOrderlist() {
                             </div>
                             <div className='col-6'>
                                 <div>
-                                    <label className='admin-customer-complaint-label12'>&#8377; {oneData.totalAmount}</label>
+                                    <label className='admin-customer-complaint-label12'>&#8377; {oneData?.totalAmount}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-success'>{oneData.paymentStatus}</label>
+                                    <label className='admin-customer-complaint-success'>{oneData?.paymentStatus}</label>
                                 </div>
                                 <div>
-                                    <label className='admin-customer-complaint-pending'>{oneData.orderStatus}</label>
+                                    <label className='admin-customer-complaint-pending'>{oneData?.orderStatus}</label>
                                 </div>    
                             </div>
                         </div>

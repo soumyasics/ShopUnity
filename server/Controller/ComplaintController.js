@@ -5,11 +5,11 @@ const Complaint = require("../Model/ComplaintSchema");
 const CustomerAddComplaints = async (req, res) => {
   try {
     const { description } = req.body;
-    console.log("req",req.body);
+    console.log("req", req.body);
     const newComplaint = new Complaint.customercomplaintSchema({
-      description:description,
+      description: description,
       customerid: req.params.customerid,
-      date:new Date()
+      date: new Date(),
     });
     await newComplaint
       .save()
@@ -165,47 +165,46 @@ const viewCustomerAllComplaint = (req, res) => {
 
 // View  shopowner complaint s
 const viewWholesaledealerAllComplaint = (req, res) => {
-    Complaint.wholesalecomplaintSchema
-      .find()
-      .populate("wholesalerid")
-      .exec()
-      .then((data) => {
-        res.status(200).json({
-          msg: "Data obtained successfully",
-          data: data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({
-          msg: "No Data obtained",
-          Error: err,
-        });
+  Complaint.wholesalecomplaintSchema
+    .find()
+    .populate("wholesalerid")
+    .exec()
+    .then((data) => {
+      res.status(200).json({
+        msg: "Data obtained successfully",
+        data: data,
       });
-  };
-  
-  // View customer complaint
-  
-  const viewDeliveryAgentComplaint = (req, res) => {
-    Complaint.deliveryAgentcomplaintSchema
-      .find()
-      .populate("agentid")
-      .exec()
-      .then((data) => {
-        res.status(200).json({
-          msg: "Data obtained successfully",
-          data: data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({
-          msg: "No Data obtained",
-          Error: err,
-        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        msg: "No Data obtained",
+        Error: err,
       });
-  };
-  
+    });
+};
+
+// View customer complaint
+
+const viewDeliveryAgentComplaint = (req, res) => {
+  Complaint.deliveryAgentcomplaintSchema
+    .find()
+    .populate("agentid")
+    .exec()
+    .then((data) => {
+      res.status(200).json({
+        msg: "Data obtained successfully",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
 
 module.exports = {
   CustomerAddComplaints,
@@ -215,5 +214,5 @@ module.exports = {
   viewCustomerAllComplaint,
   viewShopownerAllComplaint,
   viewWholesaledealerAllComplaint,
-  viewDeliveryAgentComplaint
+  viewDeliveryAgentComplaint,
 };

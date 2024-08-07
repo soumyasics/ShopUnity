@@ -1,14 +1,19 @@
+// models/OrderSchema.js
 const mongoose = require("mongoose");
-const ProductSchema = require("./ProductSchema");
 
 const OrderSchema = new mongoose.Schema({
   products: {
-    type: [],
+    type: Array,
     required: true,
   },
   customer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Customer",
+    required: true,
+  },
+  shopowner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ShopOwner",
     required: true,
   },
   paymentStatus: {
@@ -30,9 +35,9 @@ const OrderSchema = new mongoose.Schema({
     enum: ["pending", "accepted"],
     default: "pending",
   },
-  deliveryStatus:{
+  deliveryStatus: {
     type: String,
-    enum: ["pending","assigned","accepted","rejected","delivered"],
+    enum: ["pending", "assigned", "accepted", "rejected", "delivered"],
     default: "pending",
   },
   createdAt: {
