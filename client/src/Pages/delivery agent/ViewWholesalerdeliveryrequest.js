@@ -100,35 +100,36 @@ function ViewWholesalerdeliveryrequest() {
                           <div className="mt-2">
                             <label>Wholesale Dealer : </label>
                             <label className="mt-2">
-                              {request.orderProducts.wholesaledealer?.storeName}
+                            {""} {request.wholesaledealer?.storeName}
                             </label>
                           </div>
                           <div className="mt-2">
-                            <label>shop owner: </label>
+                            <label>shop owner : </label>
                             <label className="mt-2">
-                              {request.customer?.name}
+                            {""} {request.shopOwner?.shopownername}
                             </label>
                           </div>
                           <div className="mt-2">
-                            <label>Product Name: </label>
-                            <div className="mt-2">
+                            <label>Product Name : </label>
+                            <label className="mt-2">
                               {request.orderProducts.map((product, i) => (
                                 <label key={i}>
-                                  {product.productData.productname}
+                                {""}  {product.productData.productname}
                                 </label>
                               ))}
-                            </div>
+                            </label>
                           </div>
                           <div className="mt-2">
-                            <label>Delivery Address: </label>
+                            <label>Delivery Address : </label>
                             <label className="mt-2">
-                              {request.customer?.address}
+                             {""}                               {request.shopOwner.shopowneraddress}
+
                             </label>
                           </div>
                           <div className="mt-2">
                             <label>Shop Owner Address: </label>
                             <label className="mt-2">
-                              {request.shopOwner.shopowneraddress}
+                            {request.wholesaledealer?.address}
                             </label>
                           </div>
                           <div className="mt-2">

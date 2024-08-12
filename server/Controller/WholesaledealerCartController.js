@@ -2,20 +2,22 @@ const wholesaleCart = require("../Model/WholesaleCartSchema");
 const Product = require("../Model/WholesaleProductSchema");
 
 const productaddtocart = async (req, response) => {
-    console.log(req.body);
+  console.log(req.body);
   const cart = {
     product: req.body.productId    ,
     shopowner: req.body.shopowner,
   };
+  console.log(cart);
+
   var productData = await Product.findById(cart.product);
-  console.log(productData)
 
   var res = {
     message:'success'
   };
 
   const exobj = await wholesaleCart.find(cart);
-  //   console.log(exobj)
+  console.log(exobj);
+
   if (exobj.length > 0) {
     cart.quantity = req.body.quantity + exobj[0].quantity;
     if (cart.quantity > productData.quantity){
@@ -77,7 +79,6 @@ const productaddtocart = async (req, response) => {
 
 const viewproductCartItems = async (req, res) => {
     const shopowner = req.params.shopowner;
-    console.log(req.body);
   
     try {
       const cartItems = await wholesaleCart.find({ shopowner: shopowner }).populate('product');

@@ -44,28 +44,28 @@ const viewOrdersByShopOwner = async (req, res) => {
   const shopOwnerId = req.params.shopOwnerId;
 
   try {
-    var shopOwnerOrders = [];
-    const orders = await Order.find().populate("customer shopowner");
-    for (var i in orders) {
-      var order = orders[i];
-      var products = order.products;
-      var orderProducts = [];
-      for (var j in products) {
-        var product = await Product.findById(products[j].pid);
-        if (product && product.shopOwner == shopOwnerId) {
-          orderProducts.push({
-            purchasedQuantity: products[j].quantity,
-            productData: product,
-          });
-        }
-      }
+    const orders = await Order.find().populate({
+      path: 'products.pid',
+      model: 'Product',
+    }).populate('customer shopowner');
+
+    const shopOwnerOrders = orders.reduce((acc, order) => {
+      const orderProducts = order.products.filter(product => 
+        product.pid && product.pid.shopOwner.toString() === shopOwnerId
+      ).map(product => ({
+        purchasedQuantity: product.quantity,
+        productData: product.pid,
+      }));
+
       if (orderProducts.length > 0) {
-        shopOwnerOrders.push({
-          orderProducts: orderProducts,
-          order: order,
+        acc.push({
+          orderProducts,
+          order,
         });
       }
-    }
+
+      return acc;
+    }, []);
 
     res.json({ data: shopOwnerOrders });
 
@@ -78,6 +78,7 @@ const viewOrdersByShopOwner = async (req, res) => {
     });
   }
 };
+
 
 const acceptOrderRequest = async (req, res) => {
   try {

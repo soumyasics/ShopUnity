@@ -16,7 +16,6 @@ function ShopownerCustomerOrderRequest({ url }) {
     axiosInstance
       .post(`/viewordersshopownerbyId/${shopownerid}`)
       .then((res) => {
-        // Filter out only the orders with status 'pending'
         const pendingOrders = res.data.data.filter(order => order.order.orderStatus == "pending");
         setData(pendingOrders);
       })
@@ -40,13 +39,12 @@ function ShopownerCustomerOrderRequest({ url }) {
 
   const handleAcceptOrder = (orderid) => {
     axiosInstance
-      .post(`/acceptOrderRequest/${orderid}`) // Use PATCH method for updating
+      .post(`/acceptOrderRequest/${orderid}`) 
       .then((res) => {
         viewData()
         console.log(res);
         if (res.status === 200) {
           alert(res.data.message);
-          // Optionally refresh the data
           setData(prevData => prevData.filter(order => order.order._id !== orderid));
         } else {
           alert("Order is already accepted");
@@ -184,17 +182,18 @@ function ShopownerCustomerOrderRequest({ url }) {
                               </div>
                             </div>
                             <div className="text-center">
-                              <button
-                                className="hopowner-customerorder-request-tickbtn"
-                                onClick={() => handleAcceptOrder(item.order._id)}
-                              >
-                                <img src={tick} alt="Update" /> Accept
-                              </button>
+                              
                             </div>
                           </div>
                         </div>
                       ))}
                     </Card.Body>
+                    <button
+                                className="hopowner-customerorder-request-tickbtn"
+                                onClick={() => handleAcceptOrder(item.order._id)}
+                              >
+                                <img src={tick} alt="Update" /> Accept
+                              </button>
                   </Card>
                 </Col>
               ))}

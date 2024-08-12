@@ -84,6 +84,8 @@ Route.post("/view_a_product/:productId",productController.viewProductById)
 Route.post("/view_all_product",productController.viewAllProducts)
 Route.post("/edit_a_product/:productId",productController.upload,productController.editProductById)
 Route.post("/delete_a_product/:productId",productController.deleteProductById)
+Route.post("/getTodayAddedProducts",productController.getTodayAddedProducts)
+Route.post('/getTotalProductQuantity', productController.getTotalProductQuantity);
 
 // cart
 Route.post("/addtocart",cartController.addtocart)
@@ -105,13 +107,13 @@ Route.get("/deliveryRequestsbyshopowner/:shopid", deliveryRequestController.deli
 Route.post("/rejectdeliveryRequests/:requestId", deliveryRequestController.rejectDeliveryRequest);
 Route.post("/acceptdeliveryRequests/:requestId", deliveryRequestController.acceptDeliveryRequest);
 Route.post("/deliverDeliveryRequest/:requestId", deliveryRequestController.deliverDeliveryRequest);
+Route.get("/getAlldeliveryShopownerrequestsbyagentid/:agentId", deliveryRequestController.getshopownerDeliveryRequests);
 
 Route.get("/getAllwholesalerdeliveryRequestsbyagentid/:agentId", wholesaledealerorderRequestcontroller.getWholesalerDeliveryRequests);
 Route.get("/deliveryRequestsbywholesaledealer/:wholesaledealerid", wholesaledealerorderRequestcontroller.deliveryRequestsbywholesaledealer);
 Route.post("/rejectwholesaledealerdeliveryRequests/:requestId", wholesaledealerorderRequestcontroller.rejectwholesaledealerDeliveryRequest);
 Route.post("/acceptwholesaledealerdeliveryRequests/:requestId", wholesaledealerorderRequestcontroller.acceptwholesaledealerDeliveryRequest);
 Route.post("/deliverDeliveryRequestofwholesaledealer/:requestId", wholesaledealerorderRequestcontroller.deliverDeliveryRequestofwholesaledealer);
-
 // wholesale product
 
 Route.post("/add_product_bywholesale",wholesaledealerproductcontroller.upload,wholesaledealerproductcontroller.addProductByWholesaler)
@@ -119,6 +121,8 @@ Route.post("/view_a_product_bywholesale/:productId",wholesaledealerproductcontro
 Route.post("/view_all_product_bywholesale",wholesaledealerproductcontroller.viewAllwholesaleProducts)
 Route.post("/edit_a_product_bywholesale/:wholesaleproductId",wholesaledealerproductcontroller.upload,wholesaledealerproductcontroller.editProductBywholesalerId)
 Route.post("/delete_a_product_bywholesale/:productId",wholesaledealerproductcontroller.deleteProductBywholesalerId)
+Route.post("/getTodayAddedwholesalerProducts",wholesaledealerproductcontroller.getTodayAddedwholesalerProducts)
+Route.post('/getTotalwholesalerProductQuantity', wholesaledealerproductcontroller.getTotalwholesalerProductQuantity);
 
 //  wholesale cart
 

@@ -47,6 +47,7 @@ function WholesaleDealerComplaint() {
             if(res.status === 200){
                 alert("Complaint Added Successfully")
                 setComplaint("")
+                navigate("/wholesalermain")
             }
             else{
                 alert("Failed to Send")

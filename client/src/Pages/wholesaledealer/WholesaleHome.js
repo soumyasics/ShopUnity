@@ -11,7 +11,8 @@ function WholesaleHome() {
     const[unsold,setUnsold]=useState([])
 
     useEffect (() => {
-      axiosInstance.post("/view_all_product")
+      const wholesalerid=localStorage.getItem("wholesaledealer")
+      axiosInstance.post("/view_all_product_bywholesale",wholesalerid)
       .then((res) => {
         console.log(res);
         if(res.data.data!=null)
@@ -20,6 +21,24 @@ function WholesaleHome() {
           setProducts([])
       });
   
+      axiosInstance.post("/getTodayAddedwholesalerProducts",wholesalerid)
+    .then((res) => {
+      console.log(res);
+      if(res.data.data!=null)
+        setAdded(res.data.data);
+      else
+      setAdded([])
+    });
+
+    axiosInstance.post("/getTotalwholesalerProductQuantity",wholesalerid)
+    .then((res) => {
+      console.log(res);
+      if(res.data!=null)
+        setUnsold(res.data);
+      else
+      setUnsold([])
+    });
+
     },[])
   
   return (
@@ -64,7 +83,7 @@ function WholesaleHome() {
               <div className="products__box">
               <MdNoSim className="shop-dash-icon"/>
               <br></br><br></br>
-                <span>{unsold.length}<p className="shop-dash-para">Items</p></span>
+                <span>{unsold.totalQuantity}<p className="shop-dash-para">Items</p></span>
               </div>
             </Link>
           </div>

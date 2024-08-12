@@ -102,11 +102,11 @@ function WholesalerShopownerNewRequest({ url }) {
                       <div className="col-7 mb-3">
                         <div>
                           <label className="shopowner-customerorder-request-span">
-                            {item.shopowner?.shopname || "N/A"}
+                            {item.shopowner?.shopname }
                           </label>
                           <div>
                             <label className="shopowner-customerorder-request-label">
-                              {item.shopowner?.shopowneraddress || "N/A"}
+                              {item.shopowner?.shopowneraddress}
                             </label>
                           </div>
                         </div>
@@ -126,22 +126,22 @@ function WholesalerShopownerNewRequest({ url }) {
                             Brand Name:
                           </label>
                           <span className="ms-2 shopowner-customerorder-request-span">
-                            {product.productData.brand || "N/A"}
+                            {product.productData.brand}
                           </span>
                           <div>
                             <label className="shopowner-customerorder-request-label">
-                              {product.productData.name || "N/A"}
+                              {product.productData.name }
                             </label>
                           </div>
                           <div className="row">
                             <div className="col">
                               <label className="shopowner-customerorder-request-label">
-                                &#8377; {product.productData.price || "N/A"}
+                                &#8377; {product.productData.price }
                               </label>
                             </div>
                             <div className="col">
                               <label className="shopowner-customerorder-request-label">
-                                Qty-{product.purchasedQuantity || "0"}
+                                Qty-{product.purchasedQuantity }
                               </label>
                             </div>
                           </div>
@@ -188,7 +188,7 @@ function WholesalerShopownerNewRequest({ url }) {
                               </label>
                               <div>
                                 <label className="shopowner-customerorder-request-label">
-                                  {item.order.orderType || "N/A"}
+                                  {item.order.orderType}
                                 </label>
                               </div>
                             </div>

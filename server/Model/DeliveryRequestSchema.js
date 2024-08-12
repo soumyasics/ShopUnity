@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const DeliveryRequestSchema = new mongoose.Schema({
   order: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "wholesaleOrder",
+    ref: "Order",
     required: true,
   },
   agent: {

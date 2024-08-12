@@ -5,23 +5,26 @@ import { Card, Col, Row } from "react-bootstrap";
 import axiosInstance from "../../APIS/axiosinstatnce";
 import { useNavigate } from "react-router-dom";
 
-function DeliveryAgentDeliveryUpdate() {
+function DeliveryAgentCustomerDeliveryUpdate() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
   const [deliveryStatuses, setDeliveryStatuses] = useState({});
   const navigate = useNavigate();
+
   const getDeliveryRequests = async () => {
     try {
       const agentId = localStorage.getItem("deliveryagent");
       const response = await axiosInstance.get(
-        `/getAllwholesalerdeliveryRequestsbyagentid/${agentId}`
+        `/getAlldeliveryShopownerrequestsbyagentid/${agentId}`
       );
       console.log(response.data,"m");
       
       const acceptedRequests = response.data.filter(
         (request) => request.deliveryStatus == "accepted"
       );
+      console.log(acceptedRequests,"y");
+      
 
-      // console.log(acceptedRequests, "p");
+      console.log(acceptedRequests, "p");
 
       // Initialize deliveryStatuses state
       const statuses = {};
@@ -43,7 +46,7 @@ function DeliveryAgentDeliveryUpdate() {
     ) {
       navigate("/deliveryagentlogin");
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     getDeliveryRequests();
@@ -68,7 +71,7 @@ function DeliveryAgentDeliveryUpdate() {
       [id]: status,
     }));
   };
-  
+
   
 
   return (
@@ -84,10 +87,10 @@ function DeliveryAgentDeliveryUpdate() {
             </h3>
             <div>
               <h5 className="deliveryagent-deliveryrequest-h3 ms-3 pt-2">
-                wholeSale Dealer Orders
+                ShopOwner Orders
               </h5>
               <Row>
-                {deliveryRequests
+                {deliveryRequests.length > 0
                   ? deliveryRequests.map((request) => (
                       <Col
                         xs={12}
@@ -99,42 +102,35 @@ function DeliveryAgentDeliveryUpdate() {
                         <Card>
                           <Card.Body>
                             <div className="mt-2">
-                              <label>Whole Sale Shop Name : </label>
-                              <span className="mt-2">
-                                {request.wholesaledealer.storeName}
-                              </span>
-                            </div>
-                            <div className="mt-2">
-                              <label>Whole Sale Dealer Name : </label>
-                              <span className="mt-2">
-                                {request.wholesaledealer.dealername}
-                              </span>
-                            </div>
-                            <div className="mt-2">
-                              <label>Whole Sale Shop Address : </label>
-                              <span className="mt-2">
-                                {request.wholesaledealer.address}
-                              </span>
-                            </div>
-                            <div className="mt-2">
                               <label>Shop Name : </label>
                               <span className="mt-2">
-                                {request.shopOwner.shopname}
+                                {request.shopowner.shopname}
                               </span>
                             </div>
                             <div className="mt-2">
                               <label>Shop Owner Name : </label>
                               <span className="mt-2">
-                                {request.shopOwner.shopownername}
+                                {request.shopowner.shopownername}
                               </span>
                             </div>
                             <div className="mt-2">
-                              <label>Shop/Delivery Address : </label>
+                              <label>Shop Owner Address : </label>
                               <span className="mt-2">
-                                {request.shopOwner.shopowneraddress}
+                                {request.shopowner.shopowneraddress}
                               </span>
                             </div>
-
+                            <div className="mt-2">
+                              <label>Customer Name : </label>
+                              <span className="mt-2">
+                                {request.customer.name}
+                              </span>
+                            </div>
+                            <div className="mt-2">
+                              <label>Customer Address : </label>
+                              <span className="mt-2">
+                                {request.customer.address}
+                              </span>
+                            </div>
                             <div className="mt-2">
                               <label>Delivery Status : </label>
                               <select
@@ -162,49 +158,8 @@ function DeliveryAgentDeliveryUpdate() {
                         </Card>
                       </Col>
                     ))
-                  : ""}
+                  : "lkjhvg"}
               </Row>
-            </div>
-            <div>
-              {/*
-              <h5 className="deliveryagent-deliveryrequest-h3 ms-3 pt-2">
-                WholeSale Dealer Orders
-              </h5>
-              <Row>
-                {deliveryRequests.map((request) => (
-                  <Col xs={12} md={6} lg={4} key={request._id} className="mb-3">
-                    <Card>
-                      <Card.Body>
-                        <div className="mt-2">
-                          <label>Dealer Name</label>
-                          <div>{request.dealerName}</div>
-                        </div>
-                        <div className="mt-2">
-                          <label>Shop Name</label>
-                          <div>{request.shopName}</div>
-                        </div>
-                        <div className="mt-2">
-                          <label>Delivery Address</label>
-                          <div>{request.deliveryAddress}</div>
-                        </div>
-                        <div className="mt-2">
-                          <label>Delivery Status</label>
-                          <input
-                            type="text"
-                            className="deliveryagent-deliveryupdate-textbox"
-                            defaultValue={request.deliveryStatus}
-                          />
-                        </div>
-                        <div className="mt-2">
-                          <button className="deliveryagent-deliveryupdate-submitbtn">
-                            Submit
-                          </button>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>*/}
             </div>
           </div>
         </div>
@@ -213,4 +168,4 @@ function DeliveryAgentDeliveryUpdate() {
   );
 }
 
-export default DeliveryAgentDeliveryUpdate;
+export default DeliveryAgentCustomerDeliveryUpdate;

@@ -5,6 +5,8 @@ const Customer = require('../Model/CustomerSchema');
 const ShopOwner = require('../Model/ShopOwnerSchema');
 
 const getDeliveryRequests = async (req, res) => {
+  console.log(req.para);
+  
   try {
     const { agentId } = req.params;
     const deliveryRequests = await DeliveryRequest.find({ agent: agentId }).populate('order');
@@ -13,6 +15,7 @@ const getDeliveryRequests = async (req, res) => {
 
     for (let i in deliveryRequests) {
       let order = deliveryRequests[i].order;
+      console.log(order)
       let shopOwnerID = deliveryRequests[i].shopOwner;
       let products = order.products;
       let orderProducts = [];
@@ -139,4 +142,48 @@ const deliverDeliveryRequest = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-module.exports = { getDeliveryRequests, acceptDeliveryRequest, rejectDeliveryRequest ,deliveryRequestsbyshopowner, deliverDeliveryRequest};
+
+
+const getshopownerDeliveryRequests = async (req, res) => {
+  console.log(req.body);
+  try {
+    const { agentId } = req.params;
+    const deliveryRequests = await DeliveryRequest.find({ agent: agentId }).populate('order').exec();
+    let response = [];
+
+    for (let i = 0; i < deliveryRequests.length; i++) {
+      let order = deliveryRequests[i].order;
+      let shopowner = deliveryRequests[i].shopowner;
+      let products = order.products;
+      let orderProducts = [];
+
+      for (let j = 0; j < products.length; j++) {
+        let product = await Product.findById(products[j].pid);
+        if (product && String(product.shopowner) === String(shopowner)) {
+          orderProducts.push({
+            purchasedQuantity: products[j].quantity,
+            productData: product,
+          });
+        }
+      }
+
+      let customer = await Customer.findById(order.customer);
+      let shopOwner = await ShopOwner.findById(order.shopowner);
+
+      response.push({
+        _id: deliveryRequests[i]._id,
+        orderProducts: orderProducts,
+        shopowner: shopOwner,
+        customer: customer, // Changed from Customerid to customer for clarity
+        deliveryStatus: order.deliveryStatus,
+      });
+    }
+
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+module.exports = { getDeliveryRequests, acceptDeliveryRequest, rejectDeliveryRequest ,deliveryRequestsbyshopowner, deliverDeliveryRequest,getshopownerDeliveryRequests};

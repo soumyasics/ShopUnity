@@ -21,8 +21,7 @@ function ShopownerCustomerOrderAccept({ url }) {
       .then((res) => {
         const acceptedOrders = res.data.data.filter(
           (order) =>
-            order.order.orderStatus === "accepted" &&
-            order.order.paymentStatus === "completed" 
+            order.order.orderStatus === "accepted" 
         );
         setData(acceptedOrders);
       })

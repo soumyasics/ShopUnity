@@ -26,6 +26,8 @@ const navigate=useNavigate()
     axiosInstance
       .post("/view_all_product_bywholesale")
       .then((res) => {
+        console.log(res,"l");
+        
         const productsWithQuantity = res.data.data.map((product) => ({
           ...product,
           quantity: 1,
@@ -37,6 +39,8 @@ const navigate=useNavigate()
         console.log(err);
       });
   }, []);
+  console.log(data,"p");
+  
 
   const increment = (item) => {
     const updatedData = data.map((product) =>

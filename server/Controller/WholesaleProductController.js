@@ -23,7 +23,8 @@ const addProductByWholesaler = (req, res) => {
     quantity: req.body.quantity,
     price: req.body.price,
     productimage: req.file,
-    wholesaledealer: req.body.wholesaledealer
+    wholesaledealer: req.body.wholesaledealer,
+    date:new Date()
   };
 
   const newwholesaleProduct = new wholesaleProduct(productData);
@@ -154,11 +155,68 @@ const deleteProductBywholesalerId = (req, res) => {
     });
 };
 
+const getTodayAddedwholesalerProducts = (req, res) => {
+  const { wholesalerId } = req.body; // Assuming wholesalerId is sent in the request body
+
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+
+  const endOfDay = new Date();
+  endOfDay.setHours(23, 59, 59, 999);
+
+  wholesaleProduct.find({
+    date: {
+      $gte: startOfDay,
+      $lte: endOfDay,
+    },
+    wholesalerId: wholesalerId, // Filter by wholesalerId
+  })
+    .then((products) => {
+      res.status(200).json({
+        status: 200,
+        data: products,
+        message: "Today's added products fetched successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to fetch today's added products",
+        error: err.message,
+      });
+    });
+};
+
+const getTotalwholesalerProductQuantity = (req, res) => {
+  const { wholesalerId } = req.body; // Assuming wholesalerId is sent in the request body
+
+  wholesaleProduct.find({
+    wholesalerId: wholesalerId, // Filter by wholesalerId
+  })
+    .then((products) => {
+      const totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
+      res.status(200).json({
+        status: 200,
+        totalQuantity: totalQuantity,
+        message: "Total product quantity fetched successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to fetch total product quantity",
+        error: err.message,
+      });
+    });
+};
+
 module.exports = {
   upload,
   addProductByWholesaler,
   viewAllwholesaleProducts,
   editProductBywholesalerId,
   viewProductBywholesalerId,
-  deleteProductBywholesalerId
+  deleteProductBywholesalerId,
+  getTodayAddedwholesalerProducts,
+  getTotalwholesalerProductQuantity
 };
