@@ -46,6 +46,7 @@ function ShopownerComplaint() {
             .then(response => {
                 if (response.status === 200) {
                     alert('Complaint sent successfully');
+                    navigate("/shopownerhome")
                     setComplaint("");
                 } else {
                     alert('Failed to send complaint');

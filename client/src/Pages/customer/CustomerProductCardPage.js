@@ -227,6 +227,10 @@ function CustomerProductCardPage({ url }) {
           console.log(err);
         });
     }
+    else {
+      alert(" item quandity get empty please remove item from your cart" )
+      handleRemoveItem()
+    }
   };
 
   return (

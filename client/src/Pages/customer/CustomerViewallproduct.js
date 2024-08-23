@@ -11,33 +11,54 @@ import axiosInstance from "../../APIS/axiosinstatnce";
 function CustomerViewallproduct({ url }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate
+  const [customerDistrict, setCustomerDistrict] = useState("");
+
   const { shopownerid } = useParams(); // For future use if needed
+  const customer = localStorage.getItem("customer");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axiosInstance
-      .post("/view_all_product")
-      .then((res) => {
+    // Fetch customer data to get the district
+    const fetchCustomerDistrict = async () => {
+      try {
+        const customerResponse = await axiosInstance.get(`/get_a_customer/${customer}`);
+        const district = customerResponse.data.data.district;
+        setCustomerDistrict(district);
+        console.log("Customer District:", district);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchCustomerDistrict();
+  }, [customer]);
+
+  useEffect(() => {
+    // Fetch products and filter based on the customer district
+    const fetchProducts = async () => {
+      try {
+        const res = await axiosInstance.post("/view_all_product");
         const productsWithQuantity = res.data.data.map((product) => ({
           ...product,
           quantity: 1,
           Tprice: product.price,
         }));
-        setData(productsWithQuantity);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem("token") == null &&
-  //     localStorage.getItem("customer") == null
-  //   ) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate]);
+        const filteredProducts = productsWithQuantity.filter(
+          (product) => product.shopOwner.shopownerdistrict === customerDistrict
+        );
+
+        setData(filteredProducts);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (customerDistrict) {
+      fetchProducts();
+    }
+  }, [customerDistrict]);
 
   const increment = (item) => {
     const updatedData = data.map((product) =>
@@ -85,10 +106,10 @@ function CustomerViewallproduct({ url }) {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = data.filter((product) =>
-    product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  product.category.toLowerCase().includes(searchQuery.toLowerCase())
-
+  const filteredData = data.filter(
+    (product) =>
+      product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -98,9 +119,7 @@ function CustomerViewallproduct({ url }) {
           <h2 className="customer-viewproduct-h2">Products</h2>
         </div>
         <div className="row">
-          <div className="col">
-            
-          </div>
+          <div className="col"></div>
           <div className="col"></div>
           <div className="col"></div>
           <div className="col">
@@ -116,7 +135,10 @@ function CustomerViewallproduct({ url }) {
                 className="shopowner-viewproduct-imgbtn1 ms-5"
                 style={{ position: "absolute" }}
               >
-                <img src={search} className="shopowner-viewproduct-imgbtn"></img>
+                <img
+                  src={search}
+                  className="shopowner-viewproduct-imgbtn"
+                ></img>
               </button>
             </div>
           </div>

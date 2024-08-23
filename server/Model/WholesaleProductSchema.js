@@ -39,6 +39,10 @@ const wholesaleProductSchema = new mongoose.Schema({
     ref: "wholesaledealers",
     required: true,
   },
+  date: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("wholesaleProduct", wholesaleProductSchema);

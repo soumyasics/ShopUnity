@@ -7,11 +7,16 @@ import { FaBoxOpen } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import { GrDeliver } from "react-icons/gr";
 import Footer from "../Footer";
+import dummymale from "../../images/dummy-male.png"
+
 function AdminHome() {
   const [customers, setCustomers] = useState([]);
   const [shopOwners, setShopOwners] = useState([]);
   const [Wholesale, setWholesale] = useState([]);
   const [Deliveryagent, setDeliveryagent] = useState([]);
+  const [ShopOwner, SetShopOwner] = useState([]);
+  const [Wholesaler, SetWholesaler] = useState([]);
+
 
   useEffect(() => {
     axiosInstance.get("/get_all_customers").then((responce) => {
@@ -51,7 +56,38 @@ function AdminHome() {
     } else {
       navigate("/admin");
     }
+    getData()
+    axiosInstance
+    .get("/getRecentWholesaleDealer")
+    .then((res) => {
+      let allShopowners = res?.data?.data || [];
+      const filterPendingReqs = allShopowners.filter(
+        (shopowner) => shopowner?.status === "pending"
+      );
+      SetWholesaler(filterPendingReqs);
+    })
+    .catch((err) => {
+      console.log("err", err);
+    });
+    
   }, []);
+
+
+  function getData() {
+    axiosInstance
+      .get("/getResentPendingShopOwners")
+      .then((res) => {
+        let allShopowners = res?.data?.data || [];
+        const filterPendingReqs = allShopowners.filter(
+          (shopowner) => shopowner?.status === "pending"
+        );
+        SetShopOwner(filterPendingReqs);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+    }
+console.log(ShopOwner,"l");
 
   return (
     <div>
@@ -132,6 +168,104 @@ function AdminHome() {
         </section>
       </div>
     
+
+      <section className="mt-5">
+          <div>
+            <div className="col-9 ms-5">
+              <div className="">
+                <div className="">
+                  {ShopOwner?.length === 0 && (
+                    <h1 className="text-center"> No shopowner recent request Found</h1>
+                  )}
+                  {ShopOwner?.length > 0 && (
+                    <div>
+                      <h3 className="text-center pt-4">
+                        Recent Shopowner requests
+                      </h3>
+                      {ShopOwner.map((item, index) => (
+                        <div
+                          className="row bg-light rounded-pill m-5 p-2"
+                          key={item._id}
+                        >
+                         
+                           <div className="col-1">
+                            <img
+                              src={dummymale}
+                              className="shopowner-customerorder-request-img"
+                              alt="mm"
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </div>
+                          <div className="col-9">
+                            You Have New Request From{" "}{item?.shopownername} in  {item?.shopownerdistrict}
+                            
+                          </div>
+                          <div className="col-1">
+                            <button className="rounded-pill px-3 border-none">
+                              <Link className="text-decoration-none text-dark" to={"/shopownerspendinglist"}>
+                                View
+                              </Link>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<hr></hr>
+        <section className="mt-5">
+          <div>
+            <div className="col-9 ms-5">
+              <div className="">
+                <div className="">
+                  {Wholesaler?.length === 0 && (
+                    <h1 className="text-center"> No Wholesaler recent request Found</h1>
+                  )}
+                  {Wholesaler?.length > 0 && (
+                    <div>
+                      <h3 className="text-center pt-4">
+                        Recent wholesaler requests
+                      </h3>
+                      {Wholesaler?.map((item, index) => (
+                        <div
+                          className="row bg-light rounded-pill m-5 p-2"
+                          key={item?._id}
+                        >
+                         
+                           <div className="col-1">
+                            <img
+                              src={dummymale}
+                              className="shopowner-customerorder-request-img"
+                              alt="mm"
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </div>
+                          <div className="col-9">
+                            You Have New Request From{" "}{item?.dealername} in  {item?.districts}
+                            
+                          </div>
+                          <div className="col-1">
+                            <button className="rounded-pill px-3 border-none">
+                              <Link className="text-decoration-none text-dark" to={"/wholesaledealerrequests"}>
+                                View
+                              </Link>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
     </div>
   );
 }

@@ -20,9 +20,7 @@ function ShopownerCustomerOrderAccept({ url }) {
       .post(`/viewordersshopownerbyId/${shopownerid}`)
       .then((res) => {
         const acceptedOrders = res.data.data.filter(
-          (order) =>
-            order.order.orderStatus === "accepted" &&
-            order.order.paymentStatus === "completed" 
+          (order) => order.order.orderStatus === "accepted"
         );
         setData(acceptedOrders);
       })
@@ -90,13 +88,15 @@ function ShopownerCustomerOrderAccept({ url }) {
       [orderId]: agentId,
     }));
   };
+  console.log(setAssignDAgent,"p0");
+  
 
   const SubmitAssignDeliveryAgent = (orderID) => {
     axiosInstance
       .post(`/assignDeliveryAgent`, {
         orderID: orderID,
         agentId: assignDAgent[orderID],
-        shopownerid: localStorage.getItem("shopowner")
+        shopownerid: localStorage.getItem("shopowner"),
       })
       .then((res) => {
         alert(res.data.message);
@@ -172,6 +172,7 @@ function ShopownerCustomerOrderAccept({ url }) {
                               className="hopowner-customerorder-request-img"
                               alt={product.productData.name}
                             />
+                            <span>{product.productData.productname}</span>
                           </div>
                           <div className="col-9">
                             <label className="hopowner-customerorder-request-label">
@@ -209,15 +210,13 @@ function ShopownerCustomerOrderAccept({ url }) {
                           <label className="hopowner-customerorder-request-label">
                             Payment
                           </label>
-                          <label className="hopowner-customerorder-request-label">
-                            Order Status
-                          </label>
-                          <label className="hopowner-customerorder-request-label">
-                            Delivery Status
-                          </label>
-                          <label className="hopowner-customerorder-request-label">
-                            Assign Delivery Agent
-                          </label>
+
+                          
+                          {order.order.paymentStatus == "assigned" ? (
+                            <label className="hopowner-customerorder-request-label">
+                              Assign Delivery Agent
+                            </label>
+                          ):''}
                         </div>
                         <div className="col-1">
                           <div>
@@ -230,19 +229,13 @@ function ShopownerCustomerOrderAccept({ url }) {
                               :
                             </label>
                           </div>
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              :
-                            </label>
-                          </div>
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              :
-                            </label>
-                          </div>
-                          <div>
-                           
-                          </div>
+                          {order.order.paymentStatus !== "pending" && (
+                            <div>
+                              <label className="hopowner-customerorder-request-label">
+                                :
+                              </label>
+                            </div>
+                          )}
                         </div>
                         <div className="col-6">
                           <div>
@@ -259,51 +252,57 @@ function ShopownerCustomerOrderAccept({ url }) {
                           </div>
                           <label className="hopowner-customerorder-request-labelsuccess">
                             {order.order.paymentStatus}
-                          </label><br></br>
-                          <label className="hopowner-customerorder-request-label">
-                            {order.order.orderStatus}
                           </label>
                           <br></br>
-                          <label className="hopowner-customerorder-request-label">
-                            {order.order.deliveryStatus}
-                          </label>
-                          {order.order.deliveryStatus === "pending" ? (
-                            <div>
-                              <select
-                                className="hopowner-customerorder-request-select"
-                                onChange={(e) =>
-                                  handleAssignDeliveryAgent(
-                                    order.order._id,
-                                    e.target.value
-                                  )
-                                }
-                              >
-                                <option value="">Select Delivery Agent</option>
-                                {dagent.map((deliveryAgent) => {
-                                  return district === deliveryAgent.district ? (
-                                    <option
-                                      key={deliveryAgent._id}
-                                      value={deliveryAgent._id}
-                                    >
-                                      {deliveryAgent.name}
-                                    </option>
-                                  ) : (
-                                    ""
-                                  );
-                                })}
-                              </select>
-                              <div className="text-center my-3">
-                                <button
-                                  className="hopowner-customerorder-request-submitbtn"
-                                  onClick={() =>
-                                    SubmitAssignDeliveryAgent(order.order._id)
+                          {order.order.paymentStatus !== "pending" &&
+                            (order.order.deliveryStatus === "pending" ||
+                              order.order.deliveryStatus === "rejected") && (
+                              <div>
+                                <select
+                                  className="hopowner-customerorder-request-select"
+                                  onChange={(e) =>
+                                    handleAssignDeliveryAgent(
+                                      order.order._id,
+                                      e.target.value
+                                    )
                                   }
                                 >
-                                  Submit
-                                </button>
+                                  <option value="">
+                                    Select Delivery Agent
+                                  </option>
+                                  {dagent.map((deliveryAgent) => {
+                                    return district ===
+                                      deliveryAgent.district ? (
+                                      <option
+                                        key={deliveryAgent._id}
+                                        value={deliveryAgent._id}
+                                      >
+                                        {deliveryAgent.name}
+                                      </option>
+                                    ) : (
+                                      ""
+                                    );
+                                  })}
+                                </select>
+                                <div className="text-center my-3">
+                                  <button
+                                    className="hopowner-customerorder-request-submitbtn"
+                                    onClick={() =>
+                                      SubmitAssignDeliveryAgent(
+                                        order.order._id
+                                      )
+                                    }
+                                  >
+                                    Submit
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                          ) : ''}
+                            )}
+                            {order.order.deliveryStatus == "assigned" ? (
+                              <label className="hopowner-customerorder-request-label">
+                               Delivery Assigned
+                              </label>
+                            ):''}
                         </div>
                       </div>
                     </div>

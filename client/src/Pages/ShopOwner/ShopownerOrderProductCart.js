@@ -178,10 +178,11 @@ function ShopownerOrderProductCart({ url }) {
   };
 
   const updateQ = (item,action)=> {
+    console.log(item,'ppp')
     if (item.quantity >= 1){
     axiosInstance
     .post(`/shopowneraddtocart`, {
-      customerId: localStorage.getItem("shopowner"),
+      shopowner: localStorage.getItem("shopowner"),
       productId: item.product._id,
       quantity:action=='dec'? -1 : 1,
     })
@@ -193,6 +194,10 @@ function ShopownerOrderProductCart({ url }) {
     .catch((err) => {
       console.log(err);
     });}
+    else if(item.quantity >= 0){
+      alert("product quantity get's empty please remove from your cart")
+    }  
+    
   }
 
   return (

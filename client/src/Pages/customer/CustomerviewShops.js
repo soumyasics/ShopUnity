@@ -39,9 +39,9 @@ function CustomerviewShops() {
         console.log(err);
       }
     };
-
     fetchData();
   }, [customer]);
+
 
   console.log(data);
 

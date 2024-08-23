@@ -31,7 +31,7 @@ function WholesalerShopownerAcceptorders({ url }) {
         const acceptedOrders = res.data.data.filter(
           (order) =>
             order.order.orderStatus === "accepted" &&
-            order.order.paymentStatus === "completed" 
+            order.order.paymentStatus === "completed"
         );
         setData(acceptedOrders);
       })
@@ -96,7 +96,7 @@ function WholesalerShopownerAcceptorders({ url }) {
       .post(`/wholesalerassignDeliveryAgent`, {
         orderID: orderID,
         agentId: assignDAgent[orderID],
-        wholesaledealerid: localStorage.getItem("wholesaledealer")
+        wholesaledealerid: localStorage.getItem("wholesaledealer"),
       })
       .then((res) => {
         alert(res.data.message);
@@ -134,7 +134,7 @@ function WholesalerShopownerAcceptorders({ url }) {
                         <div className="col-3 ms-3">
                           <div>
                             <label className="hopowner-customerorder-request-label">
-                              Shop owner{" "}
+                              ShopOwner{" "}
                             </label>
                           </div>
                           <div>
@@ -154,7 +154,7 @@ function WholesalerShopownerAcceptorders({ url }) {
                         <div className="col-7 mb-3">
                           <div>
                             <label className="hopowner-customerorder-request-span">
-                            {order.shopowner?.shopname || "N/A"}
+                              {order.shopowner?.shopname || "N/A"}
                             </label>
                             <div>
                               <label className="hopowner-customerorder-request-label">
@@ -166,13 +166,13 @@ function WholesalerShopownerAcceptorders({ url }) {
                       </div>
                       {order.orderProducts.map((product, idx) => (
                         <div className="row mt-4" key={idx}>
-                          <div className="col-2 ms-3 me-1" >
+                          <div className="col-2 ms-3 me-1">
                             <img
-                            src={`${url}${product.productData.productimage.filename}`}
-                            className="shopowner-customerorder-request-img"
-                            alt={product.productData.name}
-                           style={{width:"50px",height:"50px"}}
-                          />
+                              src={`${url}${product.productData.productimage.filename}`}
+                              className="shopowner-customerorder-request-img"
+                              alt={product.productData.name}
+                              style={{ width: "50px", height: "50px" }}
+                            />
                           </div>
                           <div className="col-9">
                             <label className="hopowner-customerorder-request-label">
@@ -183,7 +183,7 @@ function WholesalerShopownerAcceptorders({ url }) {
                             </span>
                             <div>
                               <label className="hopowner-customerorder-request-label">
-                                {product.productData.name}
+                                {product.productData.productname}
                               </label>
                             </div>
                             <div className="row">
@@ -210,13 +210,6 @@ function WholesalerShopownerAcceptorders({ url }) {
                           <label className="hopowner-customerorder-request-label">
                             Payment
                           </label>
-                          <label className="hopowner-customerorder-request-label">
-                            Order Status
-                          </label>
-                          <label className="hopowner-customerorder-request-label">
-                            Delivery Status
-                          </label>
-                         
                         </div>
                         <div className="col-1">
                           <div>
@@ -224,24 +217,13 @@ function WholesalerShopownerAcceptorders({ url }) {
                               :
                             </label>
                           </div>
+                          <div></div>
                           <div>
                             <label className="hopowner-customerorder-request-label">
                               :
                             </label>
                           </div>
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              :
-                            </label>
-                          </div>
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              :
-                            </label>
-                          </div>
-                          <div>
-                           
-                          </div>
+                          <div></div>
                         </div>
                         <div className="col-6">
                           <div>
@@ -258,17 +240,17 @@ function WholesalerShopownerAcceptorders({ url }) {
                           </div>
                           <label className="hopowner-customerorder-request-labelsuccess">
                             {order.order.paymentStatus}
-                          </label><br></br>
-                          <label className="hopowner-customerorder-request-label">
-                            {order.order.orderStatus}
                           </label>
                           <br></br>
-                          <label className="hopowner-customerorder-request-label">
-                            {order.order.deliveryStatus}
-                          </label>
-                          {order.order.deliveryStatus === "pending" ? (
+                          {order.order.deliveryStatus == "assigned" ? (
+                            <div>Delivery Assigned </div>
+                          ) : (
+                            ""
+                          )}
+                          {order.order.deliveryStatus === "pending" ||
+                          order.order.deliveryStatus == "rejected" ? (
                             <div>
-                            Assign Delivery Agent
+                              Assign Delivery Agent
                               <select
                                 className="hopowner-customerorder-request-select"
                                 onChange={(e) =>
@@ -292,6 +274,7 @@ function WholesalerShopownerAcceptorders({ url }) {
                                   );
                                 })}
                               </select>
+                              
                               <div className="text-center my-3">
                                 <button
                                   className="hopowner-customerorder-request-submitbtn"
@@ -303,7 +286,9 @@ function WholesalerShopownerAcceptorders({ url }) {
                                 </button>
                               </div>
                             </div>
-                          ) : ''}
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                     </div>

@@ -23,24 +23,26 @@ const addProduct = (req, res) => {
     quantity: req.body.quantity,
     price: req.body.price,
     productimage: req.file,
-    shopOwner: req.body.shopOwner
+    shopOwner: req.body.shopOwner,
+    date: new Date(),
   };
 
   const newProduct = new Product(productData);
 
-  newProduct.save()
-    .then(result => {
+  newProduct
+    .save()
+    .then((result) => {
       res.status(201).json({
         status: 201,
         data: result,
-        message: "Product added successfully"
+        message: "Product added successfully",
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         status: 500,
         message: "Failed to add product",
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -49,11 +51,11 @@ const addProduct = (req, res) => {
 const editProductById = (req, res) => {
   const productId = req.params.productId;
   const data = req.body;
-  data.quantity = parseInt(data.quantity)
-  var update={};
+  data.quantity = parseInt(data.quantity);
+  var update = {};
   for (key in data) {
-    if (data[key] && data[key] != 'undefined') {
-      update[key] = data[key]
+    if (data[key] && data[key] != "undefined") {
+      update[key] = data[key];
     }
   }
   // console.log(update)
@@ -63,43 +65,82 @@ const editProductById = (req, res) => {
     update.productimage = req.file; // Save new file path if file exists
   }
 
-  Product.findByIdAndUpdate(productId, update, { new: true, runValidators: true })
-    .then(result => {
+  Product.findByIdAndUpdate(productId, update, {
+    new: true,
+    runValidators: true,
+  })
+    .then((result) => {
       if (!result) {
         return res.status(404).json({
           status: 404,
-          message: "Product not found"
+          message: "Product not found",
         });
       }
       res.status(200).json({
         status: 200,
         data: result,
-        message: "Product updated successfully"
+        message: "Product updated successfully",
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         status: 500,
         message: "Failed to update product",
-        error: err.message
+        error: err.message,
+      });
+    });
+};
+
+const getTodayAddedProducts = (req, res) => {
+  const shopownerid = req.body.shopownerid;
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+
+  const endOfDay = new Date();
+  endOfDay.setHours(23, 59, 59, 999);
+
+  Product.find({
+    date: {
+      $gte: startOfDay,
+      $lte: endOfDay,
+    },
+    shopOwner: shopownerid, // Filter by wholesalerId
+  })
+    .then((products) => {
+      const totalQuantity = products.reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      );
+      res.status(200).json({
+        status: 200,
+        data: products,
+        totalQuantity: totalQuantity,
+        message: "Today's added products fetched successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to fetch today's added products",
+        error: err.message,
       });
     });
 };
 
 // Other functions remain unchanged
 const viewAllProducts = (req, res) => {
-  Product.find()
-    .then(products => {
+  Product.find().populate("shopOwner")
+    .then((products) => {
       res.status(200).json({
         status: 200,
-        data: products
+        data: products,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         status: 500,
         message: "Failed to retrieve products",
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -108,23 +149,23 @@ const viewProductById = (req, res) => {
   const productId = req.params.productId;
 
   Product.findById(productId)
-    .then(product => {
+    .then((product) => {
       if (!product) {
         return res.status(404).json({
           status: 404,
-          message: "Product not found"
+          message: "Product not found",
         });
       }
       res.status(200).json({
         status: 200,
-        data: product
+        data: product,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         status: 500,
         message: "Failed to retrieve product",
-        error: err.message
+        error: err.message,
       });
     });
 };
@@ -133,26 +174,72 @@ const deleteProductById = (req, res) => {
   const productId = req.params.productId;
 
   Product.findByIdAndDelete(productId)
-    .then(result => {
+    .then((result) => {
       if (!result) {
         return res.status(404).json({
           status: 404,
-          message: "Product not found"
+          message: "Product not found",
         });
       }
       res.status(200).json({
         status: 200,
-        message: "Product deleted successfully"
+        message: "Product deleted successfully",
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         status: 500,
         message: "Failed to delete product",
-        error: err.message
+        error: err.message,
       });
     });
 };
+const getTotalshopownerProductQuantity = (req, res) => {
+  const shopownerid = req.params.shopownerid;
+
+  Product.find({
+    shopOwner: shopownerid,  // Note the field name should be 'shopOwner'
+  })
+    .then((products) => {
+      const totalQuantity = products.reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      );
+      res.status(200).json({
+        status: 200,
+        totalQuantity: totalQuantity,
+        message: "Total product quantity fetched successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to fetch total product quantity",
+        error: err.message,
+      });
+    });
+};
+
+
+const View_all_productbyshopowner = (req, res) => {
+  console.log(req.params.shopownerid);
+  
+  Product.find({ shopOwner: req.params.shopownerid })
+    .then((products) => {
+      res.status(200).json({
+        status: 200,
+        data: products,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to retrieve products",
+        error: err.message,
+      });
+    });
+};
+
 
 module.exports = {
   upload,
@@ -160,5 +247,8 @@ module.exports = {
   viewAllProducts,
   editProductById,
   viewProductById,
-  deleteProductById
+  deleteProductById,
+  getTodayAddedProducts,
+  getTotalshopownerProductQuantity,
+  View_all_productbyshopowner,
 };

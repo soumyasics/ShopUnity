@@ -196,9 +196,56 @@ const viewAllShopownerOrders = (req, res) => {
 };
 
 
+const viewResentOrdersBywholesaledealer = async (req, res) => {
+  console.log(req.params.wholesaledealerid, "viewOrdersBywholesaledealer");
+  const wholesaleDealer = req.params.wholesaledealerid;
+
+  try {
+    let wholesaleOrders = [];
+
+    // Find the last 5 orders, sorted by `createdAt` in descending order
+    const orders = await wholesaleOrderModel
+      .find()
+      .populate("shopownerid wholesaledealers")
+      .sort({ createdAt: -1 }) // Sort by creation date, newest first
+      .limit(5); // Limit the result to the 5 most recent orders
+
+    for (let order of orders) {
+      let products = order.products;
+      let orderProducts = [];
+      for (let productInfo of products) {
+        let product = await wholesaleProduct.findById(productInfo.pid);
+        if (product && product.wholesaledealer == wholesaleDealer) {
+          orderProducts.push({
+            purchasedQuantity: productInfo.quantity,
+            productData: product,
+          });
+        }
+      }
+      if (orderProducts.length > 0) {
+        wholesaleOrders.push({
+          orderProducts: orderProducts,
+          order: order,
+          shopowner: order.shopownerid,
+        });
+      }
+    }
+
+    res.json({ data: wholesaleOrders });
+  } catch (err) {
+    console.log("Error retrieving orders:", err.message);
+    res.status(500).json({
+      status: 500,
+      message: "Failed to retrieve orders",
+      error: err.message,
+    });
+  }
+};
+
+
 module.exports = {
   shopownerplaceOrder,
   viewOrdersBywholesaledealer,
   wholesaleacceptOrderRequest,
-  viewOrdersByshopowner,viewAllShopownerOrders,viewAllShopownerorderbyorderid
+  viewOrdersByshopowner,viewAllShopownerOrders,viewAllShopownerorderbyorderid,viewResentOrdersBywholesaledealer
 };

@@ -256,8 +256,10 @@
 .shopowner-viewproduct-labelcard{
   background-color: #EAEAEA;
   height: 30px;
-  width: 100px;
+  width: fit-content;
   border-radius: 20px;
+  padding-right: 5%;
+  margin-bottom: 5%;
 }
 .shopowner-viewproduct-b{
   color: #74767B;

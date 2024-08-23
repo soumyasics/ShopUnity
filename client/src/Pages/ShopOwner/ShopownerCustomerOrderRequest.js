@@ -16,7 +16,8 @@ function ShopownerCustomerOrderRequest({ url }) {
     axiosInstance
       .post(`/viewordersshopownerbyId/${shopownerid}`)
       .then((res) => {
-        // Filter out only the orders with status 'pending'
+        console.log(res);
+        
         const pendingOrders = res.data.data.filter(order => order.order.orderStatus == "pending");
         setData(pendingOrders);
       })
@@ -40,13 +41,12 @@ function ShopownerCustomerOrderRequest({ url }) {
 
   const handleAcceptOrder = (orderid) => {
     axiosInstance
-      .post(`/acceptOrderRequest/${orderid}`) // Use PATCH method for updating
+      .post(`/acceptOrderRequest/${orderid}`) 
       .then((res) => {
         viewData()
         console.log(res);
         if (res.status === 200) {
           alert(res.data.message);
-          // Optionally refresh the data
           setData(prevData => prevData.filter(order => order.order._id !== orderid));
         } else {
           alert("Order is already accepted");
@@ -100,11 +100,11 @@ function ShopownerCustomerOrderRequest({ url }) {
                         <div className="col-7 mb-3">
                           <div>
                             <label className="hopowner-customerorder-request-span">
-                              {item.order.customer?.name || "N/A"}
+                              {item.order.customer?.name}
                             </label>
                             <div>
                               <label className="hopowner-customerorder-request-label">
-                                {item.order.customer?.address || "N/A"}
+                                {item.order.customer?.address}
                               </label>
                             </div>
                           </div>
@@ -118,23 +118,24 @@ function ShopownerCustomerOrderRequest({ url }) {
                               className="hopowner-customerorder-request-img"
                               alt={product.productData.name}
                             />
+                            <span>{product.productData.productname}</span>
                           </div>
                           <div className="col-9">
                             <label className="hopowner-customerorder-request-label">
                               Brand Name:
                             </label>
                             <span className="ms-2 hopowner-customerorder-request-span">
-                              {product.productData.brand || "N/A"}
+                              {product.productData.brand }
                             </span>
                             <div>
                               <label className="hopowner-customerorder-request-label">
-                                {product.productData.name || "N/A"}
+                                {product.productData.name }
                               </label>
                             </div>
                             <div className="row">
                               <div className="col">
                                 <label className="hopowner-customerorder-request-label">
-                                  &#8377; {product.productData.price || "N/A"}
+                                  &#8377; {product.productData.price }
                                 </label>
                               </div>
                               <div className="col">
@@ -178,23 +179,24 @@ function ShopownerCustomerOrderRequest({ url }) {
                                 </label>
                                 <div>
                                   <label className="hopowner-customerorder-request-label">
-                                    {item.order.orderType || "N/A"}
+                                    {item.order.orderType}
                                   </label>
                                 </div>
                               </div>
                             </div>
                             <div className="text-center">
-                              <button
-                                className="hopowner-customerorder-request-tickbtn"
-                                onClick={() => handleAcceptOrder(item.order._id)}
-                              >
-                                <img src={tick} alt="Update" /> Accept
-                              </button>
+                              
                             </div>
                           </div>
                         </div>
                       ))}
                     </Card.Body>
+                    <button
+                                className="hopowner-customerorder-request-tickbtn mx-5 mb-2"
+                                onClick={() => handleAcceptOrder(item.order._id)}
+                              >
+                                <img src={tick} alt="Update" /> Accept
+                              </button>
                   </Card>
                 </Col>
               ))}

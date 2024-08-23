@@ -136,6 +136,24 @@ const getAllPendingShopOwners = (req, res) => {
       res.json({ status: 500, message: "not find", data: err });
     });
 };
+
+const getResentPendingShopOwners = (req, res) => {
+  shopownerschema
+    .find({ status: "pending" })
+    .sort({ createdAt: -1 }) // Sort by `createdAt` in descending order
+    .limit(5) // Limit the results to 5 entries
+    .then((result) => {
+      res.json({
+        status: 200,
+        data: result,
+        message: "find",
+      });
+    })
+    .catch((err) => {
+      res.json({ status: 500, message: "not find", data: err });
+    });
+};
+
 const getAshopowner = (req, res) => {
   const shopownerid = req.params.shopownerid;
   shopownerschema
@@ -410,5 +428,5 @@ module.exports = {
   getAllPendingShopOwners,
   deActivateShopOwnerById,
   activateShopownerById,
-  assignDeliveryAgent
+  assignDeliveryAgent,getResentPendingShopOwners
 };

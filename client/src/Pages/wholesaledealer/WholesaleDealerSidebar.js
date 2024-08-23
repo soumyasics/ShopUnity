@@ -88,7 +88,7 @@ function WholesaleDealerSidebar({url}) {
             <ul className="sidebar-nav nav-pills nav-stacked p-0 m-0">
               <li className="nav-item" style={{ marginTop: "55%" }}>
                 <Link
-                  to=""
+                  to="/wholesalermain"
                   className="shopownersidebar-dashboard rounded-end-5 "
                 >
                   <MdDashboard /> Dashboard
