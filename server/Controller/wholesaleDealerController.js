@@ -133,6 +133,29 @@ const getAllWholesaleDealer = async (req, res) => {
   }
 };
 
+const getRecentWholesaleDealer = async (req, res) => {
+  try {
+    const result = await wholesaledealerschema.find({ status: "pending" });
+    if (result.length === 0) {
+      return res.json({
+        status: 404,
+        message: "No pending wholesale dealers found",
+      });
+    }
+    res.json({
+      status: 200,
+      data: result,
+      message: "Pending wholesale dealers retrieved successfully",
+    });
+  } catch (err) {
+    res.json({
+      status: 500,
+      message: "An error occurred while retrieving pending wholesale dealers",
+      data: err,
+    });
+  }
+};
+
 const getAWholesaledealer = async (req, res) => {
   try {
     const wholesaledealerid = req.params.wholesaledealerid;
@@ -389,5 +412,5 @@ module.exports = {
   deActivatewholesaleById,
   activatewholesaleById,
   getAllAcceptedWholesaleDealer,
-  wholesalerassignDeliveryAgent
+  wholesalerassignDeliveryAgent,getRecentWholesaleDealer
 };

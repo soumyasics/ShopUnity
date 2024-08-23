@@ -9,10 +9,12 @@ function DeliveryAgentDeliveryUpdate() {
   const [deliveryRequests, setDeliveryRequests] = useState([]);
   const [deliveryStatuses, setDeliveryStatuses] = useState({});
   const navigate = useNavigate();
+
+  const agentId = localStorage.getItem("deliveryagent");
+
   const getDeliveryRequests = async () => {
     try {
-      const agentId = localStorage.getItem("deliveryagent");
-      const response = await axiosInstance.get(
+      const response = await axiosInstance.post(
         `/getAllwholesalerdeliveryRequestsbyagentid/${agentId}`
       );
       console.log(response.data,"m");

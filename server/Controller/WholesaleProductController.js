@@ -105,6 +105,24 @@ const viewAllwholesaleProducts = (req, res) => {
     });
 };
 
+const viewAllwholesaleProductsbywholesaler = (req, res) => {
+  console.log(req.params.wholesalerid);
+  wholesaleProduct.find({ wholesaledealer: req.params.wholesalerid })
+    .then(products => {
+      res.status(200).json({
+        status: 200,
+        data: products
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to retrieve products",
+        error: err.message
+      });
+    });
+};
+
 const viewProductBywholesalerId = (req, res) => {
   const productId = req.params.productId;
 
@@ -188,11 +206,10 @@ const getTodayAddedwholesalerProducts = (req, res) => {
 };
 
 const getTotalwholesalerProductQuantity = (req, res) => {
-  const { wholesalerId } = req.body; // Assuming wholesalerId is sent in the request body
+  const wholesalerId=(req.params.wholesalerid);
+  
 
-  wholesaleProduct.find({
-    wholesalerId: wholesalerId, // Filter by wholesalerId
-  })
+  wholesaleProduct.find({ wholesaledealer: wholesalerId }) // Filter by wholesaledealer
     .then((products) => {
       const totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
       res.status(200).json({
@@ -210,6 +227,8 @@ const getTotalwholesalerProductQuantity = (req, res) => {
     });
 };
 
+
+
 module.exports = {
   upload,
   addProductByWholesaler,
@@ -219,4 +238,5 @@ module.exports = {
   deleteProductBywholesalerId,
   getTodayAddedwholesalerProducts,
   getTotalwholesalerProductQuantity
+  ,viewAllwholesaleProductsbywholesaler
 };

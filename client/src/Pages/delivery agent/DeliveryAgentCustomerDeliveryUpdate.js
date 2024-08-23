@@ -11,8 +11,8 @@ function DeliveryAgentCustomerDeliveryUpdate() {
   const navigate = useNavigate();
 
   const getDeliveryRequests = async () => {
+    const agentId = localStorage.getItem("deliveryagent");
     try {
-      const agentId = localStorage.getItem("deliveryagent");
       const response = await axiosInstance.get(
         `/getAlldeliveryShopownerrequestsbyagentid/${agentId}`
       );
@@ -56,8 +56,9 @@ function DeliveryAgentCustomerDeliveryUpdate() {
     try {
       if (deliveryStatuses[id] === "delivered") {
         await axiosInstance.post(
-          `/deliverDeliveryRequestofwholesaledealer/${id}`
+          `/deliverDeliveryRequest/${id}`
         );
+        alert("Order is Delivered Successfully")
         getDeliveryRequests(); // Refresh the delivery requests after updating
       }
     } catch (error) {

@@ -194,6 +194,10 @@ function ShopownerOrderProductCart({ url }) {
     .catch((err) => {
       console.log(err);
     });}
+    else if(item.quantity >= 0){
+      alert("product quantity get's empty please remove from your cart")
+    }  
+    
   }
 
   return (

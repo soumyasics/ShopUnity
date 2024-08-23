@@ -30,7 +30,7 @@ function ShopownerViewProduct({ url }) {
       .then((res) => {
         var arr1=[]
         for(let i in res.data.data){
-          if( res.data.data[i].shopOwner == localStorage.getItem("shopowner")){
+          if( res.data.data[i].shopOwner._id == localStorage.getItem("shopowner")){
             arr1.push(res.data.data[i])
           }
         }

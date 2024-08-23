@@ -35,7 +35,7 @@ function CustomerViewProductPage({ url, customerId }) {
           quantity: 1,
         }));
         for (let i in productsWithQuantity) {
-          if (productsWithQuantity[i].shopOwner == shopownerid) {
+          if (productsWithQuantity[i].shopOwner._id == shopownerid) {
             arra2.push(productsWithQuantity[i]);
           }
         }

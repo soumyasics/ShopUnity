@@ -23,6 +23,7 @@ Route.get('/get_a_wholesaledealer/:wholesaledealerid',WholesaleController.getAWh
 Route.post('/edit_a_wholesaledealer/:wholesaledealerid',WholesaleController.upload,WholesaleController.EditAWholesaledealer)
 Route.post('/delete_a_wholesaledealer/:wholesaledealerid',WholesaleController.DeleteAWholesaleDealer)
 Route.post('/wholesaledealer_forgot',WholesaleController.wholesaleforgot)
+Route.get('/getRecentWholesaleDealer',WholesaleController.getRecentWholesaleDealer)
 
 Route.post('/wholesaledealer_acceptrequest/:id',WholesaleController.acceptwholesaledealer)
 Route.post('/wholesaledealer_rejectrequest/:id',WholesaleController.rejecrWholesaledealer)
@@ -66,6 +67,8 @@ Route.post("/shopeowner_register",ShopeOwnerController.upload,ShopeOwnerControll
 Route.post('/shopowner_login',ShopeOwnerController.ShopeOwnerLogin)
 Route.get('/get_all_shopowners',ShopeOwnerController.getAllShopOwners)
 Route.get('/get_all_pending_shopowners',ShopeOwnerController.getAllPendingShopOwners)
+Route.get('/getResentPendingShopOwners',ShopeOwnerController.getResentPendingShopOwners)
+
 Route.get('/get_a_shopowner/:shopownerid',ShopeOwnerController.getAshopowner)
 Route.post('/edit_a_shopowner/:shopownerid',ShopeOwnerController.upload,ShopeOwnerController.EditAShopOwner)
 Route.post('/delete_a_shopowner/:shopownerid',ShopeOwnerController.DeleteAShopOwner)
@@ -85,7 +88,8 @@ Route.post("/view_all_product",productController.viewAllProducts)
 Route.post("/edit_a_product/:productId",productController.upload,productController.editProductById)
 Route.post("/delete_a_product/:productId",productController.deleteProductById)
 Route.post("/getTodayAddedProducts",productController.getTodayAddedProducts)
-Route.post('/getTotalProductQuantity', productController.getTotalProductQuantity);
+Route.post('/getTotalProductQuantity/:shopownerid', productController.getTotalshopownerProductQuantity);
+Route.post("/view_all_productbyshopowner/:shopownerid",productController.View_all_productbyshopowner)
 
 // cart
 Route.post("/addtocart",cartController.addtocart)
@@ -100,6 +104,9 @@ Route.post("/viewOrdersByCustomerId/:customerId",orderController.viewOrdersByCus
 Route.post("/viewAllCustomerorder",orderController.viewAllCustomerorder)
 Route.post("/viewAllCustomerorderbyorderid/:orderid",orderController.viewAllCustomerorderbyorderid)
 
+Route.post("/viewRecentOrdersByShopOwner/:shopOwnerId",orderController.viewRecentOrdersByShopOwner)
+
+
 // delivery requests
 
 Route.get("/deliveryRequests/:agentId", deliveryRequestController.getDeliveryRequests);
@@ -108,13 +115,17 @@ Route.post("/rejectdeliveryRequests/:requestId", deliveryRequestController.rejec
 Route.post("/acceptdeliveryRequests/:requestId", deliveryRequestController.acceptDeliveryRequest);
 Route.post("/deliverDeliveryRequest/:requestId", deliveryRequestController.deliverDeliveryRequest);
 Route.get("/getAlldeliveryShopownerrequestsbyagentid/:agentId", deliveryRequestController.getshopownerDeliveryRequests);
+Route.get("/getResentDeliveryRequests/:agentId", deliveryRequestController.getResentDeliveryRequests);
 
-Route.get("/getAllwholesalerdeliveryRequestsbyagentid/:agentId", wholesaledealerorderRequestcontroller.getWholesalerDeliveryRequests);
+
+Route.post("/getAllwholesalerdeliveryRequestsbyagentid/:agentId", wholesaledealerorderRequestcontroller.getWholesalerDeliveryRequests);
 Route.get("/deliveryRequestsbywholesaledealer/:wholesaledealerid", wholesaledealerorderRequestcontroller.deliveryRequestsbywholesaledealer);
 Route.post("/rejectwholesaledealerdeliveryRequests/:requestId", wholesaledealerorderRequestcontroller.rejectwholesaledealerDeliveryRequest);
 Route.post("/acceptwholesaledealerdeliveryRequests/:requestId", wholesaledealerorderRequestcontroller.acceptwholesaledealerDeliveryRequest);
 Route.post("/deliverDeliveryRequestofwholesaledealer/:requestId", wholesaledealerorderRequestcontroller.deliverDeliveryRequestofwholesaledealer);
-// wholesale product
+Route.post("/getResentWholesalerDeliveryRequests/:agentId", wholesaledealerorderRequestcontroller.getResentWholesalerDeliveryRequests);
+
+// wholesale productf
 
 Route.post("/add_product_bywholesale",wholesaledealerproductcontroller.upload,wholesaledealerproductcontroller.addProductByWholesaler)
 Route.post("/view_a_product_bywholesale/:productId",wholesaledealerproductcontroller.viewProductBywholesalerId)
@@ -122,7 +133,9 @@ Route.post("/view_all_product_bywholesale",wholesaledealerproductcontroller.view
 Route.post("/edit_a_product_bywholesale/:wholesaleproductId",wholesaledealerproductcontroller.upload,wholesaledealerproductcontroller.editProductBywholesalerId)
 Route.post("/delete_a_product_bywholesale/:productId",wholesaledealerproductcontroller.deleteProductBywholesalerId)
 Route.post("/getTodayAddedwholesalerProducts",wholesaledealerproductcontroller.getTodayAddedwholesalerProducts)
-Route.post('/getTotalwholesalerProductQuantity', wholesaledealerproductcontroller.getTotalwholesalerProductQuantity);
+Route.post('/getTotalwholesalerProductQuantity/:wholesalerid', wholesaledealerproductcontroller.getTotalwholesalerProductQuantity);
+Route.post('/view_all_product_bywholesale/:wholesalerid', wholesaledealerproductcontroller.viewAllwholesaleProductsbywholesaler);
+
 
 //  wholesale cart
 
@@ -139,8 +152,10 @@ Route.post("/wholesalerassignDeliveryAgent",WholesaleController.wholesalerassign
 Route.post("/viewAllShopownerOrders",wholesaledealerordercontroller.viewAllShopownerOrders)
 Route.post("/viewAllShopownerorderbyorderid/:orderid",wholesaledealerordercontroller.viewAllShopownerorderbyorderid)
 
+Route.post("/viewResentOrdersBywholesaledealer/:wholesaledealerid",wholesaledealerordercontroller.viewResentOrdersBywholesaledealer)
 
-// All Complaints
+
+// All Complaintss
 Route.post("/customercomplaints/:customerid", complaintController.CustomerAddComplaints);
 Route.post("/shopownercomplaints/:shopownerid", complaintController.ShopownerAddComplaints);
 Route.post("/wholesalercomplaints/:wholesalerid", complaintController.WholesaledealerAddComplaints);

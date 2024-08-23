@@ -12,7 +12,11 @@ import ShopOwnerSidebar from "./ShopOwnerSidebar";
 function ShopownerViewproductList({ url }) {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-const navigate=useNavigate()
+  const [shopownerDistrict, setShopownerDistrict] = useState("");
+
+  const navigate = useNavigate();
+  const shopowner = localStorage.getItem("shopowner");
+
   useEffect(() => {
     if (
       localStorage.getItem("shopownertoken") == null &&
@@ -20,27 +24,40 @@ const navigate=useNavigate()
     ) {
       navigate("/shopownerlogin");
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
-    axiosInstance
-      .post("/view_all_product_bywholesale")
-      .then((res) => {
-        console.log(res,"l");
-        
+    const fetchData = async () => {
+      try {
+        // Fetch the shop owner's data to get the district
+        const customerResponse = await axiosInstance.get(`/get_a_shopowner/${shopowner}`);
+        const district = customerResponse.data.data.shopownerdistrict;
+        setShopownerDistrict(district);
+        console.log("Shop Owner District:", district);
+
+        // Fetch all products
+        const res = await axiosInstance.post(`/view_all_product_bywholesale`);
         const productsWithQuantity = res.data.data.map((product) => ({
           ...product,
           quantity: 1,
-          Tprice: product.price,
         }));
-        setData(productsWithQuantity);
-      })
-      .catch((err) => {
+
+        // Filter products based on the shop owner's district
+        const filteredProducts = productsWithQuantity.filter(
+          (product) => product.wholesaledealer.districts === district
+        );
+
+        console.log(filteredProducts, "Filtered Products");
+        setData(filteredProducts);
+      } catch (err) {
         console.log(err);
-      });
-  }, []);
-  console.log(data,"p");
-  
+      }
+    };
+
+    if (shopowner) {
+      fetchData();
+    }
+  }, [shopowner]);
 
   const increment = (item) => {
     const updatedData = data.map((product) =>
@@ -88,9 +105,10 @@ const navigate=useNavigate()
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = data.filter((product) =>
-    product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = data.filter(
+    (product) =>
+      product.productname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (

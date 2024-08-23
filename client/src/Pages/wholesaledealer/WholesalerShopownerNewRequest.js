@@ -120,6 +120,7 @@ function WholesalerShopownerNewRequest({ url }) {
                             className="shopowner-customerorder-request-img w-100"
                             alt={product.productData.name}
                           />
+                          <span className="pt-5">{product.productData.productname}</span>
                         </div>
                         <div className="col-9">
                           <label className="shopowner-customerorder-request-label">
@@ -130,7 +131,7 @@ function WholesalerShopownerNewRequest({ url }) {
                           </span>
                           <div>
                             <label className="shopowner-customerorder-request-label">
-                              {product.productData.name }
+                            {product.productData.productname }
                             </label>
                           </div>
                           <div className="row">

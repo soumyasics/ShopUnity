@@ -114,7 +114,7 @@ function App() {
         />
         <Route
           path="/wholesaledealerhome"
-          element={[<CommonNav />, <WholesaleHome />,<Footer />]}
+          element={[<CommonNav />, <WholesaleHome url={url} />,<Footer />]}
         />
         <Route
           path="/wholesaledealerforgetpswd"

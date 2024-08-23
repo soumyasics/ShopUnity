@@ -4,10 +4,18 @@ const Customer = require("../Model/CustomerSchema");
 const Cart = require("../Model/CartSchema");
 
 const placeOrder = async (req, res) => {
-  console.log( req.body,"pp");
-  
-  const { productId, customerId, paymentStatus, totalAmount, orderType, cid ,deliveryStatus, shopownerid} =
-    req.body;
+  console.log(req.body, "pp");
+
+  const {
+    productId,
+    customerId,
+    paymentStatus,
+    totalAmount,
+    orderType,
+    cid,
+    deliveryStatus,
+    shopownerid,
+  } = req.body;
 
   try {
     // Create order
@@ -18,7 +26,7 @@ const placeOrder = async (req, res) => {
       totalAmount,
       orderType,
       deliveryStatus,
-      shopowner: shopownerid[0]
+      shopowner: shopownerid[0],
     });
 
     const savedOrder = await order.save();
@@ -44,18 +52,23 @@ const viewOrdersByShopOwner = async (req, res) => {
   const shopOwnerId = req.params.shopOwnerId;
 
   try {
-    const orders = await Order.find().populate({
-      path: 'products.pid',
-      model: 'Product',
-    }).populate('customer shopowner');
+    const orders = await Order.find()
+      .populate({
+        path: "products.pid",
+        model: "Product",
+      })
+      .populate("customer shopowner");
 
     const shopOwnerOrders = orders.reduce((acc, order) => {
-      const orderProducts = order.products.filter(product => 
-        product.pid && product.pid.shopOwner.toString() === shopOwnerId
-      ).map(product => ({
-        purchasedQuantity: product.quantity,
-        productData: product.pid,
-      }));
+      const orderProducts = order.products
+        .filter(
+          (product) =>
+            product.pid && product.pid.shopOwner.toString() === shopOwnerId
+        )
+        .map((product) => ({
+          purchasedQuantity: product.quantity,
+          productData: product.pid,
+        }));
 
       if (orderProducts.length > 0) {
         acc.push({
@@ -68,7 +81,6 @@ const viewOrdersByShopOwner = async (req, res) => {
     }, []);
 
     res.json({ data: shopOwnerOrders });
-
   } catch (err) {
     console.log("Error retrieving orders:", err.message);
     res.status(500).json({
@@ -78,7 +90,6 @@ const viewOrdersByShopOwner = async (req, res) => {
     });
   }
 };
-
 
 const acceptOrderRequest = async (req, res) => {
   try {
@@ -117,16 +128,18 @@ const viewOrdersByCustomerId = async (req, res) => {
 
   try {
     const orders = await Order.find({ customer: customerId }).populate({
-      path: 'products.pid',
-      model: 'Product',
+      path: "products.pid",
+      model: "Product",
     });
 
     if (!orders || orders.length === 0) {
-      return res.status(404).json({ message: "No orders found for this customer" });
+      return res
+        .status(404)
+        .json({ message: "No orders found for this customer" });
     }
 
-    const customerOrders = orders.map(order => {
-      const orderProducts = order.products.map(product => ({
+    const customerOrders = orders.map((order) => {
+      const orderProducts = order.products.map((product) => ({
         purchasedQuantity: product.quantity,
         productData: product.pid, // This should be the populated Product object
       }));
@@ -150,43 +163,91 @@ const viewOrdersByCustomerId = async (req, res) => {
   }
 };
 
-
 const viewAllCustomerorder = (req, res) => {
-  Order.find().populate("customer shopowner")
-    .then(orders => {
+  Order.find()
+    .populate("customer shopowner")
+    .then((orders) => {
       res.status(200).json({
         status: 200,
-        data: orders
+        data: orders,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         status: 500,
         message: "Failed to retrieve orders",
-        error: err.message
+        error: err.message,
       });
     });
 };
 
-const viewAllCustomerorderbyorderid = async(req, res) => 
-  {
-    try {
-      const orderId = req.params.orderid;
-      const order = await Order.findById(orderId).populate("customer shopowner");
-      
-      if (!order) {
-        return res.status(404).json({ message: "Order not found" });
-      }
-      
-      res.json(order);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Server error" });
+const viewAllCustomerorderbyorderid = async (req, res) => {
+  try {
+    const orderId = req.params.orderid;
+    const order = await Order.findById(orderId).populate("customer shopowner");
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
     }
+
+    res.json(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const viewRecentOrdersByShopOwner = async (req, res) => {
+  const shopOwnerId = req.params.shopOwnerId;
+
+  try {
+    // Fetch the last 5 orders, sorted by `createdAt` in descending order
+    const orders = await Order.find()
+      .populate({
+        path: "products.pid",
+        model: "Product",
+      })
+      .populate("customer shopowner")
+      .sort({ createdAt: -1 }) // Sort by creation date, newest first
+      .limit(5); // Limit the result to the 5 most recent orders
+
+    const shopOwnerOrders = orders.reduce((acc, order) => {
+      const orderProducts = order.products
+        .filter(
+          (product) =>
+            product.pid && product.pid.shopOwner.toString() === shopOwnerId
+        )
+        .map((product) => ({
+          purchasedQuantity: product.quantity,
+          productData: product.pid,
+        }));
+
+      if (orderProducts.length > 0) {
+        acc.push({
+          orderProducts,
+          order,
+        });
+      }
+
+      return acc;
+    }, []);
+
+    res.json({ data: shopOwnerOrders });
+  } catch (err) {
+    console.log("Error retrieving orders:", err.message);
+    res.status(500).json({
+      status: 500,
+      message: "Failed to retrieve orders",
+      error: err.message,
+    });
+  }
 };
 
 module.exports = {
   placeOrder,
-  viewOrdersByShopOwner,acceptOrderRequest,viewOrdersByCustomerId,viewAllCustomerorder,viewAllCustomerorderbyorderid
+  viewOrdersByShopOwner,
+  acceptOrderRequest,
+  viewOrdersByCustomerId,
+  viewAllCustomerorder,
+  viewAllCustomerorderbyorderid,viewRecentOrdersByShopOwner
 };
-                                                        

@@ -24,7 +24,7 @@ const addProduct = (req, res) => {
     price: req.body.price,
     productimage: req.file,
     shopOwner: req.body.shopOwner,
-    date:new Date()
+    date: new Date(),
   };
 
   const newProduct = new Product(productData);
@@ -92,7 +92,7 @@ const editProductById = (req, res) => {
 };
 
 const getTodayAddedProducts = (req, res) => {
-  const shopownerid = req.body.shopownerid; 
+  const shopownerid = req.body.shopownerid;
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
 
@@ -107,7 +107,10 @@ const getTodayAddedProducts = (req, res) => {
     shopOwner: shopownerid, // Filter by wholesalerId
   })
     .then((products) => {
-      const totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
+      const totalQuantity = products.reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      );
       res.status(200).json({
         status: 200,
         data: products,
@@ -124,11 +127,9 @@ const getTodayAddedProducts = (req, res) => {
     });
 };
 
-
-
 // Other functions remain unchanged
 const viewAllProducts = (req, res) => {
-  Product.find()
+  Product.find().populate("shopOwner")
     .then((products) => {
       res.status(200).json({
         status: 200,
@@ -143,8 +144,6 @@ const viewAllProducts = (req, res) => {
       });
     });
 };
-
-
 
 const viewProductById = (req, res) => {
   const productId = req.params.productId;
@@ -195,14 +194,17 @@ const deleteProductById = (req, res) => {
       });
     });
 };
-const getTotalProductQuantity = (req, res) => {
-  const shopownerid = req.body.shopownerid; 
+const getTotalshopownerProductQuantity = (req, res) => {
+  const shopownerid = req.params.shopownerid;
 
   Product.find({
-    shopownerid: shopownerid, 
+    shopOwner: shopownerid,  // Note the field name should be 'shopOwner'
   })
     .then((products) => {
-      const totalQuantity = products.reduce((acc, product) => acc + product.quantity, 0);
+      const totalQuantity = products.reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      );
       res.status(200).json({
         status: 200,
         totalQuantity: totalQuantity,
@@ -219,11 +221,34 @@ const getTotalProductQuantity = (req, res) => {
 };
 
 
+const View_all_productbyshopowner = (req, res) => {
+  console.log(req.params.shopownerid);
+  
+  Product.find({ shopOwner: req.params.shopownerid })
+    .then((products) => {
+      res.status(200).json({
+        status: 200,
+        data: products,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        status: 500,
+        message: "Failed to retrieve products",
+        error: err.message,
+      });
+    });
+};
+
+
 module.exports = {
   upload,
   addProduct,
   viewAllProducts,
   editProductById,
   viewProductById,
-  deleteProductById,getTodayAddedProducts,getTotalProductQuantity
+  deleteProductById,
+  getTodayAddedProducts,
+  getTotalshopownerProductQuantity,
+  View_all_productbyshopowner,
 };
