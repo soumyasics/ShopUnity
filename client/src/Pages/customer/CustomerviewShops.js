@@ -54,7 +54,8 @@ function CustomerviewShops() {
       </div>
       <div className="customer-view-shop-divbox container-fluid">
         <div className="row pt-5">
-          {data.map((item, index) => (
+          {data.length > 0
+          ? data.map((item, index) => (
             <div key={index} className="col-md-4 mb-4">
               <Card
                 style={{
@@ -122,7 +123,7 @@ function CustomerviewShops() {
                 </table>
               </Card>
             </div>
-          ))}
+          )) : <div className="text-center"> no shopes available</div> }
         </div>
       </div>
     </div>

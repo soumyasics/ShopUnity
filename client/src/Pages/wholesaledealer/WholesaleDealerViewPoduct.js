@@ -94,28 +94,32 @@ function WholesaleDealerViewProduct({ url }) {
                 </select>
               </div>
               <div className="row mt-4">
-                {filteredData.map((item) => (
-                  <div
-                    key={item._id}
-                    className="col-6 col-md-4 col-lg-3 col-xl-2 mb-4"
-                  >
-                    <Card className="shopowner-viewproduct-card">
-                      <label className="m-2">{item.productname}</label>
-                      <Card.Img
-                        className="shopowner-viewproduct-cardimg mt-3"
-                        src={`${url}${item.productimage.filename}`}
-                      />
-                      <div className="shopowner-viewproduct-button">
-                        <button
-                          onClick={() => handleViewProduct(item._id)}
-                          className="shopowner-viewproduct-viewbtn me-4 mt-2 mb-3"
-                        >
-                          View
-                        </button>
-                      </div>
-                    </Card>
-                  </div>
-                ))}
+                {filteredData.length > 0 ? (
+                  filteredData.map((item) => (
+                    <div
+                      key={item._id}
+                      className="col-6 col-md-4 col-lg-3 col-xl-2 mb-4"
+                    >
+                      <Card className="shopowner-viewproduct-card">
+                        <label className="m-2">{item.productname}</label>
+                        <Card.Img
+                          className="shopowner-viewproduct-cardimg mt-3"
+                          src={`${url}${item.productimage.filename}`}
+                        />
+                        <div className="shopowner-viewproduct-button">
+                          <button
+                            onClick={() => handleViewProduct(item._id)}
+                            className="shopowner-viewproduct-viewbtn me-4 mt-2 mb-3"
+                          >
+                            View
+                          </button>
+                        </div>
+                      </Card>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center"> no products available</div>
+                )}
               </div>
             </div>
           </div>

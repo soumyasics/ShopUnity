@@ -93,7 +93,7 @@ function ShoporderList() {
                         </div>
                     </div>
                     
-                    {data.map((item,index) => (
+                    {data.length > 0 ? data.map((item,index) => (
                         <div className="row bg-light rounded-pill m-5 p-2 ps-3">
                             <div className="col-2">
                             <b className='admin-customer-order-list-list '>{index + 1}.</b>
@@ -114,7 +114,7 @@ function ShoporderList() {
                                 </Link>
                             </div>
                         </div> 
-                    ))}  
+                    )): <div className="text-center"> no orders available</div>} 
                 </div>
             </div>
         </div>

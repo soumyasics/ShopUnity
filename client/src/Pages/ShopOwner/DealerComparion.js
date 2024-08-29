@@ -79,7 +79,8 @@ function DealerComparion({ url }) {
           </div>
         </div>
         <div className="row mt-3">
-          {filteredData.map((item) => (
+          {filteredData.length > 0
+          ?filteredData.map((item) => (
             <div className="col-md-4 mb-4" key={item._id}>
               <Card className="">
                 <div className="ms-3 mt-3">
@@ -161,7 +162,7 @@ function DealerComparion({ url }) {
                 </div>
               </Card>
             </div>
-          ))}
+          )): <div className="text-center"> no Dealers available</div>}
         </div>
       </div>
     </div>

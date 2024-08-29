@@ -90,7 +90,7 @@ function DeliveryAgentDeliveryRequest() {
               Delivery Request
             </h3>
             <div className="row">
-              {deliveryRequests.map((request, index) => (
+              {deliveryRequests.length>0 ? deliveryRequests.map((request, index) => (
                 <div key={index} className="col-md-4 mb-4">
                   <Card className="h-100">
                     <div className="row ms-3 mb-3">
@@ -151,7 +151,7 @@ function DeliveryAgentDeliveryRequest() {
                     </div>
                   </Card>
                 </div>
-              ))}
+              )): <div className="text-center"> no requests available</div>}
             </div>
           </div>
         </div>

@@ -121,7 +121,8 @@ function ShopownerCustomerOrderAccept({ url }) {
           </div>
           <div className="shopowner-customerorder-request-divbox mt-5">
             <Row xs={1} md={2} lg={3} className="g-4 p-3">
-              {data.map((order) => (
+              {data.length > 0
+          ?data.map((order) => (
                 <Col key={order.order._id}>
                   <Card className="mt-4 container ">
                     <div className="shopowner-customerorder-request-cardbox mt-3 mb-3">
@@ -308,7 +309,7 @@ function ShopownerCustomerOrderAccept({ url }) {
                     </div>
                   </Card>
                 </Col>
-              ))}
+              )): <div className="text-center"> no accepted orders available</div>}
             </Row>
           </div>
         </div>
