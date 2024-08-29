@@ -20,7 +20,7 @@ function DeliveryagentHomepage() {
     try {
       
       const response = await axiosInstance.post(`/getAllwholesalerdeliveryRequestsbyagentid/${agentId}`);
-      console.log(response,"k");
+      // console.log(response,"k");
       const assignedRequests = response.data.filter(
         (request) => request.deliveryStatus == "assigned"
       );
@@ -32,6 +32,8 @@ function DeliveryagentHomepage() {
     }
   };
 
+  console.log(deliveryRequests,",,,");
+  
 
   const getshopownerDeliveryRequests = async () => {
     try {
@@ -69,9 +71,9 @@ const getData = async() => {
   }
   };
 
-  console.log(ShopOwner,"m");
+  console.log(ShopOwner,"m000");
   
-
+  console.log(Wholesaler,"000");
   const getWholesalerData = async() => {
     try {
       const response = await axiosInstance.get(`/getResentWholesalerDeliveryRequests/${agentId}`);
@@ -179,15 +181,15 @@ const getData = async() => {
             <div className="col-9 ms-5">
               <div className="">
                 <div className="">
-                  {Wholesaler?.length === 0 && (
+                  {deliveryRequests?.length === 0 && (
                     <h1 className="text-center"> No Wholesaler recent request Found</h1>
                   )}
-                  {Wholesaler?.length > 0 && (
+                  {deliveryRequests?.length > 0 && (
                     <div>
                       <h3 className="text-center pt-4">
                         Recent Shopowner order requests
                       </h3>
-                      {Wholesaler?.map((item, index) => (
+                      {deliveryRequests?.map((item, index) => (
                         <div
                           className="row bg-light rounded-pill m-5 p-2"
                           key={item?._id}

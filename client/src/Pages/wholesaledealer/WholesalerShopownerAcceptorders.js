@@ -121,180 +121,186 @@ function WholesalerShopownerAcceptorders({ url }) {
           </div>
           <div className="shopowner-customerorder-request-divbox mt-5">
             <Row xs={1} md={2} lg={3} className="g-4 p-3">
-              {data.map((order) => (
-                <Col key={order.order._id}>
-                  <Card className="mt-4 container ">
-                    <div className="shopowner-customerorder-request-cardbox mt-3 mb-3">
-                      <div className="text-center">
-                        <h5 className="hopowner-customerorder-request-h5">
-                          Order Details
-                        </h5>
-                      </div>
-                      <div className="row">
-                        <div className="col-3 ms-3">
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              ShopOwner{" "}
-                            </label>
-                          </div>
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              Address{" "}
-                            </label>
-                          </div>
+              {data.length > 0 ? (
+                data.map((order) => (
+                  <Col key={order.order._id}>
+                    <Card className="mt-4 container ">
+                      <div className="shopowner-customerorder-request-cardbox mt-3 mb-3">
+                        <div className="text-center">
+                          <h5 className="hopowner-customerorder-request-h5">
+                            Order Details
+                          </h5>
                         </div>
-                        <div className="col-1">
-                          <div className="hopowner-customerorder-request-label">
-                            :
-                          </div>
-                          <div className="hopowner-customerorder-request-label">
-                            :
-                          </div>
-                        </div>
-                        <div className="col-7 mb-3">
-                          <div>
-                            <label className="hopowner-customerorder-request-span">
-                              {order.shopowner?.shopname || "N/A"}
-                            </label>
+                        <div className="row">
+                          <div className="col-3 ms-3">
                             <div>
                               <label className="hopowner-customerorder-request-label">
-                                {order.shopowner?.shopowneraddress || "N/A"}
+                                ShopOwner{" "}
+                              </label>
+                            </div>
+                            <div>
+                              <label className="hopowner-customerorder-request-label">
+                                Address{" "}
                               </label>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      {order.orderProducts.map((product, idx) => (
-                        <div className="row mt-4" key={idx}>
-                          <div className="col-2 ms-3 me-1">
-                            <img
-                              src={`${url}${product.productData.productimage.filename}`}
-                              className="shopowner-customerorder-request-img"
-                              alt={product.productData.name}
-                              style={{ width: "50px", height: "50px" }}
-                            />
-                          </div>
-                          <div className="col-9">
-                            <label className="hopowner-customerorder-request-label">
-                              Brand Name :
-                            </label>
-                            <span className="ms-2 hopowner-customerorder-request-span">
-                              {product.productData.brand}
-                            </span>
-                            <div>
-                              <label className="hopowner-customerorder-request-label">
-                                {product.productData.productname}
-                              </label>
+                          <div className="col-1">
+                            <div className="hopowner-customerorder-request-label">
+                              :
                             </div>
-                            <div className="row">
-                              <div className="col">
+                            <div className="hopowner-customerorder-request-label">
+                              :
+                            </div>
+                          </div>
+                          <div className="col-7 mb-3">
+                            <div>
+                              <label className="hopowner-customerorder-request-span">
+                                {order.shopowner?.shopname || "N/A"}
+                              </label>
+                              <div>
                                 <label className="hopowner-customerorder-request-label">
-                                  &#8377; {product.productData.price}
-                                </label>
-                              </div>
-                              <div className="col">
-                                <label className="hopowner-customerorder-request-label">
-                                  Qty-{product.purchasedQuantity}
+                                  {order.shopowner?.shopowneraddress || "N/A"}
                                 </label>
                               </div>
                             </div>
                           </div>
                         </div>
-                      ))}
-                      <hr></hr>
-                      <div className="row mt-4 p-2">
-                        <div className="col-5">
-                          <label className="hopowner-customerorder-request-label">
-                            Total Amount{" "}
-                          </label>
-                          <label className="hopowner-customerorder-request-label">
-                            Payment
-                          </label>
-                        </div>
-                        <div className="col-1">
-                          <div>
+                        {order.orderProducts.map((product, idx) => (
+                          <div className="row mt-4" key={idx}>
+                            <div className="col-2 ms-3 me-1">
+                              <img
+                                src={`${url}${product.productData.productimage.filename}`}
+                                className="shopowner-customerorder-request-img"
+                                alt={product.productData.name}
+                                style={{ width: "50px", height: "50px" }}
+                              />
+                            </div>
+                            <div className="col-9">
+                              <label className="hopowner-customerorder-request-label">
+                                Brand Name :
+                              </label>
+                              <span className="ms-2 hopowner-customerorder-request-span">
+                                {product.productData.brand}
+                              </span>
+                              <div>
+                                <label className="hopowner-customerorder-request-label">
+                                  {product.productData.productname}
+                                </label>
+                              </div>
+                              <div className="row">
+                                <div className="col">
+                                  <label className="hopowner-customerorder-request-label">
+                                    &#8377; {product.productData.price}
+                                  </label>
+                                </div>
+                                <div className="col">
+                                  <label className="hopowner-customerorder-request-label">
+                                    Qty-{product.purchasedQuantity}
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        <hr></hr>
+                        <div className="row mt-4 p-2">
+                          <div className="col-5">
                             <label className="hopowner-customerorder-request-label">
-                              :
+                              Total Amount{" "}
+                            </label>
+                            <label className="hopowner-customerorder-request-label">
+                              Payment
                             </label>
                           </div>
-                          <div></div>
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              :
-                            </label>
-                          </div>
-                          <div></div>
-                        </div>
-                        <div className="col-6">
-                          <div>
-                            <label className="hopowner-customerorder-request-label">
-                              &#8377;{" "}
-                              {order.orderProducts.reduce(
-                                (acc, product) =>
-                                  acc +
-                                  product.purchasedQuantity *
-                                    product.productData.price,
-                                0
-                              )}
-                            </label>
-                          </div>
-                          <label className="hopowner-customerorder-request-labelsuccess">
-                            {order.order.paymentStatus}
-                          </label>
-                          <br></br>
-                          {order.order.deliveryStatus == "assigned" ? (
-                            <div>Delivery Assigned </div>
-                          ) : (
-                            ""
-                          )}
-                          {order.order.deliveryStatus === "pending" ||
-                          order.order.deliveryStatus == "rejected" ? (
+                          <div className="col-1">
                             <div>
-                              Assign Delivery Agent
-                              <select
-                                className="hopowner-customerorder-request-select"
-                                onChange={(e) =>
-                                  handleAssignDeliveryAgent(
-                                    order.order._id,
-                                    e.target.value
-                                  )
-                                }
-                              >
-                                <option value="">Select Delivery Agent</option>
-                                {dagent.map((deliveryAgent) => {
-                                  return district === deliveryAgent.district ? (
-                                    <option
-                                      key={deliveryAgent._id}
-                                      value={deliveryAgent._id}
-                                    >
-                                      {deliveryAgent.name}
-                                    </option>
-                                  ) : (
-                                    ""
-                                  );
-                                })}
-                              </select>
-                              
-                              <div className="text-center my-3">
-                                <button
-                                  className="hopowner-customerorder-request-submitbtn"
-                                  onClick={() =>
-                                    SubmitAssignDeliveryAgent(order.order._id)
+                              <label className="hopowner-customerorder-request-label">
+                                :
+                              </label>
+                            </div>
+                            <div></div>
+                            <div>
+                              <label className="hopowner-customerorder-request-label">
+                                :
+                              </label>
+                            </div>
+                            <div></div>
+                          </div>
+                          <div className="col-6">
+                            <div>
+                              <label className="hopowner-customerorder-request-label">
+                                &#8377;{" "}
+                                {order.orderProducts.reduce(
+                                  (acc, product) =>
+                                    acc +
+                                    product.purchasedQuantity *
+                                      product.productData.price,
+                                  0
+                                )}
+                              </label>
+                            </div>
+                            <label className="hopowner-customerorder-request-labelsuccess">
+                              {order.order.paymentStatus}
+                            </label>
+                            <br></br>
+                            {order.order.deliveryStatus == "assigned" ? (
+                              <div>Delivery Assigned </div>
+                            ) : (
+                              ""
+                            )}
+                            {order.order.deliveryStatus === "pending" ||
+                            order.order.deliveryStatus == "rejected" ? (
+                              <div>
+                                Assign Delivery Agent
+                                <select
+                                  className="hopowner-customerorder-request-select"
+                                  onChange={(e) =>
+                                    handleAssignDeliveryAgent(
+                                      order.order._id,
+                                      e.target.value
+                                    )
                                   }
                                 >
-                                  Submit
-                                </button>
+                                  <option value="">
+                                    Select Delivery Agent
+                                  </option>
+                                  {dagent.map((deliveryAgent) => {
+                                    return district ===
+                                      deliveryAgent.district ? (
+                                      <option
+                                        key={deliveryAgent._id}
+                                        value={deliveryAgent._id}
+                                      >
+                                        {deliveryAgent.name}
+                                      </option>
+                                    ) : (
+                                      ""
+                                    );
+                                  })}
+                                </select>
+                                <div className="text-center my-3">
+                                  <button
+                                    className="hopowner-customerorder-request-submitbtn"
+                                    onClick={() =>
+                                      SubmitAssignDeliveryAgent(order.order._id)
+                                    }
+                                  >
+                                    Submit
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                          ) : (
-                            ""
-                          )}
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Card>
-                </Col>
-              ))}
+                    </Card>
+                  </Col>
+                ))
+              ) : (
+                <div className="text-center"> no accepted order available</div>
+              )}
             </Row>
           </div>
         </div>

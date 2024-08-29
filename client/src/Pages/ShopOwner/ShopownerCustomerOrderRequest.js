@@ -71,7 +71,8 @@ function ShopownerCustomerOrderRequest({ url }) {
           </div>
           <div className="shopowner-customerorder-request-divbox mt-5">
             <Row xs={1} md={2} lg={2} className="g-4">
-              {data.map((item) => (
+              {data.length > 0
+          ?data.map((item) => (
                 <Col className="mt-4" key={item.order._id}>
                   <Card className="shopowner-customerorder-request-cardbox mt-3 mb-3 bg-light">
                     <Card.Body>
@@ -199,7 +200,7 @@ function ShopownerCustomerOrderRequest({ url }) {
                               </button>
                   </Card>
                 </Col>
-              ))}
+              )): <div className="text-center"> no requests available</div>}
             </Row>
           </div>
         </div>

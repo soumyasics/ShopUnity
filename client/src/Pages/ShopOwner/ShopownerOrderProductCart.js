@@ -216,7 +216,8 @@ function ShopownerOrderProductCart({ url }) {
               />
             </div>
 
-            {data.map((item) => (
+            {data.length > 0
+          ?data.map((item) => (
               
               <div
                 key={item.product?._id}
@@ -286,7 +287,7 @@ function ShopownerOrderProductCart({ url }) {
                   </div>
                 </div>
               </div>
-            ))}
+            )): <div className="text-center"> Cart is Empty</div>}
           </div>
           <div className="col-5">
             <div className="customerproduct-cardpage-2columndiv">
@@ -411,6 +412,7 @@ function ShopownerOrderProductCart({ url }) {
                         name="Expirydate"
                         onChange={handleChange}
                         value={cardData.Expirydate}
+                        min={new Date().toISOString().split("T")[0]}
                       ></input>
                       {errors.Expirydate && (
                         <div className="text-danger">{errors.Expirydate}</div>

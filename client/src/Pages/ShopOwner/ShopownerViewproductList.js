@@ -147,7 +147,8 @@ function ShopownerViewproductList({ url }) {
           </div>
         </div>
         <div className="row mt-3">
-          {filteredData.map((item, index) => (
+          {filteredData.length > 0
+          ?filteredData.map((item, index) => (
             <div key={item._id} className="col-md-3 mb-4">
               <Card>
                 <div className="ms-3 mt-3">
@@ -212,7 +213,7 @@ function ShopownerViewproductList({ url }) {
                 </div>
               </Card>
             </div>
-          ))}
+          )): <div className="text-center"> no products available</div>}
         </div>
       </div>
     </div>

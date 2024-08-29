@@ -46,7 +46,9 @@ function CustomerOrdersViewOrder({ url }) {
       <div className="customerorder-vieworder-divbox ms-2 me-2">
         <div className="container mt-5">
           <label className="ms-5 customerorder-vieworder-label">Order</label>
-          {orders.map((order, index) => (
+          {orders.length > 0
+          ?
+          orders.map((order, index) => (
             <div key={index} className="customerorder-vieworder-orderbox mb-5">
               <div className="text-center mt-5">
                 <h4 className="hopowner-customerorder-request-h5">
@@ -184,7 +186,7 @@ function CustomerOrdersViewOrder({ url }) {
                 </div>
               )}
             </div>
-          ))}
+          )): <div className="text-center"> no orders available</div>}
         </div>
       </div>
     </div>

@@ -237,6 +237,7 @@ function ShopAddItem() {
                         value={data.expirydate}
                         className="shopowner-additem-textbox ms-5 mt-4"
                         onChange={handleChange}
+                        min={new Date().toISOString().split("T")[0]}
                       />
                       {errors.expirydate && <span className="text-danger">{errors.expirydate}</span>}
                     </div>

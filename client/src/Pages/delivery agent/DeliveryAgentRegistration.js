@@ -309,7 +309,7 @@ function DeliveryAgentRegistration() {
                     Pincode
                   </h1>
                   <input
-                    type="text"
+                    type="number"
                     className="AgentRegistration-input-div-leftdiv-inp"
                     placeholder="Pincode"
                     name="pincode"
@@ -379,7 +379,7 @@ function DeliveryAgentRegistration() {
                     Contact Number
                   </h1>
                   <input
-                    type="text"
+                    type="number"
                     className="AgentRegistration-input-div-leftdiv-inp"
                     placeholder="Contact Number"
                     name="contactNumber"
