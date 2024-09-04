@@ -108,7 +108,7 @@ function DealerComparion({ url }) {
                   </label>
                 </div>
                 <div className="row p-3">
-                  <div className="col-5">
+                  <div className="col-4">
                     <div>
                       <label>Store Name</label>
                     </div>
@@ -143,7 +143,7 @@ function DealerComparion({ url }) {
                     <label>:</label>
                   </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-5">
                     <div>
                       <label>{item?.wholesaledealer?.storeName}</label>
                     </div>
@@ -154,7 +154,7 @@ function DealerComparion({ url }) {
                       <label>{item?.wholesaledealer?.dealername}</label>
                     </div>
                     <div>
-                    <label>{item?.wholesaledealer?.email}</label>
+                    <div>{item?.wholesaledealer?.email}</div>
                   </div> <div>
                   <label>{item?.wholesaledealer?.contact}</label>
                 </div>

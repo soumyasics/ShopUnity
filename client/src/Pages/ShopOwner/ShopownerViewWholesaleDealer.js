@@ -72,10 +72,10 @@ function ShopownerViewWholesaleDealer() {
                   <div className="col-2">
                     <b>Store Name</b>
                   </div>
-                  <div className="col-2">
+                  <div className="col-3">
                     <b>Email Id</b>
                   </div>
-                  <div className="col-2">
+                  <div className="col-2 me-5">
                     <b>Contact</b>
                   </div>
                   <div className="col-2">
@@ -89,7 +89,7 @@ function ShopownerViewWholesaleDealer() {
                     </div>
                     <div className="col-2">{wholesaledealer.dealername}</div>
                     <div className="col-2">{wholesaledealer.storeName}</div>
-                    <div className="col-2">{wholesaledealer.email}</div>
+                    <div className="col-3">{wholesaledealer.email}</div>
                     <div className="col-2">{wholesaledealer.contact}</div>
                     <div className="col-2">
                       <Link to={`/shopownerviewwdproductview/${wholesaledealer._id}`}>

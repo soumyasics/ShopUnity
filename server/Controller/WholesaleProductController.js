@@ -149,7 +149,7 @@ const viewProductBywholesalerId = (req, res) => {
 };
 
 const deleteProductBywholesalerId = (req, res) => {
-  const wholesaleproductId = req.params.wholesaleproductId;
+  const wholesaleproductId = req.params.productId;
 
   wholesaleProduct.findByIdAndDelete(wholesaleproductId)
     .then(result => {
