@@ -5,11 +5,11 @@ import tick from '../../images/tick.png'
 import wrong from '../../images/wrong.png'
 import axiosInstance from '../../APIS/axiosinstatnce';
 import ShopOwnerSidebar from './ShopOwnerSidebar';
-function ShopownerEditProduct() {
+function ShopownerEditProduct({url}) {
 
     const navigate=useNavigate();
     const [count,setCount]=useState(1)
-    const[profileImage,setProfileImage]=useState(null);
+    const[productimage,setProfileImage]=useState("");
 
     const increment = () =>{
         setCount(count+1)
@@ -61,11 +61,23 @@ function ShopownerEditProduct() {
         }));
     };
 
-    const handleFileChange = (e) => {
-        const { name, files } = e.target;
-        console.log(name, files)
-        setData({ ...data, [name]: files[0] });
-    };
+    const handleFileChange = (event) => {
+        const { name, files } = event.target;
+        const file = files[0];
+        setData((prevData) => ({
+          ...prevData,
+          [name]: file,
+        }));
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: validateField(name, file ? file.name : ""),
+        }));
+        const imageUrl = URL.createObjectURL(file);
+        // setProductImage(imageUrl);
+        // Generate a preview URL for the selected image
+        setProfileImage(imageUrl);
+      };
+
 
     function validateField(fieldName, value) {
         if (typeof value === 'string' && !value.trim()) {
@@ -212,26 +224,27 @@ function ShopownerEditProduct() {
                 <div>
                     <label className='shopowner-additem-label'>Product Image</label>
                     <div className='mt-3  shopowner-additem-divimglabel text-center'>
-                        <div className='shopowner-additem-imgupload text-center'>
-                           
-                            {profileImage ? (
-                                <img src={profileImage} alt="profile" className="rounded-circle" width="200" height="200" />
-                            ) : (
-                                <label></label>
-                            )}
-                            <label className='upload-icon text-primary mt-5 pt-3'><b>Click To Upload</b>
-                                <input 
-                                type='file'
-                                style={{display:'none'}}
-                                name='image'
-                                id='img'
-                                onChange={handleFileChange}
-                                />
-                            </label>
-                            {errors.image && <span className='text-danger'>{errors.image}</span>}
-                        </div>
+                    <div className="shopowner-additem-imgupload text-center">
+                    {productimage ? (
+                      <img
+                        src={productimage}
+                        alt="Product"
+                        className="rounded"
+                        width="180"
+                        height="180"
+                      />
+                    ) : (
+                     <img src={`${url}${data.productimage?.filename}`} width={180} height={180}></img>
+                    )}
+                    {errors.productimage && (
+                      <span className="text-danger">
+                        {errors.productimage}
+                      </span>
+                    )}
+                  </div>
                         <div className='mt-5 text-center'>                          
-                            <button className='shopowner-additem-btn ms-4' onClick={(e)=>{e.preventDefault();document.getElementById('img').click()}}>Replace Image</button>
+                            <button className='shopowner-additem-btn ms-4'><input type='file' name="image"
+                            onChange={handleFileChange}></input></button>
                         </div>
                     </div>
                 </div>
@@ -266,7 +279,7 @@ function ShopownerEditProduct() {
                 {errors.price && <span className='text-danger'>{errors.price}</span>}
                 <div className='text-center'>
                     <button className='shopowner-editproduct-tickbtn' onClick={handleSubmit}><img src={tick}></img>Update</button>
-                    <button className='shopowner-editproduct-wrongbtn ms-5' onClick={DeleteAProduct}><img src={wrong} className='shopowner-wrongproduct-img' ></img>Delete</button>
+                <button className='shopowner-editproduct-wrongbtn ms-5' onClick={DeleteAProduct}><img src={wrong} className='shopowner-wrongproduct-img' ></img>Delete</button>
                 </div>
             </div>
         </div>
