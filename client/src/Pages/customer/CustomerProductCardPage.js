@@ -211,26 +211,35 @@ function CustomerProductCardPage({ url }) {
     }
   };
 
+
+
+
   const updateQ = (item, action) => {
-    if (item.quantity >= 1) {
+    const quantityChange = action === "dec" ? -1 : 1;
+    const newQuantity = item.quantity + quantityChange;
+  
+    if (item.quantity === 1 && action === "dec") {
+      alert("Only 1 product is available. You cannot reduce the quantity further.");
+      return; 
+    }
+  
+    if (newQuantity >= 0) {
       axiosInstance
         .post(`/addtocart`, {
           customerId: localStorage.getItem("customer"),
           productId: item.product._id,
-          quantity: action == "dec" ? -1 : 1,
+          quantity: quantityChange,
         })
         .then((res) => {
-          //  alert(res.data.message)
           viewData();
           console.log("Product added to cart:", res.data);
         })
         .catch((err) => {
-          console.log(err);
+          console.error("Error updating cart:", err);
         });
-    }
-    else {
-      alert(" item quandity get empty please remove item from your cart" )
-      handleRemoveItem()
+    } else {
+      alert("Item quantity is empty, please remove the item from your cart");
+      handleRemoveItem();
     }
   };
 

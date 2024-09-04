@@ -116,14 +116,11 @@ function ShopownerOrderProductCart({ url }) {
       }));
       valid = false;
     }
-  
-    if (enteredDateObj <= currentDate) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        Expirydate: "Expiry date must be in the future",
-      }));
-      valid = false;
-    }
+      if (enteredDateObj <= currentDate) {
+        errors.Expirydate = "Expiry date must be in the future";
+        valid = false;
+      }
+    
   
     if (CVV.length !== 3 || !/^\d{3}$/.test(CVV)) {
       setErrors((prevErrors) => ({
@@ -177,28 +174,58 @@ function ShopownerOrderProductCart({ url }) {
     }
   };
 
-  const updateQ = (item,action)=> {
-    console.log(item,'ppp')
-    if (item.quantity >= 1){
-    axiosInstance
-    .post(`/shopowneraddtocart`, {
-      shopowner: localStorage.getItem("shopowner"),
-      productId: item.product._id,
-      quantity:action=='dec'? -1 : 1,
-    })
-    .then((res) => {
-    //  alert(res.data.message)
-     viewData();
-      console.log("Product added to cart:", res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });}
-    else if(item.quantity >= 0){
-      alert("product quantity get's empty please remove from your cart")
-    }  
-    
-  }
+
+  const updateQ = (item, action) => {
+    const quantityChange = action === "dec" ? -1 : 1;
+    const newQuantity = item.quantity + quantityChange;
+  
+    if (item.quantity === 1 && action === "dec") {
+      alert("Only 1 product is available. You cannot reduce the quantity further.");
+      return; 
+    }
+  
+    if (newQuantity >= 0) {
+      axiosInstance
+        .post(`/shopowneraddtocart`, {
+          shopowner: localStorage.getItem("shopowner"),
+          productId: item.product._id,
+          quantity:action=='dec'? -1 : 1,
+        })
+        .then((res) => {
+          viewData();
+          console.log("Product added to cart:", res.data);
+        })
+        .catch((err) => {
+          console.error("Error updating cart:", err);
+        });
+    } else {
+      alert("Item quantity is empty, please remove the item from your cart");
+      handleRemoveItem();
+    }
+  };
+
+  // const updateQ = (item,action)=> {
+  //   if (item.quantity >= 1){
+  //   axiosInstance
+  //   .post(`/shopowneraddtocart`, {
+  //     shopowner: localStorage.getItem("shopowner"),
+  //     productId: item.product._id,
+  //     quantity:action=='dec'? -1 : 1,
+  //   })
+  //   .then((res) => {
+  //   //  alert(res.data.message)
+  //    viewData();
+  //     console.log("Product added to cart:", res.data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })
+  // }
+  //   else if(item.quantity >= 0){
+  //     alert("product quantity get's empty please remove from your cart")
+  //   }  
+  // }
+  
 
   return (
     <div className="row">
