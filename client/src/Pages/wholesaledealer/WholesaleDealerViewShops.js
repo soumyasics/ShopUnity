@@ -93,16 +93,14 @@ function WholesaleDealerViewShops() {
                 <div>
                   <h3 className="text-center pt-4">All ShopOwner List</h3>
                   <div className="row rounded-pill m-5 p-2">
-                    <div className="col-1">
-                      <b>Sl/No</b>
-                    </div>
+                    
                     <div className="col-2">
                       <b>Shop Name</b>
                     </div>
                     <div className="col-2">
                       <b>Shopowner Name</b>
                     </div>
-                    <div className="col-2">
+                    <div className="col-3">
                       <b>Email</b>
                     </div>
                     <div className="col-2">
@@ -117,12 +115,10 @@ function WholesaleDealerViewShops() {
                       className="row bg-light rounded-pill m-5 p-2"
                       key={item._id}
                     >
-                      <div className="col-1">
-                        <b>{index + 1}.</b>
-                      </div>
+                      
                       <div className="col-2">{item.shopname}</div>
                       <div className="col-2">{item.shopownername}</div>
-                      <div className="col-2">{item.shopowneremail}</div>
+                      <div className="col-3">{item.shopowneremail}</div>
                       <div className="col-2">{item.shopownercontact}</div>
                       <div className="col-2">{item.shopownercity}</div>
                       <div className="col-1">
@@ -234,3 +230,9 @@ function WholesaleDealerViewShops() {
 }
 
 export default WholesaleDealerViewShops;
+
+// <div className="col-1">
+//                       //   <b>{index + 1}.</b>
+//                       // </div><div className="col-1">
+                      // <b>Sl/No</b>
+                      // </div>
