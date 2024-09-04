@@ -7,7 +7,7 @@ import ShopOwnerSidebar from './ShopOwnerSidebar';
 import axiosInstance from '../../APIS/axiosinstatnce';
 import Footer from '../Footer';
 
-function ShopAddItem() {
+function ShopAddItem({url}) {
   const [profileImage, setProfileImage] = useState(null);
   const [count, setCount] = useState(1);
   const [data, setData] = useState({
@@ -21,6 +21,8 @@ function ShopAddItem() {
     expirydate: ''
   });
 
+  console.log(url,"rr");
+  
   const [errors, setErrors] = useState({
     category: '',
     productname: '',
@@ -94,6 +96,8 @@ function ShopAddItem() {
     return error;
   };
 
+ 
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setData((prevData) => ({
@@ -117,17 +121,13 @@ function ShopAddItem() {
       ...prevErrors,
       [name]: validateField(name, file ? file.name : '')
     }));
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onloadend = () => {
-    //     setProfileImage(reader.result);
-    //   };
-    //   reader.readAsDataURL(file);
-    // } else {
-    //   setProfileImage(null);
-    // }
-  };
 
+    // Generate a preview URL for the selected image
+    setProfileImage(file.name)
+   
+    
+  
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = {};
@@ -161,7 +161,7 @@ function ShopAddItem() {
       })
     }
   };
-
+  
   return (
     <div>
       <div className='row ' >
@@ -262,10 +262,10 @@ function ShopAddItem() {
                     <div className="mt-3 shopowner-additem-divimglabel text-center">
                       <div className="shopowner-additem-imgupload text-center">
                         {profileImage ? (
-                          <img src={profileImage} alt="profile" className="rounded-circle" width="200" height="200" />
+                          <img src={`${url}${profileImage}`} alt="profile" className="rounded-circle" width="200" height="200" />
                         ) : (
                           <label className="upload-icon text-primary mt-5 pt-3">
-                            <b></b>
+                            <b>{profileImage}</b>
                           </label>
                         )}
                         <label className="upload-icon text-primary mt-5 pt-3">

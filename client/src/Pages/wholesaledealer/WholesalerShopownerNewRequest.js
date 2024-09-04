@@ -194,20 +194,21 @@ function WholesalerShopownerNewRequest({ url }) {
                               </div>
                             </div>
                           </div>
-                          <div className="text-center">
+                          <div className="text-center ">
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </Card.Body>
                             <button
-                              className="shopowner-customerorder-request-tickbtn"
+                              className="hopowner-customerorder-request-tickbtn mx-5 mb-2"
                               onClick={() =>
                                 handleAcceptOrder(item.order._id)
                               }
                             >
                               <img src={tick} alt="Update" /> Accept
                             </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </Card.Body>
+                          
                 </Card>
               </Col>
             )): <div className="text-center"> no order available</div>}

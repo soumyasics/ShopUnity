@@ -277,7 +277,7 @@ function App() {
     <Route path='/shopownerforgotpaswd' element={[<Shopownerforgotpswrd/>,<Footer />]}/>
     <Route path='/shopownerprofile' element={[<ShopownerProfilepage data="shopownerprofile" url={url}/>]}/>
     <Route path='/shopownerprofileedit' element={[<ShopOwnerProfileEditPage/>]}/>
-    <Route path='/shopowneradditem' element={ [<ShopAddItem/>]} />
+    <Route path='/shopowneradditem' element={ [<ShopAddItem url={url} />]} />
     <Route path='/shopownerviewproduct' element={[<ShopownerViewProduct url={url}/>]}/>
     <Route path='/shopownerviewproductdetails/:productid' element={[<ShopownerviewProductDetails url={url} />,<Footer />]}/>
     <Route path='/shopownereditproduct/:productid' element={[<ShopownerEditProduct url={url}/>,<Footer />]}/>
@@ -323,7 +323,7 @@ function App() {
           path="/shopownerprofileedit"
           element={[<ShopOwnerProfileEditPage />,<Footer />]}
         />
-        <Route path="/shopowneradditem" element={[<ShopAddItem />]} />
+        <Route path="/shopowneradditem" element={[<ShopAddItem url={url} />]} />
         
         
         <Route
