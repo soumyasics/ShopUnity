@@ -144,7 +144,7 @@ function App() {
         <Route path="/wholesaleraddproduct" element={[<WholesaleDealerAddProduct/>]} />
         <Route path="/wholesalerviewproduct" element={[<WholesaleDealerViewPoduct url={url} />]} />
         <Route path="/wholesalerviewproductdetails/:productid" element={[<WholesaleDealerViewProductDetails url={url} />,<Footer />]} />
-        <Route path="/wholesalereditproduct/:productid" element={[<WholesaleDealerEditProduct/>,<Footer />]} />
+        <Route path="/wholesalereditproduct/:productid" element={[<WholesaleDealerEditProduct url={url} />,<Footer />]} />
         <Route path="/wholesalerviewshops" element={[<WholesaleDealerViewShops/>]} />
         <Route path="/wholesalershopownernewrequest" element={[<WholesalerShopownerNewRequest url={url} />]} />
         <Route path="/wholesalershopowneracceptorders" element={[<WholesalerShopownerAcceptorders url={url} />]} />
